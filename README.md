@@ -1,5 +1,7 @@
 # Covered or Nah?
 
+Live app: https://formulary-finder-pilot-production.up.railway.app/
+
 Fast, source-linked formulary lookup for nurses and clinicians. The first pilot focuses on pulmonary and common primary-care medications across:
 
 - New York Medicaid NYRx
