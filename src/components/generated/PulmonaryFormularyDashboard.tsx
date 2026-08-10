@@ -56,6 +56,7 @@ export type Medication = {
   brands: string;
   branch: string;
   use: string;
+  productDetails?: string;
   coverage: Record<PlanKey, Coverage>;
 };
 export const plans: Array<{
@@ -702,6 +703,7 @@ export const medications: Medication[] = [
     brands: "ProAir HFA, Proventil HFA, Ventolin HFA",
     branch: "Rescue inhalers",
     use: "Asthma and COPD rescue bronchodilator",
+    productDetails: "Metered-dose inhaler: 90 mcg base per actuation (108 mcg albuterol sulfate).",
     coverage: c("Preferred", "Tier 1", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -709,6 +711,7 @@ export const medications: Medication[] = [
     brands: "AccuNeb",
     branch: "Rescue inhalers",
     use: "Nebulized rescue bronchodilator",
+    productDetails: "Nebulizer solution: 0.63 mg/3 mL, 1.25 mg/3 mL, 2.5 mg/3 mL, and concentrated 5 mg/mL products can differ.",
     coverage: c("Preferred", "Tier 1", "Preferred", [], ["QL"], []),
   },
   {
@@ -716,6 +719,7 @@ export const medications: Medication[] = [
     brands: "Xopenex HFA, Xopenex solution",
     branch: "Rescue inhalers",
     use: "Short-acting beta agonist",
+    productDetails: "HFA inhaler: 45 mcg per actuation. Nebulizer solution: 0.31, 0.63, or 1.25 mg/3 mL; concentrate products differ.",
     coverage: c(
       "Non-preferred",
       "Tier 1",
@@ -730,6 +734,7 @@ export const medications: Medication[] = [
     brands: "Brovana",
     branch: "Long-acting bronchodilators",
     use: "Nebulized LABA for COPD",
+    productDetails: "Nebulizer solution: 15 mcg/2 mL.",
     coverage: c(
       "Preferred + PA",
       "Tier 2 + PA",
@@ -744,6 +749,7 @@ export const medications: Medication[] = [
     brands: "Perforomist",
     branch: "Long-acting bronchodilators",
     use: "Nebulized LABA for COPD",
+    productDetails: "Nebulizer solution: 20 mcg/2 mL.",
     coverage: c(
       "Preferred + PA",
       "Tier 2 + PA",
@@ -758,6 +764,7 @@ export const medications: Medication[] = [
     brands: "Serevent Diskus",
     branch: "Long-acting bronchodilators",
     use: "LABA controller",
+    productDetails: "Dry-powder inhaler: 50 mcg per blister.",
     coverage: c(
       "Preferred + PA",
       "Tier 2 + PA",
@@ -772,6 +779,7 @@ export const medications: Medication[] = [
     brands: "Atrovent HFA, nebulizer solution",
     branch: "Anticholinergics",
     use: "Short-acting muscarinic antagonist",
+    productDetails: "HFA inhaler: 17 mcg per actuation. Nebulizer solution: 0.02% (0.5 mg/2.5 mL).",
     coverage: c("Preferred", "Tier 1", "Preferred", [], ["QL"], []),
   },
   {
@@ -779,6 +787,7 @@ export const medications: Medication[] = [
     brands: "Combivent Respimat, DuoNeb",
     branch: "Combination bronchodilators",
     use: "SAMA and SABA combination",
+    productDetails: "Respimat: ipratropium 20 mcg/albuterol 100 mcg per actuation. Nebulizer: ipratropium 0.5 mg/albuterol 2.5 mg per 3 mL.",
     coverage: c("Preferred", "Tier 1", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -793,6 +802,7 @@ export const medications: Medication[] = [
     brands: "tiotropium brand products",
     branch: "Anticholinergics",
     use: "Long-acting muscarinic antagonist",
+    productDetails: "HandiHaler capsule: 18 mcg. Respimat: 1.25 or 2.5 mcg per actuation; device and indication matter.",
     coverage: c("Preferred", "Tier 2 + PA", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -800,6 +810,7 @@ export const medications: Medication[] = [
     brands: "umeclidinium",
     branch: "Anticholinergics",
     use: "Long-acting muscarinic antagonist",
+    productDetails: "Ellipta dry-powder inhaler: 62.5 mcg per blister.",
     coverage: c("Preferred", "Tier 2", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -807,6 +818,7 @@ export const medications: Medication[] = [
     brands: "umeclidinium / vilanterol",
     branch: "Combination bronchodilators",
     use: "LAMA and LABA for COPD",
+    productDetails: "Ellipta dry-powder inhaler: umeclidinium 62.5 mcg/vilanterol 25 mcg per blister.",
     coverage: c("Preferred", "Tier 2", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -814,6 +826,7 @@ export const medications: Medication[] = [
     brands: "Stiolto Respimat",
     branch: "Combination bronchodilators",
     use: "LAMA and LABA for COPD",
+    productDetails: "Respimat inhaler: tiotropium 2.5 mcg/olodaterol 2.5 mcg per actuation.",
     coverage: c("Preferred", "Tier 2", "Preferred", [], ["QL"], ["QL"]),
   },
   {
@@ -821,6 +834,7 @@ export const medications: Medication[] = [
     brands: "Trelegy Ellipta",
     branch: "Triple therapy",
     use: "ICS, LAMA and LABA for COPD or asthma",
+    productDetails: "Ellipta dry-powder inhaler: 100/62.5/25 mcg or 200/62.5/25 mcg per blister.",
     coverage: c(
       "Non-preferred",
       "Tier 2 + PA",
@@ -835,6 +849,7 @@ export const medications: Medication[] = [
     brands: "Breztri Aerosphere",
     branch: "Triple therapy",
     use: "ICS, LAMA and LABA for COPD",
+    productDetails: "Metered-dose inhaler: budesonide 160 mcg/glycopyrrolate 9 mcg/formoterol 4.8 mcg per actuation.",
     coverage: c(
       "Non-preferred",
       "Tier 2 + PA",
@@ -2532,6 +2547,12 @@ export const PulmonaryFormularyDashboard = () => {
                   <p className="mt-1 text-sm text-[#687e7e]">
                     {activeSelected.brands}
                   </p>
+                  {activeSelected.productDetails && (
+                    <p className="mt-3 rounded-xl border border-[#dce9e6] bg-[#f8fbfa] p-3 text-[11px] leading-4 text-[#486665]">
+                      <strong className="text-[#244a48]">Product details:</strong>{" "}
+                      {activeSelected.productDetails}
+                    </p>
+                  )}
                   <p className="mt-2 text-[11px] leading-4 text-[#738786]">
                     Product-family summary. Device, strength, and brand or
                     generic status can differ.
