@@ -2002,9 +2002,6 @@ export const PulmonaryFormularyDashboard = () => {
     planFilter === "all"
       ? plans
       : plans.filter((plan) => plan.key === planFilter);
-  const pulmonaryCount = medications.filter(
-    (med) => med.branch !== "Common primary care",
-  ).length;
   const activeSelected =
     results.find((med) => med.generic === selected?.generic) ??
     results[0] ??
@@ -2084,23 +2081,6 @@ export const PulmonaryFormularyDashboard = () => {
                 government formularies. See preferred status, restrictions, and
                 the evidence source together.
               </p>
-            </div>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {[
-                ["Pulmonary meds", pulmonaryCount],
-                ["Formularies", plans.length],
-                ["Curated snapshot", "3 sources"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="min-w-24 rounded-xl border border-white/10 bg-white/8 px-3 py-3"
-                >
-                  <div className="text-xl font-semibold">{value}</div>
-                  <div className="mt-1 text-[10px] uppercase tracking-[0.12em] text-[#a9c6c3]">
-                    {label}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
           <div className="mt-7 flex flex-col gap-3 rounded-2xl bg-white p-2 shadow-[0_16px_45px_rgba(0,0,0,0.2)] sm:flex-row">
@@ -2222,9 +2202,6 @@ export const PulmonaryFormularyDashboard = () => {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="rounded-full bg-[#dff1ed] px-3 py-1.5 text-xs font-bold text-[#0d6664]">
-                  {visiblePlans.length} live
-                </span>
                 <button
                   onClick={() => setView("medications")}
                   className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0d6664] focus:outline-none focus:ring-2 focus:ring-[#55bda8] focus:ring-offset-2"
