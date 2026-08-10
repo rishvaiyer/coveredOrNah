@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-type CoverageState =
+import { useEffect, useMemo, useState } from "react";
+export type CoverageState =
   | "Preferred"
   | "Preferred + PA"
   | "Tier 1"
@@ -8,20 +8,20 @@ type CoverageState =
   | "Tier 2 + PA"
   | "Non-preferred"
   | "Not on PDL";
-type Restriction = "PA" | "QL" | "ST" | "SP" | "CC" | "Age" | "DX2RX";
-type PlanKey = "nyrx" | "njuhc" | "pama";
-type Coverage = {
+export type Restriction = "PA" | "QL" | "ST" | "SP" | "CC" | "Age" | "DX2RX";
+export type PlanKey = "nyrx" | "njuhc" | "pama";
+export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
 };
-type Medication = {
+export type Medication = {
   generic: string;
   brands: string;
   branch: string;
   use: string;
   coverage: Record<PlanKey, Coverage>;
 };
-const plans: Array<{
+export const plans: Array<{
   key: PlanKey;
   short: string;
   name: string;
@@ -77,7 +77,7 @@ const c = (
     flags: paFlags,
   },
 });
-const medications: Medication[] = [
+export const medications: Medication[] = [
   {
     generic: "Albuterol HFA",
     brands: "ProAir HFA, Proventil HFA, Ventolin HFA",
@@ -845,6 +845,19 @@ export const PulmonaryFormularyDashboard = () => {
   const [planFilter, setPlanFilter] = useState<"all" | PlanKey>("all");
   const [view, setView] = useState<"medications" | "plans">("medications");
   const [selected, setSelected] = useState<Medication | null>(medications[0]);
+  const [apiConnected, setApiConnected] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/health", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("API unavailable");
+        return response.json();
+      })
+      .then((payload) => setApiConnected(payload.status === "ok"))
+      .catch(() => setApiConnected(false));
+    return () => controller.abort();
+  }, []);
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return medications.filter((med) => {
@@ -878,6 +891,21 @@ export const PulmonaryFormularyDashboard = () => {
           isStraightforwardCoverage(candidate.coverage[planKey].state),
       )
       .slice(0, 3);
+  const autocompleteOptions = Array.from(
+    new Set(
+      medications.flatMap((medication) => [
+        medication.generic,
+        ...medication.brands
+          .split(/[,;]/)
+          .map((brand) => brand.trim())
+          .filter(Boolean),
+      ]),
+    ),
+  )
+    .filter((option) =>
+      option.toLowerCase().includes(query.trim().toLowerCase()),
+    )
+    .slice(0, 12);
   return (
     <main className="min-h-screen w-full bg-[#f3f7f7] text-[#102a2b]">
       <header className="border-b border-[#dbe7e5] bg-white/95 px-4 py-3 backdrop-blur sm:px-6 lg:px-10">
@@ -902,7 +930,8 @@ export const PulmonaryFormularyDashboard = () => {
           </div>
           <div className="hidden items-center gap-2 rounded-full border border-[#d9e6e4] bg-[#f8fbfa] px-3 py-2 text-xs font-medium text-[#4c6868] md:flex">
             <Icon name="shield" className="h-4 w-4 text-[#198f7c]" />
-            No patient information collected
+            {apiConnected ? "API connected · " : ""}No patient information
+            collected
           </div>
         </div>
       </header>
@@ -942,19 +971,52 @@ export const PulmonaryFormularyDashboard = () => {
             </div>
           </div>
           <div className="mt-7 flex flex-col gap-3 rounded-2xl bg-white p-2 shadow-[0_16px_45px_rgba(0,0,0,0.2)] sm:flex-row">
-            <label className="relative flex min-h-12 flex-1 items-center">
+            <div className="relative flex min-h-12 flex-1 items-center">
               <Icon
                 name="search"
                 className="absolute left-4 h-5 w-5 text-[#688382]"
               />
-              <span className="sr-only">Search medication</span>
+              <label htmlFor="medication-search" className="sr-only">
+                Search medication
+              </label>
               <input
+                id="medication-search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+                autoComplete="off"
                 className="h-12 w-full rounded-xl bg-[#f4f8f7] pl-12 pr-4 text-[15px] text-[#173334] outline-none ring-2 ring-transparent transition focus:bg-white focus:ring-[#55bda8]"
                 placeholder="Search albuterol, Trelegy, pulmonary hypertension..."
               />
-            </label>
+              {searchFocused &&
+                query.trim() &&
+                autocompleteOptions.length > 0 && (
+                  <div className="absolute left-0 right-0 top-[calc(100%+10px)] z-30 overflow-hidden rounded-xl border border-[#cfe0dd] bg-white py-1 shadow-[0_18px_45px_rgba(9,52,53,0.2)]">
+                    <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[#66807e]">
+                      Medication suggestions
+                    </div>
+                    {autocompleteOptions.map((option) => (
+                      <button
+                        type="button"
+                        key={option}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onClick={() => {
+                          setQuery(option);
+                          setSearchFocused(false);
+                        }}
+                        className="flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left text-sm font-semibold text-[#204341] transition hover:bg-[#eaf5f2] focus:bg-[#eaf5f2] focus:outline-none"
+                      >
+                        <span className="truncate">{option}</span>
+                        <Icon
+                          name="chevron"
+                          className="h-4 w-4 shrink-0 text-[#84a09d]"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+            </div>
             <select
               aria-label="Therapeutic area"
               value={branch}

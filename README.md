@@ -14,7 +14,7 @@ This tool summarizes public formulary documents. It does not collect patient inf
 
 - Coverage is curated from official, dated formulary documents into static application data.
 - Each result retains its plan, status, restrictions, source URL, and source effective date.
-- GitHub Pages serves the read-only dashboard. There is no database and no patient data.
+- Railway serves the React dashboard and read-only API from one service. There is no patient data.
 - "Not listed" means absent from this PDL snapshot, not necessarily excluded from the benefit.
 - Product, device, strength, dosage form, and brand or generic status must be verified in the linked source.
 
@@ -30,8 +30,19 @@ This tool summarizes public formulary documents. It does not collect patient inf
 
 ```bash
 npm install
-npm run dev
+npm run build
+npm start
 ```
+
+Open `http://localhost:3000`.
+
+## API
+
+- `GET /api/health`
+- `GET /api/plans`
+- `GET /api/metadata`
+- `GET /api/medications?q=trelegy&plan=nyrx`
+- `GET /api/alternatives?medication=Levalbuterol&plan=nyrx`
 
 ## Verification
 

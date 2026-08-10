@@ -6,21 +6,28 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "start": "tsx server.ts",
     "preview": "vite preview",
     "test": "npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
+    "express": "^5.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@types/node": "^24.3.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "vite": "^6.1.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   }
 }
