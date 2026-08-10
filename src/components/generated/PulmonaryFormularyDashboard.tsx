@@ -2053,25 +2053,31 @@ export const PulmonaryFormularyDashboard = () => {
                   <input
                     value={insurerQuery}
                     onChange={(event) => setInsurerQuery(event.target.value)}
+                    list="insurer-suggestions"
                     className="h-11 w-full rounded-xl border border-[#d9e7e4] bg-[#f7faf9] pl-10 pr-3 text-sm outline-none ring-2 ring-transparent focus:bg-white focus:ring-[#55bda8]"
                     placeholder="Find Aetna, Medicare, UHC..."
                   />
+                  <datalist id="insurer-suggestions">
+                    {summitNjInsurers.map((insurer) => (
+                      <option key={insurer.name} value={insurer.name} />
+                    ))}
+                  </datalist>
                 </label>
               </div>
-              <div className="mt-5 rounded-xl border border-[#d8e8e4] bg-[#f5faf8] p-4">
-                <div className="flex items-center justify-between gap-3">
+              <details className="mt-5 rounded-xl border border-[#d8e8e4] bg-[#f5faf8] p-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
                       Summit NJ pulmonary priority
                     </p>
                     <p className="mt-1 text-sm font-bold text-[#183839]">
-                      Official source routes now being converted into searchable coverage
+                      Source routes for the next insurer batches
                     </p>
                   </div>
                   <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-[#446d69] ring-1 ring-[#c9ded9]">
-                    No mock coverage
+                    Expand
                   </span>
-                </div>
+                </summary>
                 <div className="mt-3 grid gap-3 lg:grid-cols-3">
                   {summitNjFormularySources.map((item) => (
                     <article
@@ -2118,8 +2124,17 @@ export const PulmonaryFormularyDashboard = () => {
                     </article>
                   ))}
                 </div>
-              </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              </details>
+              <details
+                open={Boolean(insurerQuery)}
+                className="mt-5 rounded-xl border border-[#e1ebe9] bg-[#fbfdfc] p-4"
+              >
+                <summary className="cursor-pointer list-none text-sm font-bold text-[#183839]">
+                  {insurerQuery
+                    ? `${summitNjDirectory.length} matching accepted insurer${summitNjDirectory.length === 1 ? "" : "s"}`
+                    : `Browse all ${summitNjInsurers.length} Summit NJ insurers`}
+                </summary>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {summitNjDirectory.map((insurer) => (
                   <article
                     key={insurer.name}
@@ -2148,12 +2163,13 @@ export const PulmonaryFormularyDashboard = () => {
                     </p>
                   </article>
                 ))}
-              </div>
-              {summitNjDirectory.length === 0 && (
-                <p className="mt-5 rounded-xl bg-[#f4f8f7] p-4 text-sm text-[#607977]">
-                  No insurer matches that search.
-                </p>
-              )}
+                </div>
+                {summitNjDirectory.length === 0 && (
+                  <p className="mt-4 rounded-xl bg-[#f4f8f7] p-4 text-sm text-[#607977]">
+                    No insurer matches that search.
+                  </p>
+                )}
+              </details>
               <p className="mt-5 border-t border-[#e3ecea] pt-4 text-[11px] leading-5 text-[#687d7d]">
                 Source: Summit Health’s New Jersey accepted-insurance list, last
                 updated April 20, 2026. Participation can vary by exact
