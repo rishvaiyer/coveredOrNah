@@ -41,7 +41,8 @@ export type PlanKey =
   | "anthemNySelect"
   | "wellcareNjH0913"
   | "humanaNj26408"
-  | "bravenNjH0885";
+  | "bravenNjH0885"
+  | "healthspringNj26096";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -179,6 +180,16 @@ export const plans: Array<{
     region: "NJ",
     updated: "Jul 22, 2026",
     source: "https://mydirectory.bravenhealth.com/",
+  },
+  {
+    key: "healthspringNj26096",
+    short: "HealthSpring NJ",
+    name: "HealthSpring NJ Medicare formulary 00026096",
+    region: "NJ",
+    updated: "May 1, 2026",
+    source: "https://www.healthspring.com/static/docs/medicare/plans/2026/formulary-mapd.pdf",
+    priorAuthorizationUrl: "https://www.healthspring.com/providers/pharmacy",
+    priorAuthorizationLabel: "Open HealthSpring PA route",
   },
 ];
 export type SummitNjInsurer = {
@@ -598,6 +609,7 @@ const c = (
   wellcareNjH0913: CoverageState = "Source loading",
   humanaNj26408: CoverageState = "Source loading",
   bravenNjH0885: CoverageState = "Source loading",
+  healthspringNj26096: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -608,6 +620,7 @@ const c = (
   wellcareNjH0913Flags: Restriction[] = [],
   humanaNj26408Flags: Restriction[] = [],
   bravenNjH0885Flags: Restriction[] = [],
+  healthspringNj26096Flags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -660,6 +673,10 @@ const c = (
   bravenNjH0885: {
     state: bravenNjH0885,
     flags: bravenNjH0885Flags,
+  },
+  healthspringNj26096: {
+    state: healthspringNj26096,
+    flags: healthspringNj26096Flags,
   },
 });
 export const medications: Medication[] = [
@@ -1159,6 +1176,13 @@ export const medications: Medication[] = [
       ["SP", "QL"],
       ["QL"],
     ),
+  },
+  {
+    generic: "Sotatercept-csrk",
+    brands: "Winrevair",
+    branch: "Pulmonary hypertension",
+    use: "Activin signaling inhibitor for pulmonary arterial hypertension",
+    coverage: c("Source loading", "Source loading", "Source loading"),
   },
   {
     generic: "Tobramycin inhalation",
@@ -1742,6 +1766,10 @@ const planCoverageOverrides: Partial<
     Roflumilast: coverage("Tier 4", ["PA", "QL"], "30 tablets per 30 days."),
     Nintedanib: coverage("Tier 5", ["PA", "QL"], "60 capsules per 30 days."),
     Pirfenidone: coverage("Tier varies", ["PA", "QL"], "267 mg tablet is Tier 4; 801 mg tablet and 267 mg capsule are Tier 5."),
+  },
+  healthspringNj26096: {
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["ST", "QL"], "Spiriva Respimat entry."),
+    "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"], "Winrevair entry."),
   },
 };
 
