@@ -1901,7 +1901,7 @@ const actionForCoverage = (state: CoverageState) => {
   if (state === "Tier varies")
     return "Tier differs by product or strength. Check the product detail below.";
   if (state === "Source loading")
-    return "Coverage is unconfirmed for this exact plan. No coverage claim is shown yet.";
+    return "Please verify coverage directly with the insurer. We could not find an official source for this exact medication and plan combination. It may still be covered; confirm before submitting prior authorization.";
   if (state === "Non-preferred")
     return "Non-preferred. Review preferred same-branch options or exception criteria.";
   if (state === "Non-preferred drug" || state === "Non-formulary")
@@ -2618,6 +2618,12 @@ export const PulmonaryFormularyDashboard = () => {
                           <p className="mt-2 text-[11px] leading-4 text-[#536d6b]">
                             {actionForCoverage(item.state)}
                           </p>
+                          {item.state === "Source loading" && (
+                            <div className="mt-2 rounded-md border border-[#e2c996] bg-[#fff9ea] px-2 py-2 text-[10px] leading-4 text-[#785313]">
+                              <strong>Please verify insurance coverage.</strong>{" "}
+                              This result is unconfirmed, not a denial. An official source was not found for this exact medication and plan combination.
+                            </div>
+                          )}
                           {item.priorAuthorizationUrl && (
                             <a
                               href={item.priorAuthorizationUrl}
