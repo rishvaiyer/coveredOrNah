@@ -40,7 +40,8 @@ export type PlanKey =
   | "oscarNjIndividual"
   | "anthemNySelect"
   | "wellcareNjH0913"
-  | "humanaNj26408";
+  | "humanaNj26408"
+  | "bravenNjH0885";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -170,6 +171,14 @@ export const plans: Array<{
     priorAuthorizationUrl:
       "https://provider.humana.com/pharmacy-resources/prior-authorizations",
     priorAuthorizationLabel: "Open Humana PA route",
+  },
+  {
+    key: "bravenNjH0885",
+    short: "Braven NJ",
+    name: "Braven NJ Medicare H0885 formulary",
+    region: "NJ",
+    updated: "Jul 22, 2026",
+    source: "https://mydirectory.bravenhealth.com/",
   },
 ];
 export type SummitNjInsurer = {
@@ -588,6 +597,7 @@ const c = (
   anthemNySelect: CoverageState = "Source loading",
   wellcareNjH0913: CoverageState = "Source loading",
   humanaNj26408: CoverageState = "Source loading",
+  bravenNjH0885: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -597,6 +607,7 @@ const c = (
   anthemNySelectFlags: Restriction[] = [],
   wellcareNjH0913Flags: Restriction[] = [],
   humanaNj26408Flags: Restriction[] = [],
+  bravenNjH0885Flags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -645,6 +656,10 @@ const c = (
   humanaNj26408: {
     state: humanaNj26408,
     flags: humanaNj26408Flags,
+  },
+  bravenNjH0885: {
+    state: bravenNjH0885,
+    flags: bravenNjH0885Flags,
   },
 });
 export const medications: Medication[] = [
@@ -1716,6 +1731,17 @@ const planCoverageOverrides: Partial<
     "Aztreonam inhalation": coverage("Tier 5", ["PA", "QL"]),
     "Dornase alfa": coverage("Tier 5", [], "Part B versus Part D determination applies."),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"]),
+  },
+  bravenNjH0885: {
+    "Albuterol HFA": coverage("Tier 3", ["QL"], "Metered-dose inhaler entries have 13.4 or 17 units per 30 days limits."),
+    "Albuterol nebulizer solution": coverage("Tier varies", ["PA"], "0.83 mg/mL is Tier 2; 0.21/0.417 mg/mL entries are Tier 3."),
+    "Ipratropium / albuterol": coverage("Tier 2 + PA", ["PA"], "Nebulizer entry."),
+    "Budesonide inhalation": coverage("Tier 4", ["PA"], "Nebulized product entries."),
+    "Symbicort (brand)": coverage("Tier 4", ["QL"], "Budesonide-formoterol MDI entries, 30.9 units per 30 days."),
+    Montelukast: coverage("Tier varies", [], "4 mg granule is Tier 4; 4/5 mg chewable and 10 mg tablet entries are Tier 2."),
+    Roflumilast: coverage("Tier 4", ["PA", "QL"], "30 tablets per 30 days."),
+    Nintedanib: coverage("Tier 5", ["PA", "QL"], "60 capsules per 30 days."),
+    Pirfenidone: coverage("Tier varies", ["PA", "QL"], "267 mg tablet is Tier 4; 801 mg tablet and 267 mg capsule are Tier 5."),
   },
 };
 
