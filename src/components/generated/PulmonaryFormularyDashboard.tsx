@@ -8,6 +8,7 @@ export type CoverageState =
   | "Tier 2 + PA"
   | "Tier 3"
   | "Tier 4"
+  | "Tier 5"
   | "Tier varies"
   | "Non-preferred"
   | "Not on PDL"
@@ -27,7 +28,8 @@ export type PlanKey =
   | "njuhc"
   | "pama"
   | "horizonMarketplace"
-  | "uhcCommercial";
+  | "uhcCommercial"
+  | "aetnaMedicareHmo";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -106,6 +108,15 @@ export const plans: Array<{
       "https://www.uhcprovider.com/en/prior-auth-advance-notification/prior-auth-specialty-drugs/prior-auth-pharmacy-medical-necessity.html",
     priorAuthorizationLabel: "Open UHC PA route",
   },
+  {
+    key: "aetnaMedicareHmo",
+    short: "Aetna HMO",
+    name: "Aetna Medicare HMO formulary baseline",
+    region: "NJ",
+    updated: "Aug 1, 2026",
+    source:
+      "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf",
+  },
 ];
 export type SummitNjInsurer = {
   name: string;
@@ -149,13 +160,13 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
   },
   {
     insurer: "Aetna",
-    planScope: "NJ Medicare Advantage and plan-specific pharmacy benefit",
-    status: "Plan selection required",
+    planScope: "2026 Aetna Medicare HMO formulary family",
+    status: "Ready for pulmonary extraction",
     source:
-      "https://www.aetna.com/medicare/prescription-drugs/check-medicare-drug-list.html",
-    sourceLabel: "Aetna Medicare drug-list finder",
+      "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf",
+    sourceLabel: "August 2026 Aetna HMO drug guide",
     detail:
-      "Aetna requires the member's plan, county or ZIP to select the exact drug list. The app will only show coverage after that named plan is sourced.",
+      "Pulmonary rows are loaded for this named HMO formulary family. Confirm the plan and county because other Aetna formularies can differ.",
   },
 ];
 
@@ -386,8 +397,10 @@ const c = (
   paFlags: Restriction[] = [],
   horizon: CoverageState = "Source loading",
   uhcCommercial: CoverageState = "Source loading",
+  aetnaMedicareHmo: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
+  aetnaMedicareHmoFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -408,6 +421,10 @@ const c = (
   uhcCommercial: {
     state: uhcCommercial,
     flags: uhcCommercialFlags,
+  },
+  aetnaMedicareHmo: {
+    state: aetnaMedicareHmo,
+    flags: aetnaMedicareHmoFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1159,6 +1176,61 @@ const planCoverageOverrides: Partial<
     Nintedanib: coverage("Tier 4", ["PA", "QL", "SP"]),
     Pirfenidone: coverage("Tier 2", ["PA", "QL", "SP"]),
     Zafirlukast: coverage("Tier 1"),
+  },
+  aetnaMedicareHmo: {
+    "Albuterol HFA": coverage("Tier 2", ["QL"]),
+    "Albuterol nebulizer solution": coverage(
+      "Tier 2",
+      [],
+      "Listed under Medicare Part B/D coverage categories.",
+    ),
+    Levalbuterol: coverage(
+      "Tier varies",
+      ["QL"],
+      "Levalbuterol nebulizer is Tier 2; levalbuterol HFA is Tier 3.",
+    ),
+    Salmeterol: coverage("Tier 3", ["QL"]),
+    Ipratropium: coverage(
+      "Tier varies",
+      ["QL"],
+      "Ipratropium nebulizer is Tier 2; Atrovent HFA is Tier 4.",
+    ),
+    "Ipratropium / albuterol": coverage(
+      "Tier varies",
+      ["QL"],
+      "DuoNeb generic is Tier 2; Combivent Respimat is Tier 4.",
+    ),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
+    Roflumilast: coverage("Tier 4"),
+    "Budesonide inhalation": coverage(
+      "Tier 4",
+      [],
+      "Listed under Medicare Part B/D coverage categories.",
+    ),
+    Ciclesonide: coverage("Tier 4", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage(
+      "Tier varies",
+      ["QL"],
+      "Fluticasone-salmeterol Diskus is Tier 2; generic Advair HFA is Tier 4.",
+    ),
+    "Symbicort (brand)": coverage("Tier 3", ["QL"]),
+    "Mometasone / formoterol": coverage("Tier 4", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
+    Montelukast: coverage("Tier 1", ["QL"]),
+    Benralizumab: coverage("Tier 5", ["PA", "QL", "LD"]),
+    Omalizumab: coverage("Tier 5", ["PA", "LD"]),
+    Nintedanib: coverage("Tier 5", ["PA", "QL", "LD"]),
+    Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
+    "Dornase alfa": coverage("Tier 5", ["PA", "LD"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", [
+      "PA",
+      "QL",
+      "LD",
+    ]),
   },
 };
 
