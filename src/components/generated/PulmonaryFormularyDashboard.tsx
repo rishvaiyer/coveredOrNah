@@ -37,11 +37,14 @@ export type PlanKey =
   | "aetnaMedicareHmo"
   | "amerihealthNj"
   | "cignaNationalPreferred"
-  | "oscarNjIndividual";
+  | "oscarNjIndividual"
+  | "anthemNySelect";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
   productNote?: string;
+  priorAuthorizationUrl?: string;
+  priorAuthorizationLabel?: string;
 };
 export type Medication = {
   generic: string;
@@ -130,6 +133,18 @@ export const plans: Array<{
       "https://www.hioscar.com/search-documents/drug-formularies/document?state=NJ&year=2026&planType=INDIVIDUAL",
     priorAuthorizationUrl: "https://provider.hioscar.com/",
     priorAuthorizationLabel: "Open Oscar PA portal (sign-in required)",
+  },
+  {
+    key: "anthemNySelect",
+    short: "Anthem NY",
+    name: "Anthem BCBS NY Individual Select 3-Tier formulary",
+    region: "NY",
+    updated: "Aug 1, 2026",
+    source:
+      "https://fm.formularynavigator.com/FBO/143/2026_Select_3_Tier_NY_ABS_IND.pdf",
+    priorAuthorizationUrl:
+      "https://providers.anthem.com/new-york-provider/resources/pharmacy-information",
+    priorAuthorizationLabel: "Open Anthem pharmacy PA route",
   },
 ];
 export type SummitNjInsurer = {
@@ -545,12 +560,14 @@ const c = (
   amerihealthNj: CoverageState = "Source loading",
   cignaNationalPreferred: CoverageState = "Source loading",
   oscarNjIndividual: CoverageState = "Source loading",
+  anthemNySelect: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
   amerihealthNjFlags: Restriction[] = [],
   cignaNationalPreferredFlags: Restriction[] = [],
   oscarNjIndividualFlags: Restriction[] = [],
+  anthemNySelectFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -587,6 +604,10 @@ const c = (
   oscarNjIndividual: {
     state: oscarNjIndividual,
     flags: oscarNjIndividualFlags,
+  },
+  anthemNySelect: {
+    state: anthemNySelect,
+    flags: anthemNySelectFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1324,7 +1345,15 @@ const coverage = (
   state: CoverageState,
   flags: Restriction[] = [],
   productNote?: string,
-): Coverage => ({ state, flags, productNote });
+  priorAuthorizationUrl?: string,
+  priorAuthorizationLabel?: string,
+): Coverage => ({
+  state,
+  flags,
+  productNote,
+  priorAuthorizationUrl,
+  priorAuthorizationLabel,
+});
 
 const planCoverageOverrides: Partial<
   Record<PlanKey, Record<string, Coverage>>
@@ -1570,6 +1599,40 @@ const planCoverageOverrides: Partial<
     "Tobramycin inhalation": coverage("Tier 4", ["PA", "QL", "SP"], "Tobramycin nebulizer entry."),
     "Aztreonam inhalation": coverage("Tier 4", ["PA", "QL", "SP"]),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 4", ["PA", "QL", "SP"]),
+  },
+  anthemNySelect: {
+    "Albuterol HFA": coverage("Tier 1", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier 1", ["QL"]),
+    Levalbuterol: coverage("Tier varies", ["QL"], "HFA is Tier 1; nebulizer solution is Tier 2."),
+    Arformoterol: coverage("Tier 2", ["QL"]),
+    Formoterol: coverage("Tier 2", ["QL"]),
+    Salmeterol: coverage("Tier 2", ["QL"]),
+    Ipratropium: coverage("Tier 1", ["QL"], "Ipratropium nebulizer entry."),
+    "Ipratropium / albuterol": coverage("Tier 1", ["QL"], "Ipratropium-albuterol nebulizer entry."),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 2", ["QL"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"], "Spiriva Respimat entry."),
+    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"], "Umeclidinium/vilanterol entry."),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
+    Roflumilast: coverage("Tier 2", ["QL"]),
+    "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "Fluticasone propionate HFA 44 mcg": coverage("Tier 2", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
+    Mometasone: coverage("Tier 2", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage("Tier 1", ["QL"], "Fluticasone-salmeterol HFA/DPI entry; brand status can differ."),
+    "Symbicort (brand)": coverage("Tier 2", ["QL"], "Budesonide-formoterol entry; brand status can differ."),
+    "Mometasone / formoterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 2", ["QL"]),
+    Montelukast: coverage("Tier 1", ["QL"]),
+    Zafirlukast: coverage("Tier 1", ["QL"]),
+    "Zileuton ER": coverage("Tier 2 + PA", ["PA", "QL"]),
+    Dupilumab: coverage("Tier 3", ["PA", "SP"]),
+    Nintedanib: coverage("Tier 3", ["PA", "QL", "SP"]),
+    "Tobramycin inhalation": coverage("Tier 3", ["QL", "SP"]),
+    "Dornase alfa": coverage("Tier 3", ["PA", "QL", "SP", "LD"]),
+    "Bupropion SR 150 mg": coverage("Tier 1", ["QL"], "$0 smoking-cessation benefit entry."),
+    "Nicotine replacement": coverage("Tier 1", [], "$0 smoking-cessation benefit entry."),
+    Varenicline: coverage("Tier 2", ["QL"], "$0 smoking-cessation benefit entry."),
   },
 };
 
@@ -2338,6 +2401,17 @@ export const PulmonaryFormularyDashboard = () => {
                           <p className="mt-2 text-[11px] leading-4 text-[#536d6b]">
                             {actionForCoverage(item.state)}
                           </p>
+                          {item.priorAuthorizationUrl && (
+                            <a
+                              href={item.priorAuthorizationUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#fff6e8] px-2 py-1.5 text-[10px] font-bold text-[#8a5a16] ring-1 ring-[#efd4a4] hover:bg-[#ffedcc]"
+                            >
+                              {item.priorAuthorizationLabel ?? `Open PA form for ${activeSelected.generic}`}
+                              <Icon name="external" className="h-3 w-3" />
+                            </a>
+                          )}
                           {!isStraightforwardCoverage(item.state) &&
                             plan.priorAuthorizationUrl && (
                               <a
@@ -2361,7 +2435,9 @@ export const PulmonaryFormularyDashboard = () => {
                                 }
                                 className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#eef5f3] px-2 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#c7ded9] hover:bg-[#dff1ed]"
                               >
-                                {plan.priorAuthorizationLabel ?? "Open PA route"}
+                                {plan.priorAuthorizationDownload
+                                  ? `Download PA form for ${activeSelected.generic}`
+                                  : `Open ${plan.short} PA route for ${activeSelected.generic}`}
                                 <Icon name="external" className="h-3 w-3" />
                               </a>
                             )}
