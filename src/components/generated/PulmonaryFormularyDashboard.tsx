@@ -2441,33 +2441,39 @@ export const PulmonaryFormularyDashboard = () => {
                                 <Icon name="external" className="h-3 w-3" />
                               </a>
                             )}
-                          {!isStraightforwardCoverage(item.state) &&
-                            alternatives.length > 0 && (
-                              <div className="mt-3 rounded-lg bg-[#f3f8f7] p-2.5">
-                                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#466e69]">
-                                  Similar covered options
-                                </div>
-                                <p className="mt-1 text-[10px] leading-4 text-[#718482]">
-                                  Same medication branch and preferred or Tier 1
-                                  on this plan. Not substitution advice.
-                                </p>
-                                <div className="mt-2 flex flex-wrap gap-1.5">
-                                  {alternatives.map((alternative) => (
-                                    <button
-                                      key={alternative.generic}
-                                      onClick={() => {
-                                        setQuery("");
-                                        setBranch(alternative.branch);
-                                        setSelected(alternative);
-                                      }}
-                                      className="rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] transition hover:bg-[#e5f3f0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55bda8]"
-                                    >
-                                      {alternative.generic}
-                                    </button>
-                                  ))}
-                                </div>
+                          {!isStraightforwardCoverage(item.state) && (
+                            <div className="mt-3 rounded-lg bg-[#f3f8f7] p-2.5">
+                              <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#466e69]">
+                                Covered alternatives to {activeSelected.generic}
                               </div>
-                            )}
+                              {alternatives.length > 0 ? (
+                                <>
+                                  <p className="mt-1 text-[10px] leading-4 text-[#718482]">
+                                    Similar or generic options in the same therapeutic area that are preferred or Tier 1 on this plan. Select one for its full coverage details.
+                                  </p>
+                                  <div className="mt-2 flex flex-wrap gap-1.5">
+                                    {alternatives.map((alternative) => (
+                                      <button
+                                        key={alternative.generic}
+                                        onClick={() => {
+                                          setQuery("");
+                                          setBranch(alternative.branch);
+                                          setSelected(alternative);
+                                        }}
+                                        className="rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] transition hover:bg-[#e5f3f0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55bda8]"
+                                      >
+                                        {alternative.generic}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </>
+                              ) : (
+                                <p className="mt-1 text-[10px] leading-4 text-[#718482]">
+                                  No covered alternative is verified in this source yet. Use the PA action above when appropriate.
+                                </p>
+                              )}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
