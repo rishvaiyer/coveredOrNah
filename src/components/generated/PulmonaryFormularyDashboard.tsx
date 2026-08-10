@@ -2484,7 +2484,7 @@ export const PulmonaryFormularyDashboard = () => {
                               key={plan.key}
                               className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[10px] font-bold ring-1 ring-inset ${toneForState(item.state)}`}
                             >
-                              <span>{plan.region}</span>
+                              <span>{plan.short}</span>
                               <span className="opacity-50">·</span>
                               <span>{displayState(item.state)}</span>
                             </span>
