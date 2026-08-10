@@ -35,7 +35,8 @@ export type PlanKey =
   | "horizonMarketplace"
   | "uhcCommercial"
   | "aetnaMedicareHmo"
-  | "amerihealthNj";
+  | "amerihealthNj"
+  | "cignaNationalPreferred";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -104,6 +105,18 @@ export const plans: Array<{
       "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
     priorAuthorizationUrl:
       "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
+    priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    key: "cignaNationalPreferred",
+    short: "Cigna 3-Tier",
+    name: "Cigna National Preferred 3-Tier employer formulary",
+    region: "NJ",
+    updated: "Jul 1, 2026",
+    source:
+      "https://www.cigna.com/static/www-cigna-com/docs/ifp/cigna-national-preferred-formulary-abridged.pdf",
+    priorAuthorizationUrl:
+      "https://v.static.cigna.com/assets/chcp/resourceLibrary/forms/prescription/commercialDrugPriorAuthorizationForms.html",
     priorAuthorizationLabel: "Open PA route",
   },
 ];
@@ -518,10 +531,12 @@ const c = (
   uhcCommercial: CoverageState = "Source loading",
   aetnaMedicareHmo: CoverageState = "Source loading",
   amerihealthNj: CoverageState = "Source loading",
+  cignaNationalPreferred: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
   amerihealthNjFlags: Restriction[] = [],
+  cignaNationalPreferredFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -550,6 +565,10 @@ const c = (
   amerihealthNj: {
     state: amerihealthNj,
     flags: amerihealthNjFlags,
+  },
+  cignaNationalPreferred: {
+    state: cignaNationalPreferred,
+    flags: cignaNationalPreferredFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1477,6 +1496,30 @@ const planCoverageOverrides: Partial<
     Omalizumab: coverage("Preferred brand", ["SP", "PA"]),
     "Benzonatate": coverage("Low-cost generic"),
     "Epinephrine auto-injector": coverage("Generic", ["QL"]),
+  },
+  cignaNationalPreferred: {
+    "Albuterol nebulizer solution": coverage("Tier 1"),
+    "Ipratropium / albuterol": coverage("Tier 2", ["QL"], "Combivent Respimat entry."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"], "Spiriva Respimat entry."),
+    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 2", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
+    Mometasone: coverage("Tier 2", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage("Tier 2 + PA", ["PA", "QL"], "Advair HFA entry."),
+    "Symbicort (brand)": coverage("Tier 1 + PA", ["PA", "QL"], "Breyna entry; brand status can differ."),
+    "Mometasone / formoterol": coverage("Tier 2 + PA", ["PA", "QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 2 + PA", ["PA", "QL"]),
+    Montelukast: coverage("Tier 1"),
+    Benralizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    Mepolizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    Tezepelumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    Omalizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    "Treprostinil inhaled": coverage("Tier 2 + PA", ["PA", "LD"]),
+    Selexipag: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    Riociguat: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
   },
 };
 
