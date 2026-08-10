@@ -8,7 +8,9 @@
     "build": "tsc --noEmit && vite build",
     "start": "tsx server.ts",
     "preview": "vite preview",
-    "test": "npm run build"
+    "test": "npm run build",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "cms:import": "tsx scripts/import-cms-medicare.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",

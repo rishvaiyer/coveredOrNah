@@ -1,6 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ensureFormularySchema, pool } from "./db.js";
 import {
   medications,
   plans,
@@ -51,6 +52,18 @@ app.get("/api/health", (_request, response) => {
 
 app.get("/api/plans", (_request, response) => {
   response.json({ plans });
+});
+
+app.get("/api/medicare/plans", async (request, response) => {
+  if (!pool) return response.status(503).json({ error: "Medicare plan index is not configured yet." });
+  const query = String(request.query.q || "").trim().slice(0, 100);
+  const state = String(request.query.state || "NJ").trim().toUpperCase();
+  try {
+    const latest = await pool.query<{ id: number; source_version: string; imported_at: string }>("SELECT id, source_version, imported_at FROM formulary_imports WHERE status = 'succeeded' ORDER BY imported_at DESC LIMIT 1");
+    if (!latest.rowCount) return response.json({ import: null, plans: [] });
+    const result = await pool.query(`SELECT DISTINCT contract_id, plan_id, segment_id, contract_name, plan_name, state, county_code, formulary_id FROM medicare_plans WHERE import_id = $1 AND ($2 = '' OR state = $2 OR state IS NULL) AND ($3 = '' OR contract_name ILIKE '%' || $3 || '%' OR plan_name ILIKE '%' || $3 || '%' OR contract_id ILIKE '%' || $3 || '%') ORDER BY contract_name, plan_name LIMIT 100`, [latest.rows[0].id, state, query]);
+    response.json({ import: latest.rows[0], plans: result.rows });
+  } catch { response.status(503).json({ error: "Medicare plan index is temporarily unavailable." }); }
 });
 
 app.get("/api/pa-form/:plan", async (request, response) => {
@@ -220,6 +233,7 @@ app.get(/.*/, (_request, response) => {
   response.sendFile(path.join(distDir, "index.html"));
 });
 
+await ensureFormularySchema();
 app.listen(port, "0.0.0.0", () => {
   console.log(`Covered or Nah listening on port ${port}`);
 });
