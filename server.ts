@@ -216,6 +216,7 @@ app.use("/api", (_request, response) => {
 
 app.use(express.static(distDir, { index: false, maxAge: "1h" }));
 app.get(/.*/, (_request, response) => {
+  response.setHeader("Cache-Control", "no-store, max-age=0");
   response.sendFile(path.join(distDir, "index.html"));
 });
 
