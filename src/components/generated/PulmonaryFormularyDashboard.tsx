@@ -107,6 +107,7 @@ export type SummitNjFormularySource = {
   sourceLabel: string;
   detail: string;
   priorAuthorizationUrl?: string;
+  priorAuthorizationLabel?: string;
 };
 
 export const summitNjFormularySources: SummitNjFormularySource[] = [
@@ -160,6 +161,8 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+    priorAuthorizationUrl: "https://mydirectory.bravenhealth.com/",
+    priorAuthorizationLabel: "Open plan documents",
   },
   {
     insurer: "UnitedHealthcare / AARP Medicare",
@@ -180,6 +183,9 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "CMS plan import is running; Humana's plan-scoped formulary API will be used for refreshes.",
+    priorAuthorizationUrl:
+      "https://provider.humana.com/pharmacy-resources/prior-authorizations",
+    priorAuthorizationLabel: "Open PA hub",
   },
   {
     insurer: "Wellcare",
@@ -190,6 +196,9 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+    priorAuthorizationUrl:
+      "https://www.wellcare.com/en/New-Jersey/Providers/Medicare/Pharmacy/Coverage-Determination-Request",
+    priorAuthorizationLabel: "Open PA form",
   },
   {
     insurer: "HealthSpring",
@@ -200,6 +209,8 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+    priorAuthorizationUrl: "https://www.healthspring.com/providers/prior-authorization",
+    priorAuthorizationLabel: "Open PA hub",
   },
   {
     insurer: "Clover Health",
@@ -210,6 +221,9 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+    priorAuthorizationUrl:
+      "https://cdn.cloverhealth.com/filer_public/2f/52/2f52cc48-ac8a-478a-b921-7057d3f995e3/clover-nlx_website_prior_authorization_form_final.pdf",
+    priorAuthorizationLabel: "Open PA form",
   },
   {
     insurer: "Wellpoint",
@@ -220,6 +234,58 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "CMS July 2026 plan formulary data",
     detail:
       "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+    priorAuthorizationUrl:
+      "https://www.provider.wellpoint.com/new-jersey-provider/resources/prior-authorization-requirements/prior-authorization-lookup",
+    priorAuthorizationLabel: "Open PA lookup",
+  },
+  {
+    insurer: "Cigna",
+    planScope: "NJ employer and individual plans by exact drug-list type",
+    status: "Plan selection required",
+    source:
+      "https://www.cigna.com/individuals-families/member-guide/prescription-drug-lists",
+    sourceLabel: "Cigna 2026 drug-list hub",
+    detail:
+      "Select the employer drug-list type or individual plan before coverage is shown.",
+    priorAuthorizationUrl:
+      "https://v.static.cigna.com/assets/chcp/resourceLibrary/forms/prescription/commercialDrugPriorAuthorizationForms.html",
+    priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    insurer: "AmeriHealth NJ",
+    planScope: "NJ Individual and Family or named Value/Select formulary",
+    status: "Ready for pulmonary extraction",
+    source:
+      "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
+    sourceLabel: "2026 NJ Individual and Family drug guide",
+    detail:
+      "The exact plan family matters. Individual and Family, Value and Select each use distinct formularies.",
+    priorAuthorizationUrl:
+      "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
+    priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    insurer: "Oscar Health",
+    planScope: "NJ commercial plans by exact member policy",
+    status: "Plan selection required",
+    source: "https://www.hioscar.com/formularies",
+    sourceLabel: "Oscar formulary hub",
+    detail:
+      "Verify the member policy and plan formulary before coverage is shown.",
+    priorAuthorizationUrl: "https://www.hioscar.com/clinical-guidelines/pharmacy",
+    priorAuthorizationLabel: "Open PA guidance",
+  },
+  {
+    insurer: "Empire / Anthem NY",
+    planScope: "NY-origin plan selected by exact drug-list type",
+    status: "Plan selection required",
+    source: "https://www.anthem.com/ny/pharmacy-information/drug-list-formulary",
+    sourceLabel: "Empire/Anthem NY drug-list hub",
+    detail:
+      "Use the state of the health plan and its named drug list, not the member's residence.",
+    priorAuthorizationUrl:
+      "https://providers.anthem.com/new-york-provider/resources/pharmacy-information",
+    priorAuthorizationLabel: "Open PA lookup",
   },
 ];
 
@@ -1870,7 +1936,7 @@ export const PulmonaryFormularyDashboard = () => {
                             rel="noreferrer"
                             className="rounded bg-[#eef5f3] px-2 py-1 text-[9px] font-bold text-[#0d6664]"
                           >
-                            PA form
+                            {item.priorAuthorizationLabel ?? "Open PA route"}
                           </a>
                         )}
                       </div>
