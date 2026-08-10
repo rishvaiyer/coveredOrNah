@@ -56,6 +56,230 @@ export const plans: Array<{
       "https://www.papdl.com/content/dam/ffs-medicaid/pa/pdl/penn-statewide-pdl-012026-v12.pdf",
   },
 ];
+export type SummitNjInsurer = {
+  name: string;
+  category: string;
+  participation: "Accepted" | "Limited / provider-specific";
+  note: string;
+};
+export const summitNjInsurers: SummitNjInsurer[] = [
+  {
+    name: "1199 SEIU",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "1199 SEIU",
+  },
+  {
+    name: "Aetna",
+    category: "Commercial + Medicare Advantage",
+    participation: "Accepted",
+    note: "Most plans, Whole Health, Signature Solutions, Meritain and First Health commercial",
+  },
+  {
+    name: "Aetna Better Health",
+    category: "Medicaid managed care",
+    participation: "Limited / provider-specific",
+    note: "Limited provider participation",
+  },
+  {
+    name: "AmeriHealth / AmeriHealth Administrators",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "Anthem BCBS",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "Braven Health",
+    category: "Medicare Advantage",
+    participation: "Accepted",
+    note: "Medicare plans",
+  },
+  {
+    name: "Horizon BCBSNJ",
+    category: "Commercial + Medicare Advantage",
+    participation: "Accepted",
+    note: "All plans; Braven Health Medicare Advantage",
+  },
+  {
+    name: "Horizon NJ Health / NJ FamilyCare",
+    category: "Medicaid managed care",
+    participation: "Limited / provider-specific",
+    note: "Limited provider participation; not in-network for all plans",
+  },
+  {
+    name: "Empire BCBS of NY",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "All plans; Health Plus and Pathway Medicaid excluded",
+  },
+  {
+    name: "Centivo",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "CHN / Medlogix",
+    category: "Network",
+    participation: "Accepted",
+    note: "CHN or Medlogix",
+  },
+  {
+    name: "Cigna",
+    category: "Commercial + Medicare Advantage",
+    participation: "Accepted",
+    note: "All plans and Local Plus",
+  },
+  {
+    name: "HealthSpring",
+    category: "Medicare Advantage",
+    participation: "Accepted",
+    note: "Formerly Cigna Medicare",
+  },
+  {
+    name: "Clover Health",
+    category: "Medicare Advantage",
+    participation: "Accepted",
+    note: "Medicare Advantage",
+  },
+  {
+    name: "CorVel",
+    category: "Workers compensation",
+    participation: "Accepted",
+    note: "Workers compensation",
+  },
+  {
+    name: "Coventry",
+    category: "Workers compensation / MVA",
+    participation: "Accepted",
+    note: "Workers compensation and motor vehicle only",
+  },
+  {
+    name: "Emblem Health / HIP",
+    category: "Commercial + Medicare Advantage",
+    participation: "Accepted",
+    note: "Selected commercial, Medicare and Child Health Plus networks",
+  },
+  {
+    name: "First Health",
+    category: "Commercial + Medigap",
+    participation: "Accepted",
+    note: "First Health logo on card and Medigap; Medicare Advantage excluded",
+  },
+  {
+    name: "Humana",
+    category: "Commercial + Medicare",
+    participation: "Accepted",
+    note: "PPO, HMO and all Humana Medicare plans",
+  },
+  {
+    name: "MagnaCare",
+    category: "Commercial + workers compensation",
+    participation: "Accepted",
+    note: "All commercial plans and workers compensation",
+  },
+  {
+    name: "Original Medicare",
+    category: "Medicare",
+    participation: "Accepted",
+    note: "Traditional Medicare",
+  },
+  {
+    name: "Railroad Medicare",
+    category: "Medicare",
+    participation: "Accepted",
+    note: "Railroad Medicare",
+  },
+  {
+    name: "MultiPlan / PHCS / Beech Street",
+    category: "Network",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "MVP",
+    category: "Commercial",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "NY Workers Compensation",
+    category: "Workers compensation",
+    participation: "Accepted",
+    note: "Workers compensation",
+  },
+  {
+    name: "Optum VA Community Care Network",
+    category: "Government",
+    participation: "Accepted",
+    note: "VA Community Care Network",
+  },
+  {
+    name: "Oscar Health",
+    category: "ACA marketplace",
+    participation: "Accepted",
+    note: "NJ Individual, Family, PPO and Small Group; Medicare Advantage excluded",
+  },
+  {
+    name: "Oxford Health",
+    category: "Commercial + Medicare",
+    participation: "Accepted",
+    note: "Freedom, Liberty and all Medicare plans; Compass and Garden State excluded",
+  },
+  {
+    name: "QualCare",
+    category: "Commercial + workers compensation",
+    participation: "Accepted",
+    note: "All plans and workers compensation",
+  },
+  {
+    name: "The Empire Plan",
+    category: "Government employee",
+    participation: "Accepted",
+    note: "All plans except Medicaid",
+  },
+  {
+    name: "TRICARE",
+    category: "Government",
+    participation: "Accepted",
+    note: "All plans",
+  },
+  {
+    name: "United Community Plan",
+    category: "Medicaid managed care",
+    participation: "Limited / provider-specific",
+    note: "Limited participation at CityMD NJ and select NJ Urology providers",
+  },
+  {
+    name: "UnitedHealthcare",
+    category: "Commercial + Medicare Advantage",
+    participation: "Accepted",
+    note: "Choice, Choice Plus, HMO, PPO, Navigate, AARP Medicare Complete and VA Community Care",
+  },
+  {
+    name: "US Family Health Plan",
+    category: "TRICARE Prime",
+    participation: "Accepted",
+    note: "US Family Health Plan - TRICARE Prime",
+  },
+  {
+    name: "WellCare",
+    category: "Medicare Advantage",
+    participation: "Accepted",
+    note: "Managed Medicare",
+  },
+  {
+    name: "Wellpoint",
+    category: "Medicare Advantage + Medicaid",
+    participation: "Accepted",
+    note: "All Summit NJ providers participate in listed Medicare Advantage plans; Medicaid is limited",
+  },
+];
 const c = (
   ny: CoverageState,
   nj: CoverageState,
@@ -847,6 +1071,7 @@ export const PulmonaryFormularyDashboard = () => {
   const [selected, setSelected] = useState<Medication | null>(medications[0]);
   const [apiConnected, setApiConnected] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [insurerQuery, setInsurerQuery] = useState("");
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/health", { signal: controller.signal })
@@ -891,6 +1116,12 @@ export const PulmonaryFormularyDashboard = () => {
           isStraightforwardCoverage(candidate.coverage[planKey].state),
       )
       .slice(0, 3);
+  const summitNjDirectory = summitNjInsurers.filter((insurer) =>
+    [insurer.name, insurer.category, insurer.note]
+      .join(" ")
+      .toLowerCase()
+      .includes(insurerQuery.trim().toLowerCase()),
+  );
   const autocompleteOptions = Array.from(
     new Set(
       medications.flatMap((medication) => [
@@ -1077,64 +1308,152 @@ export const PulmonaryFormularyDashboard = () => {
         </div>
 
         {view === "plans" ? (
-          <div className="grid gap-4 lg:grid-cols-3">
-            {visiblePlans.map((plan) => {
-              const preferred = medications.filter((med) =>
-                ["Preferred", "Tier 1"].includes(med.coverage[plan.key].state),
-              ).length;
-              const restricted = medications.filter(
-                (med) =>
-                  med.coverage[plan.key].state.includes("PA") ||
-                  med.coverage[plan.key].state === "Tier 2",
-              ).length;
-              return (
-                <article
-                  key={plan.key}
-                  className="rounded-2xl border border-[#d8e5e3] bg-white p-5 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e7f3f1] text-[#0d6664]">
-                      <Icon name="database" />
-                    </div>
-                    <span className="rounded-full bg-[#f1f5f4] px-2.5 py-1 text-[11px] font-bold text-[#527070]">
-                      {plan.region}
-                    </span>
-                  </div>
-                  <h2 className="mt-4 text-lg font-bold tracking-tight">
-                    {plan.name}
-                  </h2>
-                  <p className="mt-1 text-xs text-[#698080]">
-                    Source updated {plan.updated}
-                  </p>
-                  <div className="mt-5 grid grid-cols-2 gap-3">
-                    <div className="rounded-xl bg-[#eef8f4] p-3">
-                      <div className="text-2xl font-semibold text-[#15735f]">
-                        {preferred}
-                      </div>
-                      <div className="text-xs text-[#59736e]">
-                        preferred / Tier 1
-                      </div>
-                    </div>
-                    <div className="rounded-xl bg-[#fff6e8] p-3">
-                      <div className="text-2xl font-semibold text-[#9a6417]">
-                        {restricted}
-                      </div>
-                      <div className="text-xs text-[#7b6a4f]">restricted</div>
-                    </div>
-                  </div>
-                  <a
-                    href={plan.source}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#0d6664] hover:text-[#074f4d]"
+          <>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-bold">Live formulary plans</h2>
+                <p className="text-xs text-[#6b8180]">
+                  Source-backed medication coverage available now
+                </p>
+              </div>
+              <span className="rounded-full bg-[#dff1ed] px-3 py-1.5 text-xs font-bold text-[#0d6664]">
+                {visiblePlans.length} live
+              </span>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {visiblePlans.map((plan) => {
+                const preferred = medications.filter((med) =>
+                  ["Preferred", "Tier 1"].includes(
+                    med.coverage[plan.key].state,
+                  ),
+                ).length;
+                const restricted = medications.filter(
+                  (med) =>
+                    med.coverage[plan.key].state.includes("PA") ||
+                    med.coverage[plan.key].state === "Tier 2",
+                ).length;
+                return (
+                  <article
+                    key={plan.key}
+                    className="rounded-2xl border border-[#d8e5e3] bg-white p-5 shadow-sm"
                   >
-                    Open official source{" "}
-                    <Icon name="external" className="h-4 w-4" />
-                  </a>
-                </article>
-              );
-            })}
-          </div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#e7f3f1] text-[#0d6664]">
+                        <Icon name="database" />
+                      </div>
+                      <span className="rounded-full bg-[#f1f5f4] px-2.5 py-1 text-[11px] font-bold text-[#527070]">
+                        {plan.region}
+                      </span>
+                    </div>
+                    <h2 className="mt-4 text-lg font-bold tracking-tight">
+                      {plan.name}
+                    </h2>
+                    <p className="mt-1 text-xs text-[#698080]">
+                      Source updated {plan.updated}
+                    </p>
+                    <div className="mt-5 grid grid-cols-2 gap-3">
+                      <div className="rounded-xl bg-[#eef8f4] p-3">
+                        <div className="text-2xl font-semibold text-[#15735f]">
+                          {preferred}
+                        </div>
+                        <div className="text-xs text-[#59736e]">
+                          preferred / Tier 1
+                        </div>
+                      </div>
+                      <div className="rounded-xl bg-[#fff6e8] p-3">
+                        <div className="text-2xl font-semibold text-[#9a6417]">
+                          {restricted}
+                        </div>
+                        <div className="text-xs text-[#7b6a4f]">restricted</div>
+                      </div>
+                    </div>
+                    <a
+                      href={plan.source}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#0d6664] hover:text-[#074f4d]"
+                    >
+                      Open official source{" "}
+                      <Icon name="external" className="h-4 w-4" />
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+
+            <section className="mt-8 rounded-2xl border border-[#cfe0dd] bg-white p-5 shadow-sm sm:p-6">
+              <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
+                <div className="max-w-2xl">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                    Summit Health NJ network directory
+                  </p>
+                  <h2 className="mt-1 text-xl font-bold tracking-tight">
+                    Every accepted insurer and plan family
+                  </h2>
+                  <p className="mt-2 text-sm leading-5 text-[#607977]">
+                    {summitNjInsurers.length} organizations from Summit Health’s
+                    current New Jersey accepted-insurance list. These cards
+                    identify network participation only. Medication coverage is
+                    enabled once the exact plan formulary is sourced and
+                    reviewed.
+                  </p>
+                </div>
+                <label className="relative block w-full lg:max-w-sm">
+                  <span className="sr-only">Find an accepted insurer</span>
+                  <Icon
+                    name="search"
+                    className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#698281]"
+                  />
+                  <input
+                    value={insurerQuery}
+                    onChange={(event) => setInsurerQuery(event.target.value)}
+                    className="h-11 w-full rounded-xl border border-[#d9e7e4] bg-[#f7faf9] pl-10 pr-3 text-sm outline-none ring-2 ring-transparent focus:bg-white focus:ring-[#55bda8]"
+                    placeholder="Find Aetna, Medicare, UHC..."
+                  />
+                </label>
+              </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {summitNjDirectory.map((insurer) => (
+                  <article
+                    key={insurer.name}
+                    className="rounded-xl border border-[#e1ebe9] bg-[#fbfdfc] p-4"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-sm font-bold text-[#183839]">
+                        {insurer.name}
+                      </h3>
+                      <span
+                        className={`shrink-0 rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-wide ${insurer.participation === "Accepted" ? "bg-[#e6f6ef] text-[#16745f]" : "bg-[#fff3dd] text-[#94621e]"}`}
+                      >
+                        {insurer.participation === "Accepted"
+                          ? "Accepted"
+                          : "Limited"}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[11px] font-semibold text-[#3d716b]">
+                      {insurer.category}
+                    </p>
+                    <p className="mt-2 text-[11px] leading-4 text-[#657c7a]">
+                      {insurer.note}
+                    </p>
+                    <p className="mt-3 inline-flex rounded-full bg-[#eef3f2] px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-[#657a78]">
+                      Formulary sourcing
+                    </p>
+                  </article>
+                ))}
+              </div>
+              {summitNjDirectory.length === 0 && (
+                <p className="mt-5 rounded-xl bg-[#f4f8f7] p-4 text-sm text-[#607977]">
+                  No insurer matches that search.
+                </p>
+              )}
+              <p className="mt-5 border-t border-[#e3ecea] pt-4 text-[11px] leading-5 text-[#687d7d]">
+                Source: Summit Health’s New Jersey accepted-insurance list, last
+                updated April 20, 2026. Participation can vary by exact
+                location, provider, network, and plan.
+              </p>
+            </section>
+          </>
         ) : (
           <div className="grid min-h-[580px] gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,.75fr)]">
             <div className="overflow-hidden rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">

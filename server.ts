@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   medications,
   plans,
+  summitNjInsurers,
   type PlanKey,
 } from "./src/components/generated/PulmonaryFormularyDashboard.tsx";
 
@@ -37,9 +38,28 @@ app.get("/api/plans", (_request, response) => {
   response.json({ plans });
 });
 
+app.get("/api/summit-nj-insurers", (request, response) => {
+  const query = String(request.query.q || "")
+    .trim()
+    .slice(0, 100)
+    .toLowerCase();
+  const insurers = summitNjInsurers.filter((insurer) =>
+    [insurer.name, insurer.category, insurer.note]
+      .join(" ")
+      .toLowerCase()
+      .includes(query),
+  );
+  response.json({
+    count: insurers.length,
+    source: "Summit Health New Jersey accepted-insurance list",
+    insurers,
+  });
+});
+
 app.get("/api/metadata", (_request, response) => {
   response.json({
     medicationCount: medications.length,
+    summitNjInsurerCount: summitNjInsurers.length,
     pulmonaryMedicationCount: medications.filter(
       (medication) => medication.branch !== "Common primary care",
     ).length,
