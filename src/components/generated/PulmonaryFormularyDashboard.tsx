@@ -42,7 +42,8 @@ export type PlanKey =
   | "wellcareNjH0913"
   | "humanaNj26408"
   | "bravenNjH0885"
-  | "healthspringNj26096";
+  | "healthspringNj26096"
+  | "cloverNj2026";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -190,6 +191,16 @@ export const plans: Array<{
     source: "https://www.healthspring.com/static/docs/medicare/plans/2026/formulary-mapd.pdf",
     priorAuthorizationUrl: "https://www.healthspring.com/providers/pharmacy",
     priorAuthorizationLabel: "Open HealthSpring PA route",
+  },
+  {
+    key: "cloverNj2026",
+    short: "Clover NJ",
+    name: "Clover NJ Medicare formulary 00026082",
+    region: "NJ",
+    updated: "Jun 23, 2026",
+    source: "https://cdn.cloverhealth.com/filer_cloudrun_public/filer_public/c5/9f/c59f4269-fd6e-4d72-9580-cb812b952e43/25mx108a_2026_formulary_ch_nj_cy26_5t_gs_core_july_26.pdf",
+    priorAuthorizationUrl: "https://cdrd.cvscaremarkmyd.com/CoverageDetermination.aspx?ClientID=51",
+    priorAuthorizationLabel: "Open Clover drug PA form",
   },
 ];
 export type SummitNjInsurer = {
@@ -610,6 +621,7 @@ const c = (
   humanaNj26408: CoverageState = "Source loading",
   bravenNjH0885: CoverageState = "Source loading",
   healthspringNj26096: CoverageState = "Source loading",
+  cloverNj2026: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -621,6 +633,7 @@ const c = (
   humanaNj26408Flags: Restriction[] = [],
   bravenNjH0885Flags: Restriction[] = [],
   healthspringNj26096Flags: Restriction[] = [],
+  cloverNj2026Flags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -677,6 +690,10 @@ const c = (
   healthspringNj26096: {
     state: healthspringNj26096,
     flags: healthspringNj26096Flags,
+  },
+  cloverNj2026: {
+    state: cloverNj2026,
+    flags: cloverNj2026Flags,
   },
 });
 export const medications: Medication[] = [
@@ -1770,6 +1787,43 @@ const planCoverageOverrides: Partial<
   healthspringNj26096: {
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["ST", "QL"], "Spiriva Respimat entry."),
     "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"], "Winrevair entry."),
+  },
+  cloverNj2026: {
+    "Albuterol HFA": coverage("Tier 3", ["QL"], "Two inhalers per 30 days."),
+    "Albuterol nebulizer solution": coverage("Tier varies", [], "Tier 2 or 3 depending NDC; Part B versus Part D determination applies."),
+    Levalbuterol: coverage("Tier varies", ["ST", "QL"], "HFA is Tier 3 with step therapy/QL; nebulizer is Tier 4 with Part B/D determination."),
+    Arformoterol: coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    Formoterol: coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    Salmeterol: coverage("Tier 3", ["QL"]),
+    Ipratropium: coverage("Tier varies", ["QL"], "Nebulizer is Tier 2 with Part B/D determination; HFA is Tier 4 with QL."),
+    "Ipratropium / albuterol": coverage("Tier varies", ["QL"], "Nebulizer is Tier 3 with Part B/D determination; Combivent is Tier 4 with QL."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
+    "Budesonide inhalation": coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL"]),
+    "Symbicort (brand)": coverage("Tier 3", ["QL"], "Budesonide-formoterol product entries."),
+    "Mometasone / formoterol": coverage("Tier 4", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
+    Montelukast: coverage("Tier varies", [], "10 mg tablet is Tier 1; chewable is Tier 2; granule packet is Tier 4."),
+    Zafirlukast: coverage("Tier 3"),
+    Dupilumab: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Benralizumab: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Omalizumab: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Nintedanib: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Pirfenidone: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Ambrisentan: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    "Sildenafil 20 mg": coverage("Tier 3", ["PA", "QL"], "Network medication requirement applies."),
+    "Tadalafil for PAH": coverage("Tier 4", ["PA", "QL"], "Network medication requirement applies."),
+    Selexipag: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    Riociguat: coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    "Treprostinil inhaled": coverage("Tier 5", ["PA"], "Network medication requirement applies."),
+    "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"], "Winrevair entry; network medication requirement applies."),
+    "Tobramycin inhalation": coverage("Tier 5", ["PA"], "Network medication requirement applies."),
+    "Dornase alfa": coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"], "Network medication requirement applies."),
   },
 };
 
