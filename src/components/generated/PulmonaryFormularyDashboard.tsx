@@ -51,42 +51,8 @@ export const plans: Array<{
   source: string;
   priorAuthorizationUrl?: string;
   priorAuthorizationLabel?: string;
+  priorAuthorizationDownload?: boolean;
 }> = [
-  {
-    key: "nyrx",
-    short: "NYRx",
-    name: "New York Medicaid NYRx",
-    region: "NY",
-    updated: "Jul 16, 2026",
-    source: "https://newyork.fhsc.com/downloads/providers/NYRx_PDP_PDL.pdf",
-    priorAuthorizationUrl:
-      "https://www.health.ny.gov/health_care/medicaid/program/pharmacy.htm",
-    priorAuthorizationLabel: "NYRx PA instructions",
-  },
-  {
-    key: "njuhc",
-    short: "NJ FamilyCare",
-    name: "UnitedHealthcare NJ FamilyCare",
-    region: "NJ",
-    updated: "Jul 1, 2026",
-    source:
-      "https://www.uhcprovider.com/content/dam/provider/docs/public/commplan/nj/pharmacy/NJ-Preferred-Drug-List-Family-Care.pdf",
-    priorAuthorizationUrl:
-      "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
-    priorAuthorizationLabel: "Open PA form",
-  },
-  {
-    key: "pama",
-    short: "PA Medical Assistance",
-    name: "Pennsylvania Statewide Medicaid PDL",
-    region: "PA",
-    updated: "Jan 5, 2026",
-    source:
-      "https://www.papdl.com/content/dam/ffs-medicaid/pa/pdl/penn-statewide-pdl-012026-v12.pdf",
-    priorAuthorizationUrl:
-      "https://www.dhs.pa.gov/providers/Pharmacy-Services/Pages/Pharmacy-Services-Fax-Forms.aspx",
-    priorAuthorizationLabel: "Open PA forms",
-  },
   {
     key: "horizonMarketplace",
     short: "Horizon NJ",
@@ -105,8 +71,9 @@ export const plans: Array<{
     source:
       "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
     priorAuthorizationUrl:
-      "https://www.uhcprovider.com/en/prior-auth-advance-notification/prior-auth-specialty-drugs/prior-auth-pharmacy-medical-necessity.html",
-    priorAuthorizationLabel: "Open UHC PA route",
+      "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
+    priorAuthorizationLabel: "Download PA form",
+    priorAuthorizationDownload: true,
   },
   {
     key: "aetnaMedicareHmo",
@@ -116,6 +83,10 @@ export const plans: Array<{
     updated: "Aug 1, 2026",
     source:
       "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf",
+    priorAuthorizationUrl:
+      "https://www.aetna.com/content/dam/aetna/pdfs/wwwaetnamedicarecomSSL/individual/2026/appeals/Coverage_Determination_Request_Form.pdf",
+    priorAuthorizationLabel: "Download PA form",
+    priorAuthorizationDownload: true,
   },
 ];
 export type SummitNjInsurer = {
@@ -128,7 +99,10 @@ export type SummitNjInsurer = {
 export type SummitNjFormularySource = {
   insurer: string;
   planScope: string;
-  status: "Ready for pulmonary extraction" | "Plan selection required";
+  status:
+    | "Ready for pulmonary extraction"
+    | "Plan selection required"
+    | "CMS plan import running";
   source: string;
   sourceLabel: string;
   detail: string;
@@ -159,6 +133,15 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
       "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
   },
   {
+    insurer: "UMR employer plans",
+    planScope: "Employer plan and network shown on the member card",
+    status: "Plan selection required",
+    source: "https://www.umr.com/oss/cms/welcometoumr/prescriptionbenefits.html",
+    sourceLabel: "UMR pharmacy-benefit route",
+    detail:
+      "UMR administers employer plans. Confirm the network on the card, then use that employer plan's UMR or Optum Rx formulary.",
+  },
+  {
     insurer: "Aetna",
     planScope: "2026 Aetna Medicare HMO formulary family",
     status: "Ready for pulmonary extraction",
@@ -167,6 +150,76 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
     sourceLabel: "August 2026 Aetna HMO drug guide",
     detail:
       "Pulmonary rows are loaded for this named HMO formulary family. Confirm the plan and county because other Aetna formularies can differ.",
+  },
+  {
+    insurer: "Braven Health",
+    planScope: "NJ Medicare Advantage plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+  },
+  {
+    insurer: "UnitedHealthcare / AARP Medicare",
+    planScope: "NJ Medicare Advantage and Part D plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+  },
+  {
+    insurer: "Humana",
+    planScope: "NJ Medicare Advantage and Part D plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "CMS plan import is running; Humana's plan-scoped formulary API will be used for refreshes.",
+  },
+  {
+    insurer: "Wellcare",
+    planScope: "NJ Medicare Advantage and Part D plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+  },
+  {
+    insurer: "HealthSpring",
+    planScope: "NJ Medicare Advantage plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+  },
+  {
+    insurer: "Clover Health",
+    planScope: "NJ Medicare Advantage plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
+  },
+  {
+    insurer: "Wellpoint",
+    planScope: "NJ Medicare Advantage plans",
+    status: "CMS plan import running",
+    source:
+      "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
+    sourceLabel: "CMS July 2026 plan formulary data",
+    detail:
+      "Exact NJ contract and plan IDs are being loaded from CMS before pulmonary coverage is shown.",
   },
 ];
 
@@ -182,12 +235,6 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     category: "Commercial + Medicare Advantage",
     participation: "Accepted",
     note: "Most plans, Whole Health, Signature Solutions, Meritain and First Health commercial",
-  },
-  {
-    name: "Aetna Better Health",
-    category: "Medicaid managed care",
-    participation: "Limited / provider-specific",
-    note: "Limited provider participation",
   },
   {
     name: "AmeriHealth / AmeriHealth Administrators",
@@ -212,12 +259,6 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     category: "Commercial + Medicare Advantage",
     participation: "Accepted",
     note: "All plans; Braven Health Medicare Advantage",
-  },
-  {
-    name: "Horizon NJ Health / NJ FamilyCare",
-    category: "Medicaid managed care",
-    participation: "Limited / provider-specific",
-    note: "Limited provider participation; not in-network for all plans",
   },
   {
     name: "Empire BCBS of NY",
@@ -358,12 +399,6 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     note: "All plans",
   },
   {
-    name: "United Community Plan",
-    category: "Medicaid managed care",
-    participation: "Limited / provider-specific",
-    note: "Limited participation at CityMD NJ and select NJ Urology providers",
-  },
-  {
     name: "UnitedHealthcare",
     category: "Commercial + Medicare Advantage",
     participation: "Accepted",
@@ -383,9 +418,9 @@ export const summitNjInsurers: SummitNjInsurer[] = [
   },
   {
     name: "Wellpoint",
-    category: "Medicare Advantage + Medicaid",
+    category: "Medicare Advantage",
     participation: "Accepted",
-    note: "All Summit NJ providers participate in listed Medicare Advantage plans; Medicaid is limited",
+    note: "All Summit NJ providers participate in listed Medicare Advantage plans",
   },
 ];
 const c = (
@@ -1022,6 +1057,83 @@ export const medications: Medication[] = [
     branch: "Smoking cessation",
     use: "Nicotine dependence treatment",
     coverage: c("Not on PDL", "Tier 1", "Preferred", [], [], ["QL"]),
+  },
+  {
+    generic: "Azithromycin",
+    brands: "Zithromax, Z-Pak and generics",
+    branch: "Respiratory infections",
+    use: "Common bacterial respiratory infection treatment when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Amoxicillin / clavulanate",
+    brands: "Augmentin and generics",
+    branch: "Respiratory infections",
+    use: "Common bacterial respiratory infection treatment when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Doxycycline",
+    brands: "Vibramycin and generics",
+    branch: "Respiratory infections",
+    use: "Common bacterial respiratory infection treatment when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Levofloxacin",
+    brands: "Levaquin and generics",
+    branch: "Respiratory infections",
+    use: "Respiratory infection treatment when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Benzonatate",
+    brands: "Tessalon Perles and generics",
+    branch: "Cough and mucus",
+    use: "Non-opioid cough suppression",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Guaifenesin ER",
+    brands: "Mucinex and generics",
+    branch: "Cough and mucus",
+    use: "Expectorant for mucus clearance",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Famotidine",
+    brands: "Pepcid and generics",
+    branch: "Reflux and upper airway",
+    use: "Acid suppression for reflux-associated respiratory symptoms",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Pantoprazole",
+    brands: "Protonix and generics",
+    branch: "Reflux and upper airway",
+    use: "Acid suppression for reflux-associated respiratory symptoms",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Epinephrine auto-injector",
+    brands: "EpiPen, Auvi-Q and generics",
+    branch: "Allergy and anaphylaxis",
+    use: "Emergency treatment for severe allergic reaction",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Furosemide",
+    brands: "Lasix and generics",
+    branch: "Pulmonary hypertension support",
+    use: "Diuretic often used for fluid management when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
+  },
+  {
+    generic: "Apixaban",
+    brands: "Eliquis",
+    branch: "Pulmonary vascular",
+    use: "Anticoagulant used for venous thromboembolism treatment or prevention when clinically appropriate",
+    coverage: c("Source loading", "Source loading", "Source loading"),
   },
   {
     generic: "Lisinopril",
@@ -1725,9 +1837,16 @@ export const PulmonaryFormularyDashboard = () => {
                       key={item.insurer}
                       className="rounded-lg border border-[#dce9e6] bg-white p-3"
                     >
-                      <h3 className="text-sm font-bold text-[#183839]">
-                        {item.insurer}
-                      </h3>
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="text-sm font-bold text-[#183839]">
+                          {item.insurer}
+                        </h3>
+                        <span className="shrink-0 rounded-full bg-[#eef5f3] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-[#47706b]">
+                          {item.status === "CMS plan import running"
+                            ? "Importing"
+                            : "Source ready"}
+                        </span>
+                      </div>
                       <p className="mt-1 text-[10px] font-semibold text-[#3d716b]">
                         {item.planScope}
                       </p>
@@ -1965,9 +2084,24 @@ export const PulmonaryFormularyDashboard = () => {
                           {!isStraightforwardCoverage(item.state) &&
                             plan.priorAuthorizationUrl && (
                               <a
-                                href={plan.priorAuthorizationUrl}
-                                target="_blank"
-                                rel="noreferrer"
+                                href={
+                                  plan.priorAuthorizationDownload
+                                    ? `/api/pa-form/${plan.key}`
+                                    : plan.priorAuthorizationUrl
+                                }
+                                target={
+                                  plan.priorAuthorizationDownload
+                                    ? undefined
+                                    : "_blank"
+                                }
+                                rel={
+                                  plan.priorAuthorizationDownload
+                                    ? undefined
+                                    : "noreferrer"
+                                }
+                                download={
+                                  plan.priorAuthorizationDownload || undefined
+                                }
                                 className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#eef5f3] px-2 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#c7ded9] hover:bg-[#dff1ed]"
                               >
                                 {plan.priorAuthorizationLabel ?? "Open PA route"}

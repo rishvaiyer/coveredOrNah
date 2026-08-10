@@ -15,6 +15,19 @@ const port = Number(process.env.PORT || 3000);
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.join(rootDir, "dist");
 const validPlanKeys = new Set<PlanKey>(plans.map((plan) => plan.key));
+const paFormDownloads = new Map(
+  plans
+    .filter(
+      (plan) => plan.priorAuthorizationDownload && plan.priorAuthorizationUrl,
+    )
+    .map((plan) => [
+      plan.key,
+      {
+        url: plan.priorAuthorizationUrl as string,
+        filename: `${plan.short.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-prior-authorization-form.pdf`,
+      },
+    ]),
+);
 
 app.disable("x-powered-by");
 app.use((_request, response, next) => {
@@ -38,6 +51,27 @@ app.get("/api/health", (_request, response) => {
 
 app.get("/api/plans", (_request, response) => {
   response.json({ plans });
+});
+
+app.get("/api/pa-form/:plan", async (request, response) => {
+  const planKey = String(request.params.plan || "") as PlanKey;
+  const form = paFormDownloads.get(planKey);
+  if (!form) {
+    response.status(404).json({ error: "No downloadable PA form for this plan." });
+    return;
+  }
+
+  try {
+    const formResponse = await fetch(form.url, { redirect: "follow" });
+    if (!formResponse.ok) throw new Error(`Official form returned ${formResponse.status}`);
+    const pdf = Buffer.from(await formResponse.arrayBuffer());
+    response.setHeader("Content-Type", "application/pdf");
+    response.setHeader("Content-Disposition", `attachment; filename="${form.filename}"`);
+    response.setHeader("Cache-Control", "public, max-age=3600");
+    response.send(pdf);
+  } catch {
+    response.status(502).json({ error: "Unable to retrieve the official PA form right now." });
+  }
 });
 
 app.get("/api/summit-nj-insurers", (request, response) => {
