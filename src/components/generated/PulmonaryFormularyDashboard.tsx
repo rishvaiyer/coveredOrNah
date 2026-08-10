@@ -36,7 +36,8 @@ export type PlanKey =
   | "uhcCommercial"
   | "aetnaMedicareHmo"
   | "amerihealthNj"
-  | "cignaNationalPreferred";
+  | "cignaNationalPreferred"
+  | "oscarNjIndividual";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -118,6 +119,17 @@ export const plans: Array<{
     priorAuthorizationUrl:
       "https://v.static.cigna.com/assets/chcp/resourceLibrary/forms/prescription/commercialDrugPriorAuthorizationForms.html",
     priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    key: "oscarNjIndividual",
+    short: "Oscar NJ",
+    name: "Oscar NJ Individual 5-Tier standard formulary",
+    region: "NJ",
+    updated: "Aug 1, 2026",
+    source:
+      "https://www.hioscar.com/search-documents/drug-formularies/document?state=NJ&year=2026&planType=INDIVIDUAL",
+    priorAuthorizationUrl: "https://provider.hioscar.com/",
+    priorAuthorizationLabel: "Open Oscar PA portal (sign-in required)",
   },
 ];
 export type SummitNjInsurer = {
@@ -532,11 +544,13 @@ const c = (
   aetnaMedicareHmo: CoverageState = "Source loading",
   amerihealthNj: CoverageState = "Source loading",
   cignaNationalPreferred: CoverageState = "Source loading",
+  oscarNjIndividual: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
   amerihealthNjFlags: Restriction[] = [],
   cignaNationalPreferredFlags: Restriction[] = [],
+  oscarNjIndividualFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -569,6 +583,10 @@ const c = (
   cignaNationalPreferred: {
     state: cignaNationalPreferred,
     flags: cignaNationalPreferredFlags,
+  },
+  oscarNjIndividual: {
+    state: oscarNjIndividual,
+    flags: oscarNjIndividualFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1520,6 +1538,38 @@ const planCoverageOverrides: Partial<
     "Treprostinil inhaled": coverage("Tier 2 + PA", ["PA", "LD"]),
     Selexipag: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
     Riociguat: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+  },
+  oscarNjIndividual: {
+    "Albuterol HFA": coverage("Tier 1", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier 1", ["QL"]),
+    Levalbuterol: coverage("Tier 1", ["QL"]),
+    Formoterol: coverage("Tier 2", ["QL"], "Formoterol nebulizer entry."),
+    Ipratropium: coverage("Tier 1", ["QL"], "Ipratropium nebulizer entry."),
+    "Ipratropium / albuterol": coverage("Tier 1", ["QL"], "Ipratropium-albuterol nebulizer entry."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
+    Roflumilast: coverage("Tier 3", ["PA"]),
+    "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage("Tier 1", ["QL"], "Generic fluticasone-salmeterol entry."),
+    "Symbicort (brand)": coverage("Tier 1", ["QL"], "Generic budesonide-formoterol entry; brand status can differ."),
+    "Mometasone / formoterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 2", ["QL"]),
+    Montelukast: coverage("Tier 1"),
+    Zafirlukast: coverage("Tier 1"),
+    "Zileuton ER": coverage("Tier 3", ["PA", "QL"]),
+    Dupilumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Benralizumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Mepolizumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Tezepelumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Omalizumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Nintedanib: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Pirfenidone: coverage("Tier 4", ["PA", "QL", "SP"]),
+    "Tobramycin inhalation": coverage("Tier 4", ["PA", "QL", "SP"], "Tobramycin nebulizer entry."),
+    "Aztreonam inhalation": coverage("Tier 4", ["PA", "QL", "SP"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 4", ["PA", "QL", "SP"]),
   },
 };
 
