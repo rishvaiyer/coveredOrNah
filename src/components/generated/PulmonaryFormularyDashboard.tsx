@@ -1857,7 +1857,7 @@ const displayState = (state: CoverageState) =>
     : state === "Not on PDL"
     ? "Not listed"
     : state === "Source loading"
-      ? "Verifying"
+      ? "Unconfirmed"
       : state;
 const restrictionNames: Record<Restriction, string> = {
   PA: "Prior authorization",
@@ -1886,7 +1886,7 @@ const actionForCoverage = (state: CoverageState) => {
   if (state === "Tier varies")
     return "Tier differs by product or strength. Check the product detail below.";
   if (state === "Source loading")
-    return "This exact plan source is being reviewed. No coverage claim is shown yet.";
+    return "Coverage is unconfirmed for this exact plan. No coverage claim is shown yet.";
   if (state === "Non-preferred")
     return "Non-preferred. Review preferred same-branch options or exception criteria.";
   if (state === "Non-preferred drug" || state === "Non-formulary")
