@@ -5,6 +5,7 @@ import {
   medications,
   plans,
   summitNjInsurers,
+  summitNjFormularySources,
   type PlanKey,
 } from "./src/components/generated/PulmonaryFormularyDashboard.tsx";
 
@@ -56,10 +57,18 @@ app.get("/api/summit-nj-insurers", (request, response) => {
   });
 });
 
+app.get("/api/summit-nj-formulary-sources", (_request, response) => {
+  response.json({
+    count: summitNjFormularySources.length,
+    sources: summitNjFormularySources,
+  });
+});
+
 app.get("/api/metadata", (_request, response) => {
   response.json({
     medicationCount: medications.length,
     summitNjInsurerCount: summitNjInsurers.length,
+    summitNjPrioritySourceCount: summitNjFormularySources.length,
     pulmonaryMedicationCount: medications.filter(
       (medication) => medication.branch !== "Common primary care",
     ).length,

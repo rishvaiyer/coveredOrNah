@@ -73,6 +73,52 @@ export type SummitNjInsurer = {
   participation: "Accepted" | "Limited / provider-specific";
   note: string;
 };
+
+export type SummitNjFormularySource = {
+  insurer: string;
+  planScope: string;
+  status: "Ready for pulmonary extraction" | "Plan selection required";
+  source: string;
+  sourceLabel: string;
+  detail: string;
+  priorAuthorizationUrl?: string;
+};
+
+export const summitNjFormularySources: SummitNjFormularySource[] = [
+  {
+    insurer: "Horizon BCBSNJ",
+    planScope: "NJ Marketplace and named small-group products",
+    status: "Ready for pulmonary extraction",
+    source:
+      "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
+    sourceLabel: "August 2026 Horizon NJ drug guide",
+    detail:
+      "Exact named NJ Marketplace and small-group products. Pulmonary product, strength, tier and restriction rows are being loaded.",
+  },
+  {
+    insurer: "UnitedHealthcare / Oxford",
+    planScope: "NJ commercial plans with UHC pharmacy benefit",
+    status: "Ready for pulmonary extraction",
+    source:
+      "https://www.uhcprovider.com/en/resource-library/drug-lists-pharmacy.html?CID=none",
+    sourceLabel: "UHC drug-list library",
+    detail:
+      "Coverage varies by employer benefit and Oxford product. The official drug-list library is the source route for named plan coverage.",
+    priorAuthorizationUrl:
+      "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
+  },
+  {
+    insurer: "Aetna",
+    planScope: "NJ Medicare Advantage and plan-specific pharmacy benefit",
+    status: "Plan selection required",
+    source:
+      "https://www.aetna.com/medicare/prescription-drugs/check-medicare-drug-list.html",
+    sourceLabel: "Aetna Medicare drug-list finder",
+    detail:
+      "Aetna requires the member's plan, county or ZIP to select the exact drug list. The app will only show coverage after that named plan is sourced.",
+  },
+];
+
 export const summitNjInsurers: SummitNjInsurer[] = [
   {
     name: "1199 SEIU",
@@ -1422,6 +1468,60 @@ export const PulmonaryFormularyDashboard = () => {
                     placeholder="Find Aetna, Medicare, UHC..."
                   />
                 </label>
+              </div>
+              <div className="mt-5 rounded-xl border border-[#d8e8e4] bg-[#f5faf8] p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                      Summit NJ pulmonary priority
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-[#183839]">
+                      Official source routes now being converted into searchable coverage
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-[#446d69] ring-1 ring-[#c9ded9]">
+                    No mock coverage
+                  </span>
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-3">
+                  {summitNjFormularySources.map((item) => (
+                    <article
+                      key={item.insurer}
+                      className="rounded-lg border border-[#dce9e6] bg-white p-3"
+                    >
+                      <h3 className="text-sm font-bold text-[#183839]">
+                        {item.insurer}
+                      </h3>
+                      <p className="mt-1 text-[10px] font-semibold text-[#3d716b]">
+                        {item.planScope}
+                      </p>
+                      <p className="mt-2 text-[10px] leading-4 text-[#657c7a]">
+                        {item.detail}
+                      </p>
+                      <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <a
+                          href={item.source}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0d6664] hover:underline"
+                        >
+                          {item.sourceLabel}
+                          <Icon name="external" className="h-3 w-3" />
+                        </a>
+                        {item.priorAuthorizationUrl && (
+                          <a
+                            href={item.priorAuthorizationUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="rounded bg-[#eef5f3] px-2 py-1 text-[9px] font-bold text-[#0d6664]"
+                          >
+                            PA form
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
               <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                 {summitNjDirectory.map((insurer) => (
