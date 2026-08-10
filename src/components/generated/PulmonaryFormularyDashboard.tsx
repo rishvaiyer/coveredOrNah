@@ -39,7 +39,8 @@ export type PlanKey =
   | "cignaNationalPreferred"
   | "oscarNjIndividual"
   | "anthemNySelect"
-  | "wellcareNjH0913";
+  | "wellcareNjH0913"
+  | "humanaNj26408";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -158,6 +159,17 @@ export const plans: Array<{
       "https://www.wellcare.com/-/media/pdfs/na/member/request-forms/der/na_drug_coverage_determination_request_2025_r.ashx",
     priorAuthorizationLabel: "Download Wellcare PA form",
     priorAuthorizationDownload: true,
+  },
+  {
+    key: "humanaNj26408",
+    short: "Humana NJ",
+    name: "Humana NJ Medicare formulary 26408",
+    region: "NJ",
+    updated: "Aug 1, 2026",
+    source: "https://assets.humana.com/is/content/humana/20260009PDG2640826Cpdf",
+    priorAuthorizationUrl:
+      "https://provider.humana.com/pharmacy-resources/prior-authorizations",
+    priorAuthorizationLabel: "Open Humana PA route",
   },
 ];
 export type SummitNjInsurer = {
@@ -575,6 +587,7 @@ const c = (
   oscarNjIndividual: CoverageState = "Source loading",
   anthemNySelect: CoverageState = "Source loading",
   wellcareNjH0913: CoverageState = "Source loading",
+  humanaNj26408: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -583,6 +596,7 @@ const c = (
   oscarNjIndividualFlags: Restriction[] = [],
   anthemNySelectFlags: Restriction[] = [],
   wellcareNjH0913Flags: Restriction[] = [],
+  humanaNj26408Flags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -627,6 +641,10 @@ const c = (
   wellcareNjH0913: {
     state: wellcareNjH0913,
     flags: wellcareNjH0913Flags,
+  },
+  humanaNj26408: {
+    state: humanaNj26408,
+    flags: humanaNj26408Flags,
   },
 });
 export const medications: Medication[] = [
@@ -1664,6 +1682,40 @@ const planCoverageOverrides: Partial<
     "Ipratropium / albuterol": coverage("Tier 3", ["QL"], "Combivent Respimat entry, 8 g per 30 days."),
     "Benralizumab": coverage("Tier 5", ["PA", "QL"], "Fasenra entry, 0.5 to 1 mL per 28 days."),
     Dupilumab: coverage("Tier 5", ["PA", "QL"], "Dupixent package-specific quantity limits per 28 days."),
+  },
+  humanaNj26408: {
+    "Albuterol HFA": coverage("Tier 3", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier 2", [], "Part B versus Part D determination applies."),
+    Levalbuterol: coverage("Tier 4", ["ST", "QL"], "Levalbuterol HFA entry."),
+    Arformoterol: coverage("Tier 4", ["QL"], "Part B versus Part D determination applies."),
+    Ipratropium: coverage("Tier varies", ["PA", "QL"], "Nebulizer is Tier 2 with Part B/D determination; HFA is Tier 4 with PA and QL."),
+    "Ipratropium / albuterol": coverage("Tier varies", ["QL"], "DuoNeb is Tier 2 with Part B/D determination; Combivent is Tier 4 with QL."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 3", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 3", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
+    Roflumilast: coverage("Tier 3", ["QL"]),
+    "Budesonide inhalation": coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL"]),
+    "Symbicort (brand)": coverage("Tier 3", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
+    Montelukast: coverage("Tier 1", ["QL"]),
+    Zafirlukast: coverage("Tier 4", ["QL"]),
+    Dupilumab: coverage("Tier 5", ["PA", "QL"]),
+    Benralizumab: coverage("Tier 5", ["PA", "QL"]),
+    Mepolizumab: coverage("Tier 5", ["PA", "QL"]),
+    Omalizumab: coverage("Tier 5", ["PA", "QL"]),
+    Nintedanib: coverage("Tier 5", ["PA", "QL"]),
+    Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
+    Ambrisentan: coverage("Tier 5", ["PA", "QL"]),
+    "Sildenafil 20 mg": coverage("Tier 3", ["PA", "QL"]),
+    "Tadalafil for PAH": coverage("Tier 4", ["PA", "QL"]),
+    Selexipag: coverage("Tier 5", ["PA", "QL"]),
+    Riociguat: coverage("Tier 5", ["PA", "QL"]),
+    "Tobramycin inhalation": coverage("Tier 5", [], "Part B versus Part D determination applies."),
+    "Aztreonam inhalation": coverage("Tier 5", ["PA", "QL"]),
+    "Dornase alfa": coverage("Tier 5", [], "Part B versus Part D determination applies."),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"]),
   },
 };
 
