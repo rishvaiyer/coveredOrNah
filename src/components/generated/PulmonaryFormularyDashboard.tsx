@@ -2723,6 +2723,9 @@ export const PulmonaryFormularyDashboard = () => {
           <span className="shrink-0 font-semibold">
             Curated public PDL snapshot. Verify the exact product.
           </span>
+          <span className="shrink-0 font-semibold text-[#173f41]">
+            Made by Rishva Iyer
+          </span>
         </footer>
       </section>
     </main>
