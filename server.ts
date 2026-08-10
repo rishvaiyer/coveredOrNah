@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   medications,
   plans,
+  coverageFor,
   summitNjInsurers,
   summitNjFormularySources,
   type PlanKey,
@@ -114,8 +115,13 @@ app.get("/api/medications", (request, response) => {
     .map((medication) => ({
       ...medication,
       coverage: plan
-        ? { [plan]: medication.coverage[plan] }
-        : medication.coverage,
+        ? { [plan]: coverageFor(medication, plan) }
+        : Object.fromEntries(
+            plans.map((candidatePlan) => [
+              candidatePlan.key,
+              coverageFor(medication, candidatePlan.key),
+            ]),
+          ),
     }));
 
   response.json({ count: results.length, medications: results });
@@ -149,14 +155,14 @@ app.get("/api/alternatives", (request, response) => {
       (candidate) =>
         candidate.generic !== medication.generic &&
         candidate.branch === medication.branch &&
-        ["Preferred", "Tier 1"].includes(candidate.coverage[plan].state),
+        ["Preferred", "Tier 1"].includes(coverageFor(candidate, plan).state),
     )
     .slice(0, 5)
     .map((candidate) => ({
       generic: candidate.generic,
       brands: candidate.brands,
       branch: candidate.branch,
-      coverage: candidate.coverage[plan],
+      coverage: coverageFor(candidate, plan),
     }));
 
   response.json({

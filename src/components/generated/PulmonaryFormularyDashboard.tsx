@@ -6,13 +6,32 @@ export type CoverageState =
   | "Tier 1 + PA"
   | "Tier 2"
   | "Tier 2 + PA"
+  | "Tier 3"
+  | "Tier 4"
+  | "Tier varies"
   | "Non-preferred"
-  | "Not on PDL";
-export type Restriction = "PA" | "QL" | "ST" | "SP" | "CC" | "Age" | "DX2RX";
-export type PlanKey = "nyrx" | "njuhc" | "pama";
+  | "Not on PDL"
+  | "Source loading";
+export type Restriction =
+  | "PA"
+  | "QL"
+  | "ST"
+  | "SP"
+  | "CC"
+  | "Age"
+  | "DX2RX"
+  | "RS"
+  | "LD";
+export type PlanKey =
+  | "nyrx"
+  | "njuhc"
+  | "pama"
+  | "horizonMarketplace"
+  | "uhcCommercial";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
+  productNote?: string;
 };
 export type Medication = {
   generic: string;
@@ -65,6 +84,27 @@ export const plans: Array<{
     priorAuthorizationUrl:
       "https://www.dhs.pa.gov/providers/Pharmacy-Services/Pages/Pharmacy-Services-Fax-Forms.aspx",
     priorAuthorizationLabel: "Open PA forms",
+  },
+  {
+    key: "horizonMarketplace",
+    short: "Horizon NJ",
+    name: "Horizon BCBSNJ Marketplace",
+    region: "NJ",
+    updated: "Aug 2026",
+    source:
+      "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
+  },
+  {
+    key: "uhcCommercial",
+    short: "UHC Commercial",
+    name: "UnitedHealthcare Commercial PDL baseline",
+    region: "NJ",
+    updated: "May 1, 2026",
+    source:
+      "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
+    priorAuthorizationUrl:
+      "https://www.uhcprovider.com/en/prior-auth-advance-notification/prior-auth-specialty-drugs/prior-auth-pharmacy-medical-necessity.html",
+    priorAuthorizationLabel: "Open UHC PA route",
   },
 ];
 export type SummitNjInsurer = {
@@ -344,6 +384,10 @@ const c = (
   nyFlags: Restriction[] = [],
   njFlags: Restriction[] = [],
   paFlags: Restriction[] = [],
+  horizon: CoverageState = "Source loading",
+  uhcCommercial: CoverageState = "Source loading",
+  horizonFlags: Restriction[] = [],
+  uhcCommercialFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -356,6 +400,14 @@ const c = (
   pama: {
     state: pa,
     flags: paFlags,
+  },
+  horizonMarketplace: {
+    state: horizon,
+    flags: horizonFlags,
+  },
+  uhcCommercial: {
+    state: uhcCommercial,
+    flags: uhcCommercialFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1011,6 +1063,108 @@ export const medications: Medication[] = [
     coverage: c("Preferred", "Tier 1", "Preferred", ["QL"], ["QL"], ["QL"]),
   },
 ];
+
+const coverage = (
+  state: CoverageState,
+  flags: Restriction[] = [],
+  productNote?: string,
+): Coverage => ({ state, flags, productNote });
+
+const planCoverageOverrides: Partial<
+  Record<PlanKey, Record<string, Coverage>>
+> = {
+  horizonMarketplace: {
+    "Albuterol HFA": coverage("Tier 1", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier 1"),
+    Arformoterol: coverage("Tier 1", ["QL"]),
+    Salmeterol: coverage("Tier 2", ["QL"]),
+    Ipratropium: coverage("Tier 1", ["QL"]),
+    "Ipratropium / albuterol": coverage("Tier 1"),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 1", ["QL"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage(
+      "Tier 2",
+      ["QL"],
+    ),
+    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2 + PA", [
+      "PA",
+      "QL",
+    ]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 2 + PA", [
+      "PA",
+      "QL",
+    ]),
+    Roflumilast: coverage("Tier 1", ["QL"]),
+    "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2"),
+    Mometasone: coverage("Tier 2", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage(
+      "Tier varies",
+      ["QL"],
+      "Advair Diskus is Tier 1; Advair HFA is Tier 2.",
+    ),
+    "Symbicort (brand)": coverage("Tier 1", ["QL"]),
+    "Mometasone / formoterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 2", ["QL"]),
+    Montelukast: coverage("Tier 1", ["QL"]),
+    Zafirlukast: coverage("Tier 1", ["QL"]),
+    "Zileuton ER": coverage("Tier 1", ["QL"]),
+    Dupilumab: coverage("Tier 2 + PA", ["PA", "QL", "SP", "LD"]),
+    Benralizumab: coverage("Tier 2 + PA", ["PA", "QL", "SP"]),
+    Mepolizumab: coverage("Tier 2 + PA", ["PA", "QL", "SP", "LD"]),
+    Tezepelumab: coverage("Tier 2 + PA", ["PA", "QL", "SP", "LD"]),
+    Omalizumab: coverage("Tier 2 + PA", ["PA", "SP", "LD"]),
+    Nintedanib: coverage("Tier 1 + PA", ["PA", "QL", "SP", "LD"]),
+    Pirfenidone: coverage(
+      "Tier varies",
+      ["PA", "QL", "SP", "LD"],
+      "267 mg capsule and 267/801 mg tablet are Tier 1; 534 mg tablet is Tier 3.",
+    ),
+    Ambrisentan: coverage("Tier 1 + PA", ["PA", "QL", "SP", "LD"]),
+    Bosentan: coverage("Tier 1 + PA", ["PA", "QL", "SP", "LD"]),
+    "Sildenafil 20 mg": coverage("Tier 1 + PA", ["PA", "QL", "SP", "LD"]),
+    "Tadalafil for PAH": coverage("Tier 1 + PA", ["PA", "QL", "SP", "LD"]),
+    Selexipag: coverage("Tier 3", ["PA", "QL", "SP", "LD"]),
+    Riociguat: coverage("Tier 3", ["PA", "QL", "SP", "LD"]),
+    "Tobramycin inhalation": coverage(
+      "Tier varies",
+      ["PA", "QL", "SP", "LD"],
+      "Tobi and Bethkis nebulizer solutions are Tier 1; generic and Kitabis Pak are Tier 3; Tobi Podhaler is Tier 2.",
+    ),
+    "Aztreonam inhalation": coverage("Tier 2 + PA", ["PA", "QL", "SP", "LD"]),
+    "Dornase alfa": coverage("Tier 2", ["QL", "SP", "LD"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 2 + PA", [
+      "PA",
+      "QL",
+      "SP",
+      "LD",
+    ]),
+  },
+  uhcCommercial: {
+    Salmeterol: coverage("Tier 2", ["QL"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
+    "Symbicort (brand)": coverage("Tier 3", ["QL", "RS"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL", "RS"]),
+    Tezepelumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Omalizumab: coverage("Tier 2", ["PA", "QL", "SP"]),
+    "Dornase alfa": coverage("Tier 2", ["PA", "QL", "SP"]),
+    "Tobramycin inhalation": coverage(
+      "Tier 3",
+      ["PA", "QL", "SP"],
+      "Tobi Podhaler entry.",
+    ),
+    Nintedanib: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Pirfenidone: coverage("Tier 2", ["PA", "QL", "SP"]),
+    Zafirlukast: coverage("Tier 1"),
+  },
+};
+
+export const coverageFor = (medication: Medication, plan: PlanKey): Coverage =>
+  planCoverageOverrides[plan]?.[medication.generic] ?? medication.coverage[plan];
+
 const branches = [
   "All areas",
   ...Array.from(new Set(medications.map((med) => med.branch))),
@@ -1018,14 +1172,18 @@ const branches = [
 const toneForState = (state: CoverageState) => {
   if (state === "Preferred" || state === "Tier 1")
     return "bg-emerald-50 text-emerald-800 ring-emerald-200";
-  if (state.includes("PA") || state === "Tier 2")
+  if (state.includes("PA") || state.startsWith("Tier"))
     return "bg-amber-50 text-amber-900 ring-amber-200";
   if (state === "Non-preferred")
     return "bg-rose-50 text-rose-800 ring-rose-200";
   return "bg-slate-100 text-slate-600 ring-slate-200";
 };
 const displayState = (state: CoverageState) =>
-  state === "Not on PDL" ? "Not listed" : state;
+  state === "Not on PDL"
+    ? "Not listed"
+    : state === "Source loading"
+      ? "Verifying"
+      : state;
 const restrictionNames: Record<Restriction, string> = {
   PA: "Prior authorization",
   QL: "Quantity limit",
@@ -1034,6 +1192,8 @@ const restrictionNames: Record<Restriction, string> = {
   CC: "Clinical criteria",
   Age: "Age restriction",
   DX2RX: "Diagnosis-to-drug criteria",
+  RS: "Refill or supply restriction",
+  LD: "Limited distribution",
 };
 const isStraightforwardCoverage = (state: CoverageState) =>
   state === "Preferred" || state === "Tier 1";
@@ -1042,8 +1202,12 @@ const actionForCoverage = (state: CoverageState) => {
     return "Preferred or first-tier listing. Verify the exact product and benefit.";
   if (state.includes("PA"))
     return "Review prior-authorization criteria before prescribing.";
-  if (state === "Tier 2")
+  if (state.startsWith("Tier"))
     return "Covered on a higher tier. Check restrictions and preferred options.";
+  if (state === "Tier varies")
+    return "Tier differs by product or strength. Check the product detail below.";
+  if (state === "Source loading")
+    return "This exact plan source is being reviewed. No coverage claim is shown yet.";
   if (state === "Non-preferred")
     return "Non-preferred. Review preferred same-branch options or exception criteria.";
   return "Not listed in this PDL snapshot. Verify the pharmacy benefit directly.";
@@ -1170,7 +1334,7 @@ export const PulmonaryFormularyDashboard = () => {
         (candidate) =>
           candidate.generic !== med.generic &&
           candidate.branch === med.branch &&
-          isStraightforwardCoverage(candidate.coverage[planKey].state),
+          isStraightforwardCoverage(coverageFor(candidate, planKey).state),
       )
       .slice(0, 3);
   const summitNjDirectory = summitNjInsurers.filter((insurer) =>
@@ -1381,13 +1545,13 @@ export const PulmonaryFormularyDashboard = () => {
               {visiblePlans.map((plan) => {
                 const preferred = medications.filter((med) =>
                   ["Preferred", "Tier 1"].includes(
-                    med.coverage[plan.key].state,
+                    coverageFor(med, plan.key).state,
                   ),
                 ).length;
                 const restricted = medications.filter(
                   (med) =>
-                    med.coverage[plan.key].state.includes("PA") ||
-                    med.coverage[plan.key].state === "Tier 2",
+                    coverageFor(med, plan.key).state.includes("PA") ||
+                    coverageFor(med, plan.key).state === "Tier 2",
                 ).length;
                 return (
                   <article
@@ -1607,7 +1771,7 @@ export const PulmonaryFormularyDashboard = () => {
                       </div>
                       <div className="flex flex-wrap gap-2 lg:justify-end">
                         {visiblePlans.map((plan) => {
-                          const item = med.coverage[plan.key];
+                          const item = coverageFor(med, plan.key);
                           return (
                             <span
                               key={plan.key}
@@ -1670,7 +1834,7 @@ export const PulmonaryFormularyDashboard = () => {
                   </p>
                   <div className="mt-5 space-y-3">
                     {visiblePlans.map((plan) => {
-                      const item = activeSelected.coverage[plan.key];
+                      const item = coverageFor(activeSelected, plan.key);
                       const alternatives = alternativesFor(
                         activeSelected,
                         plan.key,
@@ -1707,6 +1871,11 @@ export const PulmonaryFormularyDashboard = () => {
                                 </span>
                               ))}
                             </div>
+                          )}
+                          {item.productNote && (
+                            <p className="mt-2 rounded-md bg-[#f5f8f7] px-2 py-1.5 text-[10px] leading-4 text-[#536d6b]">
+                              {item.productNote}
+                            </p>
                           )}
                           <a
                             href={plan.source}
