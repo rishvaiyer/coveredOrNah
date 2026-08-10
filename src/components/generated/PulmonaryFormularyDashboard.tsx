@@ -1792,6 +1792,8 @@ const isStraightforwardCoverage = (state: CoverageState) =>
   ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
     state,
   );
+const isSourceListedCoverage = (state: CoverageState) =>
+  !["Source loading", "Not on PDL", "Non-formulary"].includes(state);
 const actionForCoverage = (state: CoverageState) => {
   if (isStraightforwardCoverage(state))
     return "Preferred or first-tier listing. Verify the exact product and benefit.";
@@ -1931,7 +1933,7 @@ export const PulmonaryFormularyDashboard = () => {
         (candidate) =>
           candidate.generic !== med.generic &&
           candidate.branch === med.branch &&
-          isStraightforwardCoverage(coverageFor(candidate, planKey).state),
+          isSourceListedCoverage(coverageFor(candidate, planKey).state),
       )
       .slice(0, 3);
   const summitNjDirectory = summitNjInsurers.filter((insurer) =>
@@ -2584,7 +2586,7 @@ export const PulmonaryFormularyDashboard = () => {
                               {alternatives.length > 0 ? (
                                 <>
                                   <p className="mt-1 text-[10px] leading-4 text-[#718482]">
-                                    Similar or generic options in the same therapeutic area that are preferred or Tier 1 on this plan. Select one for its full coverage details.
+                                    Similar or generic options in the same therapeutic area with source-verified coverage on this plan. Select one for its exact tier, restrictions, and PA action.
                                   </p>
                                   <div className="mt-2 flex flex-wrap gap-1.5">
                                     {alternatives.map((alternative) => (
@@ -2597,7 +2599,7 @@ export const PulmonaryFormularyDashboard = () => {
                                         }}
                                         className="rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] transition hover:bg-[#e5f3f0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55bda8]"
                                       >
-                                        {alternative.generic}
+                                        {alternative.generic} · {displayState(coverageFor(alternative, plan.key).state)}
                                       </button>
                                     ))}
                                   </div>
