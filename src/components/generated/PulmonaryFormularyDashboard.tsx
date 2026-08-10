@@ -38,7 +38,8 @@ export type PlanKey =
   | "amerihealthNj"
   | "cignaNationalPreferred"
   | "oscarNjIndividual"
-  | "anthemNySelect";
+  | "anthemNySelect"
+  | "wellcareNjH0913";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -145,6 +146,18 @@ export const plans: Array<{
     priorAuthorizationUrl:
       "https://providers.anthem.com/new-york-provider/resources/pharmacy-information",
     priorAuthorizationLabel: "Open Anthem pharmacy PA route",
+  },
+  {
+    key: "wellcareNjH0913",
+    short: "Wellcare NJ",
+    name: "Wellcare NJ Medicare H0913-002/021 formulary",
+    region: "NJ",
+    updated: "Jul 22, 2026",
+    source: "https://www.wellcare.com/en/New-Jersey/Providers/Medicare/Pharmacy",
+    priorAuthorizationUrl:
+      "https://www.wellcare.com/-/media/pdfs/na/member/request-forms/der/na_drug_coverage_determination_request_2025_r.ashx",
+    priorAuthorizationLabel: "Download Wellcare PA form",
+    priorAuthorizationDownload: true,
   },
 ];
 export type SummitNjInsurer = {
@@ -561,6 +574,7 @@ const c = (
   cignaNationalPreferred: CoverageState = "Source loading",
   oscarNjIndividual: CoverageState = "Source loading",
   anthemNySelect: CoverageState = "Source loading",
+  wellcareNjH0913: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -568,6 +582,7 @@ const c = (
   cignaNationalPreferredFlags: Restriction[] = [],
   oscarNjIndividualFlags: Restriction[] = [],
   anthemNySelectFlags: Restriction[] = [],
+  wellcareNjH0913Flags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -608,6 +623,10 @@ const c = (
   anthemNySelect: {
     state: anthemNySelect,
     flags: anthemNySelectFlags,
+  },
+  wellcareNjH0913: {
+    state: wellcareNjH0913,
+    flags: wellcareNjH0913Flags,
   },
 });
 export const medications: Medication[] = [
@@ -1634,6 +1653,18 @@ const planCoverageOverrides: Partial<
     "Nicotine replacement": coverage("Tier 1", [], "$0 smoking-cessation benefit entry."),
     Varenicline: coverage("Tier 2", ["QL"], "$0 smoking-cessation benefit entry."),
   },
+  wellcareNjH0913: {
+    Salmeterol: coverage("Tier 3", ["QL"], "Serevent Diskus entry, 60 actuations per 30 days."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["QL"], "Spiriva Respimat entry, 4 g per 30 days."),
+    "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"], "30 doses per 30 days."),
+    "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"], "60 doses per 30 days."),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"], "Trelegy Ellipta entry, 60 actuations per 30 days."),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"], "Breztri entry, 10.7 g per 30 days."),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL"], "Breo Ellipta entry, 60 doses per 30 days."),
+    "Ipratropium / albuterol": coverage("Tier 3", ["QL"], "Combivent Respimat entry, 8 g per 30 days."),
+    "Benralizumab": coverage("Tier 5", ["PA", "QL"], "Fasenra entry, 0.5 to 1 mL per 28 days."),
+    Dupilumab: coverage("Tier 5", ["PA", "QL"], "Dupixent package-specific quantity limits per 28 days."),
+  },
 };
 
 export const coverageFor = (medication: Medication, plan: PlanKey): Coverage =>
@@ -2023,9 +2054,9 @@ export const PulmonaryFormularyDashboard = () => {
           <>
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-bold">Live formulary plans</h2>
+                <h2 className="text-lg font-bold">Choose a plan to search medicines</h2>
                 <p className="text-xs text-[#6b8180]">
-                  Source-backed medication coverage available now
+                  Select a plan card to see its medications, coverage alternatives, and PA actions.
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -2082,13 +2113,16 @@ export const PulmonaryFormularyDashboard = () => {
                     <p className="mt-1 text-xs text-[#698080]">
                       Source updated {plan.updated}
                     </p>
+                    <p className="mt-2 text-xs font-bold text-[#0d6664]">
+                      Click to search this plan’s medicines
+                    </p>
                     <div className="mt-5 grid grid-cols-2 gap-3">
                       <div className="rounded-xl bg-[#eef8f4] p-3">
                         <div className="text-2xl font-semibold text-[#15735f]">
                           {preferred}
                         </div>
                         <div className="text-xs text-[#59736e]">
-                          preferred / Tier 1
+                          plan preferred / Tier 1
                         </div>
                       </div>
                       <div className="rounded-xl bg-[#fff6e8] p-3">
