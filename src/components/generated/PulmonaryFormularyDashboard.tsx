@@ -28,6 +28,8 @@ export const plans: Array<{
   region: string;
   updated: string;
   source: string;
+  priorAuthorizationUrl?: string;
+  priorAuthorizationLabel?: string;
 }> = [
   {
     key: "nyrx",
@@ -36,6 +38,9 @@ export const plans: Array<{
     region: "NY",
     updated: "Jul 16, 2026",
     source: "https://newyork.fhsc.com/downloads/providers/NYRx_PDP_PDL.pdf",
+    priorAuthorizationUrl:
+      "https://www.health.ny.gov/health_care/medicaid/program/pharmacy.htm",
+    priorAuthorizationLabel: "NYRx PA instructions",
   },
   {
     key: "njuhc",
@@ -45,6 +50,9 @@ export const plans: Array<{
     updated: "Jul 1, 2026",
     source:
       "https://www.uhcprovider.com/content/dam/provider/docs/public/commplan/nj/pharmacy/NJ-Preferred-Drug-List-Family-Care.pdf",
+    priorAuthorizationUrl:
+      "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
+    priorAuthorizationLabel: "Open PA form",
   },
   {
     key: "pama",
@@ -54,6 +62,9 @@ export const plans: Array<{
     updated: "Jan 5, 2026",
     source:
       "https://www.papdl.com/content/dam/ffs-medicaid/pa/pdl/penn-statewide-pdl-012026-v12.pdf",
+    priorAuthorizationUrl:
+      "https://www.dhs.pa.gov/providers/Pharmacy-Services/Pages/Pharmacy-Services-Fax-Forms.aspx",
+    priorAuthorizationLabel: "Open PA forms",
   },
 ];
 export type SummitNjInsurer = {
@@ -1611,6 +1622,18 @@ export const PulmonaryFormularyDashboard = () => {
                             {actionForCoverage(item.state)}
                           </p>
                           {!isStraightforwardCoverage(item.state) &&
+                            plan.priorAuthorizationUrl && (
+                              <a
+                                href={plan.priorAuthorizationUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#eef5f3] px-2 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#c7ded9] hover:bg-[#dff1ed]"
+                              >
+                                {plan.priorAuthorizationLabel ?? "Open PA route"}
+                                <Icon name="external" className="h-3 w-3" />
+                              </a>
+                            )}
+                          {!isStraightforwardCoverage(item.state) &&
                             alternatives.length > 0 && (
                               <div className="mt-3 rounded-lg bg-[#f3f8f7] p-2.5">
                                 <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#466e69]">
@@ -1658,11 +1681,11 @@ export const PulmonaryFormularyDashboard = () => {
                   <div className="mt-5 border-t border-[#e3ecea] pt-4">
                     <p className="text-[11px] leading-5 text-[#687d7d]">
                       <strong className="text-[#304f4e]">
-                        Clinical use note:
+                        Quick-check note:
                       </strong>{" "}
-                      Formulary status is not a guarantee of payment. Confirm
-                      strength, dosage form, member eligibility, benefit year,
-                      and prior-authorization criteria before prescribing.
+                      Coverage can differ by product, strength, device, benefit
+                      year, and member plan. Use the linked source or PA route
+                      for the final check.
                     </p>
                   </div>
                 </>
