@@ -189,7 +189,9 @@ app.get("/api/alternatives", (request, response) => {
       (candidate) =>
         candidate.generic !== medication.generic &&
         candidate.branch === medication.branch &&
-        ["Preferred", "Tier 1"].includes(coverageFor(candidate, plan).state),
+        ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
+          coverageFor(candidate, plan).state,
+        ),
     )
     .slice(0, 5)
     .map((candidate) => ({

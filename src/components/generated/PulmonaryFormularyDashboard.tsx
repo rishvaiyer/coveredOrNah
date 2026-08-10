@@ -12,7 +12,12 @@ export type CoverageState =
   | "Tier varies"
   | "Non-preferred"
   | "Not on PDL"
-  | "Source loading";
+  | "Source loading"
+  | "Generic"
+  | "Low-cost generic"
+  | "Preferred brand"
+  | "Non-preferred drug"
+  | "Non-formulary";
 export type Restriction =
   | "PA"
   | "QL"
@@ -29,7 +34,8 @@ export type PlanKey =
   | "pama"
   | "horizonMarketplace"
   | "uhcCommercial"
-  | "aetnaMedicareHmo";
+  | "aetnaMedicareHmo"
+  | "amerihealthNj";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -87,6 +93,18 @@ export const plans: Array<{
       "https://www.aetna.com/content/dam/aetna/pdfs/wwwaetnamedicarecomSSL/individual/2026/appeals/Coverage_Determination_Request_Form.pdf",
     priorAuthorizationLabel: "Download PA form",
     priorAuthorizationDownload: true,
+  },
+  {
+    key: "amerihealthNj",
+    short: "AmeriHealth NJ",
+    name: "AmeriHealth NJ Individual and Family",
+    region: "NJ",
+    updated: "Jul 1, 2026",
+    source:
+      "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
+    priorAuthorizationUrl:
+      "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
+    priorAuthorizationLabel: "Open PA route",
   },
 ];
 export type SummitNjInsurer = {
@@ -499,9 +517,11 @@ const c = (
   horizon: CoverageState = "Source loading",
   uhcCommercial: CoverageState = "Source loading",
   aetnaMedicareHmo: CoverageState = "Source loading",
+  amerihealthNj: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
+  amerihealthNjFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -526,6 +546,10 @@ const c = (
   aetnaMedicareHmo: {
     state: aetnaMedicareHmo,
     flags: aetnaMedicareHmoFlags,
+  },
+  amerihealthNj: {
+    state: amerihealthNj,
+    flags: amerihealthNjFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1410,6 +1434,50 @@ const planCoverageOverrides: Partial<
       "LD",
     ]),
   },
+  amerihealthNj: {
+    "Albuterol HFA": coverage("Generic"),
+    "Albuterol nebulizer solution": coverage("Generic"),
+    Levalbuterol: coverage(
+      "Non-preferred drug",
+      ["QL"],
+      "Levalbuterol HFA is non-preferred with a quantity limit; nebulizer solution is generic.",
+    ),
+    Arformoterol: coverage("Generic"),
+    Formoterol: coverage("Generic"),
+    Salmeterol: coverage("Preferred brand"),
+    Ipratropium: coverage("Generic"),
+    "Ipratropium / albuterol": coverage("Generic"),
+    "Tiotropium (generic capsule-inhaler)": coverage("Non-formulary"),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Preferred brand"),
+    "Incruse Ellipta (brand)": coverage("Non-formulary"),
+    "Anoro Ellipta (brand)": coverage("Preferred brand"),
+    "Tiotropium / olodaterol": coverage("Preferred brand"),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Preferred brand"),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Preferred brand"),
+    Roflumilast: coverage("Generic"),
+    Ensifentrine: coverage("Non-formulary", ["QL"]),
+    "Budesonide inhalation": coverage("Generic"),
+    "Fluticasone propionate HFA 44 mcg": coverage("Non-formulary"),
+    "QVAR RediHaler (brand)": coverage("Non-formulary"),
+    Ciclesonide: coverage("Non-formulary"),
+    Mometasone: coverage("Non-formulary"),
+    "Advair Diskus / HFA (brand)": coverage(
+      "Non-formulary",
+      [],
+      "Advair Diskus is non-formulary; Advair HFA is preferred brand.",
+    ),
+    "Symbicort (brand)": coverage("Preferred brand"),
+    "Mometasone / formoterol": coverage("Non-formulary"),
+    "Fluticasone / vilanterol": coverage("Non-formulary"),
+    Montelukast: coverage("Generic"),
+    Zafirlukast: coverage("Generic"),
+    "Zileuton ER": coverage("Generic", ["PA"]),
+    Mepolizumab: coverage("Preferred brand", ["SP", "PA"]),
+    Tezepelumab: coverage("Preferred brand", ["SP", "PA"]),
+    Omalizumab: coverage("Preferred brand", ["SP", "PA"]),
+    "Benzonatate": coverage("Low-cost generic"),
+    "Epinephrine auto-injector": coverage("Generic", ["QL"]),
+  },
 };
 
 export const coverageFor = (medication: Medication, plan: PlanKey): Coverage =>
@@ -1420,11 +1488,15 @@ const branches = [
   ...Array.from(new Set(medications.map((med) => med.branch))),
 ];
 const toneForState = (state: CoverageState) => {
-  if (state === "Preferred" || state === "Tier 1")
+  if (
+    ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
+      state,
+    )
+  )
     return "bg-emerald-50 text-emerald-800 ring-emerald-200";
   if (state.includes("PA") || state.startsWith("Tier"))
     return "bg-amber-50 text-amber-900 ring-amber-200";
-  if (state === "Non-preferred")
+  if (state === "Non-preferred" || state === "Non-preferred drug" || state === "Non-formulary")
     return "bg-rose-50 text-rose-800 ring-rose-200";
   return "bg-slate-100 text-slate-600 ring-slate-200";
 };
@@ -1446,7 +1518,9 @@ const restrictionNames: Record<Restriction, string> = {
   LD: "Limited distribution",
 };
 const isStraightforwardCoverage = (state: CoverageState) =>
-  state === "Preferred" || state === "Tier 1";
+  ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
+    state,
+  );
 const actionForCoverage = (state: CoverageState) => {
   if (isStraightforwardCoverage(state))
     return "Preferred or first-tier listing. Verify the exact product and benefit.";
@@ -1460,6 +1534,8 @@ const actionForCoverage = (state: CoverageState) => {
     return "This exact plan source is being reviewed. No coverage claim is shown yet.";
   if (state === "Non-preferred")
     return "Non-preferred. Review preferred same-branch options or exception criteria.";
+  if (state === "Non-preferred drug" || state === "Non-formulary")
+    return "Review preferred same-branch options or the plan's PA and exception route.";
   return "Not listed in this PDL snapshot. Verify the pharmacy benefit directly.";
 };
 const Icon = ({
@@ -1794,9 +1870,7 @@ export const PulmonaryFormularyDashboard = () => {
             <div className="grid gap-4 lg:grid-cols-3">
               {visiblePlans.map((plan) => {
                 const preferred = medications.filter((med) =>
-                  ["Preferred", "Tier 1"].includes(
-                    coverageFor(med, plan.key).state,
-                  ),
+                  isStraightforwardCoverage(coverageFor(med, plan.key).state),
                 ).length;
                 const restricted = medications.filter(
                   (med) =>
