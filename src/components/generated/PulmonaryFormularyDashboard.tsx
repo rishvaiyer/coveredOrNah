@@ -1863,9 +1863,17 @@ export const PulmonaryFormularyDashboard = () => {
                   Source-backed medication coverage available now
                 </p>
               </div>
-              <span className="rounded-full bg-[#dff1ed] px-3 py-1.5 text-xs font-bold text-[#0d6664]">
-                {visiblePlans.length} live
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-[#dff1ed] px-3 py-1.5 text-xs font-bold text-[#0d6664]">
+                  {visiblePlans.length} live
+                </span>
+                <button
+                  onClick={() => setView("medications")}
+                  className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0d6664] focus:outline-none focus:ring-2 focus:ring-[#55bda8] focus:ring-offset-2"
+                >
+                  Search medicines
+                </button>
+              </div>
             </div>
             <div className="grid gap-4 lg:grid-cols-3">
               {visiblePlans.map((plan) => {
