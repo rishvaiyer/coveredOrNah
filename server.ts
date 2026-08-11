@@ -85,8 +85,17 @@ app.get("/api/medicare/coverage", async (request, response) => {
     const rxNormPayload = await rxNormResponse.json() as { idGroup?: { rxnormId?: string[] } };
     const rxcuis = rxNormPayload.idGroup?.rxnormId?.slice(0, 10) ?? [];
     if (!rxcuis.length) return response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis: [], coverage: [] });
-    const coverage = await pool.query<{ tier_level: number | null; prior_authorization: boolean; quantity_limit: boolean; quantity_limit_amount: string | null; quantity_limit_days: string | null; step_therapy: boolean }>("SELECT DISTINCT tier_level, prior_authorization, quantity_limit, quantity_limit_amount, quantity_limit_days, step_therapy FROM medicare_formulary_drugs WHERE import_id = $1 AND formulary_id = $2 AND rxcui = ANY($3::text[]) ORDER BY tier_level NULLS LAST", [latest.rows[0].id, plan.rows[0].formulary_id, rxcuis]);
-    response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis, coverage: coverage.rows });
+    const relatedResponses = await Promise.all(
+      rxcuis.map(async (rxcui) => {
+        const related = await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui/${rxcui}/related.json?tty=SCD+SBD`);
+        if (!related.ok) return [];
+        const payload = await related.json() as { relatedGroup?: { conceptGroup?: Array<{ conceptProperties?: Array<{ rxcui: string }> }> } };
+        return payload.relatedGroup?.conceptGroup?.flatMap((group) => group.conceptProperties?.map((concept) => concept.rxcui) ?? []) ?? [];
+      }),
+    );
+    const productRxcuis = [...new Set([...rxcuis, ...relatedResponses.flat()])];
+    const coverage = await pool.query<{ tier_level: number | null; prior_authorization: boolean; quantity_limit: boolean; quantity_limit_amount: string | null; quantity_limit_days: string | null; step_therapy: boolean }>("SELECT DISTINCT tier_level, prior_authorization, quantity_limit, quantity_limit_amount, quantity_limit_days, step_therapy FROM medicare_formulary_drugs WHERE import_id = $1 AND formulary_id = $2 AND rxcui = ANY($3::text[]) ORDER BY tier_level NULLS LAST", [latest.rows[0].id, plan.rows[0].formulary_id, productRxcuis]);
+    response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis, productRxcuiCount: productRxcuis.length, coverage: coverage.rows });
   } catch {
     response.status(503).json({ error: "Medicare coverage lookup is temporarily unavailable." });
   }
