@@ -2203,6 +2203,22 @@ export const PulmonaryFormularyDashboard = () => {
     formulary_id: string;
     county_codes: string[];
   } | null>(null);
+  const [medicareCoverageLoading, setMedicareCoverageLoading] = useState(false);
+  const [selectedMedicareCoverage, setSelectedMedicareCoverage] = useState<{
+    source: { source_version: string; imported_at: string };
+    plan: { formulary_id: string; plan_name: string };
+    medication: string;
+    matchedTerms: string[];
+    productRxcuiCount: number;
+    coverage: Array<{
+      tier_level: number | null;
+      prior_authorization: boolean;
+      quantity_limit: boolean;
+      quantity_limit_amount: string | null;
+      quantity_limit_days: string | null;
+      step_therapy: boolean;
+    }>;
+  } | null>(null);
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/health", { signal: controller.signal })
@@ -2242,6 +2258,29 @@ export const PulmonaryFormularyDashboard = () => {
       window.clearTimeout(timeout);
     };
   }, [medicareQuery]);
+  useEffect(() => {
+    if (!selectedMedicarePlan || !selected) {
+      setSelectedMedicareCoverage(null);
+      setMedicareCoverageLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setMedicareCoverageLoading(true);
+    fetch(
+      `/api/medicare/coverage?contractId=${encodeURIComponent(selectedMedicarePlan.contract_id)}&planId=${encodeURIComponent(selectedMedicarePlan.plan_id)}&segmentId=${encodeURIComponent(selectedMedicarePlan.segment_id)}&medication=${encodeURIComponent(selected.generic)}`,
+      { signal: controller.signal },
+    )
+      .then((response) => {
+        if (!response.ok) throw new Error("Medicare coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setSelectedMedicareCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") setSelectedMedicareCoverage(null);
+      })
+      .finally(() => setMedicareCoverageLoading(false));
+    return () => controller.abort();
+  }, [selectedMedicarePlan, selected]);
   const selectMedication = (medication: Medication) => {
     setSelected(medication);
     window.requestAnimationFrame(() => {
@@ -2957,6 +2996,57 @@ export const PulmonaryFormularyDashboard = () => {
                   <p className="mt-4 rounded-xl bg-[#f2f7f6] p-3 text-sm leading-5 text-[#3d5959]">
                     {activeSelected.use}
                   </p>
+                  {selectedMedicarePlan && (
+                    <section className="mt-5 rounded-xl border border-[#9fcfc4] bg-[#eef8f5] p-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">
+                            Exact Medicare plan result
+                          </p>
+                          <p className="mt-1 text-sm font-bold text-[#173f41]">
+                            {selectedMedicarePlan.plan_name}
+                          </p>
+                          <p className="mt-0.5 text-[10px] text-[#58726f]">
+                            {selectedMedicarePlan.contract_id}-{selectedMedicarePlan.plan_id} · Formulary {selectedMedicarePlan.formulary_id}
+                          </p>
+                        </div>
+                        <span className="rounded-full bg-white px-2 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">
+                          CMS source
+                        </span>
+                      </div>
+                      {medicareCoverageLoading ? (
+                        <p className="mt-3 text-xs font-semibold text-[#55716f]">Checking the selected plan…</p>
+                      ) : selectedMedicareCoverage?.coverage.length ? (
+                        <div className="mt-3 space-y-2">
+                          {selectedMedicareCoverage.coverage.map((item, index) => (
+                            <div key={`${item.tier_level}-${index}`} className="rounded-lg bg-white p-2.5 ring-1 ring-[#cfe4df]">
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-xs font-bold text-[#173f41]">
+                                  {item.tier_level ? `Tier ${item.tier_level}` : "Tier not supplied"}
+                                </span>
+                                <span className="text-[9px] font-bold uppercase tracking-wide text-[#54716d]">
+                                  Candidate row
+                                </span>
+                              </div>
+                              <div className="mt-2 flex flex-wrap gap-1">
+                                {item.prior_authorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                                {item.quantity_limit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL{item.quantity_limit_amount ? ` ${item.quantity_limit_amount}${item.quantity_limit_days ? ` / ${item.quantity_limit_days} days` : ""}` : ""}</span>}
+                                {item.step_therapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                                {!item.prior_authorization && !item.quantity_limit && !item.step_therapy && <span className="text-[10px] text-[#58726f]">No CMS restriction flag on this matched row.</span>}
+                              </div>
+                            </div>
+                          ))}
+                          <p className="text-[10px] leading-4 text-[#55716f]">
+                            CMS {selectedMedicareCoverage.source.source_version}. <strong>Needs product confirmation:</strong> match the device, strength, and NDC against the card/formulary before acting.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="mt-3 rounded-lg border border-[#e2c996] bg-[#fff9ea] p-2.5 text-[10px] leading-4 text-[#785313]">
+                          <strong>Unconfirmed - not a denial.</strong> No matching CMS product row was found for this medication name and selected plan. Verify the exact device, strength, and NDC in the plan formulary.
+                        </div>
+                      )}
+                    </section>
+                  )}
                   <div className="mt-5 space-y-3">
                     {visiblePlans.map((plan) => {
                       const item = coverageFor(activeSelected, plan.key);

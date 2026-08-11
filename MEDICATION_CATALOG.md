@@ -61,6 +61,7 @@ Every new item requires product-level details where applicable: brand/generic, s
 - [ ] Hypertonic saline inhalation - `Next`
 - [ ] Acetylcysteine inhalation - `Next`
 - [ ] Colistimethate inhalation - `Review`
+- [ ] Amikacin liposome inhalation (Arikayce) - `Next`
 
 ### Interstitial lung disease and pulmonary vascular adjuncts
 
