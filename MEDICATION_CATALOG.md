@@ -78,6 +78,30 @@ Every new item requires product-level details where applicable: brand/generic, s
 - [ ] Rituximab - `Review`
 - [ ] Inhaled nitric oxide products - `Review`
 
+## Expanded specialty audit
+
+These are candidate items to audit before claiming a complete pulmonary catalog. They are not all routine outpatient prescriptions.
+
+| Specialty area | Candidate medication products to audit |
+| --- | --- |
+| Asthma rescue/controller | Terbutaline; fluticasone/salmeterol HFA and DPI generics by strength; budesonide/formoterol by device; fluticasone/vilanterol by strength; albuterol/budesonide by device; spacer and nebulizer-specific products |
+| COPD | Aclidinium; revefenacin; glycopyrrolate; indacaterol; olodaterol; glycopyrrolate/formoterol; aclidinium/formoterol; hypertonic saline; acetylcysteine |
+| Severe asthma | Reslizumab; provider-administered biologic formulations and administration-route distinctions |
+| PAH | Macitentan; macitentan/tadalafil; epoprostenol; iloprost; treprostinil oral; treprostinil IV/subcutaneous; inhaled treprostinil DPI; nitric-oxide pathway products |
+| ILD and connective-tissue disease lung disease | Mycophenolate; azathioprine; rituximab; cyclophosphamide; corticosteroid formulations; antifibrotic product strengths |
+| CF / bronchiectasis | CFTR modulator products; hypertonic saline; acetylcysteine; colistimethate; amikacin liposome inhalation; product-specific tobramycin; chronic macrolide regimens |
+| NTM and resistant airway infection | Amikacin liposome inhalation; ethambutol; rifampin/rifabutin; clofazimine; linezolid; cefoxitin; imipenem/cilastatin; tigecycline; moxifloxacin; culture-directed IV products |
+| Pulmonary vascular / VTE | Rivaroxaban; warfarin; enoxaparin; unfractionated heparin; thrombolytic products for hospital workflows |
+| Pulmonary infection | Cefpodoxime; cefuroxime; TMP-SMX; ciprofloxacin; moxifloxacin; linezolid; antivirals and antifungals only when included in the clinic's scope |
+| Sleep and respiratory support | Wake-promoting and PAP-adjacent medicines only if the practice includes sleep medicine; keep this a separate module from pulmonary formulary coverage |
+
+## Audit rules
+
+- A generic ingredient is not enough when the device, strength, route, or brand changes formulary coverage.
+- Keep inhaler, nebulizer, oral, injection, infusion, and hospital-administered products distinct.
+- Hospital-only, infusion-center, transplant, sleep, and infectious-disease workflows must be explicitly enabled instead of being silently mixed into the outpatient pulmonary search.
+- A pulmonary clinician reviews each `Review` line before it becomes a live searchable medication.
+
 ## Catalog workflow
 
 1. Add the medication product and device details.
