@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 export type CoverageState =
   | "Preferred"
   | "Preferred + PA"
@@ -2129,6 +2129,7 @@ export const PulmonaryFormularyDashboard = () => {
   const [planFilter, setPlanFilter] = useState<"all" | PlanKey>("all");
   const [view, setView] = useState<"medications" | "plans">("medications");
   const [selected, setSelected] = useState<Medication | null>(medications[0]);
+  const medicationDetailRef = useRef<HTMLElement | null>(null);
   const [apiConnected, setApiConnected] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [insurerQuery, setInsurerQuery] = useState("");
@@ -2191,6 +2192,15 @@ export const PulmonaryFormularyDashboard = () => {
       window.clearTimeout(timeout);
     };
   }, [medicareQuery]);
+  const selectMedication = (medication: Medication) => {
+    setSelected(medication);
+    window.requestAnimationFrame(() => {
+      medicationDetailRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return medications.filter((med) => {
@@ -2330,6 +2340,14 @@ export const PulmonaryFormularyDashboard = () => {
                         onMouseDown={(event) => event.preventDefault()}
                         onClick={() => {
                           setQuery(option);
+                          const medication = medications.find(
+                            (item) =>
+                              item.generic === option ||
+                              item.brands
+                                .split(/[,;]/)
+                                .some((brand) => brand.trim() === option),
+                          );
+                          if (medication) selectMedication(medication);
                           setSearchFocused(false);
                         }}
                         className="flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left text-sm font-semibold text-[#204341] transition hover:bg-[#eaf5f2] focus:bg-[#eaf5f2] focus:outline-none"
@@ -2797,7 +2815,7 @@ export const PulmonaryFormularyDashboard = () => {
                 {results.map((med) => (
                   <button
                     key={med.generic}
-                    onClick={() => setSelected(med)}
+                    onClick={() => selectMedication(med)}
                     aria-pressed={activeSelected?.generic === med.generic}
                     className={`w-full px-4 py-4 text-left transition hover:bg-[#f6faf9] focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#55bda8] sm:px-5 ${activeSelected?.generic === med.generic ? "bg-[#edf7f4]" : "bg-white"}`}
                   >
@@ -2859,7 +2877,7 @@ export const PulmonaryFormularyDashboard = () => {
               </div>
             </div>
 
-            <aside className="order-first h-fit rounded-2xl border border-[#d8e5e3] bg-white p-5 shadow-sm xl:order-none xl:sticky xl:top-5">
+            <aside ref={medicationDetailRef} className="order-first h-fit scroll-mt-4 rounded-2xl border border-[#d8e5e3] bg-white p-5 shadow-sm xl:order-none xl:sticky xl:top-5">
               {activeSelected ? (
                 <>
                   <div className="flex items-start justify-between gap-3">
@@ -3010,7 +3028,7 @@ export const PulmonaryFormularyDashboard = () => {
                                         onClick={() => {
                                           setQuery("");
                                           setBranch(alternative.branch);
-                                          setSelected(alternative);
+                                          selectMedication(alternative);
                                         }}
                                         className="rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] transition hover:bg-[#e5f3f0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55bda8]"
                                       >
