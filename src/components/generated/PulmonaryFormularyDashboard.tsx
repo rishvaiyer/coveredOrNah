@@ -73,7 +73,7 @@ export const plans: Array<{
 }> = [
   {
     key: "horizonMarketplace",
-    short: "Horizon NJ",
+    short: "Horizon Marketplace",
     name: "Horizon BCBSNJ Marketplace",
     region: "NJ",
     updated: "Aug 2026",
