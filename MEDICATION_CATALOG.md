@@ -10,20 +10,20 @@ Status labels:
 
 Every new item requires product-level details where applicable: brand/generic, strength, device, inhaler versus nebulizer, and official payer source. Do not treat this document as a prescribing guide.
 
-## Live catalog - 76 medications
+## Live catalog - 85 medications
 
 | Area | Live medications |
 | --- | --- |
 | Rescue inhalers | Albuterol HFA; albuterol nebulizer solution; levalbuterol |
-| Long-acting bronchodilators | Arformoterol; formoterol; salmeterol |
-| Anticholinergics | Ipratropium; tiotropium generic capsule-inhaler; Spiriva HandiHaler / Respimat; Incruse Ellipta |
-| Combination and triple inhalers | Ipratropium/albuterol; Anoro Ellipta; tiotropium/olodaterol; Trelegy Ellipta; Breztri Aerosphere |
+| Long-acting bronchodilators | Arformoterol; formoterol; salmeterol; olodaterol (Striverdi Respimat) |
+| Anticholinergics | Ipratropium; tiotropium generic capsule-inhaler; Spiriva HandiHaler / Respimat; Incruse Ellipta; aclidinium (Tudorza Pressair); revefenacin (Yupelri nebulizer) |
+| Combination and triple inhalers | Ipratropium/albuterol; Anoro Ellipta; tiotropium/olodaterol; glycopyrrolate/formoterol (Bevespi); Trelegy Ellipta; Breztri Aerosphere |
 | COPD oral/nebulized therapy | Roflumilast; ensifentrine |
-| Inhaled corticosteroids | Budesonide inhalation; fluticasone furoate (Arnuity Ellipta); fluticasone propionate HFA; QVAR RediHaler; ciclesonide; mometasone |
-| ICS/LABA combinations | Advair Diskus/HFA; Symbicort; mometasone/formoterol; fluticasone/vilanterol |
+| Inhaled corticosteroids | Budesonide nebulizer; Pulmicort Flexhaler; fluticasone furoate (Arnuity Ellipta); fluticasone propionate HFA; QVAR RediHaler; ciclesonide; mometasone |
+| ICS/LABA combinations | Advair Diskus/HFA; generic fluticasone/salmeterol and Wixela; Symbicort; generic budesonide/formoterol and Breyna; mometasone/formoterol; fluticasone/vilanterol; albuterol/budesonide (Airsupra) |
 | Leukotriene modifiers | Montelukast; zafirlukast; zileuton ER |
 | Systemic steroids | Prednisone; prednisolone |
-| Asthma biologics | Dupilumab; benralizumab; mepolizumab; tezepelumab; omalizumab |
+| Asthma biologics | Dupilumab; benralizumab; mepolizumab; reslizumab (Cinqair); tezepelumab; omalizumab |
 | Interstitial lung disease | Nintedanib; pirfenidone |
 | Pulmonary hypertension | Ambrisentan; bosentan; sildenafil; tadalafil; inhaled treprostinil; selexipag; riociguat; sotatercept-csrk |
 | CF / inhaled anti-infectives | Tobramycin inhalation; aztreonam inhalation; dornase alfa; elexacaftor/tezacaftor/ivacaftor |
@@ -33,22 +33,13 @@ Every new item requires product-level details where applicable: brand/generic, s
 
 ### COPD and asthma inhalers
 
-- [ ] Aclidinium (Tudorza Pressair) - `Next`
-- [ ] Revefenacin (Yupelri nebulizer) - `Next`
 - [ ] Glycopyrrolate inhaler - `Next`
-- [ ] Olodaterol (Striverdi Respimat) - `Next`
 - [ ] Indacaterol (Arcapta Neohaler) - `Review`
-- [ ] Glycopyrrolate/formoterol (Bevespi Aerosphere) - `Next`
 - [ ] Aclidinium/formoterol (Duaklir Pressair) - `Review`
-- [ ] Fluticasone/salmeterol generic and Wixela Inhub as distinct products - `Next`
-- [ ] Budesonide/formoterol generic and Breyna as distinct products - `Next`
-- [ ] Airsupra - `Next`
 - [ ] Flunisolide inhalation - `Review`
-- [ ] Pulmicort Flexhaler as a product distinct from budesonide nebulizer - `Next`
 
 ### Severe asthma and allergy
 
-- [ ] Reslizumab (Cinqair) - `Next`
 - [ ] Epinephrine nasal spray / other rescue-anaphylaxis products - `Review`
 
 ### Pulmonary hypertension
