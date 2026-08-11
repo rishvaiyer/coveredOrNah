@@ -1,0 +1,60 @@
+FORMULARY FINDER - MISSING PULMONARY MEDICINES CHECKLIST
+
+Status
+- Live: searchable in the dashboard.
+- Next: add product, device/form, and official formulary evidence.
+- Review: relevant for selected pulmonary subspecialty workflows; validate before adding.
+
+CURRENTLY LIVE
+- 85 searchable pulmonary and common-clinic medications.
+- Recent additions: Arnuity Ellipta, Airsupra, Bevespi, Yupelri, Wixela/generic fluticasone-salmeterol, Striverdi Respimat, Tudorza Pressair, Pulmicort Flexhaler, Breyna/generic budesonide-formoterol, and Cinqair.
+
+NEXT - COPD AND ASTHMA INHALERS
+- Glycopyrrolate inhaler
+- Indacaterol (Arcapta Neohaler) - Review
+- Aclidinium/formoterol (Duaklir Pressair) - Review
+- Flunisolide inhalation - Review
+
+NEXT - SEVERE ASTHMA AND ALLERGY
+- Epinephrine nasal spray and other rescue-anaphylaxis products - Review
+
+NEXT - PULMONARY HYPERTENSION
+- Macitentan (Opsumit)
+- Macitentan/tadalafil (Opsynvi)
+- Oral treprostinil (Orenitram)
+- IV/subcutaneous treprostinil (Remodulin) - Review
+- Epoprostenol products - Review
+- Iloprost (Ventavis) - Review
+- Inhaled treprostinil DPI, separate from solution
+
+NEXT - CYSTIC FIBROSIS, BRONCHIECTASIS, AND AIRWAY CLEARANCE
+- Ivacaftor (Kalydeco)
+- Lumacaftor/ivacaftor (Orkambi)
+- Tezacaftor/ivacaftor (Symdeko)
+- Vanzacaftor/tezacaftor/deutivacaftor (Alyftrek)
+- Hypertonic saline inhalation
+- Acetylcysteine inhalation
+- Colistimethate inhalation - Review
+- Amikacin liposome inhalation (Arikayce)
+
+NEXT - ILD AND PULMONARY VASCULAR ADJUNCTS
+- Mycophenolate mofetil - Review
+- Azathioprine - Review
+- Rituximab - Review
+- Inhaled nitric oxide products - Review
+
+SPECIALTY AUDIT BEFORE CLAIMING COMPLETE OUTPATIENT SCOPE
+- Product-specific inhaler strengths and devices for all ICS, LABA, LAMA, ICS/LABA, and triple therapies.
+- PAH infusion products and hospital-administered therapies.
+- NTM and resistant-airway infection regimens.
+- ILD immunosuppressants and transplant workflows.
+- Sleep medicine/PAP-adjacent medicines, only if that service is included.
+
+RULES
+- Keep inhaler, nebulizer, oral, injection, infusion, and hospital-administered products distinct.
+- Device, strength, route, brand, and generic can have different coverage.
+- Add an official payer source before presenting a covered/not-covered result.
+- Unsourced plan/product combinations are Unconfirmed, never a denial.
+
+CANONICAL MARKDOWN TRACKER
+MEDICATION_CATALOG.md
