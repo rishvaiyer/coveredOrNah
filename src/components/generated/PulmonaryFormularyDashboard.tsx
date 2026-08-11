@@ -1491,6 +1491,13 @@ const coverage = (
 const planCoverageOverrides: Partial<
   Record<PlanKey, Record<string, Coverage>>
 > = {
+  oxfordFreedom: {
+    "Fluticasone furoate": coverage(
+      "Tier 1",
+      ["QL"],
+      "Arnuity Ellipta entry on the Oxford/UHC commercial PDL.",
+    ),
+  },
   horizonMarketplace: {
     "Albuterol HFA": coverage("Tier 1", ["QL"]),
     "Albuterol nebulizer solution": coverage("Tier 1"),
@@ -1883,6 +1890,7 @@ const planCoverageOverrides: Partial<
 export const coverageFor = (medication: Medication, plan: PlanKey): Coverage => {
   const coveragePlan = plan === "oxfordFreedom" ? "uhcCommercial" : plan;
   return (
+    planCoverageOverrides[plan]?.[medication.generic] ??
     planCoverageOverrides[coveragePlan]?.[medication.generic] ??
     medication.coverage[coveragePlan]
   );
