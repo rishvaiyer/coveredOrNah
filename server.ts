@@ -66,6 +66,32 @@ app.get("/api/medicare/plans", async (request, response) => {
   } catch { response.status(503).json({ error: "Medicare plan index is temporarily unavailable." }); }
 });
 
+app.get("/api/medicare/coverage", async (request, response) => {
+  if (!pool) return response.status(503).json({ error: "Medicare coverage data is not configured yet." });
+  const contractId = String(request.query.contractId || "").trim().toUpperCase().slice(0, 12);
+  const planId = String(request.query.planId || "").trim().slice(0, 8);
+  const segmentId = String(request.query.segmentId || "000").trim().slice(0, 8);
+  const medication = String(request.query.medication || "").trim().slice(0, 120);
+  if (!contractId || !planId || !medication) {
+    return response.status(400).json({ error: "contractId, planId, and medication are required." });
+  }
+  try {
+    const latest = await pool.query<{ id: number; source_version: string; imported_at: string }>("SELECT id, source_version, imported_at FROM formulary_imports WHERE status = 'succeeded' ORDER BY imported_at DESC LIMIT 1");
+    if (!latest.rowCount) return response.status(404).json({ error: "No successful Medicare source import is available." });
+    const plan = await pool.query<{ formulary_id: string; plan_name: string }>("SELECT formulary_id, plan_name FROM medicare_plans WHERE import_id = $1 AND contract_id = $2 AND plan_id = $3 AND segment_id = $4 LIMIT 1", [latest.rows[0].id, contractId, planId, segmentId]);
+    if (!plan.rowCount) return response.status(404).json({ error: "Medicare plan was not found in the current source." });
+    const rxNormResponse = await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${encodeURIComponent(medication)}&search=2`);
+    if (!rxNormResponse.ok) throw new Error("RxNorm lookup unavailable");
+    const rxNormPayload = await rxNormResponse.json() as { idGroup?: { rxnormId?: string[] } };
+    const rxcuis = rxNormPayload.idGroup?.rxnormId?.slice(0, 10) ?? [];
+    if (!rxcuis.length) return response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis: [], coverage: [] });
+    const coverage = await pool.query<{ tier_level: number | null; prior_authorization: boolean; quantity_limit: boolean; quantity_limit_amount: string | null; quantity_limit_days: string | null; step_therapy: boolean }>("SELECT DISTINCT tier_level, prior_authorization, quantity_limit, quantity_limit_amount, quantity_limit_days, step_therapy FROM medicare_formulary_drugs WHERE import_id = $1 AND formulary_id = $2 AND rxcui = ANY($3::text[]) ORDER BY tier_level NULLS LAST", [latest.rows[0].id, plan.rows[0].formulary_id, rxcuis]);
+    response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis, coverage: coverage.rows });
+  } catch {
+    response.status(503).json({ error: "Medicare coverage lookup is temporarily unavailable." });
+  }
+});
+
 app.get("/api/pa-form/:plan", async (request, response) => {
   const planKey = String(request.params.plan || "") as PlanKey;
   const form = paFormDownloads.get(planKey);
