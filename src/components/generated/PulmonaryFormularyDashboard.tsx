@@ -217,6 +217,49 @@ export const plans: Array<{
     priorAuthorizationLabel: "Open Clover drug PA form",
   },
 ];
+
+const commercialPlanRoutes = [
+  {
+    carrier: "Horizon BCBSNJ",
+    prompt: "Direct Access POS: use the pharmacy benefit or drug-list name on the card.",
+    action: "Open Horizon member drug lookup",
+    url: "https://www.horizonblue.com/",
+  },
+  {
+    carrier: "UHC / Oxford",
+    prompt: "Freedom: choose the PDL variant shown on the plan/SBC, such as Access, Traditional, or Advantage.",
+    action: "Open UHC / Oxford drug lists",
+    url: "https://www.uhcprovider.com/en/resource-library/drug-lists-pharmacy.html?CID=none",
+    baseline: "oxfordFreedom" as PlanKey,
+  },
+  {
+    carrier: "Aetna",
+    prompt: "Choose the plan year and pharmacy plan name from the card or benefits document.",
+    action: "Find an Aetna medication",
+    url: "https://www.aetna.com/individuals-families/find-a-medication.html",
+  },
+  {
+    carrier: "Cigna",
+    prompt: "Choose the employer drug-list family, such as Standard, Value, Performance, or Advantage.",
+    action: "Open Cigna drug lists",
+    url: "https://www.cigna.com/individuals-families/member-guide/prescription-drug-lists",
+    baseline: "cignaNationalPreferred" as PlanKey,
+  },
+  {
+    carrier: "AmeriHealth NJ",
+    prompt: "Choose Value, Select, or Individual & Family from the plan/SBC.",
+    action: "Open AmeriHealth formulary",
+    url: "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/value-formulary.html",
+    baseline: "amerihealthNj" as PlanKey,
+  },
+  {
+    carrier: "Oscar NJ",
+    prompt: "Use the plan name or HIOS/product identifier from the enrollment card or benefits page.",
+    action: "Open Oscar drug check",
+    url: "https://www.hioscar.com/care-options",
+    baseline: "oscarNjIndividual" as PlanKey,
+  },
+];
 export type SummitNjInsurer = {
   name: string;
   category: string;
@@ -2451,6 +2494,49 @@ export const PulmonaryFormularyDashboard = () => {
                   )}
                 </div>
               )}
+            </section>
+            <section className="mb-5 overflow-hidden rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">
+              <div className="border-b border-[#e1ecea] px-5 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                  Commercial plan finder
+                </p>
+                <h2 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
+                  Match the plan’s drug list before searching.
+                </h2>
+                <p className="mt-1 text-sm leading-5 text-[#55716f]">
+                  Carrier names are not enough. Use the plan or pharmacy-benefit name on the card, then open its official lookup. No member ID is stored here.
+                </p>
+              </div>
+              <div className="grid gap-3 p-5 sm:grid-cols-2 sm:p-6 xl:grid-cols-3">
+                {commercialPlanRoutes.map((route) => (
+                  <article key={route.carrier} className="rounded-xl border border-[#d8e6e3] bg-[#f9fcfb] p-4">
+                    <h3 className="text-sm font-bold text-[#173f41]">{route.carrier}</h3>
+                    <p className="mt-1 min-h-10 text-xs leading-5 text-[#5c7775]">{route.prompt}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <a
+                        href={route.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0d6664]"
+                      >
+                        {route.action}
+                      </a>
+                      {route.baseline && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPlanFilter(route.baseline!);
+                            setView("medications");
+                          }}
+                          className="rounded-full border border-[#b8d7d1] px-3 py-1.5 text-xs font-bold text-[#0d6664]"
+                        >
+                          Use sourced baseline
+                        </button>
+                      )}
+                    </div>
+                  </article>
+                ))}
+              </div>
             </section>
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
