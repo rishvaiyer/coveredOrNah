@@ -2106,6 +2106,14 @@ export const PulmonaryFormularyDashboard = () => {
       option.toLowerCase().includes(query.trim().toLowerCase()),
     )
     .slice(0, 12);
+  const medicareAutocompleteOptions = Array.from(
+    new Set(
+      medicarePlans.flatMap((plan) => [
+        plan.plan_name,
+        `${plan.contract_id}-${plan.plan_id}`,
+      ]),
+    ),
+  ).slice(0, 12);
   return (
     <main className="min-h-screen w-full bg-[#f3f7f7] text-[#102a2b]">
       <header className="border-b border-[#dbe7e5] bg-white/95 px-4 py-3 backdrop-blur sm:px-6 lg:px-10">
@@ -2284,13 +2292,25 @@ export const PulmonaryFormularyDashboard = () => {
                   <input
                     value={medicareQuery}
                     onChange={(event) => {
-                      setMedicareQuery(event.target.value);
-                      setSelectedMedicarePlan(null);
+                      const nextValue = event.target.value;
+                      const exactPlan = medicarePlans.find(
+                        (plan) =>
+                          plan.plan_name === nextValue ||
+                          `${plan.contract_id}-${plan.plan_id}` === nextValue,
+                      );
+                      setMedicareQuery(nextValue);
+                      setSelectedMedicarePlan(exactPlan ?? null);
                     }}
+                    list="medicare-plan-suggestions"
                     className="mt-2 h-12 w-full rounded-xl border border-[#bfdcd5] bg-white px-4 text-sm outline-none ring-2 ring-transparent focus:ring-[#55bda8]"
                     placeholder="Try Humana, Wellcare, H5216-319..."
                     autoComplete="off"
                   />
+                  <datalist id="medicare-plan-suggestions">
+                    {medicareAutocompleteOptions.map((option) => (
+                      <option key={option} value={option} />
+                    ))}
+                  </datalist>
                 </label>
                 <div className="rounded-xl bg-white px-4 py-3 text-xs leading-5 text-[#55716f] ring-1 ring-[#cce4de]">
                   <span className="font-bold text-[#173f41]">Card check:</span> carrier + plan name/ID<br />
