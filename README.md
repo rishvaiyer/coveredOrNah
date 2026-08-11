@@ -2,6 +2,8 @@
 made for my mom<3
 Live app: https://formulary-finder-pilot-production.up.railway.app/
 
+![Formulary Finder interface](docs/screenshots/formulary-finder-home.png)
+
 Fast, source-linked formulary lookup for nurses and clinicians. The first pilot focuses on pulmonary and common primary-care medications across:
 
 - New York Medicaid NYRx
