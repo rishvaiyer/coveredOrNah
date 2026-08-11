@@ -1996,6 +1996,26 @@ export const PulmonaryFormularyDashboard = () => {
   const [apiConnected, setApiConnected] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [insurerQuery, setInsurerQuery] = useState("");
+  const [medicareQuery, setMedicareQuery] = useState("");
+  const [medicarePlans, setMedicarePlans] = useState<
+    Array<{
+      contract_id: string;
+      plan_id: string;
+      segment_id: string;
+      plan_name: string;
+      formulary_id: string;
+      county_codes: string[];
+    }>
+  >([]);
+  const [medicarePlanLoading, setMedicarePlanLoading] = useState(false);
+  const [selectedMedicarePlan, setSelectedMedicarePlan] = useState<{
+    contract_id: string;
+    plan_id: string;
+    segment_id: string;
+    plan_name: string;
+    formulary_id: string;
+    county_codes: string[];
+  } | null>(null);
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/health", { signal: controller.signal })
@@ -2007,6 +2027,34 @@ export const PulmonaryFormularyDashboard = () => {
       .catch(() => setApiConnected(false));
     return () => controller.abort();
   }, []);
+  useEffect(() => {
+    const search = medicareQuery.trim();
+    if (search.length < 2) {
+      setMedicarePlans([]);
+      setMedicarePlanLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setMedicarePlanLoading(true);
+    const timeout = window.setTimeout(() => {
+      fetch(`/api/medicare/plans?q=${encodeURIComponent(search)}&state=NJ`, {
+        signal: controller.signal,
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error("Medicare plans unavailable");
+          return response.json();
+        })
+        .then((payload) => setMedicarePlans(payload.plans ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") setMedicarePlans([]);
+        })
+        .finally(() => setMedicarePlanLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [medicareQuery]);
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return medications.filter((med) => {
@@ -2216,11 +2264,86 @@ export const PulmonaryFormularyDashboard = () => {
 
         {view === "plans" ? (
           <>
+            <section className="mb-5 overflow-hidden rounded-2xl border border-[#b9ddd5] bg-[#eef8f5] shadow-sm">
+              <div className="border-b border-[#cce5df] bg-white px-5 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                  Medicare plan finder
+                </p>
+                <h2 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
+                  Medicare is not one drug plan.
+                </h2>
+                <p className="mt-1 max-w-3xl text-sm leading-5 text-[#55716f]">
+                  Use the carrier and plan name or ID on the patient’s insurance card. If they have Original Medicare, ask for their separate Part D drug-plan card.
+                </p>
+              </div>
+              <div className="grid gap-4 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+                <label className="block">
+                  <span className="text-xs font-bold text-[#284e4d]">
+                    Search carrier, plan name, or plan ID
+                  </span>
+                  <input
+                    value={medicareQuery}
+                    onChange={(event) => {
+                      setMedicareQuery(event.target.value);
+                      setSelectedMedicarePlan(null);
+                    }}
+                    className="mt-2 h-12 w-full rounded-xl border border-[#bfdcd5] bg-white px-4 text-sm outline-none ring-2 ring-transparent focus:ring-[#55bda8]"
+                    placeholder="Try Humana, Wellcare, H5216-319..."
+                    autoComplete="off"
+                  />
+                </label>
+                <div className="rounded-xl bg-white px-4 py-3 text-xs leading-5 text-[#55716f] ring-1 ring-[#cce4de]">
+                  <span className="font-bold text-[#173f41]">Card check:</span> carrier + plan name/ID<br />
+                  Member ID is not needed here.
+                </div>
+              </div>
+              {(medicarePlanLoading || medicarePlans.length > 0 || selectedMedicarePlan) && (
+                <div className="border-t border-[#cce5df] bg-white px-5 py-4 sm:px-6">
+                  {medicarePlanLoading ? (
+                    <p className="text-sm font-semibold text-[#55716f]">Finding NJ Medicare plans…</p>
+                  ) : selectedMedicarePlan ? (
+                    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                      <div>
+                        <p className="text-sm font-bold text-[#0d6664]">Exact plan selected</p>
+                        <p className="text-sm font-semibold text-[#173f41]">{selectedMedicarePlan.plan_name}</p>
+                        <p className="mt-1 text-xs text-[#55716f]">{selectedMedicarePlan.contract_id}-{selectedMedicarePlan.plan_id} · Formulary {selectedMedicarePlan.formulary_id}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedMedicarePlan(null)}
+                        className="w-fit rounded-full border border-[#b8d7d1] px-3 py-1.5 text-xs font-bold text-[#0d6664]"
+                      >
+                        Choose another
+                      </button>
+                    </div>
+                  ) : medicarePlans.length > 0 ? (
+                    <div>
+                      <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-[#55716f]">Choose the exact plan from the card</p>
+                      <div className="grid gap-2 lg:grid-cols-2">
+                        {medicarePlans.slice(0, 8).map((plan) => (
+                          <button
+                            type="button"
+                            key={`${plan.contract_id}-${plan.plan_id}-${plan.segment_id}`}
+                            onClick={() => setSelectedMedicarePlan(plan)}
+                            className="rounded-xl border border-[#d4e6e2] bg-[#f9fcfb] px-4 py-3 text-left transition hover:border-[#75bdb0] hover:bg-[#eef8f5] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
+                          >
+                            <span className="block text-sm font-bold text-[#173f41]">{plan.plan_name}</span>
+                            <span className="mt-1 block text-xs text-[#5c7775]">{plan.contract_id}-{plan.plan_id} · Formulary {plan.formulary_id}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-sm text-[#55716f]">No NJ Medicare plan matched that search. Check the card’s carrier and plan ID.</p>
+                  )}
+                </div>
+              )}
+            </section>
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
-                <h2 className="text-lg font-bold">Choose a plan to search medicines</h2>
+                <h2 className="text-lg font-bold">Commercial and named-plan shortcuts</h2>
                 <p className="text-xs text-[#6b8180]">
-                  Select a plan card to see its medications, coverage alternatives, and PA actions.
+                  Select a sourced plan family to see its medications, coverage alternatives, and PA actions.
                 </p>
               </div>
               <div className="flex items-center gap-2">
