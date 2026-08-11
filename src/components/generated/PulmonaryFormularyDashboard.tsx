@@ -221,9 +221,9 @@ export const plans: Array<{
 const commercialPlanRoutes = [
   {
     carrier: "Horizon BCBSNJ",
-    prompt: "Direct Access POS: use the pharmacy benefit or drug-list name on the card.",
-    action: "Open Horizon member drug lookup",
-    url: "https://www.horizonblue.com/",
+    prompt: "Direct Access POS: use the pharmacy benefit or drug-list name on the card. Marketplace is a separate drug list.",
+    action: "Check Horizon plan in MyPrime",
+    url: "https://www.myprime.com/",
   },
   {
     carrier: "UHC / Oxford",
