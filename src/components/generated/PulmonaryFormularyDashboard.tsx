@@ -34,6 +34,7 @@ export type PlanKey =
   | "pama"
   | "horizonMarketplace"
   | "uhcCommercial"
+  | "oxfordFreedom"
   | "aetnaMedicareHmo"
   | "amerihealthNj"
   | "cignaNationalPreferred"
@@ -91,6 +92,18 @@ export const plans: Array<{
       "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
     priorAuthorizationLabel: "Download PA form",
     priorAuthorizationDownload: true,
+  },
+  {
+    key: "oxfordFreedom",
+    short: "Oxford Freedom",
+    name: "Oxford Freedom Network commercial PDL baseline",
+    region: "NJ / NY",
+    updated: "May 1, 2026",
+    source:
+      "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
+    priorAuthorizationUrl:
+      "https://www.uhcprovider.com/en/prior-auth-advance-notification/prior-auth-specialty-drugs/prior-auth-pharmacy-medical-necessity.html",
+    priorAuthorizationLabel: "Open Oxford / UHC PA route",
   },
   {
     key: "aetnaMedicareHmo",
@@ -656,6 +669,10 @@ const c = (
     state: uhcCommercial,
     flags: uhcCommercialFlags,
   },
+  oxfordFreedom: {
+    state: uhcCommercial,
+    flags: uhcCommercialFlags,
+  },
   aetnaMedicareHmo: {
     state: aetnaMedicareHmo,
     flags: aetnaMedicareHmoFlags,
@@ -886,6 +903,14 @@ export const medications: Medication[] = [
     branch: "Inhaled corticosteroids",
     use: "ICS controller",
     coverage: c("Not on PDL", "Tier 1", "Preferred", [], ["QL"], ["QL"]),
+  },
+  {
+    generic: "Fluticasone furoate",
+    brands: "Arnuity Ellipta",
+    branch: "Inhaled corticosteroids",
+    use: "Once-daily ICS controller for asthma",
+    productDetails: "Ellipta dry-powder inhaler: 50, 100, or 200 mcg per blister.",
+    coverage: c("Source loading", "Source loading", "Source loading"),
   },
   {
     generic: "Fluticasone propionate HFA 44 mcg",
@@ -1491,6 +1516,7 @@ const planCoverageOverrides: Partial<
     ]),
     Roflumilast: coverage("Tier 1", ["QL"]),
     "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "Fluticasone furoate": coverage("Tier 2", ["QL"], "Arnuity Ellipta 50, 100, and 200 mcg entries."),
     "QVAR RediHaler (brand)": coverage("Tier 2"),
     Mometasone: coverage("Tier 2", ["QL"]),
     "Advair Diskus / HFA (brand)": coverage(
@@ -1587,6 +1613,7 @@ const planCoverageOverrides: Partial<
       [],
       "Listed under Medicare Part B/D coverage categories.",
     ),
+    "Fluticasone furoate": coverage("Tier 3", ["QL"], "Arnuity Ellipta 50, 100, and 200 mcg entries."),
     Ciclesonide: coverage("Tier 4", ["QL"]),
     "Advair Diskus / HFA (brand)": coverage(
       "Tier varies",
@@ -1631,6 +1658,7 @@ const planCoverageOverrides: Partial<
     Roflumilast: coverage("Generic"),
     Ensifentrine: coverage("Non-formulary", ["QL"]),
     "Budesonide inhalation": coverage("Generic"),
+    "Fluticasone furoate": coverage("Preferred brand", [], "Arnuity Ellipta entry."),
     "Fluticasone propionate HFA 44 mcg": coverage("Non-formulary"),
     "QVAR RediHaler (brand)": coverage("Non-formulary"),
     Ciclesonide: coverage("Non-formulary"),
@@ -1689,6 +1717,7 @@ const planCoverageOverrides: Partial<
     "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
     Roflumilast: coverage("Tier 3", ["PA"]),
     "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "Fluticasone furoate": coverage("Tier 2", ["QL"], "Arnuity Ellipta entry."),
     "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
     "Advair Diskus / HFA (brand)": coverage("Tier 1", ["QL"], "Generic fluticasone-salmeterol entry."),
     "Symbicort (brand)": coverage("Tier 1", ["QL"], "Generic budesonide-formoterol entry; brand status can differ."),
@@ -1767,6 +1796,7 @@ const planCoverageOverrides: Partial<
     "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
     Roflumilast: coverage("Tier 3", ["QL"]),
     "Budesonide inhalation": coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    "Fluticasone furoate": coverage("Tier 3", ["QL"], "Arnuity Ellipta entry."),
     "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL"]),
     "Symbicort (brand)": coverage("Tier 3", ["QL"]),
     "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
@@ -1823,6 +1853,7 @@ const planCoverageOverrides: Partial<
       "250 mcg is limited to 56 tablets per year; 500 mcg is limited to 30 tablets per 30 days.",
     ),
     "Budesonide inhalation": coverage("Tier 4", [], "Part B versus Part D determination applies."),
+    "Fluticasone furoate": coverage("Tier 3", ["QL"], "Arnuity Ellipta entry."),
     Ciclesonide: coverage("Tier 4", ["QL"], "Alvesco inhaler entries."),
     "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL"]),
     "Symbicort (brand)": coverage("Tier 3", ["QL"], "Budesonide-formoterol product entries."),
@@ -1849,8 +1880,13 @@ const planCoverageOverrides: Partial<
   },
 };
 
-export const coverageFor = (medication: Medication, plan: PlanKey): Coverage =>
-  planCoverageOverrides[plan]?.[medication.generic] ?? medication.coverage[plan];
+export const coverageFor = (medication: Medication, plan: PlanKey): Coverage => {
+  const coveragePlan = plan === "oxfordFreedom" ? "uhcCommercial" : plan;
+  return (
+    planCoverageOverrides[coveragePlan]?.[medication.generic] ??
+    medication.coverage[coveragePlan]
+  );
+};
 
 const branches = [
   "All areas",

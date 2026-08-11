@@ -80,11 +80,16 @@ app.get("/api/medicare/coverage", async (request, response) => {
     if (!latest.rowCount) return response.status(404).json({ error: "No successful Medicare source import is available." });
     const plan = await pool.query<{ formulary_id: string; plan_name: string }>("SELECT formulary_id, plan_name FROM medicare_plans WHERE import_id = $1 AND contract_id = $2 AND plan_id = $3 AND segment_id = $4 LIMIT 1", [latest.rows[0].id, contractId, planId, segmentId]);
     if (!plan.rowCount) return response.status(404).json({ error: "Medicare plan was not found in the current source." });
-    const rxNormResponse = await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${encodeURIComponent(medication)}&search=2`);
-    if (!rxNormResponse.ok) throw new Error("RxNorm lookup unavailable");
-    const rxNormPayload = await rxNormResponse.json() as { idGroup?: { rxnormId?: string[] } };
-    const rxcuis = rxNormPayload.idGroup?.rxnormId?.slice(0, 10) ?? [];
-    if (!rxcuis.length) return response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis: [], coverage: [] });
+    const searchTerms = [...new Set([medication, ...medication.split(/[ /(),-]+/).filter((term) => term.length >= 4)])].slice(0, 6);
+    const rxNormResults = await Promise.all(searchTerms.map(async (term) => {
+      const lookup = await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${encodeURIComponent(term)}&search=2`);
+      if (!lookup.ok) throw new Error("RxNorm lookup unavailable");
+      const payload = await lookup.json() as { idGroup?: { rxnormId?: string[] } };
+      return { term, rxcuis: payload.idGroup?.rxnormId ?? [] };
+    }));
+    const rxcuis = [...new Set(rxNormResults.flatMap((result) => result.rxcuis))].slice(0, 10);
+    const matchedTerms = rxNormResults.filter((result) => result.rxcuis.length).map((result) => result.term);
+    if (!rxcuis.length) return response.json({ source: latest.rows[0], plan: plan.rows[0], medication, matchedTerms, rxcuis: [], coverage: [] });
     const relatedResponses = await Promise.all(
       rxcuis.map(async (rxcui) => {
         const related = await fetch(`https://rxnav.nlm.nih.gov/REST/rxcui/${rxcui}/related.json?tty=SCD+SBD`);
@@ -95,7 +100,7 @@ app.get("/api/medicare/coverage", async (request, response) => {
     );
     const productRxcuis = [...new Set([...rxcuis, ...relatedResponses.flat()])];
     const coverage = await pool.query<{ tier_level: number | null; prior_authorization: boolean; quantity_limit: boolean; quantity_limit_amount: string | null; quantity_limit_days: string | null; step_therapy: boolean }>("SELECT DISTINCT tier_level, prior_authorization, quantity_limit, quantity_limit_amount, quantity_limit_days, step_therapy FROM medicare_formulary_drugs WHERE import_id = $1 AND formulary_id = $2 AND rxcui = ANY($3::text[]) ORDER BY tier_level NULLS LAST", [latest.rows[0].id, plan.rows[0].formulary_id, productRxcuis]);
-    response.json({ source: latest.rows[0], plan: plan.rows[0], medication, rxcuis, productRxcuiCount: productRxcuis.length, coverage: coverage.rows });
+    response.json({ source: latest.rows[0], plan: plan.rows[0], medication, matchedTerms, rxcuis, productRxcuiCount: productRxcuis.length, coverage: coverage.rows });
   } catch {
     response.status(503).json({ error: "Medicare coverage lookup is temporarily unavailable." });
   }
