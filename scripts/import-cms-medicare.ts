@@ -2,6 +2,11 @@ import { createReadStream } from "node:fs";
 import { createInterface } from "node:readline";
 import type { PoolClient } from "pg";
 import { pool } from "../db.js";
+import {
+  isEligibleCmsPlan,
+  normalizeCmsRow,
+  type CmsRow,
+} from "./cms-medicare-utils.js";
 
 const planFile = process.env.CMS_PLAN_FILE;
 const drugFile = process.env.CMS_DRUG_FILE;
@@ -16,8 +21,6 @@ if (!pool || !planFile || !drugFile) throw new Error("DATABASE_URL, CMS_PLAN_FIL
 if (!Number.isInteger(batchSize) || batchSize < 1 || batchSize > 1_000) throw new Error("CMS_IMPORT_BATCH_SIZE must be an integer between 1 and 1000.");
 if (states.size === 0 || pdpRegions.size === 0) throw new Error("CMS_STATES and CMS_PDP_REGION_CODES must contain at least one value.");
 
-type CmsRow = Record<string, string>;
-
 const requiredPlanHeaders = ["PLAN_SUPPRESSED_YN", "STATE", "PDP_REGION_CODE", "FORMULARY_ID", "CONTRACT_ID", "PLAN_ID", "SEGMENT_ID", "CONTRACT_NAME", "PLAN_NAME", "COUNTY_CODE", "MA_REGION_CODE"];
 const requiredDrugHeaders = ["FORMULARY_ID", "RXCUI", "NDC", "TIER_LEVEL_VALUE", "QUANTITY_LIMIT_YN", "QUANTITY_LIMIT_AMOUNT", "QUANTITY_LIMIT_DAYS", "PRIOR_AUTHORIZATION_YN", "STEP_THERAPY_YN", "SELECTED_DRUG_YN"];
 
@@ -29,7 +32,7 @@ async function forEachPipeRow(file: string, requiredHeaders: string[], onRow: (r
   for await (const line of input) {
     lineNumber += 1;
     if (!headers) {
-      headers = line.split("|");
+      headers = line.split("|").map((header) => header.trim());
       const missing = requiredHeaders.filter((header) => !headers!.includes(header));
       if (missing.length) throw new Error(`${file} is missing CMS headers: ${missing.join(", ")}`);
       continue;
@@ -37,7 +40,7 @@ async function forEachPipeRow(file: string, requiredHeaders: string[], onRow: (r
     if (!line) continue;
     const values = line.split("|");
     if (values.length > headers.length) throw new Error(`${file}:${lineNumber} has more columns than its CMS header.`);
-    await onRow(Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""])));
+    await onRow(normalizeCmsRow(headers, values));
   }
 
   if (!headers) throw new Error(`${file} is empty.`);
@@ -81,7 +84,7 @@ try {
 
   await forEachPipeRow(planFile, requiredPlanHeaders, async (row) => {
     const state = row.STATE.toUpperCase();
-    const eligible = row.PLAN_SUPPRESSED_YN !== "Y" && (states.has(state) || pdpRegions.has(row.PDP_REGION_CODE));
+    const eligible = isEligibleCmsPlan(row, states, pdpRegions);
     if (!eligible || !row.FORMULARY_ID) return;
     formularies.add(row.FORMULARY_ID);
     planRows.push([importId!, row.CONTRACT_ID, row.PLAN_ID, row.SEGMENT_ID || "000", row.CONTRACT_NAME, row.PLAN_NAME, row.FORMULARY_ID, asNullable(state), asNullable(row.COUNTY_CODE), asNullable(row.MA_REGION_CODE), asNullable(row.PDP_REGION_CODE)]);

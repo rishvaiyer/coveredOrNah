@@ -1,5 +1,5 @@
 {
-  "name": "covered-or-nah",
+  "name": "formulary-finder-pilot",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,7 +10,19 @@
     "preview": "vite preview",
     "test": "npm run build",
     "db:migrate": "tsx scripts/migrate.ts",
-    "cms:import": "tsx scripts/import-cms-medicare.ts"
+    "cms:import": "tsx scripts/import-cms-medicare.ts",
+    "cms:check": "tsx scripts/check-cms-medicare.ts",
+    "cms:test": "tsx --test scripts/cms-medicare-utils.test.ts",
+    "uhc:qhp:test": "tsx --test uhc-nj-qhp.test.ts",
+    "aetna:familycare:test": "tsx --test src/server-data/aetna-nj-familycare.test.ts",
+    "uhc:community:test": "tsx --test src/server-data/uhc-nj-community.test.ts",
+    "fidelis:nj:test": "tsx --test src/server-data/fidelis-nj-familycare.test.ts",
+    "formulary:gaps": "tsx scripts/audit-formulary-gaps.ts",
+    "formulary:gaps:test": "tsx --test scripts/audit-formulary-gaps.test.ts",
+    "horizon:classic:test": "tsx --test scripts/horizon-classic.test.ts",
+    "formulary-data": "tsx tools/public-formulary-cli/index.ts",
+    "formulary-data:typecheck": "tsc -p tools/public-formulary-cli/tsconfig.json",
+    "formulary-data:test": "tsx --test tools/public-formulary-cli/client.test.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",

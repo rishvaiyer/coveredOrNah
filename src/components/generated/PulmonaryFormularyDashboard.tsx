@@ -16,6 +16,7 @@ export type CoverageState =
   | "Generic"
   | "Low-cost generic"
   | "Preferred brand"
+  | "Listed in PDL"
   | "Non-preferred drug"
   | "Non-formulary";
 export type Restriction =
@@ -33,10 +34,13 @@ export type PlanKey =
   | "njuhc"
   | "pama"
   | "horizonMarketplace"
+  | "horizonClassic"
   | "uhcCommercial"
   | "oxfordFreedom"
   | "aetnaMedicareHmo"
   | "amerihealthNj"
+  | "amerihealthValue"
+  | "amerihealthSelect"
   | "cignaNationalPreferred"
   | "oscarNjIndividual"
   | "anthemNySelect"
@@ -44,7 +48,8 @@ export type PlanKey =
   | "humanaNj26408"
   | "bravenNjH0885"
   | "healthspringNj26096"
-  | "cloverNj2026";
+  | "cloverNj2026"
+  | "wellpointNjFamilyCare";
 export type Coverage = {
   state: CoverageState;
   flags?: Restriction[];
@@ -79,6 +84,17 @@ export const plans: Array<{
     updated: "Aug 2026",
     source:
       "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
+  },
+  {
+    key: "horizonClassic",
+    short: "Horizon Classic",
+    name: "Horizon BCBSNJ Classic Formulary",
+    region: "NJ",
+    updated: "Jul 1, 2026",
+    source:
+      "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/Commercial/5517-L_Horizon_Classic.pdf",
+    priorAuthorizationUrl: "https://www.horizonblue.com/providers/pharmacy",
+    priorAuthorizationLabel: "Open Horizon pharmacy PA route",
   },
   {
     key: "uhcCommercial",
@@ -126,6 +142,30 @@ export const plans: Array<{
     updated: "Jul 1, 2026",
     source:
       "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
+    priorAuthorizationUrl:
+      "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
+    priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    key: "amerihealthValue",
+    short: "AmeriHealth Value",
+    name: "AmeriHealth New Jersey Value Formulary",
+    region: "NJ",
+    updated: "Jul 1, 2026",
+    source:
+      "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-value-formulary-nj.pdf",
+    priorAuthorizationUrl:
+      "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
+    priorAuthorizationLabel: "Open PA route",
+  },
+  {
+    key: "amerihealthSelect",
+    short: "AmeriHealth Select",
+    name: "AmeriHealth New Jersey Select Formulary",
+    region: "NJ",
+    updated: "Jul 1, 2026",
+    source:
+      "https://amerihealth.com/pdfs/providers/pharmacy_information/select_drug/ah-select-drug-formulary-nj.pdf",
     priorAuthorizationUrl:
       "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
     priorAuthorizationLabel: "Open PA route",
@@ -216,17 +256,64 @@ export const plans: Array<{
     priorAuthorizationUrl: "https://cdrd.cvscaremarkmyd.com/CoverageDetermination.aspx?ClientID=51",
     priorAuthorizationLabel: "Open Clover drug PA form",
   },
+  {
+    key: "wellpointNjFamilyCare",
+    short: "Wellpoint FamilyCare",
+    name: "Wellpoint New Jersey FamilyCare PDL",
+    region: "NJ",
+    updated: "May 1, 2026",
+    source: "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json",
+    priorAuthorizationUrl: "https://www.provider.wellpoint.com/new-jersey-provider/member-eligibility-and-pharmacy/pharmacy-information",
+    priorAuthorizationLabel: "Open Wellpoint NJ pharmacy PA route",
+  },
 ];
+
+const exactMedicarePlanKeys = new Set<PlanKey>([
+  "aetnaMedicareHmo",
+  "wellcareNjH0913",
+  "humanaNj26408",
+  "bravenNjH0885",
+  "healthspringNj26096",
+  "cloverNj2026",
+]);
+
+export const primaryNjPlans = plans.filter(
+  (plan) => plan.region.includes("NJ") && plan.key !== "anthemNySelect",
+);
+
+const generalPdlReferenceKeys = new Set<PlanKey>([
+  "uhcCommercial",
+  "oxfordFreedom",
+  "cignaNationalPreferred",
+]);
+
+const referencePlans = primaryNjPlans.filter((plan) => !exactMedicarePlanKeys.has(plan.key));
+
+const planNameSuggestions = Array.from(
+  new Set(referencePlans.flatMap((plan) => [plan.name, plan.short])),
+).sort();
+
+const pharmacyBenefitSuggestions = [
+  "Commercial PDL",
+  "Medicare formulary",
+  "Advantage 3-Tier",
+  "Prime Therapeutics",
+  "Optum Rx",
+  "CVS Caremark",
+  "Express Scripts",
+].sort();
 
 const commercialPlanRoutes = [
   {
     carrier: "Horizon BCBSNJ",
+    intakeInsurer: "Horizon BCBSNJ",
     prompt: "Direct Access POS: use the pharmacy benefit or drug-list name on the card. Marketplace is a separate drug list.",
     action: "Check Horizon plan in MyPrime",
     url: "https://www.myprime.com/",
   },
   {
     carrier: "UHC / Oxford",
+    intakeInsurer: "UnitedHealthcare",
     prompt: "Freedom: choose the PDL variant shown on the plan/SBC, such as Access, Traditional, or Advantage.",
     action: "Open UHC / Oxford drug lists",
     url: "https://www.uhcprovider.com/en/resource-library/drug-lists-pharmacy.html?CID=none",
@@ -234,12 +321,14 @@ const commercialPlanRoutes = [
   },
   {
     carrier: "Aetna",
+    intakeInsurer: "Aetna",
     prompt: "Choose the plan year and pharmacy plan name from the card or benefits document.",
     action: "Find an Aetna medication",
     url: "https://www.aetna.com/individuals-families/find-a-medication.html",
   },
   {
     carrier: "Cigna",
+    intakeInsurer: "Cigna",
     prompt: "Choose the employer drug-list family, such as Standard, Value, Performance, or Advantage.",
     action: "Open Cigna drug lists",
     url: "https://www.cigna.com/individuals-families/member-guide/prescription-drug-lists",
@@ -247,6 +336,7 @@ const commercialPlanRoutes = [
   },
   {
     carrier: "AmeriHealth NJ",
+    intakeInsurer: "AmeriHealth / AmeriHealth Administrators",
     prompt: "Choose Value, Select, or Individual & Family from the plan/SBC.",
     action: "Open AmeriHealth formulary",
     url: "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/value-formulary.html",
@@ -254,6 +344,7 @@ const commercialPlanRoutes = [
   },
   {
     carrier: "Oscar NJ",
+    intakeInsurer: "Oscar Health",
     prompt: "Use the plan name or HIOS/product identifier from the enrollment card or benefits page.",
     action: "Open Oscar drug check",
     url: "https://www.hioscar.com/care-options",
@@ -267,11 +358,158 @@ export type SummitNjInsurer = {
   note: string;
 };
 
+type PlanIntake = {
+  insurer: string;
+  planKind: string;
+  planName: string;
+  pharmacyBenefit: string;
+};
+
+const planKinds = [
+  "Commercial / employer",
+  "ACA marketplace / individual",
+  "Medicare Advantage",
+  "Standalone Medicare Part D (Original / Railroad Medicare)",
+  "Medicaid / public coverage",
+  "Government / military",
+  "Workers' compensation / MVA",
+  "Network or administrator",
+];
+
+const planKindsForInsurer = (insurerName: string) => {
+  const insurer = summitNjInsurers.find((candidate) => candidate.name === insurerName);
+  if (!insurer) return planKinds;
+  const category = insurer.category.toLowerCase();
+  if (insurer.name === "Original Medicare" || insurer.name === "Railroad Medicare") {
+    return ["Standalone Medicare Part D (Original / Railroad Medicare)"];
+  }
+  if (insurer.name === "Aetna") {
+    return [
+      "Commercial / employer",
+      "Medicare Advantage",
+      "Standalone Medicare Part D (Original / Railroad Medicare)",
+      "Medicaid / public coverage",
+    ];
+  }
+  if (insurer.name === "UnitedHealthcare") {
+    return [
+      "Commercial / employer",
+      "ACA marketplace / individual",
+      "Medicare Advantage",
+      "Standalone Medicare Part D (Original / Railroad Medicare)",
+      "Medicaid / public coverage",
+      "Government / military",
+    ];
+  }
+  if (insurer.name === "WellCare" || insurer.name === "Humana") {
+    return ["Medicare Advantage", "Standalone Medicare Part D (Original / Railroad Medicare)"];
+  }
+  if (insurer.name === "Wellpoint") {
+    return ["Medicaid / public coverage", "Medicare Advantage"];
+  }
+  if (insurer.name === "Fidelis Care") return ["Medicaid / public coverage"];
+  if (insurer.name === "Horizon NJ Health") return ["Medicaid / public coverage"];
+  if (insurer.name === "Oxford Health") {
+    return ["Commercial / employer", "Medicare Advantage"];
+  }
+  if (insurer.name === "AmeriHealth / AmeriHealth Administrators" || insurer.name === "Anthem BCBS") {
+    return ["Commercial / employer", "ACA marketplace / individual"];
+  }
+  if (insurer.name === "Horizon BCBSNJ") {
+    return ["Commercial / employer", "ACA marketplace / individual", "Medicare Advantage"];
+  }
+  if (insurer.name === "Oscar Health") return ["ACA marketplace / individual", "Commercial / employer"];
+  if (category.includes("workers compensation")) return ["Workers' compensation / MVA"];
+  if (category.includes("network")) return ["Network or administrator"];
+  if (category.includes("government employee") || category === "government" || category.includes("tricare")) {
+    return ["Government / military"];
+  }
+  if (category.includes("medicare") && !category.includes("commercial")) {
+    return ["Medicare Advantage"];
+  }
+  if (category.includes("commercial") && category.includes("medicare")) {
+    return ["Commercial / employer", "Medicare Advantage"];
+  }
+  if (category.includes("commercial")) return ["Commercial / employer"];
+  return planKinds;
+};
+
+const planNameOptionsFor = (insurerName: string, planKind: string) => {
+  const names = new Set(
+    referencePlans
+      .filter(
+        (plan) =>
+          importedPlanOwners[plan.key]?.includes(insurerName) &&
+          importedPlanKinds[plan.key]?.includes(planKind),
+      )
+      .flatMap((plan) => [plan.short, plan.name]),
+  );
+  if (insurerName === "Horizon BCBSNJ" && planKind === "ACA marketplace / individual") {
+    [
+      "Direct Access Silver HSA 100/70/60 BlueCard",
+      "Direct Access Gold 100/80/60 BlueCard",
+      "Direct Access 100/70 BlueCard",
+      "Horizon Marketplace formulary",
+    ].forEach((name) => names.add(name));
+  }
+  if (insurerName === "UnitedHealthcare" && planKind === "Medicaid / public coverage") {
+    ["UHC Community Plan NJ", "UnitedHealthcare Community Plan of New Jersey"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "Fidelis Care" && planKind === "Medicaid / public coverage") {
+    ["Fidelis Care NJ FamilyCare", "Fidelis Care New Jersey FamilyCare", "Fidelis / WellCare NJ FamilyCare PDL"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "Horizon NJ Health" && planKind === "Medicaid / public coverage") {
+    names.add("Horizon NJ Health NJ FamilyCare");
+  }
+  if (insurerName === "Wellpoint" && planKind === "Medicaid / public coverage") {
+    names.add("Wellpoint New Jersey FamilyCare PDL");
+  }
+  return Array.from(names).sort();
+};
+
+const pharmacyBenefitOptionsFor = (insurerName: string, planKind: string) => {
+  const options = new Set<string>();
+  if (!insurerName) return pharmacyBenefitSuggestions;
+  if (insurerName === "Horizon BCBSNJ") {
+    options.add(planKind === "ACA marketplace / individual" ? "Marketplace 3-Tier" : "Prime Therapeutics");
+  }
+  if (insurerName === "UnitedHealthcare" || insurerName === "Oxford Health") {
+    options.add("Optum Rx");
+    options.add("Commercial PDL");
+    if (planKind === "Medicaid / public coverage") options.add("NJ Community Plan PDL");
+  }
+  if (insurerName === "Aetna") {
+    options.add(planKind === "Medicaid / public coverage" ? "NJ FamilyCare" : "Aetna pharmacy benefit");
+  }
+  if (insurerName === "Wellpoint" && planKind === "Medicaid / public coverage") options.add("NJ FamilyCare PDL");
+  if (insurerName === "Fidelis Care" && planKind === "Medicaid / public coverage") options.add("NJ FamilyCare PDL");
+  if (insurerName === "Horizon NJ Health" && planKind === "Medicaid / public coverage") options.add("Horizon NJ Health pharmacy benefit");
+  if (insurerName === "AmeriHealth / AmeriHealth Administrators") {
+    options.add("Individual & Family");
+    options.add("Value");
+    options.add("Select");
+  }
+  if (insurerName === "Cigna") {
+    options.add("National Preferred");
+    options.add("Standard");
+    options.add("Value");
+    options.add("Performance");
+    options.add("Advantage");
+  }
+  if (insurerName === "Anthem BCBS" || insurerName === "Empire BCBS of NY") options.add("Select 3-Tier");
+  if (insurerName === "Oscar Health") options.add("Oscar formulary");
+  if (planKind === "Medicare Advantage" || planKind === "Standalone Medicare Part D (Original / Railroad Medicare)") {
+    options.add("Medicare formulary");
+  }
+  return options.size ? Array.from(options).sort() : ["Plan pharmacy label from card"];
+};
+
 export type SummitNjFormularySource = {
   insurer: string;
   planScope: string;
   status:
     | "Ready for pulmonary extraction"
+    | "Pulmonary formulary loaded"
     | "Plan selection required"
     | "CMS plan import running";
   source: string;
@@ -285,17 +523,29 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
   {
     insurer: "Horizon BCBSNJ",
     planScope: "NJ Marketplace and named small-group products",
-    status: "Ready for pulmonary extraction",
+    status: "Pulmonary formulary loaded",
     source:
       "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
     sourceLabel: "August 2026 Horizon NJ drug guide",
     detail:
-      "Exact named NJ Marketplace and small-group products. Pulmonary product, strength, tier and restriction rows are being loaded.",
+      "Pulmonary formulary rows are available in the portal for this Marketplace formulary family. Do not use them for other Horizon commercial or Medicaid products.",
+  },
+  {
+    insurer: "Horizon BCBSNJ Classic",
+    planScope: "NJ commercial plans whose pharmacy benefit is explicitly Horizon Classic",
+    status: "Pulmonary formulary loaded",
+    source:
+      "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/Commercial/5517-L_Horizon_Classic.pdf",
+    sourceLabel: "July 2026 Horizon Classic Formulary",
+    detail:
+      "This quarterly Classic drug list is a source-backed baseline only when the card or benefits document confirms the Horizon Classic pharmacy benefit. Direct Access is not automatically Classic.",
+    priorAuthorizationUrl: "https://www.horizonblue.com/providers/pharmacy",
+    priorAuthorizationLabel: "Open Horizon pharmacy PA route",
   },
   {
     insurer: "UnitedHealthcare / Oxford",
     planScope: "NJ commercial plans with UHC pharmacy benefit",
-    status: "Ready for pulmonary extraction",
+    status: "Pulmonary formulary loaded",
     source:
       "https://www.uhcprovider.com/en/resource-library/drug-lists-pharmacy.html?CID=none",
     sourceLabel: "UHC drug-list library",
@@ -337,7 +587,7 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
   },
   {
     insurer: "UnitedHealthcare / AARP Medicare",
-    planScope: "NJ Medicare Advantage and Part D plans",
+    planScope: "NJ Medicare Advantage and standalone Part D plans",
     status: "CMS plan import running",
     source:
       "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
@@ -347,7 +597,7 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
   },
   {
     insurer: "Humana",
-    planScope: "NJ Medicare Advantage and Part D plans",
+    planScope: "NJ Medicare Advantage and standalone Part D plans",
     status: "CMS plan import running",
     source:
       "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
@@ -360,7 +610,7 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
   },
   {
     insurer: "Wellcare",
-    planScope: "NJ Medicare Advantage and Part D plans",
+    planScope: "NJ Medicare Advantage and standalone Part D plans",
     status: "CMS plan import running",
     source:
       "https://data.cms.gov/sites/default/files/2026-07/86072516-8629-44d7-9f0e-2d8877ef7fd3/2026_20260722.zip",
@@ -430,7 +680,7 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
       "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
     sourceLabel: "2026 NJ Individual and Family drug guide",
     detail:
-      "The exact plan family matters. Individual and Family, Value and Select each use distinct formularies.",
+      "Pulmonary formulary rows are available in the portal for the Individual and Family formulary family. Value, Select, employer, and Medicare products remain separate.",
     priorAuthorizationUrl:
       "https://www.amerihealth.com/resources/for-providers/policies-and-guidelines/prior-authorization.html",
     priorAuthorizationLabel: "Open PA route",
@@ -498,10 +748,10 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     note: "All plans; Braven Health Medicare Advantage",
   },
   {
-    name: "Empire BCBS of NY",
-    category: "Commercial",
+    name: "Horizon NJ Health",
+    category: "Medicaid / public coverage",
     participation: "Accepted",
-    note: "All plans; Health Plus and Pathway Medicaid excluded",
+    note: "NJ FamilyCare Medicaid MCO",
   },
   {
     name: "Centivo",
@@ -594,12 +844,6 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     note: "All plans",
   },
   {
-    name: "NY Workers Compensation",
-    category: "Workers compensation",
-    participation: "Accepted",
-    note: "Workers compensation",
-  },
-  {
     name: "Optum VA Community Care Network",
     category: "Government",
     participation: "Accepted",
@@ -622,12 +866,6 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     category: "Commercial + workers compensation",
     participation: "Accepted",
     note: "All plans and workers compensation",
-  },
-  {
-    name: "The Empire Plan",
-    category: "Government employee",
-    participation: "Accepted",
-    note: "All plans except Medicaid",
   },
   {
     name: "TRICARE",
@@ -659,7 +897,540 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     participation: "Accepted",
     note: "All Summit NJ providers participate in listed Medicare Advantage plans",
   },
+  {
+    name: "Fidelis Care",
+    category: "Medicaid / public coverage",
+    participation: "Accepted",
+    note: "NJ FamilyCare Medicaid",
+  },
 ];
+
+type ClinicalWorkflow = {
+  kind: string;
+  cardCheck: string;
+  steps: string[];
+  resultRule: string;
+  source?: { label: string; url: string };
+  cardAction?: string;
+  baseline?: PlanKey;
+  exactMedicare?: boolean;
+};
+
+type PlanIntakeMatch =
+  | { kind: "imported"; plan: (typeof plans)[number] }
+  | { kind: "medicare" }
+  | { kind: "uhc-nj-marketplace" }
+  | { kind: "aetna-nj-familycare" }
+  | { kind: "uhc-nj-community" }
+  | { kind: "fidelis-nj-familycare" }
+  | { kind: "horizon-nj-health" }
+  | { kind: "wellpoint-nj-familycare" }
+  | { kind: "horizon-nj-marketplace" }
+  | { kind: "horizon-classic" }
+  | { kind: "amerihealth-nj-individual" }
+  | { kind: "anthem-ny-select" }
+  | { kind: "uhc-commercial" }
+  | { kind: "oxford-freedom" }
+  | { kind: "cigna-national-preferred" }
+  | { kind: "out-of-scope" }
+  | { kind: "unconfirmed" };
+
+type UhcNjQhpPlan = {
+  planId: string;
+  marketingName: string;
+  years: number[];
+  lastUpdatedOn: string | null;
+  drugTiers: string[];
+};
+
+type UhcNjQhpDrug = {
+  rxcui: string;
+  drugName: string;
+  planCount: number;
+};
+
+type UhcNjQhpCoverage = {
+  status: "confirmed" | "unconfirmed" | "error";
+  covered: true | null;
+  reason: string | null;
+  plan?: UhcNjQhpPlan;
+  drug?: { rxcui: string; drugName: string };
+  coverage?: Array<{
+    drugTier: string;
+    priorAuthorization: boolean | null;
+    stepTherapy: boolean | null;
+    quantityLimit: boolean | null;
+  }>;
+  source?: { drugs?: { sourceDate?: string | null }; cacheStatus?: string };
+};
+
+type AetnaNjFamilyCareSuggestion = {
+  drugName: string;
+  ndcCount: number;
+  ndcs: string[];
+};
+
+type AetnaNjFamilyCareCoverage = {
+  status: "listed" | "not-listed-in-source" | "error";
+  listed: true | null;
+  ndc?: string;
+  notice?: string;
+  matches?: Array<{
+    ndc: string;
+    drugName: string;
+    drugTier: string;
+    priorAuthorization: boolean;
+    stepTherapy: boolean;
+    quantityLimit: boolean;
+    otc: boolean;
+  }>;
+  source?: { effectiveDate?: string };
+};
+
+type UhcNjCommunityDrug = {
+  rxcui: string;
+  drugName: string;
+  tier: string;
+  priorAuthorization: boolean;
+  stepTherapy: boolean;
+  quantityLimit: boolean;
+};
+
+type UhcNjCommunityCoverage = {
+  status: "listed" | "not-listed-in-source" | "error";
+  listed: true | null;
+  drug?: UhcNjCommunityDrug | null;
+  source?: { sourceLastModified?: string | null };
+};
+
+type FidelisNjFamilyCareDrug = {
+  id: string;
+  name: string;
+  aliases: string[];
+  tier: "P" | "NF";
+  priorAuthorization: boolean;
+  stepTherapy: boolean;
+  quantityLimit: boolean;
+  ageLimit: boolean;
+  quantityText?: string;
+  ageText?: string;
+  note?: string;
+};
+
+type FidelisNjFamilyCareCoverage = {
+  status: "listed" | "not-listed-in-source" | "error";
+  listed: true | null;
+  drug?: FidelisNjFamilyCareDrug | null;
+  notice?: string;
+};
+
+type HorizonNjHealthDrug = {
+  id: string;
+  name: string;
+  aliases: string[];
+  priorAuthorization: boolean;
+  limitations: boolean;
+  note?: string;
+};
+
+type HorizonNjHealthCoverage = {
+  status: "listed" | "not-listed-in-source" | "error";
+  listed: true | null;
+  drug?: HorizonNjHealthDrug | null;
+  notice?: string;
+};
+
+type WellpointNjFamilyCareDrug = {
+  id: string;
+  name: string;
+  aliases: string[];
+  tier: "Preferred" | "Non-Preferred";
+  priorAuthorization: boolean;
+  quantityLimit: boolean;
+  stepTherapy: boolean;
+  specialtyPharmacy: boolean;
+  ageLimit: boolean;
+  note?: string;
+};
+
+type WellpointNjFamilyCareCoverage = {
+  status: "listed" | "not-listed-in-source" | "error";
+  listed: true | null;
+  drug?: WellpointNjFamilyCareDrug | null;
+  notice?: string;
+};
+
+const normalizedPlanText = (value: string) =>
+  value.trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+const needsProductCorrectionHint = (query: string, productNames: string[]) => {
+  const queryTokens = normalizedPlanText(query).split(" ").filter(Boolean);
+  if (!queryTokens.length || !productNames.length) return false;
+  return !productNames.some((productName) => {
+    const productTokens = normalizedPlanText(productName).split(" ").filter(Boolean);
+    return queryTokens.every((queryToken) =>
+      productTokens.some((productToken) => productToken.startsWith(queryToken)),
+    );
+  });
+};
+
+const editDistance = (left: string, right: string) => {
+  const previous = Array.from({ length: right.length + 1 }, (_, index) => index);
+  for (let leftIndex = 1; leftIndex <= left.length; leftIndex += 1) {
+    let diagonal = previous[0];
+    previous[0] = leftIndex;
+    for (let rightIndex = 1; rightIndex <= right.length; rightIndex += 1) {
+      const saved = previous[rightIndex];
+      previous[rightIndex] = Math.min(
+        previous[rightIndex] + 1,
+        previous[rightIndex - 1] + 1,
+        diagonal + (left[leftIndex - 1] === right[rightIndex - 1] ? 0 : 1),
+      );
+      diagonal = saved;
+    }
+  }
+  return previous[right.length];
+};
+
+const medicationSuggestionScore = (query: string, medication: Medication) => {
+  const needle = normalizedPlanText(query);
+  const name = normalizedPlanText(`${medication.generic} ${medication.brands} ${medication.productDetails ?? ""}`);
+  if (!needle) return 0;
+  if (name.includes(needle)) return 0;
+  const nameTokens = name.split(" ").filter(Boolean);
+  const queryTokens = needle.split(" ").filter(Boolean);
+  let score = 0;
+  for (const queryToken of queryTokens) {
+    const best = Math.min(...nameTokens.map((nameToken) => nameToken.startsWith(queryToken) ? 0 : editDistance(queryToken, nameToken)));
+    if (best > Math.max(1, Math.floor(queryToken.length / 3))) return Number.POSITIVE_INFINITY;
+    score += best;
+  }
+  return score;
+};
+
+const importedPlanOwners: Partial<Record<PlanKey, string[]>> = {
+  horizonMarketplace: ["Horizon BCBSNJ"],
+  uhcCommercial: ["UnitedHealthcare"],
+  oxfordFreedom: ["Oxford Health"],
+  aetnaMedicareHmo: ["Aetna"],
+  amerihealthNj: ["AmeriHealth / AmeriHealth Administrators"],
+  amerihealthValue: ["AmeriHealth / AmeriHealth Administrators"],
+  amerihealthSelect: ["AmeriHealth / AmeriHealth Administrators"],
+  cignaNationalPreferred: ["Cigna"],
+  horizonClassic: ["Horizon BCBSNJ"],
+  oscarNjIndividual: ["Oscar Health"],
+  anthemNySelect: ["Anthem BCBS"],
+  wellcareNjH0913: ["WellCare"],
+  humanaNj26408: ["Humana"],
+  bravenNjH0885: ["Braven Health"],
+  healthspringNj26096: ["HealthSpring"],
+  cloverNj2026: ["Clover Health"],
+  wellpointNjFamilyCare: ["Wellpoint"],
+};
+
+const importedPlanKinds: Partial<Record<PlanKey, string[]>> = {
+  horizonMarketplace: ["ACA marketplace / individual"],
+  uhcCommercial: ["Commercial / employer"],
+  oxfordFreedom: ["Commercial / employer"],
+  aetnaMedicareHmo: ["Medicare Advantage"],
+  amerihealthNj: ["ACA marketplace / individual"],
+  amerihealthValue: ["Commercial / employer"],
+  amerihealthSelect: ["Commercial / employer"],
+  cignaNationalPreferred: ["Commercial / employer"],
+  horizonClassic: ["Commercial / employer"],
+  oscarNjIndividual: ["ACA marketplace / individual"],
+  anthemNySelect: ["ACA marketplace / individual"],
+  wellcareNjH0913: ["Medicare Advantage"],
+  humanaNj26408: ["Medicare Advantage"],
+  bravenNjH0885: ["Medicare Advantage"],
+  healthspringNj26096: ["Medicare Advantage"],
+  cloverNj2026: ["Medicare Advantage"],
+  wellpointNjFamilyCare: ["Medicaid / public coverage"],
+};
+
+const planIntakeMatchFor = (intake: PlanIntake): PlanIntakeMatch => {
+  if (
+    intake.planKind === "Medicare Advantage" ||
+    intake.planKind === "Standalone Medicare Part D (Original / Railroad Medicare)" ||
+    ["Original Medicare", "Railroad Medicare"].includes(intake.insurer)
+  )
+    return { kind: "medicare" };
+  const normalizedName = normalizedPlanText(intake.planName);
+  if (
+    intake.insurer === "UnitedHealthcare" &&
+    intake.planKind === "ACA marketplace / individual"
+  )
+    return { kind: "uhc-nj-marketplace" };
+  if (
+    intake.insurer === "Aetna" &&
+    intake.planKind === "Medicaid / public coverage"
+  )
+    return { kind: "aetna-nj-familycare" };
+  if (
+    intake.insurer === "Fidelis Care" &&
+    intake.planKind === "Medicaid / public coverage" &&
+    ["Fidelis Care NJ FamilyCare", "Fidelis Care New Jersey FamilyCare", "Fidelis / WellCare NJ FamilyCare PDL"].includes(intake.planName.trim())
+  )
+    return { kind: "fidelis-nj-familycare" };
+  if (
+    intake.insurer === "UnitedHealthcare" &&
+    intake.planKind === "Medicaid / public coverage" &&
+    ["UHC Community Plan NJ", "UnitedHealthcare Community Plan of New Jersey", "UHC Community Plan of NJ"].includes(intake.planName.trim())
+  )
+    return { kind: "uhc-nj-community" };
+  if (
+    intake.insurer === "Horizon NJ Health" &&
+    intake.planKind === "Medicaid / public coverage" &&
+    ["Horizon NJ Health NJ FamilyCare", "Horizon NJ Health Medicaid", "Horizon NJ Health formulary"].includes(intake.planName.trim())
+  )
+    return { kind: "horizon-nj-health" };
+  if (
+    intake.insurer === "Wellpoint" &&
+    intake.planKind === "Medicaid / public coverage" &&
+    ["Wellpoint New Jersey FamilyCare PDL", "Wellpoint NJ FamilyCare", "Wellpoint Medicaid PDL"].includes(intake.planName.trim())
+  )
+    return { kind: "wellpoint-nj-familycare" };
+  if (
+    intake.insurer === "Horizon BCBSNJ" &&
+    intake.planKind === "ACA marketplace / individual"
+  )
+    return { kind: "horizon-nj-marketplace" };
+  if (
+    intake.insurer === "Horizon BCBSNJ" &&
+    intake.planKind === "Commercial / employer" &&
+    ["horizon classic formulary", "horizon classic"].includes(normalizedName)
+  )
+    return { kind: "horizon-classic" };
+  if (
+    intake.insurer === "AmeriHealth / AmeriHealth Administrators" &&
+    intake.planKind === "ACA marketplace / individual"
+  )
+    return { kind: "amerihealth-nj-individual" };
+  const importedMatches = referencePlans.filter((plan) =>
+    importedPlanOwners[plan.key]?.includes(intake.insurer) &&
+    importedPlanKinds[plan.key]?.includes(intake.planKind) &&
+    [plan.name, plan.short].some((name) => normalizedPlanText(name) === normalizedName),
+  );
+  if (importedMatches.length === 1)
+    return generalPdlReferenceKeys.has(importedMatches[0].key)
+      ? importedMatches[0].key === "uhcCommercial"
+        ? { kind: "uhc-commercial" }
+        : importedMatches[0].key === "oxfordFreedom"
+          ? { kind: "oxford-freedom" }
+          : { kind: "cigna-national-preferred" }
+      : { kind: "imported", plan: importedMatches[0] };
+  if (
+    normalizedName &&
+    ["Medicare Advantage", "Standalone Medicare Part D (Original / Railroad Medicare)"].includes(
+      intake.planKind,
+    )
+  )
+    return { kind: "medicare" };
+  return { kind: "unconfirmed" };
+};
+
+const commercialRouteFor = (name: string) => {
+  if (name.includes("Horizon")) return commercialPlanRoutes[0];
+  if (name.includes("UnitedHealthcare") || name.includes("Oxford"))
+    return commercialPlanRoutes[1];
+  if (name.includes("Aetna")) return commercialPlanRoutes[2];
+  if (name.includes("Cigna")) return commercialPlanRoutes[3];
+  if (name.includes("AmeriHealth")) return commercialPlanRoutes[4];
+  if (name.includes("Oscar")) return commercialPlanRoutes[5];
+  return undefined;
+};
+
+const clinicalWorkflowFor = (insurer: SummitNjInsurer): ClinicalWorkflow => {
+  const name = insurer.name;
+  const lowerName = name.toLowerCase();
+  const commercialRoute = commercialRouteFor(name);
+  const sourceMatch = summitNjFormularySources.find((source) => {
+    const sourceName = source.insurer.toLowerCase();
+    const insurerName = lowerName;
+    return (
+      sourceName.includes(insurerName) ||
+      insurerName.includes(sourceName) ||
+      ((name === "Anthem BCBS" || name === "Empire BCBS of NY") &&
+        source.insurer === "Empire / Anthem NY")
+    );
+  });
+  const source = commercialRoute
+    ? { label: commercialRoute.action, url: commercialRoute.url }
+    : sourceMatch
+      ? { label: sourceMatch.sourceLabel, url: sourceMatch.source }
+      : undefined;
+
+  if (
+    [
+      "Braven Health",
+      "HealthSpring",
+      "Clover Health",
+      "WellCare",
+      "Wellpoint",
+    ].includes(name)
+  ) {
+    return {
+      kind: "Medicare Advantage",
+      cardCheck: "Carrier plus exact plan name or contract-plan ID. Do not use the member ID.",
+      steps: [
+        "Confirm the card says Medicare Advantage and read the plan name or ID.",
+        "Select that exact plan in the Medicare finder.",
+        "Match the medication's device, strength, and NDC before acting on a CMS candidate row.",
+      ],
+      resultRule:
+        "Only the selected CMS plan can produce a plan-level result. A missing product match is unconfirmed, not a denial.",
+      source,
+      exactMedicare: true,
+    };
+  }
+
+  if (name === "Fidelis Care") {
+    return {
+      kind: "NJ FamilyCare Medicaid",
+      cardCheck: "Fidelis Care or WellCare NJ FamilyCare card and the exact pharmacy benefit.",
+      steps: [
+        "Confirm the member is enrolled in Fidelis Care NJ FamilyCare Medicaid.",
+        "Choose the Fidelis Care NJ FamilyCare PDL workflow in this portal.",
+        "Select the exact medication product and review the published tier and restrictions.",
+      ],
+      resultRule:
+        "The portal shows listed products from the current Fidelis NJ FamilyCare PDL. An omitted product is unconfirmed, not a denial.",
+      source: {
+        label: "Fidelis NJ FamilyCare 2026 PDL",
+        url: "https://www.fideliscarenj.com/content/dam/centene/wellcare/nj/pdfs/pdls/NJ_Caid_Preferred_Drug_List_2026_Eng_Spa_R.pdf",
+      },
+    };
+  }
+
+  if (name === "Original Medicare" || name === "Railroad Medicare") {
+    return {
+      kind: "Original or Railroad Medicare with standalone Part D",
+      cardCheck: "Use the separate prescription-drug plan card. The red-white-blue Medicare card does not identify the Part D plan.",
+      steps: [
+        "Find the patient's separate Part D prescription-drug plan card.",
+        "Enter the carrier, exact plan name, or S-contract and plan ID in the Medicare finder.",
+        "Select the exact standalone Part D plan before checking a medication.",
+      ],
+      resultRule:
+        "A missing plan or product match is unconfirmed, not a denial. Original or Railroad Medicare alone does not determine outpatient drug coverage.",
+      cardAction:
+        "If there is no separate Part D card, confirm the prescription plan with the patient or the clinic's established benefits-verification process.",
+      exactMedicare: true,
+    };
+  }
+
+  if (
+    ["CorVel", "Coventry", "NY Workers Compensation"].includes(name)
+  ) {
+    return {
+      kind: "Workers' compensation or motor-vehicle claim",
+      cardCheck: "Claim administrator, claim instructions, and the authorized pharmacy benefit. Do not record claim numbers here.",
+      steps: [
+        "Confirm the visit and prescription are authorized under the injury claim.",
+        "Use the claim administrator's pharmacy channel or written pharmacy instructions.",
+        "Escalate to the adjuster or authorized pharmacy contact when the medicine is not listed.",
+      ],
+      resultRule:
+        "A general medical network does not establish pharmacy authorization for a workers' compensation or MVA claim.",
+    };
+  }
+
+  if (
+    [
+      "CHN / Medlogix",
+      "MultiPlan / PHCS / Beech Street",
+      "MagnaCare",
+      "QualCare",
+      "Centivo",
+      "First Health",
+    ].includes(name)
+  ) {
+    return {
+      kind: "Network or plan administrator",
+      cardCheck: "The underlying insurer and pharmacy-benefit manager, not only the network logo.",
+      steps: [
+        "Read the pharmacy-benefit or PBM name from the card or benefits document.",
+        "Use the underlying payer's exact drug list or member/provider pharmacy route.",
+        "If the card only identifies a network, call the pharmacy-benefit number before beginning prior authorization.",
+      ],
+      resultRule:
+        "Network participation is not medication coverage and cannot be used as a formulary match.",
+    };
+  }
+
+  if (name === "Optum VA Community Care Network") {
+    return {
+      kind: "VA Community Care",
+      cardCheck: "VA authorization and the pharmacy instructions for this episode of care.",
+      steps: [
+        "Confirm Community Care authorization before treating this as a VA-covered pharmacy request.",
+        "Use the VA-directed pharmacy channel or the authorization contact, not a commercial payer baseline.",
+        "Escalate missing authorization or medication routing to the VA Community Care contact.",
+      ],
+      resultRule:
+        "Community Care network participation does not establish outpatient pharmacy coverage.",
+    };
+  }
+
+  if (name === "TRICARE" || name === "US Family Health Plan") {
+    return {
+      kind: "Military health plan",
+      cardCheck: "Plan variant and the prescription-benefit routing shown on the card.",
+      steps: [
+        "Confirm whether the card is TRICARE or US Family Health Plan and identify its pharmacy route.",
+        "Use that plan's current drug list and prior-authorization process.",
+        "Do not substitute a commercial, Medicare, or network formulary for this benefit.",
+      ],
+      resultRule:
+        "Coverage depends on the named military health plan and pharmacy route, not the network label alone.",
+    };
+  }
+
+  if (name === "The Empire Plan") {
+    return {
+      kind: "New York government employee plan",
+      cardCheck: "The Empire Plan pharmacy-benefit information and current drug-list year.",
+      steps: [
+        "Confirm the card identifies The Empire Plan, not a different Empire or Anthem product.",
+        "Use its current pharmacy benefit and drug list.",
+        "Verify product, device, strength, and restriction before beginning prior authorization.",
+      ],
+      resultRule:
+        "The Empire Plan should not be matched to a generic Empire or Anthem commercial formulary.",
+    };
+  }
+
+  const combinedMedicareCarrier = [
+    "Aetna",
+    "Horizon BCBSNJ",
+    "Humana",
+    "UnitedHealthcare",
+    "Oxford Health",
+    "Emblem Health / HIP",
+  ].includes(name);
+
+  return {
+    kind: insurer.category,
+    cardCheck: combinedMedicareCarrier
+      ? "Whether this is a Medicare Advantage/Part D plan or a commercial plan, plus the pharmacy-benefit or drug-list name."
+      : "Exact plan or pharmacy-benefit name and the drug-list year shown on the card or benefits document.",
+    steps: [
+      combinedMedicareCarrier
+        ? "If the card says Medicare Advantage or Part D, use the exact Medicare plan finder."
+        : "Identify the exact plan and the pharmacy-benefit or drug-list name.",
+      "Use the named plan's official drug list before treating a medication as covered.",
+      "Match the product, device, strength, and restriction criteria; then use the plan's PA route if needed.",
+    ],
+    resultRule:
+      "A carrier-level result is not coverage. Use a sourced baseline only when the card matches its exact plan family; otherwise verify in the official plan route.",
+    source,
+    cardAction: source
+      ? undefined
+      : "Use the pharmacy-benefit phone number and exact plan route printed on the card before beginning prior authorization.",
+    baseline: commercialRoute?.baseline,
+    exactMedicare: combinedMedicareCarrier,
+  };
+};
 const c = (
   ny: CoverageState,
   nj: CoverageState,
@@ -679,6 +1450,7 @@ const c = (
   bravenNjH0885: CoverageState = "Source loading",
   healthspringNj26096: CoverageState = "Source loading",
   cloverNj2026: CoverageState = "Source loading",
+  wellpointNjFamilyCare: CoverageState = "Source loading",
   horizonFlags: Restriction[] = [],
   uhcCommercialFlags: Restriction[] = [],
   aetnaMedicareHmoFlags: Restriction[] = [],
@@ -691,6 +1463,13 @@ const c = (
   bravenNjH0885Flags: Restriction[] = [],
   healthspringNj26096Flags: Restriction[] = [],
   cloverNj2026Flags: Restriction[] = [],
+  wellpointNjFamilyCareFlags: Restriction[] = [],
+  horizonClassic: CoverageState = "Source loading",
+  horizonClassicFlags: Restriction[] = [],
+  amerihealthValue: CoverageState = "Source loading",
+  amerihealthValueFlags: Restriction[] = [],
+  amerihealthSelect: CoverageState = "Source loading",
+  amerihealthSelectFlags: Restriction[] = [],
 ): Record<PlanKey, Coverage> => ({
   nyrx: {
     state: ny,
@@ -708,6 +1487,10 @@ const c = (
     state: horizon,
     flags: horizonFlags,
   },
+  horizonClassic: {
+    state: horizonClassic,
+    flags: horizonClassicFlags,
+  },
   uhcCommercial: {
     state: uhcCommercial,
     flags: uhcCommercialFlags,
@@ -723,6 +1506,14 @@ const c = (
   amerihealthNj: {
     state: amerihealthNj,
     flags: amerihealthNjFlags,
+  },
+  amerihealthValue: {
+    state: amerihealthValue,
+    flags: amerihealthValueFlags,
+  },
+  amerihealthSelect: {
+    state: amerihealthSelect,
+    flags: amerihealthSelectFlags,
   },
   cignaNationalPreferred: {
     state: cignaNationalPreferred,
@@ -755,6 +1546,10 @@ const c = (
   cloverNj2026: {
     state: cloverNj2026,
     flags: cloverNj2026Flags,
+  },
+  wellpointNjFamilyCare: {
+    state: wellpointNjFamilyCare,
+    flags: wellpointNjFamilyCareFlags,
   },
 });
 export const medications: Medication[] = [
@@ -1606,6 +2401,240 @@ const coverage = (
 const planCoverageOverrides: Partial<
   Record<PlanKey, Record<string, Coverage>>
 > = {
+  amerihealthSelect: {
+    Arformoterol: coverage("Generic"),
+    Formoterol: coverage("Generic"),
+    Salmeterol: coverage("Preferred brand"),
+    Ipratropium: coverage("Tier varies", [], "Atrovent HFA is preferred brand; inhalation solution is generic."),
+    "Ipratropium / albuterol": coverage("Generic"),
+    "Tiotropium (generic capsule-inhaler)": coverage("Non-preferred", ["PA"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Preferred brand"),
+    "Incruse Ellipta (brand)": coverage("Non-preferred", ["PA"]),
+    "Anoro Ellipta (brand)": coverage("Preferred brand"),
+    "Glycopyrrolate / formoterol": coverage("Non-preferred", ["PA"], "Bevespi Aerosphere entry."),
+    Revefenacin: coverage("Non-preferred", ["PA"], "Yupelri solution entry."),
+    "Tiotropium / olodaterol": coverage("Preferred brand"),
+    Olodaterol: coverage("Preferred brand"),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Preferred brand"),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Preferred brand"),
+    Roflumilast: coverage("Generic"),
+    "Budesonide inhalation": coverage("Tier varies", ["PA"], "Generic budesonide suspension is generic; Pulmicort Respules are non-preferred with PA."),
+    "Budesonide (Flexhaler)": coverage("Preferred brand"),
+    "Fluticasone furoate": coverage("Preferred brand"),
+    "Fluticasone propionate HFA 44 mcg": coverage("Non-preferred", ["PA"]),
+    "QVAR RediHaler (brand)": coverage("Non-preferred", ["PA"]),
+    Ciclesonide: coverage("Non-preferred", ["PA"]),
+    Mometasone: coverage("Non-preferred", ["PA"]),
+    "Advair Diskus / HFA (brand)": coverage("Tier varies", ["PA"], "Advair HFA is preferred brand; Advair Diskus is non-preferred with PA."),
+    "Symbicort (brand)": coverage("Preferred brand"),
+    "Budesonide / formoterol (generic)": coverage("Non-preferred", ["PA"]),
+    "Mometasone / formoterol": coverage("Non-preferred", ["PA"]),
+    "Fluticasone / vilanterol": coverage("Preferred brand"),
+    "Fluticasone / salmeterol (generic)": coverage("Non-preferred"),
+    Montelukast: coverage("Generic"),
+    Zafirlukast: coverage("Generic"),
+    "Zileuton ER": coverage("Generic", ["PA"]),
+    Dupilumab: coverage("Preferred brand", ["PA", "SP"]),
+    Benralizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Mepolizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Tezepelumab: coverage("Preferred brand", ["PA", "SP"]),
+    Omalizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Nintedanib: coverage("Non-preferred", ["PA", "SP"]),
+    Pirfenidone: coverage("Generic", ["PA", "SP"]),
+    Ambrisentan: coverage("Generic", ["PA", "SP"]),
+    Bosentan: coverage("Generic", ["PA", "SP"]),
+    "Sildenafil 20 mg": coverage("Generic", ["PA", "SP"]),
+    "Tadalafil for PAH": coverage("Generic", ["PA", "SP"]),
+    "Sotatercept-csrk": coverage("Non-preferred", ["PA", "SP"], "Winrevair injection entry."),
+    "Tobramycin inhalation": coverage("Source loading", [], "No exact inhaled tobramycin row was found in the Select source; do not infer from ophthalmic products."),
+    "Dornase alfa": coverage("Preferred brand", ["SP"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Non-preferred", ["PA", "SP"]),
+    "Fluticasone nasal": coverage("Generic"),
+    "Azelastine nasal": coverage("Generic"),
+    Varenicline: coverage("Generic"),
+    "Nicotine replacement": coverage("Generic", [], "ACA preventive coverage may apply when the member's benefit includes it."),
+    "Bupropion SR 150 mg": coverage("Generic"),
+    Benzonatate: coverage("Low-cost generic"),
+    "Epinephrine auto-injector": coverage("Tier varies", ["QL"], "0.3 mg generic pen is generic; 0.15 mg pen is preferred brand; brand EpiPen products are non-preferred with PA."),
+  },
+  amerihealthValue: {
+    Arformoterol: coverage("Generic"),
+    Salmeterol: coverage("Preferred brand"),
+    Ipratropium: coverage("Tier varies", [], "Atrovent HFA is preferred brand; inhalation solution is generic."),
+    "Ipratropium / albuterol": coverage("Generic"),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Preferred brand"),
+    "Anoro Ellipta (brand)": coverage("Preferred brand"),
+    "Glycopyrrolate / formoterol": coverage("Non-preferred", ["PA"], "Bevespi Aerosphere entry."),
+    Revefenacin: coverage("Non-preferred", ["PA"], "Yupelri solution entry."),
+    "Tiotropium / olodaterol": coverage("Preferred brand"),
+    Olodaterol: coverage("Preferred brand"),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Preferred brand"),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Preferred brand"),
+    Roflumilast: coverage("Generic"),
+    "Budesonide inhalation": coverage("Generic"),
+    "Budesonide (Flexhaler)": coverage("Preferred brand"),
+    "Fluticasone furoate": coverage("Preferred brand"),
+    "Fluticasone propionate HFA 44 mcg": coverage("Non-formulary"),
+    "QVAR RediHaler (brand)": coverage("Non-formulary"),
+    Ciclesonide: coverage("Non-formulary"),
+    Mometasone: coverage("Non-formulary"),
+    "Advair Diskus / HFA (brand)": coverage("Tier varies", [], "Advair Diskus is non-formulary; Advair HFA is preferred brand."),
+    "Symbicort (brand)": coverage("Preferred brand"),
+    "Budesonide / formoterol (generic)": coverage("Non-formulary"),
+    "Mometasone / formoterol": coverage("Non-formulary"),
+    "Fluticasone / vilanterol": coverage("Preferred brand"),
+    "Fluticasone / salmeterol (generic)": coverage("Generic"),
+    Montelukast: coverage("Generic"),
+    Zafirlukast: coverage("Generic"),
+    "Zileuton ER": coverage("Generic", ["PA"]),
+    Dupilumab: coverage("Preferred brand", ["PA", "SP"]),
+    Benralizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Mepolizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Tezepelumab: coverage("Preferred brand", ["PA", "SP"]),
+    Omalizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Nintedanib: coverage("Non-preferred", ["PA", "SP"]),
+    Pirfenidone: coverage("Generic", ["PA", "SP"]),
+    Bosentan: coverage("Generic", ["PA", "SP"]),
+    "Sildenafil 20 mg": coverage("Generic", ["PA", "SP"]),
+    "Tadalafil for PAH": coverage("Generic", ["PA", "SP"]),
+    "Tobramycin inhalation": coverage("Tier varies", ["SP"], "Generic inhaled tobramycin is generic; branded/device products differ."),
+    "Aztreonam inhalation": coverage("Non-preferred", ["PA", "SP"]),
+    "Dornase alfa": coverage("Preferred brand", ["SP"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Non-formulary", ["SP"]),
+    "Fluticasone nasal": coverage("Generic"),
+    "Azelastine nasal": coverage("Generic", ["PA"]),
+    Varenicline: coverage("Generic"),
+    "Nicotine replacement": coverage("Generic", [], "ACA preventive coverage may apply when the member's benefit includes it."),
+    "Bupropion SR 150 mg": coverage("Generic"),
+    Benzonatate: coverage("Low-cost generic"),
+    "Epinephrine auto-injector": coverage("Tier varies", ["QL"], "0.3 mg generic pen is generic; 0.15 mg pen is preferred brand; Auvi-Q differs by strength."),
+  },
+  horizonClassic: {
+    "Albuterol HFA": coverage("Tier 1", ["QL"], "Albuterol sulfate HFA inhaler entry in the July 2026 Horizon Classic Formulary."),
+    "Albuterol nebulizer solution": coverage("Tier 1"),
+    Arformoterol: coverage("Tier 1"),
+    "Fluticasone furoate": coverage("Tier 2", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 2", ["PA", "QL"]),
+    "Budesonide inhalation": coverage("Tier 1", ["QL"]),
+    "Budesonide / formoterol (generic)": coverage("Tier 1", ["QL"]),
+    "Ipratropium / albuterol": coverage(
+      "Tier varies",
+      ["QL"],
+      "Combivent Respimat is Tier 2; ipratropium-albuterol nebulizer solution is Tier 1.",
+    ),
+    "Roflumilast": coverage("Tier varies", ["QL"], "Generic roflumilast is Tier 1; Daliresp is Tier 3 with quantity limits in the July 2026 Horizon Classic Formulary."),
+    "Fluticasone / salmeterol (generic)": coverage("Tier 1", ["QL"]),
+    "Montelukast": coverage("Tier 1", ["QL"]),
+    "Levalbuterol": coverage("Tier varies", ["QL"], "Nebulizer solution entries are Tier 1; levalbuterol HFA is Tier 3 in the July 2026 Horizon Classic Formulary."),
+    Dupilumab: coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    Benralizumab: coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    Mepolizumab: coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
+    "Symbicort (brand)": coverage("Tier 1", ["QL"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage(
+      "Tier varies",
+      ["QL"],
+      "Spiriva HandiHaler is Tier 1; Spiriva Respimat is Tier 2.",
+    ),
+    // Horizon Classic rows below are transcribed from the July 2026 official drug list.
+    // Combined catalog entries stay Tier varies when the source separates formulations.
+    Salmeterol: coverage("Tier 2", ["QL"]),
+    Ipratropium: coverage("Tier 1"),
+    // Existing rows below are kept in the same source-backed map and corrected
+    // in place where the official list separates products or restrictions.
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 1"),
+    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
+    Olodaterol: coverage("Tier 3", ["QL"]),
+    "Mometasone": coverage("Tier 2", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage(
+      "Tier varies",
+      ["QL"],
+      "Advair HFA is Tier 2; the Advair Diskus/fluticasone-salmeterol dry-powder entries are Tier 1.",
+    ),
+    "Mometasone / formoterol": coverage("Tier 2", ["QL"]),
+    "Fluticasone / vilanterol": coverage("Tier 2", ["QL"]),
+    // Fluticasone/salmeterol, montelukast, and the other existing rows above
+    // retain their source-backed entries in the original map.
+    Zafirlukast: coverage("Tier 1", ["QL"]),
+    Prednisone: coverage("Tier 1"),
+    Prednisolone: coverage("Tier 1"),
+    Tezepelumab: coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    Omalizumab: coverage("Tier 2", ["PA", "QL", "SP"]),
+    Nintedanib: coverage("Tier 1", ["PA", "QL", "SP", "LD"]),
+    Pirfenidone: coverage(
+      "Tier varies",
+      ["PA", "QL", "SP", "LD"],
+      "Pirfenidone 534 mg is Tier 3; 267 mg capsule/tablet entries are Tier 1.",
+    ),
+    Ambrisentan: coverage("Tier 1", ["PA", "QL", "SP", "LD"]),
+    Bosentan: coverage("Tier 1", ["PA", "QL", "SP", "LD"]),
+    "Sildenafil 20 mg": coverage("Tier 1", ["PA", "QL", "SP", "LD"]),
+    "Tadalafil for PAH": coverage("Tier 1", ["PA", "QL", "SP", "LD"]),
+    Selexipag: coverage("Tier 3", ["PA", "QL", "SP", "LD"]),
+    Riociguat: coverage("Tier 3", ["PA", "QL", "SP", "LD"]),
+    "Tobramycin inhalation": coverage(
+      "Tier varies",
+      ["PA", "QL", "SP", "LD"],
+      "Tobramycin inhaled products range from Tier 1 to Tier 3 by product and device.",
+    ),
+    "Aztreonam inhalation": coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    "Dornase alfa": coverage("Tier 2", ["PA", "QL", "SP"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 2", ["PA", "QL", "SP", "LD"]),
+    "Azelastine nasal": coverage("Tier 1", ["QL"]),
+    Varenicline: coverage(
+      "Tier varies",
+      [],
+      "The July 2026 source marks varenicline as ACA rather than assigning a numeric tier.",
+    ),
+    "Nicotine replacement": coverage(
+      "Tier varies",
+      [],
+      "The July 2026 source marks covered nicotine gum, lozenge, and patches as ACA products rather than assigning a numeric tier.",
+    ),
+    "Bupropion SR 150 mg": coverage("Tier 1"),
+    Azithromycin: coverage("Tier 1", ["QL"]),
+    "Amoxicillin / clavulanate": coverage("Tier 1"),
+    Doxycycline: coverage("Tier 1", ["QL"]),
+    Levofloxacin: coverage("Tier 1", ["QL"]),
+    Benzonatate: coverage("Tier 1"),
+    Famotidine: coverage("Tier 1"),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    "Epinephrine auto-injector": coverage(
+      "Tier varies",
+      ["QL"],
+      "The listed epinephrine auto-injectors range from Tier 1 to Tier 3 by product and strength.",
+    ),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 2", ["QL"]),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1", ["QL"]),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier 1", ["QL"]),
+    Omeprazole: coverage("Tier 1", ["QL"]),
+    Sertraline: coverage("Tier 1"),
+    Ibuprofen: coverage("Tier 1"),
+    // Keep labels without an exact Classic row visibly unconfirmed.
+    Formoterol: coverage("Source loading", [], "No exact Formoterol product row was found in the July 2026 Horizon Classic Formulary."),
+    "Glycopyrrolate / formoterol": coverage("Source loading", [], "No exact Glycopyrrolate/formoterol product row was found in the July 2026 Horizon Classic Formulary."),
+    Revefenacin: coverage("Source loading", [], "No exact Revefenacin product row was found in the July 2026 Horizon Classic Formulary."),
+    Aclidinium: coverage("Source loading", [], "No exact Aclidinium product row was found in the July 2026 Horizon Classic Formulary."),
+    Ensifentrine: coverage("Source loading", [], "No exact Ensifentrine product row was found in the July 2026 Horizon Classic Formulary."),
+    "Budesonide (Flexhaler)": coverage("Source loading", [], "The Classic list includes nebulized budesonide, but no exact Flexhaler row was found."),
+    "Fluticasone propionate HFA 44 mcg": coverage("Source loading", [], "No exact Fluticasone propionate HFA 44 mcg row was found in the July 2026 Horizon Classic Formulary."),
+    Ciclesonide: coverage("Source loading", [], "No exact Ciclesonide product row was found in the July 2026 Horizon Classic Formulary."),
+    "Albuterol / budesonide": coverage("Source loading", [], "No exact Albuterol/budesonide product row was found in the July 2026 Horizon Classic Formulary."),
+    "Zileuton ER": coverage("Source loading", [], "No exact Zileuton ER product row was found in the July 2026 Horizon Classic Formulary."),
+    Reslizumab: coverage("Source loading", [], "No exact Reslizumab product row was found in the July 2026 Horizon Classic Formulary."),
+    "Treprostinil inhaled": coverage("Source loading", [], "The Classic list includes oral treprostinil, but no exact inhaled product row was found."),
+    "Sotatercept-csrk": coverage("Source loading", [], "No exact Sotatercept-csrk product row was found in the July 2026 Horizon Classic Formulary."),
+    "Fluticasone nasal": coverage("Source loading", [], "No exact Fluticasone nasal product row was found in the July 2026 Horizon Classic Formulary."),
+    Cetirizine: coverage("Source loading", [], "No exact Cetirizine product row was found in the July 2026 Horizon Classic Formulary."),
+    "Guaifenesin ER": coverage("Source loading", [], "No exact Guaifenesin ER product row was found in the July 2026 Horizon Classic Formulary."),
+  },
   oxfordFreedom: {
     "Fluticasone furoate": coverage(
       "Tier 1",
@@ -1690,12 +2719,33 @@ const planCoverageOverrides: Partial<
     ]),
   },
   uhcCommercial: {
+    "Albuterol HFA": coverage("Tier 2", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier varies", [], "0.083%, 0.63 mg/3 mL, and 1.25 mg/3 mL are Tier 1; 0.5% is Tier 3."),
+    Levalbuterol: coverage("Tier 3", ["QL"]),
+    Arformoterol: coverage("Source loading", [], "No exact arformoterol product row was found in the May 2026 UHC commercial PDL."),
     Salmeterol: coverage("Tier 2", ["QL"]),
+    Ipratropium: coverage("Tier 1"),
+    "Ipratropium / albuterol": coverage("Tier 2"),
+    "Tiotropium (generic capsule-inhaler)": coverage("Source loading", [], "No exact generic tiotropium capsule row was found in the May 2026 UHC commercial PDL."),
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Source loading", [], "No exact Incruse Ellipta row was found in the May 2026 UHC commercial PDL."),
+    "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Glycopyrrolate / formoterol": coverage("Tier 2", ["QL"], "Bevespi Aerosphere entry."),
     "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
     Olodaterol: coverage("Tier 2", ["QL"], "Striverdi Respimat entry."),
     Revefenacin: coverage("Tier 4", ["PA", "QL"], "Yupelri entry."),
     "Fluticasone / salmeterol (generic)": coverage("Tier 3", ["QL", "RS"], "Wixela Inhub entry."),
+    "Fluticasone furoate": coverage("Tier 1", ["QL"], "Arnuity Ellipta entry."),
+    "Budesonide inhalation": coverage("Tier 2", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 1", ["QL"]),
+    "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL", "RS"], "Advair HFA entry."),
+    "Budesonide / formoterol (generic)": coverage("Source loading", [], "No exact generic budesonide/formoterol row was found in the May 2026 UHC commercial PDL."),
+    "Mometasone / formoterol": coverage("Source loading", [], "No exact Dulera/mometasone-formoterol row was found in the May 2026 UHC commercial PDL."),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL", "RS"], "Breo Ellipta entry."),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL", "RS"]),
+    Roflumilast: coverage("Tier 2", ["QL"]),
+    Benralizumab: coverage("Tier 4", ["PA", "QL", "SP"]),
+    Mepolizumab: coverage("Tier 4", ["PA", "QL", "SP"]),
     "Symbicort (brand)": coverage("Tier 3", ["QL", "RS"]),
     "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL", "RS"]),
     Tezepelumab: coverage("Tier 4", ["PA", "QL", "SP"]),
@@ -1706,6 +2756,17 @@ const planCoverageOverrides: Partial<
       ["PA", "QL", "SP"],
       "Tobi Podhaler entry.",
     ),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 2", ["PA", "QL", "SP"]),
+    "Fluticasone nasal": coverage("Tier 2"),
+    "Azelastine nasal": coverage("Tier 2"),
+    Benzonatate: coverage("Tier 1"),
+    "Epinephrine auto-injector": coverage("Tier 1", ["QL"]),
+    Ambrisentan: coverage("Source loading", [], "No exact ambrisentan row was found in the May 2026 UHC commercial PDL."),
+    Bosentan: coverage("Tier 2", ["PA", "QL", "SP"]),
+    "Sildenafil 20 mg": coverage("Tier 1", ["QL"]),
+    "Tadalafil for PAH": coverage("Tier 1", ["PA", "QL", "SP"]),
+    "Treprostinil inhaled": coverage("Tier 2", ["PA", "SP"], "Tyvaso/Tyvaso DPI entries."),
+    Riociguat: coverage("Tier 2", ["PA", "QL", "SP"]),
     Nintedanib: coverage("Tier 4", ["PA", "QL", "SP"]),
     Pirfenidone: coverage("Tier 2", ["PA", "QL", "SP"]),
     Zafirlukast: coverage("Tier 1"),
@@ -1736,6 +2797,7 @@ const planCoverageOverrides: Partial<
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["QL"]),
     "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"]),
     "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Glycopyrrolate / formoterol": coverage("Tier 3", ["QL"], "Bevespi Aerosphere entry."),
     "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"]),
     "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"]),
     Roflumilast: coverage("Tier 4"),
@@ -1754,8 +2816,17 @@ const planCoverageOverrides: Partial<
     "Symbicort (brand)": coverage("Tier 3", ["QL"]),
     "Mometasone / formoterol": coverage("Tier 4", ["QL"]),
     "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
+    "Albuterol / budesonide": coverage("Tier 3", ["QL"], "Airsupra entry."),
+    "Fluticasone / salmeterol (generic)": coverage(
+      "Tier varies",
+      ["QL"],
+      "Diskus entries are Tier 2; generic HFA entries are Tier 4.",
+    ),
     Montelukast: coverage("Tier 1", ["QL"]),
+    Zafirlukast: coverage("Tier 4", ["QL"]),
+    "Budesonide / formoterol (generic)": coverage("Tier 3", ["QL"]),
     Benralizumab: coverage("Tier 5", ["PA", "QL", "LD"]),
+    Dupilumab: coverage("Tier 5", ["PA", "QL"]),
     Omalizumab: coverage("Tier 5", ["PA", "LD"]),
     Nintedanib: coverage("Tier 5", ["PA", "QL", "LD"]),
     Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
@@ -1765,6 +2836,14 @@ const planCoverageOverrides: Partial<
       "QL",
       "LD",
     ]),
+    "Fluticasone nasal": coverage("Tier 2", ["QL"], "Fluticasone propionate nasal spray entry."),
+    "Azelastine nasal": coverage("Tier 2", ["QL"], "Azelastine hydrochloride nasal spray entry."),
+    Ambrisentan: coverage("Tier 5", ["PA", "QL"]),
+    Bosentan: coverage("Tier 5", ["PA", "QL", "LD"]),
+    "Sildenafil 20 mg": coverage("Tier 3", ["PA", "QL"], "Generic Revatio entry."),
+    "Tadalafil for PAH": coverage("Tier 5", ["PA"], "Generic Adcirca entry."),
+    "Treprostinil inhaled": coverage("Tier 5", ["PA", "LD"], "Tyvaso starter and refill kit entries."),
+    Riociguat: coverage("Tier 5", ["PA", "QL", "LD"], "Adempas entry."),
   },
   amerihealthNj: {
     "Albuterol HFA": coverage("Generic"),
@@ -1819,32 +2898,37 @@ const planCoverageOverrides: Partial<
     "Epinephrine auto-injector": coverage("Generic", ["QL"]),
   },
   cignaNationalPreferred: {
-    "Albuterol nebulizer solution": coverage("Tier 1"),
-    "Ipratropium / albuterol": coverage("Tier 2", ["QL"], "Combivent Respimat entry."),
-    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"], "Spiriva Respimat entry."),
-    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
-    "Anoro Ellipta (brand)": coverage("Tier 2", ["QL"]),
-    Revefenacin: coverage("Tier 2", ["QL"], "Yupelri entry."),
-    "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
-    Olodaterol: coverage("Tier 2", ["QL"], "Striverdi Respimat entry."),
-    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
-    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 2", ["QL"]),
-    "QVAR RediHaler (brand)": coverage("Tier 2", ["QL"]),
-    Mometasone: coverage("Tier 2", ["QL"]),
-    "Advair Diskus / HFA (brand)": coverage("Tier 2 + PA", ["PA", "QL"], "Advair HFA entry."),
-    "Symbicort (brand)": coverage("Tier 1 + PA", ["PA", "QL"], "Breyna entry; brand status can differ."),
-    "Budesonide / formoterol (generic)": coverage("Tier 1 + PA", ["PA", "QL"], "Breyna entry."),
-    "Mometasone / formoterol": coverage("Tier 2 + PA", ["PA", "QL"]),
-    "Fluticasone / vilanterol": coverage("Tier 2 + PA", ["PA", "QL"]),
-    "Albuterol / budesonide": coverage("Tier 2", [], "Airsupra entry."),
-    Montelukast: coverage("Tier 1"),
-    Benralizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
-    Mepolizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
-    Tezepelumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
-    Omalizumab: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
-    "Treprostinil inhaled": coverage("Tier 2 + PA", ["PA", "LD"]),
-    Selexipag: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
-    Riociguat: coverage("Tier 2 + PA", ["PA", "QL", "LD"]),
+    "Albuterol HFA": coverage("Listed in PDL", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Listed in PDL"),
+    "Ipratropium / albuterol": coverage("Listed in PDL", ["QL"], "Combivent Respimat entry; this does not determine nebulizer coverage."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Listed in PDL", ["QL"], "Spiriva Respimat entry."),
+    "Incruse Ellipta (brand)": coverage("Listed in PDL", ["QL"]),
+    "Anoro Ellipta (brand)": coverage("Listed in PDL", ["QL"]),
+    Revefenacin: coverage("Listed in PDL", ["QL"], "Yupelri entry."),
+    "Tiotropium / olodaterol": coverage("Listed in PDL", ["QL"], "Stiolto Respimat entry."),
+    Olodaterol: coverage("Listed in PDL", ["QL"], "Striverdi Respimat entry."),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Listed in PDL", ["QL"], "Trelegy Ellipta entry."),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Listed in PDL", ["QL"], "Breztri Aerosphere entry."),
+    "QVAR RediHaler (brand)": coverage("Listed in PDL", ["QL"]),
+    Mometasone: coverage("Listed in PDL", ["QL"], "Asmanex or Asmanex HFA entry."),
+    "Advair Diskus / HFA (brand)": coverage("Listed in PDL", ["PA", "QL"], "Advair HFA entry."),
+    "Budesonide / formoterol (generic)": coverage("Listed in PDL", ["PA", "QL"], "Breyna entry."),
+    "Mometasone / formoterol": coverage("Listed in PDL", ["PA", "QL"], "Dulera entry."),
+    "Fluticasone / vilanterol": coverage("Listed in PDL", ["PA", "QL"], "Breo Ellipta entry."),
+    "Albuterol / budesonide": coverage("Listed in PDL", [], "Airsupra entry."),
+    Montelukast: coverage("Listed in PDL"),
+    Dupilumab: coverage("Listed in PDL", ["PA", "QL"], "Dupixent entry."),
+    Benralizumab: coverage("Listed in PDL", ["PA", "QL"], "Fasenra Pen entry."),
+    Mepolizumab: coverage("Listed in PDL", ["PA", "QL"], "Nucala auto-injector or syringe entry."),
+    Tezepelumab: coverage("Listed in PDL", ["PA", "QL"]),
+    Omalizumab: coverage("Listed in PDL", ["PA", "QL"]),
+    Nintedanib: coverage("Listed in PDL", ["PA", "QL"], "Ofev entry."),
+    "Treprostinil inhaled": coverage("Listed in PDL", ["PA"], "Tyvaso entry."),
+    Selexipag: coverage("Listed in PDL", ["PA", "QL"], "Uptravi tablet entry."),
+    Riociguat: coverage("Listed in PDL", ["PA", "QL"], "Adempas entry."),
+    "Fluticasone nasal": coverage("Listed in PDL", ["QL"], "Fluticasone spray entry."),
+    "Azelastine nasal": coverage("Listed in PDL", ["QL"], "Azelastine 0.1% nasal spray entry."),
+    Ibuprofen: coverage("Listed in PDL", [], "Oral suspension and 400 mg, 600 mg, or 800 mg tablet entries."),
   },
   oscarNjIndividual: {
     "Albuterol HFA": coverage("Tier 1", ["QL"]),
@@ -1914,6 +2998,12 @@ const planCoverageOverrides: Partial<
     Varenicline: coverage("Tier 2", ["QL"], "$0 smoking-cessation benefit entry."),
   },
   wellcareNjH0913: {
+    "Albuterol HFA": coverage("Tier varies", ["QL"], "Generic albuterol HFA is Tier 4; Ventolin HFA is Tier 3."),
+    "Albuterol nebulizer solution": coverage("Tier 4", [], "Part B/D determination applies."),
+    Levalbuterol: coverage("Tier 4", [], "Nebulizer entry; Part B/D determination applies."),
+    Arformoterol: coverage("Tier 4", ["QL"], "Part B/D determination applies."),
+    Formoterol: coverage("Tier 3", ["QL"], "Part B/D determination applies."),
+    Ipratropium: coverage("Tier 2", [], "Nebulizer entry; Part B/D determination applies."),
     Salmeterol: coverage("Tier 3", ["QL"], "Serevent Diskus entry, 60 actuations per 30 days."),
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["QL"], "Spiriva Respimat entry, 4 g per 30 days."),
     "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"], "30 doses per 30 days."),
@@ -1922,8 +3012,25 @@ const planCoverageOverrides: Partial<
     "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"], "Breztri entry, 10.7 g per 30 days."),
     "Fluticasone / vilanterol": coverage("Tier 3", ["QL"], "Breo Ellipta entry, 60 doses per 30 days."),
     "Ipratropium / albuterol": coverage("Tier 3", ["QL"], "Combivent Respimat entry, 8 g per 30 days."),
+    "Glycopyrrolate / formoterol": coverage("Tier 3", ["QL"], "Bevespi entry."),
+    "Budesonide inhalation": coverage("Tier 4", [], "Part B/D determination applies."),
+    "Albuterol / budesonide": coverage("Tier 3", ["QL"], "Airsupra entry."),
+    "Fluticasone / salmeterol (generic)": coverage("Tier 4", ["QL"]),
+    "Budesonide / formoterol (generic)": coverage("Tier 3", ["QL"], "Breyna entry."),
+    "Fluticasone nasal": coverage("Tier 2", ["QL"]),
+    Montelukast: coverage("Tier varies", [], "10 mg tablet is Tier 1; granules and chewables are Tier 2."),
+    Zafirlukast: coverage("Tier 4"),
     "Benralizumab": coverage("Tier 5", ["PA", "QL"], "Fasenra entry, 0.5 to 1 mL per 28 days."),
     Dupilumab: coverage("Tier 5", ["PA", "QL"], "Dupixent package-specific quantity limits per 28 days."),
+    Omalizumab: coverage("Tier 5", ["PA", "QL", "LD"]),
+    Nintedanib: coverage("Tier 5", ["PA", "QL"]),
+    Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
+    Roflumilast: coverage("Tier 4", ["QL"]),
+    "Sildenafil 20 mg": coverage("Tier 2", ["PA", "QL"]),
+    "Tadalafil for PAH": coverage("Tier 4", ["PA", "QL"]),
+    "Dornase alfa": coverage("Tier 5", [], "Part B/D determination applies."),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL", "LD"]),
+    "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"]),
   },
   humanaNj26408: {
     "Albuterol HFA": coverage("Tier 3", ["QL"]),
@@ -1939,14 +3046,16 @@ const planCoverageOverrides: Partial<
     Roflumilast: coverage("Tier 3", ["QL"]),
     "Budesonide inhalation": coverage("Tier 4", [], "Part B versus Part D determination applies."),
     "Fluticasone furoate": coverage("Tier 3", ["QL"], "Arnuity Ellipta entry."),
+    "Albuterol / budesonide": coverage("Tier 3", ["QL"], "Airsupra entry."),
     "Advair Diskus / HFA (brand)": coverage("Tier 3", ["QL"]),
     "Symbicort (brand)": coverage("Tier 3", ["QL"]),
     "Fluticasone / vilanterol": coverage("Tier 3", ["QL"]),
+    "Fluticasone / salmeterol (generic)": coverage("Tier 3", ["QL"], "Wixela Inhub entry."),
     Montelukast: coverage("Tier 1", ["QL"]),
     Zafirlukast: coverage("Tier 4", ["QL"]),
     Dupilumab: coverage("Tier 5", ["PA", "QL"]),
     Benralizumab: coverage("Tier 5", ["PA", "QL"]),
-    Mepolizumab: coverage("Tier 5", ["PA", "QL"]),
+    Mepolizumab: coverage("Tier 5", ["PA", "QL"], "Nucala entries."),
     Omalizumab: coverage("Tier 5", ["PA", "QL"]),
     Nintedanib: coverage("Tier 5", ["PA", "QL"]),
     Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
@@ -1959,6 +3068,30 @@ const planCoverageOverrides: Partial<
     "Aztreonam inhalation": coverage("Tier 5", ["PA", "QL"]),
     "Dornase alfa": coverage("Tier 5", [], "Part B versus Part D determination applies."),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"]),
+    "Fluticasone nasal": coverage("Tier 2", ["QL"], "Fluticasone propionate nasal spray entry."),
+    "Azelastine nasal": coverage("Tier 3", ["QL"], "Azelastine 0.1% nasal spray entry."),
+    "Epinephrine auto-injector": coverage("Tier 3", ["QL"], "Generic epinephrine auto-injector entry."),
+    "Sotatercept-csrk": coverage("Tier 5", ["PA"], "Winrevair entry."),
+    Prednisone: coverage("Tier varies", [], "Most tablet strengths are Tier 1; dose-pack and liquid products vary."),
+    Prednisolone: coverage("Tier varies", [], "Oral solution products range from Tier 2 to Tier 4."),
+    Cetirizine: coverage("Tier 2", ["QL"], "Cetirizine oral solution entry."),
+    Azithromycin: coverage("Tier 1"),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Oral products range from Tier 1 to Tier 3 by formulation."),
+    Doxycycline: coverage("Tier varies", [], "Product and formulation tiers vary."),
+    Levofloxacin: coverage("Tier varies", [], "Oral product tiers vary by strength and formulation."),
+    Benzonatate: coverage("Tier 1"),
+    Famotidine: coverage("Tier 2"),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 3", ["QL"], "Eliquis entry."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1"),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1"),
+    Metformin: coverage("Tier 1"),
+    Omeprazole: coverage("Tier 1"),
+    Sertraline: coverage("Tier 1", ["QL"]),
+    Ibuprofen: coverage("Tier 1"),
   },
   bravenNjH0885: {
     "Albuterol HFA": coverage("Tier 3", ["QL"], "Metered-dose inhaler entries have 13.4 or 17 units per 30 days limits."),
@@ -1972,12 +3105,61 @@ const planCoverageOverrides: Partial<
     Pirfenidone: coverage("Tier varies", ["PA", "QL"], "267 mg tablet is Tier 4; 801 mg tablet and 267 mg capsule are Tier 5."),
   },
   healthspringNj26096: {
+    "Albuterol HFA": coverage("Tier 2", ["QL"]),
+    "Albuterol nebulizer solution": coverage("Tier 2", ["PA"], "Part B/D determination applies."),
+    Arformoterol: coverage("Tier 4", ["PA"], "Part B/D determination applies."),
+    Formoterol: coverage("Tier 4", ["PA", "QL"], "Perforomist entry; Part B/D determination applies."),
+    Levalbuterol: coverage("Tier varies", ["PA"], "Nebulizer is Tier 3; HFA is Tier 4 with a quantity limit."),
+    Salmeterol: coverage("Tier 3", ["QL"], "Serevent Diskus entry."),
+    Ipratropium: coverage("Tier varies", ["PA", "QL"], "Nebulizer is Tier 2; HFA is Tier 4 with a quantity limit."),
+    "Ipratropium / albuterol": coverage("Tier 2", ["PA"], "Part B/D determination applies."),
+    "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 4", ["ST", "QL"], "Spiriva Respimat entry."),
+    "Incruse Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 3", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 3", ["QL"], "Breztri Aerosphere entry."),
+    Revefenacin: coverage("Tier 5", ["PA", "QL"], "Yupelri entry; Part B/D determination applies."),
+    "Fluticasone / vilanterol": coverage("Tier 3", ["QL"], "Breo Ellipta entry."),
+    "Budesonide inhalation": coverage("Tier 3", ["PA", "QL"], "Part B/D determination applies."),
+    "Budesonide (Flexhaler)": coverage("Tier 4", ["PA", "QL"], "Pulmicort entry; Part B/D determination applies."),
+    "Fluticasone furoate": coverage("Tier 3", ["QL"], "Arnuity Ellipta entry."),
+    "Fluticasone nasal": coverage("Tier 2", ["QL"]),
+    Montelukast: coverage("Tier varies", ["QL"], "Tablets are Tier 1; granules are Tier 3."),
+    Zafirlukast: coverage("Tier 4", ["QL"]),
+    Benralizumab: coverage("Tier 5", ["PA", "QL"]),
+    Omalizumab: coverage("Tier 5", ["PA", "QL", "LD"]),
+    Mepolizumab: coverage("Tier 5", ["PA", "QL"], "Nucala entries."),
+    Nintedanib: coverage("Tier 5", ["PA", "QL"]),
+    Pirfenidone: coverage("Tier 5", ["PA", "QL"]),
+    Roflumilast: coverage("Tier 4", ["PA", "QL"]),
+    "Sildenafil 20 mg": coverage("Tier 3", ["PA", "QL"]),
+    "Tadalafil for PAH": coverage("Tier 4", ["PA", "QL"]),
+    "Treprostinil inhaled": coverage("Tier 5", ["PA"], "Tyvaso entry; Part B/D determination applies."),
     Olodaterol: coverage("Tier 2", ["QL"], "Striverdi Respimat entry."),
     "Glycopyrrolate / formoterol": coverage("Tier 2", ["QL"], "Bevespi entry."),
-    "Fluticasone / salmeterol (generic)": coverage("Tier 1", ["QL"], "Generic DPI/HFA formulary entries."),
+    "Fluticasone / salmeterol (generic)": coverage("Tier 2", ["QL"], "Generic DPI formulary entry."),
     "Budesonide / formoterol (generic)": coverage("Tier 1", ["QL"], "Generic budesonide-formoterol entry."),
     "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"], "Winrevair entry."),
+    Ambrisentan: coverage("Tier 5", ["PA", "QL"], "Specialty distribution restriction applies."),
+    Bosentan: coverage("Tier 5", ["PA"], "Specialty distribution restriction applies."),
+    Prednisone: coverage("Tier varies", [], "Most tablets and dose packs are Tier 1; solution and 50 mg tablet vary."),
+    Prednisolone: coverage("Tier varies", [], "Oral products range from Tier 3 to Tier 4."),
+    Cetirizine: coverage("Tier 2", ["QL"], "Cetirizine oral solution entry."),
+    Azithromycin: coverage("Tier 1"),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Oral tablets are Tier 2; suspension and extended-release products vary."),
+    Doxycycline: coverage("Tier varies", [], "Doxycycline hyclate products are Tier 1; other formulations vary."),
+    Levofloxacin: coverage("Tier varies", [], "Oral tablet is Tier 2; solution is Tier 4."),
+    Famotidine: coverage("Tier 1"),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    Furosemide: coverage("Tier 1"),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1", ["QL"]),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier 1"),
+    Omeprazole: coverage("Tier 1", ["QL"]),
+    Sertraline: coverage("Tier 1", ["QL"]),
+    Ibuprofen: coverage("Tier varies", [], "Tablets are Tier 1; oral suspension is Tier 2."),
   },
   cloverNj2026: {
     "Albuterol HFA": coverage("Tier 3", ["QL"], "Two inhalers per 30 days."),
@@ -2022,10 +3204,53 @@ const planCoverageOverrides: Partial<
     Riociguat: coverage("Tier 5", ["PA", "QL"], "Adempas entry; not available by mail order."),
     "Treprostinil inhaled": coverage("Tier 5", ["PA"], "Treprostinil solution entry; not available by mail order."),
     "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"], "Winrevair entry; not available by mail order."),
+    Prednisone: coverage("Tier varies", [], "Most tablets are Tier 1; dose packs and liquid products vary."),
+    Prednisolone: coverage("Tier varies", [], "Oral products range from Tier 2 to Tier 4."),
+    Cetirizine: coverage("Tier 2", ["QL"]),
+    Azithromycin: coverage("Tier varies", [], "Oral tablet and suspension product tiers vary."),
+    Doxycycline: coverage("Tier varies", [], "Doxycycline hyclate and monohydrate product tiers vary."),
+    Levofloxacin: coverage("Tier varies", [], "Oral tablet is Tier 1; oral solution is Tier 4."),
+    Famotidine: coverage("Tier 1"),
+    Pantoprazole: coverage("Tier 1"),
+    Furosemide: coverage("Tier varies", [], "Oral tablets are Tier 1; solution is Tier 2."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier varies", [], "Tier varies by strength."),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier varies", [], "Tier varies by strength."),
+    Metformin: coverage("Tier 1", ["QL"]),
+    Omeprazole: coverage("Tier 1"),
+    Sertraline: coverage("Tier 1"),
+    Ibuprofen: coverage("Tier varies", [], "Oral tablets are Tier 1; suspension is Tier 3."),
     "Tobramycin inhalation": coverage("Tier 5", ["PA"], "Tobramycin nebulizer and Tobi Podhaler entries; not available by mail order."),
     "Dornase alfa": coverage("Tier 5", ["PA"], "Pulmozyme entry; not available by mail order."),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"], "Trikafta entry; not available by mail order."),
+    "Fluticasone nasal": coverage("Tier 2", ["QL"], "Fluticasone propionate nasal spray entry."),
+    "Azelastine nasal": coverage("Tier 2", [], "Azelastine 0.1% nasal solution entry."),
     "Epinephrine auto-injector": coverage("Tier 3", [], "Generic EpiPen and Adrenaclick entries."),
+  },
+  wellpointNjFamilyCare: {
+    "Albuterol HFA": coverage("Listed in PDL", ["QL"], "Albuterol sulfate HFA entry."),
+    "Albuterol nebulizer solution": coverage("Listed in PDL", ["QL"], "Albuterol sulfate nebulization solution entry."),
+    Salmeterol: coverage("Listed in PDL", ["QL"], "Serevent Diskus entry."),
+    Ipratropium: coverage("Listed in PDL", ["QL"], "Atrovent HFA and ipratropium nebulization entries."),
+    "Ipratropium / albuterol": coverage("Listed in PDL", ["QL"], "Ipratropium-albuterol inhalation solution entry."),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Listed in PDL", ["QL"], "Spiriva Respimat entry."),
+    "Anoro Ellipta (brand)": coverage("Listed in PDL", ["QL"], "Umeclidinium-vilanterol / Anoro Ellipta entry."),
+    "Tiotropium / olodaterol": coverage("Listed in PDL", ["QL"], "Stiolto Respimat entry."),
+    Roflumilast: coverage("Listed in PDL", ["QL"], "Roflumilast / Daliresp entry."),
+    "Budesonide inhalation": coverage("Listed in PDL", ["QL"], "Budesonide nebulization / Pulmicort entry."),
+    "Fluticasone furoate": coverage("Listed in PDL", ["QL"], "Arnuity Ellipta entry."),
+    "Fluticasone propionate HFA 44 mcg": coverage("Listed in PDL", ["QL"], "Fluticasone propionate HFA entry."),
+    "Budesonide / formoterol (generic)": coverage("Listed in PDL", ["QL"], "Budesonide-formoterol / Breyna entry."),
+    "Fluticasone / salmeterol (generic)": coverage("Listed in PDL", ["QL"], "Fluticasone-salmeterol / Wixela Inhub entry."),
+    Montelukast: coverage("Listed in PDL", ["QL"], "Montelukast / Singulair entries."),
+    Zafirlukast: coverage("Listed in PDL", ["QL"]),
+    Dupilumab: coverage("Listed in PDL", ["PA", "SP", "QL"], "Dupixent entry."),
+    Omalizumab: coverage("Listed in PDL", ["PA", "SP", "QL"], "Xolair entry."),
+    Ambrisentan: coverage("Listed in PDL", ["PA", "SP", "QL"], "Letairis entry."),
+    "Sildenafil 20 mg": coverage("Listed in PDL", ["PA", "SP", "QL"], "Sildenafil / Revatio entry for pulmonary hypertension."),
+    "Tadalafil for PAH": coverage("Listed in PDL", ["PA", "SP", "QL"], "Tadalafil PAH / Alyq entry."),
+    "Tobramycin inhalation": coverage("Listed in PDL", ["SP", "QL"], "Bethkis entry."),
   },
 };
 
@@ -2049,6 +3274,7 @@ const toneForState = (state: CoverageState) => {
     )
   )
     return "bg-emerald-50 text-emerald-800 ring-emerald-200";
+  if (state === "Listed in PDL") return "bg-teal-50 text-teal-800 ring-teal-200";
   if (state.includes("PA") || state.startsWith("Tier"))
     return "bg-amber-50 text-amber-900 ring-amber-200";
   if (state === "Non-preferred" || state === "Non-preferred drug" || state === "Non-formulary")
@@ -2061,7 +3287,9 @@ const displayState = (state: CoverageState) =>
     : state === "Preferred + PA"
       ? "Plan preferred + PA"
       : state === "Preferred brand"
-        ? "Plan preferred brand"
+      ? "Plan preferred brand"
+      : state === "Listed in PDL"
+        ? "Listed in source PDL"
     : state === "Not on PDL"
     ? "Not listed"
     : state === "Source loading"
@@ -2084,7 +3312,16 @@ const isStraightforwardCoverage = (state: CoverageState) =>
   );
 const isSourceListedCoverage = (state: CoverageState) =>
   !["Source loading", "Not on PDL", "Non-formulary"].includes(state);
+const isCoveredBySource = (state: CoverageState) =>
+  ![
+    "Source loading",
+    "Not on PDL",
+    "Non-formulary",
+    "Non-preferred drug",
+  ].includes(state);
 const actionForCoverage = (state: CoverageState) => {
+  if (state === "Listed in PDL")
+    return "Listed in the source PDL. Confirm the member's exact pharmacy benefit, tier, cost, and current restrictions.";
   if (isStraightforwardCoverage(state))
     return "Preferred or first-tier listing. Verify the exact product and benefit.";
   if (state.includes("PA"))
@@ -2111,6 +3348,7 @@ const Icon = ({
     | "shield"
     | "external"
     | "chevron"
+    | "check"
     | "filter"
     | "database";
   className?: string;
@@ -2143,6 +3381,7 @@ const Icon = ({
       </>
     ),
     chevron: <path d="m9 18 6-6-6-6" />,
+    check: <path d="m5 12 4 4L19 6" />,
     filter: (
       <>
         <path d="M4 6h16" />
@@ -2180,9 +3419,26 @@ export const PulmonaryFormularyDashboard = () => {
   const [view, setView] = useState<"medications" | "plans">("medications");
   const [selected, setSelected] = useState<Medication | null>(medications[0]);
   const medicationDetailRef = useRef<HTMLElement | null>(null);
+  const coverageQuickSearchRef = useRef<HTMLInputElement | null>(null);
   const [apiConnected, setApiConnected] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [insurerQuery, setInsurerQuery] = useState("");
+  const [selectedInsurerName, setSelectedInsurerName] = useState<string | null>(
+    null,
+  );
+  const [showAllInsurerWorkflows, setShowAllInsurerWorkflows] = useState(false);
+  const [planIntake, setPlanIntake] = useState<PlanIntake>({
+    insurer: "",
+    planKind: "Commercial / employer",
+    planName: "",
+    pharmacyBenefit: "",
+  });
+  const [submittedPlanIntake, setSubmittedPlanIntake] = useState<PlanIntake | null>(null);
+  const planIntakeRef = useRef<HTMLElement | null>(null);
+  const planIntakeInsurerRef = useRef<HTMLInputElement | null>(null);
+  const medicareFinderRef = useRef<HTMLElement | null>(null);
+  const medicareSearchRef = useRef<HTMLInputElement | null>(null);
+  const [medicareBenefitType, setMedicareBenefitType] = useState<"ma" | "pdp">("ma");
   const [medicareQuery, setMedicareQuery] = useState("");
   const [medicarePlans, setMedicarePlans] = useState<
     Array<{
@@ -2191,16 +3447,19 @@ export const PulmonaryFormularyDashboard = () => {
       segment_id: string;
       plan_name: string;
       formulary_id: string;
+      plan_type: string;
       county_codes: string[];
     }>
   >([]);
   const [medicarePlanLoading, setMedicarePlanLoading] = useState(false);
+  const [medicarePlanError, setMedicarePlanError] = useState(false);
   const [selectedMedicarePlan, setSelectedMedicarePlan] = useState<{
     contract_id: string;
     plan_id: string;
     segment_id: string;
     plan_name: string;
     formulary_id: string;
+    plan_type: string;
     county_codes: string[];
   } | null>(null);
   const [medicareCoverageLoading, setMedicareCoverageLoading] = useState(false);
@@ -2211,6 +3470,8 @@ export const PulmonaryFormularyDashboard = () => {
     matchedTerms: string[];
     productRxcuiCount: number;
     coverage: Array<{
+      rxcui: string | null;
+      ndc: string | null;
       tier_level: number | null;
       prior_authorization: boolean;
       quantity_limit: boolean;
@@ -2219,6 +3480,58 @@ export const PulmonaryFormularyDashboard = () => {
       step_therapy: boolean;
     }>;
   } | null>(null);
+  const publicCoverageFinderRef = useRef<HTMLElement | null>(null);
+  const publicPlanMedicationRef = useRef<HTMLInputElement | null>(null);
+  const uhcQhpPlanRef = useRef<HTMLInputElement | null>(null);
+  const aetnaFamilyCareDrugRef = useRef<HTMLInputElement | null>(null);
+  const uhcCommunityDrugRef = useRef<HTMLInputElement | null>(null);
+  const fidelisFamilyCareDrugRef = useRef<HTMLInputElement | null>(null);
+  const horizonNjHealthDrugRef = useRef<HTMLInputElement | null>(null);
+  const wellpointNjFamilyCareDrugRef = useRef<HTMLInputElement | null>(null);
+  const [uhcQhpPlanQuery, setUhcQhpPlanQuery] = useState("");
+  const [uhcQhpPlans, setUhcQhpPlans] = useState<UhcNjQhpPlan[]>([]);
+  const [selectedUhcQhpPlan, setSelectedUhcQhpPlan] = useState<UhcNjQhpPlan | null>(null);
+  const [uhcQhpDrugQuery, setUhcQhpDrugQuery] = useState("");
+  const [uhcQhpDrugs, setUhcQhpDrugs] = useState<UhcNjQhpDrug[]>([]);
+  const [selectedUhcQhpDrug, setSelectedUhcQhpDrug] = useState<UhcNjQhpDrug | null>(null);
+  const [uhcQhpCoverage, setUhcQhpCoverage] = useState<UhcNjQhpCoverage | null>(null);
+  const [uhcQhpCoverageRequest, setUhcQhpCoverageRequest] = useState(0);
+  const [uhcQhpLoading, setUhcQhpLoading] = useState(false);
+  const [uhcQhpError, setUhcQhpError] = useState(false);
+  const [aetnaFamilyCareDrugQuery, setAetnaFamilyCareDrugQuery] = useState("");
+  const [aetnaFamilyCareSuggestions, setAetnaFamilyCareSuggestions] = useState<AetnaNjFamilyCareSuggestion[]>([]);
+  const [selectedAetnaFamilyCareNdc, setSelectedAetnaFamilyCareNdc] = useState("");
+  const [aetnaFamilyCareCoverage, setAetnaFamilyCareCoverage] = useState<AetnaNjFamilyCareCoverage | null>(null);
+  const [aetnaFamilyCareCoverageRequest, setAetnaFamilyCareCoverageRequest] = useState(0);
+  const [aetnaFamilyCareLoading, setAetnaFamilyCareLoading] = useState(false);
+  const [aetnaFamilyCareError, setAetnaFamilyCareError] = useState(false);
+  const [uhcCommunityDrugQuery, setUhcCommunityDrugQuery] = useState("");
+  const [uhcCommunityDrugs, setUhcCommunityDrugs] = useState<UhcNjCommunityDrug[]>([]);
+  const [selectedUhcCommunityDrug, setSelectedUhcCommunityDrug] = useState<UhcNjCommunityDrug | null>(null);
+  const [uhcCommunityCoverage, setUhcCommunityCoverage] = useState<UhcNjCommunityCoverage | null>(null);
+  const [uhcCommunityLoading, setUhcCommunityLoading] = useState(false);
+  const [uhcCommunityError, setUhcCommunityError] = useState(false);
+  const [fidelisFamilyCareDrugQuery, setFidelisFamilyCareDrugQuery] = useState("");
+  const [fidelisFamilyCareDrugs, setFidelisFamilyCareDrugs] = useState<FidelisNjFamilyCareDrug[]>([]);
+  const [selectedFidelisFamilyCareDrug, setSelectedFidelisFamilyCareDrug] = useState<FidelisNjFamilyCareDrug | null>(null);
+  const [fidelisFamilyCareCoverage, setFidelisFamilyCareCoverage] = useState<FidelisNjFamilyCareCoverage | null>(null);
+  const [fidelisFamilyCareLoading, setFidelisFamilyCareLoading] = useState(false);
+  const [fidelisFamilyCareError, setFidelisFamilyCareError] = useState(false);
+  const [horizonNjHealthDrugQuery, setHorizonNjHealthDrugQuery] = useState("");
+  const [horizonNjHealthDrugs, setHorizonNjHealthDrugs] = useState<HorizonNjHealthDrug[]>([]);
+  const [selectedHorizonNjHealthDrug, setSelectedHorizonNjHealthDrug] = useState<HorizonNjHealthDrug | null>(null);
+  const [horizonNjHealthCoverage, setHorizonNjHealthCoverage] = useState<HorizonNjHealthCoverage | null>(null);
+  const [horizonNjHealthLoading, setHorizonNjHealthLoading] = useState(false);
+  const [horizonNjHealthError, setHorizonNjHealthError] = useState(false);
+  const [wellpointNjFamilyCareDrugQuery, setWellpointNjFamilyCareDrugQuery] = useState("");
+  const [wellpointNjFamilyCareDrugs, setWellpointNjFamilyCareDrugs] = useState<WellpointNjFamilyCareDrug[]>([]);
+  const [selectedWellpointNjFamilyCareDrug, setSelectedWellpointNjFamilyCareDrug] = useState<WellpointNjFamilyCareDrug | null>(null);
+  const [wellpointNjFamilyCareCoverage, setWellpointNjFamilyCareCoverage] = useState<WellpointNjFamilyCareCoverage | null>(null);
+  const [wellpointNjFamilyCareLoading, setWellpointNjFamilyCareLoading] = useState(false);
+  const [wellpointNjFamilyCareError, setWellpointNjFamilyCareError] = useState(false);
+  const [publicPlanMedicationQuery, setPublicPlanMedicationQuery] = useState("");
+  const [selectedPublicPlanMedication, setSelectedPublicPlanMedication] = useState<Medication | null>(null);
+  const [publicPlanCoverageVisible, setPublicPlanCoverageVisible] = useState(false);
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/health", { signal: controller.signal })
@@ -2239,8 +3552,9 @@ export const PulmonaryFormularyDashboard = () => {
     }
     const controller = new AbortController();
     setMedicarePlanLoading(true);
+    setMedicarePlanError(false);
     const timeout = window.setTimeout(() => {
-      fetch(`/api/medicare/plans?q=${encodeURIComponent(search)}&state=NJ`, {
+      fetch(`/api/medicare/plans?q=${encodeURIComponent(search)}&state=NJ&benefitType=${medicareBenefitType}`, {
         signal: controller.signal,
       })
         .then((response) => {
@@ -2249,7 +3563,10 @@ export const PulmonaryFormularyDashboard = () => {
         })
         .then((payload) => setMedicarePlans(payload.plans ?? []))
         .catch((error) => {
-          if (error.name !== "AbortError") setMedicarePlans([]);
+          if (error.name !== "AbortError") {
+            setMedicarePlans([]);
+            setMedicarePlanError(true);
+          }
         })
         .finally(() => setMedicarePlanLoading(false));
     }, 250);
@@ -2257,7 +3574,7 @@ export const PulmonaryFormularyDashboard = () => {
       controller.abort();
       window.clearTimeout(timeout);
     };
-  }, [medicareQuery]);
+  }, [medicareQuery, medicareBenefitType]);
   useEffect(() => {
     if (!selectedMedicarePlan || !selected) {
       setSelectedMedicareCoverage(null);
@@ -2281,6 +3598,353 @@ export const PulmonaryFormularyDashboard = () => {
       .finally(() => setMedicareCoverageLoading(false));
     return () => controller.abort();
   }, [selectedMedicarePlan, selected]);
+  useEffect(() => {
+    const search = uhcQhpPlanQuery.trim();
+    if (search.length < 2) {
+      setUhcQhpPlans([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setUhcQhpLoading(true);
+      setUhcQhpError(false);
+      fetch(`/api/uhc-nj-qhp/plans?q=${encodeURIComponent(search)}`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("UHC NJ Marketplace plans unavailable");
+          return response.json();
+        })
+        .then((payload) => setUhcQhpPlans(payload.plans ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setUhcQhpPlans([]);
+            setUhcQhpError(true);
+          }
+        })
+        .finally(() => setUhcQhpLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [uhcQhpPlanQuery]);
+  useEffect(() => {
+    const search = uhcQhpDrugQuery.trim();
+    if (search.length < 2) {
+      setUhcQhpDrugs([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setUhcQhpLoading(true);
+      setUhcQhpError(false);
+      fetch(`/api/uhc-nj-qhp/drugs?q=${encodeURIComponent(search)}&limit=12`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("UHC NJ Marketplace drugs unavailable");
+          return response.json();
+        })
+        .then((payload) => setUhcQhpDrugs(payload.drugs ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setUhcQhpDrugs([]);
+            setUhcQhpError(true);
+          }
+        })
+        .finally(() => setUhcQhpLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [uhcQhpDrugQuery]);
+  useEffect(() => {
+    if (!selectedUhcQhpPlan || !selectedUhcQhpDrug || !uhcQhpCoverageRequest) {
+      setUhcQhpCoverage(null);
+      setUhcQhpLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setUhcQhpLoading(true);
+    setUhcQhpError(false);
+    fetch(`/api/uhc-nj-qhp/coverage?planId=${encodeURIComponent(selectedUhcQhpPlan.planId)}&rxcui=${encodeURIComponent(selectedUhcQhpDrug.rxcui)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("UHC NJ Marketplace coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setUhcQhpCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setUhcQhpCoverage(null);
+          setUhcQhpError(true);
+        }
+      })
+      .finally(() => setUhcQhpLoading(false));
+    return () => controller.abort();
+  }, [selectedUhcQhpPlan, selectedUhcQhpDrug, uhcQhpCoverageRequest]);
+  useEffect(() => {
+    const search = aetnaFamilyCareDrugQuery.trim();
+    if (search.length < 2) {
+      setAetnaFamilyCareSuggestions([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setAetnaFamilyCareLoading(true);
+      setAetnaFamilyCareError(false);
+      fetch(`/api/aetna-nj-familycare/drugs?q=${encodeURIComponent(search)}&limit=10`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("Aetna NJ FamilyCare formulary unavailable");
+          return response.json();
+        })
+        .then((payload) => setAetnaFamilyCareSuggestions(payload.suggestions ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setAetnaFamilyCareSuggestions([]);
+            setAetnaFamilyCareError(true);
+          }
+        })
+        .finally(() => setAetnaFamilyCareLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [aetnaFamilyCareDrugQuery]);
+  useEffect(() => {
+    if (!selectedAetnaFamilyCareNdc || !aetnaFamilyCareCoverageRequest) {
+      setAetnaFamilyCareCoverage(null);
+      setAetnaFamilyCareLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setAetnaFamilyCareLoading(true);
+    setAetnaFamilyCareError(false);
+    fetch(`/api/aetna-nj-familycare/coverage?ndc=${encodeURIComponent(selectedAetnaFamilyCareNdc)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Aetna NJ FamilyCare coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setAetnaFamilyCareCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setAetnaFamilyCareCoverage(null);
+          setAetnaFamilyCareError(true);
+        }
+      })
+      .finally(() => setAetnaFamilyCareLoading(false));
+    return () => controller.abort();
+  }, [selectedAetnaFamilyCareNdc, aetnaFamilyCareCoverageRequest]);
+  useEffect(() => {
+    const search = uhcCommunityDrugQuery.trim();
+    if (search.length < 2) {
+      setUhcCommunityDrugs([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setUhcCommunityLoading(true);
+      setUhcCommunityError(false);
+      fetch(`/api/uhc-nj-community/drugs?q=${encodeURIComponent(search)}&limit=12`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("UHC Community NJ formulary unavailable");
+          return response.json();
+        })
+        .then((payload) => setUhcCommunityDrugs(payload.drugs ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setUhcCommunityDrugs([]);
+            setUhcCommunityError(true);
+          }
+        })
+        .finally(() => setUhcCommunityLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [uhcCommunityDrugQuery]);
+  useEffect(() => {
+    if (!selectedUhcCommunityDrug) {
+      setUhcCommunityCoverage(null);
+      setUhcCommunityLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setUhcCommunityLoading(true);
+    setUhcCommunityError(false);
+    fetch(`/api/uhc-nj-community/coverage?rxcui=${encodeURIComponent(selectedUhcCommunityDrug.rxcui)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("UHC Community NJ coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setUhcCommunityCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setUhcCommunityCoverage(null);
+          setUhcCommunityError(true);
+        }
+      })
+      .finally(() => setUhcCommunityLoading(false));
+    return () => controller.abort();
+  }, [selectedUhcCommunityDrug]);
+  useEffect(() => {
+    const search = fidelisFamilyCareDrugQuery.trim();
+    if (search.length < 2) {
+      setFidelisFamilyCareDrugs([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setFidelisFamilyCareLoading(true);
+      setFidelisFamilyCareError(false);
+      fetch(`/api/fidelis-nj-familycare/drugs?q=${encodeURIComponent(search)}&limit=12`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("Fidelis NJ FamilyCare formulary unavailable");
+          return response.json();
+        })
+        .then((payload) => setFidelisFamilyCareDrugs(payload.drugs ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setFidelisFamilyCareDrugs([]);
+            setFidelisFamilyCareError(true);
+          }
+        })
+        .finally(() => setFidelisFamilyCareLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [fidelisFamilyCareDrugQuery]);
+  useEffect(() => {
+    if (!selectedFidelisFamilyCareDrug) {
+      setFidelisFamilyCareCoverage(null);
+      setFidelisFamilyCareLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setFidelisFamilyCareLoading(true);
+    setFidelisFamilyCareError(false);
+    fetch(`/api/fidelis-nj-familycare/coverage?id=${encodeURIComponent(selectedFidelisFamilyCareDrug.id)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Fidelis NJ FamilyCare coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setFidelisFamilyCareCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setFidelisFamilyCareCoverage(null);
+          setFidelisFamilyCareError(true);
+        }
+      })
+      .finally(() => setFidelisFamilyCareLoading(false));
+    return () => controller.abort();
+  }, [selectedFidelisFamilyCareDrug]);
+  useEffect(() => {
+    const search = horizonNjHealthDrugQuery.trim();
+    if (search.length < 2) {
+      setHorizonNjHealthDrugs([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setHorizonNjHealthLoading(true);
+      setHorizonNjHealthError(false);
+      fetch(`/api/horizon-nj-health/drugs?q=${encodeURIComponent(search)}&limit=12`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("Horizon NJ Health formulary unavailable");
+          return response.json();
+        })
+        .then((payload) => setHorizonNjHealthDrugs(payload.drugs ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setHorizonNjHealthDrugs([]);
+            setHorizonNjHealthError(true);
+          }
+        })
+        .finally(() => setHorizonNjHealthLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [horizonNjHealthDrugQuery]);
+  useEffect(() => {
+    if (!selectedHorizonNjHealthDrug) {
+      setHorizonNjHealthCoverage(null);
+      setHorizonNjHealthLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setHorizonNjHealthLoading(true);
+    setHorizonNjHealthError(false);
+    fetch(`/api/horizon-nj-health/coverage?id=${encodeURIComponent(selectedHorizonNjHealthDrug.id)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Horizon NJ Health coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setHorizonNjHealthCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setHorizonNjHealthCoverage(null);
+          setHorizonNjHealthError(true);
+        }
+      })
+      .finally(() => setHorizonNjHealthLoading(false));
+    return () => controller.abort();
+  }, [selectedHorizonNjHealthDrug]);
+  useEffect(() => {
+    const search = wellpointNjFamilyCareDrugQuery.trim();
+    if (search.length < 2) {
+      setWellpointNjFamilyCareDrugs([]);
+      return;
+    }
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => {
+      setWellpointNjFamilyCareLoading(true);
+      setWellpointNjFamilyCareError(false);
+      fetch(`/api/wellpoint-nj-familycare/drugs?q=${encodeURIComponent(search)}&limit=12`, { signal: controller.signal })
+        .then((response) => {
+          if (!response.ok) throw new Error("Wellpoint NJ FamilyCare formulary unavailable");
+          return response.json();
+        })
+        .then((payload) => setWellpointNjFamilyCareDrugs(payload.drugs ?? []))
+        .catch((error) => {
+          if (error.name !== "AbortError") {
+            setWellpointNjFamilyCareDrugs([]);
+            setWellpointNjFamilyCareError(true);
+          }
+        })
+        .finally(() => setWellpointNjFamilyCareLoading(false));
+    }, 250);
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [wellpointNjFamilyCareDrugQuery]);
+  useEffect(() => {
+    if (!selectedWellpointNjFamilyCareDrug) {
+      setWellpointNjFamilyCareCoverage(null);
+      setWellpointNjFamilyCareLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setWellpointNjFamilyCareLoading(true);
+    setWellpointNjFamilyCareError(false);
+    fetch(`/api/wellpoint-nj-familycare/coverage?id=${encodeURIComponent(selectedWellpointNjFamilyCareDrug.id)}`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Wellpoint NJ FamilyCare coverage unavailable");
+        return response.json();
+      })
+      .then((payload) => setWellpointNjFamilyCareCoverage(payload))
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setWellpointNjFamilyCareCoverage(null);
+          setWellpointNjFamilyCareError(true);
+        }
+      })
+      .finally(() => setWellpointNjFamilyCareLoading(false));
+    return () => controller.abort();
+  }, [selectedWellpointNjFamilyCareDrug]);
   const selectMedication = (medication: Medication) => {
     setSelected(medication);
     window.requestAnimationFrame(() => {
@@ -2305,8 +3969,8 @@ export const PulmonaryFormularyDashboard = () => {
   }, [query, branch]);
   const visiblePlans =
     planFilter === "all"
-      ? plans
-      : plans.filter((plan) => plan.key === planFilter);
+      ? referencePlans
+      : referencePlans.filter((plan) => plan.key === planFilter);
   const activeSelected =
     results.find((med) => med.generic === selected?.generic) ??
     results[0] ??
@@ -2326,6 +3990,295 @@ export const PulmonaryFormularyDashboard = () => {
       .toLowerCase()
       .includes(insurerQuery.trim().toLowerCase()),
   );
+  const selectedInsurer = selectedInsurerName
+    ? summitNjInsurers.find((insurer) => insurer.name === selectedInsurerName) ?? null
+    : null;
+  const selectedWorkflow = selectedInsurer
+    ? clinicalWorkflowFor(selectedInsurer)
+    : null;
+  const intakeInsurer = submittedPlanIntake?.insurer
+    ? summitNjInsurers.find((insurer) => insurer.name === submittedPlanIntake.insurer) ?? null
+    : null;
+  const intakeWorkflow = intakeInsurer
+    ? clinicalWorkflowFor(intakeInsurer)
+    : null;
+  const intakeMatch = submittedPlanIntake ? planIntakeMatchFor(submittedPlanIntake) : null;
+  const recognizedPlanIntakeInsurer = summitNjInsurers.find(
+    (insurer) => insurer.name === planIntake.insurer.trim(),
+  );
+  const availablePlanKinds = planKindsForInsurer(planIntake.insurer.trim());
+  const availablePlanNames = planNameOptionsFor(planIntake.insurer.trim(), planIntake.planKind);
+  const availablePharmacyBenefits = pharmacyBenefitOptionsFor(
+    planIntake.insurer.trim(),
+    planIntake.planKind,
+  );
+  const isExactPublicWorkflow =
+    (planIntake.insurer === "UnitedHealthcare" &&
+      planIntake.planKind === "ACA marketplace / individual") ||
+    (planIntake.insurer === "Aetna" &&
+      planIntake.planKind === "Medicaid / public coverage") ||
+    (planIntake.insurer === "UnitedHealthcare" &&
+      planIntake.planKind === "Medicaid / public coverage") ||
+    (planIntake.insurer === "Fidelis Care" &&
+      planIntake.planKind === "Medicaid / public coverage") ||
+    (planIntake.insurer === "Horizon NJ Health" &&
+      planIntake.planKind === "Medicaid / public coverage" &&
+      ["Horizon NJ Health NJ FamilyCare", "Horizon NJ Health Medicaid", "Horizon NJ Health formulary"].includes(planIntake.planName.trim())) ||
+    (planIntake.insurer === "Wellpoint" &&
+      planIntake.planKind === "Medicaid / public coverage" &&
+      ["Wellpoint New Jersey FamilyCare PDL", "Wellpoint NJ FamilyCare", "Wellpoint Medicaid PDL"].includes(planIntake.planName.trim())) ||
+    (planIntake.insurer === "Horizon BCBSNJ" &&
+      planIntake.planKind === "ACA marketplace / individual") ||
+    (planIntake.insurer === "Horizon BCBSNJ" &&
+      planIntake.planKind === "Commercial / employer" &&
+      ["Horizon Classic", "Horizon Classic Formulary"].includes(planIntake.planName.trim())) ||
+    (planIntake.insurer === "AmeriHealth / AmeriHealth Administrators" &&
+      planIntake.planKind === "ACA marketplace / individual") ||
+    (planIntake.insurer === "Anthem BCBS" &&
+      planIntake.planKind === "ACA marketplace / individual") ||
+    (planIntake.insurer === "UnitedHealthcare" &&
+      planIntake.planKind === "Commercial / employer" &&
+      ["UHC Commercial", "UnitedHealthcare Commercial PDL baseline"].includes(planIntake.planName.trim())) ||
+    (planIntake.insurer === "Oxford Health" &&
+      planIntake.planKind === "Commercial / employer" &&
+      ["Oxford Freedom", "Oxford Freedom Network commercial PDL baseline"].includes(planIntake.planName.trim())) ||
+    (planIntake.insurer === "Cigna" &&
+      planIntake.planKind === "Commercial / employer" &&
+      ["Cigna 3-Tier", "Cigna National Preferred 3-Tier employer formulary"].includes(planIntake.planName.trim())) ||
+    planIntake.planKind === "Medicare Advantage" ||
+    planIntake.planKind === "Standalone Medicare Part D (Original / Railroad Medicare)" ||
+    ["Original Medicare", "Railroad Medicare"].includes(planIntake.insurer);
+  const canStartPlanWorkflow =
+    summitNjInsurers.some((insurer) => insurer.name === planIntake.insurer) &&
+    (isExactPublicWorkflow || Boolean(planIntake.planName.trim()));
+  const activePublicFormulary =
+    intakeMatch?.kind === "uhc-nj-marketplace" ||
+    intakeMatch?.kind === "aetna-nj-familycare" ||
+    intakeMatch?.kind === "uhc-nj-community" ||
+    intakeMatch?.kind === "fidelis-nj-familycare" ||
+    intakeMatch?.kind === "horizon-nj-health" ||
+    intakeMatch?.kind === "wellpoint-nj-familycare" ||
+    intakeMatch?.kind === "horizon-nj-marketplace" ||
+    intakeMatch?.kind === "horizon-classic" ||
+    intakeMatch?.kind === "amerihealth-nj-individual" ||
+    intakeMatch?.kind === "anthem-ny-select" ||
+    intakeMatch?.kind === "uhc-commercial" ||
+    intakeMatch?.kind === "oxford-freedom" ||
+    intakeMatch?.kind === "cigna-national-preferred"
+      ? intakeMatch.kind
+      : null;
+  const planIntakeNextMatch = planIntakeMatchFor(planIntake);
+  const planIntakeActionLabel =
+    planIntakeNextMatch.kind === "uhc-nj-marketplace"
+      ? "Choose UHC Marketplace plan"
+      : planIntakeNextMatch.kind === "aetna-nj-familycare"
+        ? "Choose Aetna FamilyCare product"
+      : planIntakeNextMatch.kind === "uhc-nj-community"
+        ? "Choose UHC Community medication"
+      : planIntakeNextMatch.kind === "fidelis-nj-familycare"
+        ? "Choose Fidelis medication"
+      : planIntakeNextMatch.kind === "horizon-nj-health"
+        ? "Choose Horizon NJ Health medication"
+      : planIntakeNextMatch.kind === "wellpoint-nj-familycare"
+        ? "Choose Wellpoint medication"
+        : planIntakeNextMatch.kind === "horizon-nj-marketplace"
+          ? "Choose Horizon medication"
+          : planIntakeNextMatch.kind === "horizon-classic"
+            ? "Choose Horizon Classic medication"
+          : planIntakeNextMatch.kind === "amerihealth-nj-individual"
+            ? "Choose AmeriHealth medication"
+          : planIntakeNextMatch.kind === "anthem-ny-select"
+            ? "Choose Anthem medication"
+          : ["uhc-commercial", "oxford-freedom", "cigna-national-preferred"].includes(planIntakeNextMatch.kind)
+            ? "Choose medication product"
+        : planIntakeNextMatch.kind === "medicare"
+          ? "Find exact Medicare plan"
+          : planIntakeNextMatch.kind === "imported"
+            ? "Next: choose medicine"
+          : "Continue to plan check";
+  const publicPlanKey: PlanKey | null =
+    activePublicFormulary === "horizon-nj-marketplace"
+      ? "horizonMarketplace"
+      : activePublicFormulary === "horizon-classic"
+        ? "horizonClassic"
+      : activePublicFormulary === "amerihealth-nj-individual"
+        ? "amerihealthNj"
+        : activePublicFormulary === "anthem-ny-select"
+          ? "anthemNySelect"
+        : activePublicFormulary === "uhc-commercial"
+          ? "uhcCommercial"
+        : activePublicFormulary === "oxford-freedom"
+          ? "oxfordFreedom"
+        : activePublicFormulary === "cigna-national-preferred"
+          ? "cignaNationalPreferred"
+        : null;
+  const publicPlanMedicationSuggestions = publicPlanKey
+    ? medications
+        .map((medication) => {
+          const coverage = coverageFor(medication, publicPlanKey);
+          return { medication, coverage, score: medicationSuggestionScore(publicPlanMedicationQuery, medication) };
+        })
+        .filter(({ coverage, score }) => coverage.state !== "Source loading" && Number.isFinite(score))
+        .sort((left, right) => left.score - right.score || left.medication.generic.localeCompare(right.medication.generic))
+        .map(({ medication }) => medication)
+        .slice(0, 12)
+    : [];
+  const selectedPublicPlanCoverage =
+    publicPlanKey && selectedPublicPlanMedication
+      ? coverageFor(selectedPublicPlanMedication, publicPlanKey)
+      : null;
+  const publicPlanSource =
+    activePublicFormulary === "horizon-nj-marketplace"
+      ? summitNjFormularySources.find((source) => source.insurer === "Horizon BCBSNJ")
+      : activePublicFormulary === "horizon-classic"
+        ? summitNjFormularySources.find((source) => source.insurer === "Horizon BCBSNJ Classic")
+      : activePublicFormulary === "amerihealth-nj-individual"
+        ? summitNjFormularySources.find((source) => source.insurer === "AmeriHealth NJ")
+        : activePublicFormulary === "anthem-ny-select"
+          ? summitNjFormularySources.find((source) => source.insurer === "Empire / Anthem NY")
+        : activePublicFormulary === "uhc-commercial" || activePublicFormulary === "oxford-freedom"
+          ? summitNjFormularySources.find((source) => source.insurer === "UnitedHealthcare / Oxford")
+        : activePublicFormulary === "cigna-national-preferred"
+          ? summitNjFormularySources.find((source) => source.insurer === "Cigna")
+        : null;
+  const publicPlanEyebrow =
+    activePublicFormulary === "horizon-nj-marketplace"
+      ? "2026 NJ Marketplace"
+      : activePublicFormulary === "horizon-classic"
+        ? "July 2026 Commercial"
+      : activePublicFormulary === "amerihealth-nj-individual"
+        ? "2026 NJ Individual & Family"
+      : activePublicFormulary === "anthem-ny-select"
+        ? "2026 New York Individual Select"
+      : activePublicFormulary === "uhc-commercial" || activePublicFormulary === "oxford-freedom"
+        ? "May 2026 Commercial PDL"
+      : "2026 Cigna National Preferred";
+  const publicPlanHeading =
+    activePublicFormulary === "horizon-nj-marketplace"
+      ? "Horizon BCBSNJ Marketplace"
+      : activePublicFormulary === "horizon-classic"
+        ? "Horizon BCBSNJ Classic Formulary"
+      : activePublicFormulary === "amerihealth-nj-individual"
+        ? "AmeriHealth NJ Individual & Family"
+      : activePublicFormulary === "anthem-ny-select"
+        ? "Anthem New York Individual Select"
+      : activePublicFormulary === "uhc-commercial"
+        ? "UnitedHealthcare Commercial PDL"
+      : activePublicFormulary === "oxford-freedom"
+        ? "Oxford Freedom Network PDL"
+      : "Cigna National Preferred 3-Tier";
+  const publicPlanBoundary =
+    activePublicFormulary === "horizon-nj-marketplace"
+      ? "Use only for the named Marketplace or listed Direct Access small-group products. Do not use for generic Horizon employer or Direct Access, Medicaid, or Medicare products."
+      : activePublicFormulary === "horizon-classic"
+        ? "Use only when the member's pharmacy benefit is explicitly Horizon Classic. Direct Access alone does not identify the pharmacy formulary."
+      : activePublicFormulary === "amerihealth-nj-individual"
+        ? "Do not use this result for AmeriHealth Value, Select, employer, or Medicare products."
+      : activePublicFormulary === "anthem-ny-select"
+        ? "This applies only to New York Individual Select plans, not New Jersey, employer, Medicare, or other Anthem formularies."
+      : activePublicFormulary === "uhc-commercial"
+        ? "This is a general UnitedHealthcare commercial PDL baseline. Employer benefits and pharmacy-benefit variants can differ."
+      : activePublicFormulary === "oxford-freedom"
+        ? "This is the Oxford Freedom Network baseline linked to the UHC commercial PDL. Confirm the exact Oxford product and employer benefit."
+      : "This is an abridged Cigna National Preferred employer baseline. Confirm the employer drug-list variant before acting.";
+  const workflowInsurers =
+    insurerQuery || showAllInsurerWorkflows
+      ? summitNjDirectory
+      : summitNjDirectory.slice(0, 9);
+  const openMedicareFinder = (benefitType?: "ma" | "pdp") => {
+    if (benefitType) {
+      setMedicareBenefitType(benefitType);
+      setSelectedMedicarePlan(null);
+    }
+    medicareFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => medicareSearchRef.current?.focus(), 250);
+  };
+  const openPlanIntake = (insurer = "") => {
+    if (insurer) setPlanIntake((current) => ({ ...current, insurer }));
+    planIntakeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => planIntakeInsurerRef.current?.focus(), 250);
+  };
+  const submitPlanIntake = () => {
+    if (!canStartPlanWorkflow) return;
+    setSubmittedPlanIntake(planIntake);
+    setSelectedInsurerName(planIntake.insurer);
+    const nextMatch = planIntakeMatchFor(planIntake);
+    if (nextMatch.kind === "medicare") {
+      const isStandalonePartD =
+        planIntake.planKind === "Standalone Medicare Part D (Original / Railroad Medicare)" ||
+        ["Original Medicare", "Railroad Medicare"].includes(planIntake.insurer);
+      setMedicareBenefitType(isStandalonePartD ? "pdp" : "ma");
+      setMedicareQuery(planIntake.planName);
+      window.setTimeout(() => {
+        medicareFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        medicareSearchRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "uhc-nj-marketplace") {
+      setUhcQhpPlanQuery(planIntake.planName);
+      if (activeSelected) setUhcQhpDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        uhcQhpPlanRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "aetna-nj-familycare") {
+      if (activeSelected) setAetnaFamilyCareDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        aetnaFamilyCareDrugRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "uhc-nj-community") {
+      if (activeSelected) setUhcCommunityDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        uhcCommunityDrugRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "fidelis-nj-familycare") {
+      if (activeSelected) setFidelisFamilyCareDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        fidelisFamilyCareDrugRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "horizon-nj-health") {
+      if (activeSelected) setHorizonNjHealthDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        horizonNjHealthDrugRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "wellpoint-nj-familycare") {
+      if (activeSelected) setWellpointNjFamilyCareDrugQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        wellpointNjFamilyCareDrugRef.current?.focus();
+      }, 0);
+    }
+    if (
+      nextMatch.kind === "horizon-nj-marketplace" ||
+      nextMatch.kind === "horizon-classic" ||
+      nextMatch.kind === "amerihealth-nj-individual" ||
+      nextMatch.kind === "anthem-ny-select" ||
+      nextMatch.kind === "uhc-commercial" ||
+      nextMatch.kind === "oxford-freedom" ||
+      nextMatch.kind === "cigna-national-preferred"
+    ) {
+      if (activeSelected) setPublicPlanMedicationQuery(activeSelected.generic);
+      window.setTimeout(() => {
+        publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        publicPlanMedicationRef.current?.focus();
+      }, 0);
+    }
+    if (nextMatch.kind === "imported") {
+      setPlanFilter(nextMatch.plan.key);
+      setView("medications");
+      setQuery("");
+      window.setTimeout(() => coverageQuickSearchRef.current?.focus(), 0);
+    }
+  };
   const autocompleteOptions = Array.from(
     new Set(
       medications.flatMap((medication) => [
@@ -2373,8 +4326,7 @@ export const PulmonaryFormularyDashboard = () => {
           </div>
           <div className="hidden items-center gap-2 rounded-full border border-[#d9e6e4] bg-[#f8fbfa] px-3 py-2 text-xs font-medium text-[#4c6868] md:flex">
             <Icon name="shield" className="h-4 w-4 text-[#198f7c]" />
-            {apiConnected ? "API connected · " : ""}No patient information
-            collected
+            {apiConnected ? "API connected · " : ""}{medications.length} medication families · {plans.length} plan families · No patient information collected
           </div>
         </div>
       </header>
@@ -2390,9 +4342,9 @@ export const PulmonaryFormularyDashboard = () => {
                 Know the coverage path before the pharmacy call.
               </h1>
               <p className="mt-3 max-w-xl text-sm leading-6 text-[#c7dcda]">
-                Search pulmonary and common medicines across current regional
-                government formularies. See preferred status, restrictions, and
-                the evidence source together.
+                Search {medications.length} pulmonary and commonly used medication families across {plans.length}
+                named plan-family baselines. See preferred status, restrictions,
+                and the evidence source together.
               </p>
             </div>
           </div>
@@ -2411,10 +4363,16 @@ export const PulmonaryFormularyDashboard = () => {
                 onChange={(event) => setQuery(event.target.value)}
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
+                list="medication-suggestions"
                 autoComplete="off"
                 className="h-12 w-full rounded-xl bg-[#f4f8f7] pl-12 pr-4 text-[15px] text-[#173334] outline-none ring-2 ring-transparent transition focus:bg-white focus:ring-[#55bda8]"
-                placeholder="Search albuterol, Trelegy, pulmonary hypertension..."
+                placeholder="Search albuterol, metformin, Trelegy, or a medication..."
               />
+              <datalist id="medication-suggestions">
+                {autocompleteOptions.map((option) => (
+                  <option key={option} value={option} />
+                ))}
+              </datalist>
               {searchFocused &&
                 query.trim() &&
                 autocompleteOptions.length > 0 && (
@@ -2451,16 +4409,20 @@ export const PulmonaryFormularyDashboard = () => {
                   </div>
                 )}
             </div>
-            <select
+            <input
               aria-label="Therapeutic area"
               value={branch}
               onChange={(event) => setBranch(event.target.value)}
+              list="therapeutic-area-options"
+              autoComplete="off"
               className="h-12 rounded-xl border-0 bg-[#edf5f3] px-4 text-sm font-semibold text-[#214746] outline-none ring-2 ring-transparent focus:ring-[#55bda8] sm:max-w-64"
-            >
+              placeholder="Therapeutic area"
+            />
+            <datalist id="therapeutic-area-options">
               {branches.map((item) => (
                 <option key={item}>{item}</option>
               ))}
-            </select>
+            </datalist>
             <button
               onClick={() => setQuery(query.trim())}
               className="h-12 rounded-xl bg-[#ef7d55] px-7 text-sm font-bold text-white shadow-sm transition hover:bg-[#df6942] focus:outline-none focus:ring-2 focus:ring-[#ef7d55] focus:ring-offset-2"
@@ -2497,7 +4459,7 @@ export const PulmonaryFormularyDashboard = () => {
             >
               All plans
             </button>
-            {plans.map((plan) => (
+            {referencePlans.map((plan) => (
               <button
                 key={plan.key}
                 onClick={() => {
@@ -2515,17 +4477,310 @@ export const PulmonaryFormularyDashboard = () => {
 
         {view === "plans" ? (
           <>
-            <section className="mb-5 overflow-hidden rounded-2xl border border-[#b9ddd5] bg-[#eef8f5] shadow-sm">
+            <section ref={planIntakeRef} className="mb-5 overflow-hidden rounded-2xl border border-[#9bcfc4] bg-[#eef8f5] shadow-sm">
               <div className="border-b border-[#cce5df] bg-white px-5 py-4 sm:px-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
-                  Medicare plan finder
+                  Start with the insurance card
                 </p>
                 <h2 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
-                  Medicare is not one drug plan.
+                  Enter the plan details here. Do not start on a payer website.
                 </h2>
                 <p className="mt-1 max-w-3xl text-sm leading-5 text-[#55716f]">
-                  Use the carrier and plan name or ID on the patient’s insurance card. If they have Original Medicare, ask for their separate Part D drug-plan card.
+                  Keep this to plan information only: insurer, plan type, plan or formulary name, and pharmacy-benefit label. Do not enter member IDs, DOBs, claim numbers, or patient details.
                 </p>
+                <p className="mt-3 text-xs font-semibold text-[#0d6664]">
+                  Step 1: choose the major insurer. Step 2: choose its exact plan detail. Step 3: choose the medicine.
+                </p>
+              </div>
+              <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6 xl:grid-cols-4">
+                <label className="block">
+                  <span className="text-xs font-bold text-[#284e4d]">Insurer on card</span>
+                  <input
+                    ref={planIntakeInsurerRef}
+                    value={planIntake.insurer}
+                    onChange={(event) => {
+                      const nextInsurer = event.target.value;
+                      const recognized = summitNjInsurers.find((insurer) => insurer.name === nextInsurer.trim());
+                      setPlanIntake((current) => {
+                        if (!recognized || current.insurer.trim() === nextInsurer.trim()) {
+                          return { ...current, insurer: nextInsurer };
+                        }
+                        const nextKinds = planKindsForInsurer(recognized.name);
+                        return {
+                          insurer: nextInsurer,
+                          planKind: nextKinds.includes(current.planKind) ? current.planKind : nextKinds[0],
+                          planName: "",
+                          pharmacyBenefit: "",
+                        };
+                      });
+                      setSubmittedPlanIntake(null);
+                    }}
+                    list="plan-intake-insurers"
+                    autoComplete="off"
+                    className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                    placeholder="Type insurer name"
+                  />
+                  <datalist id="plan-intake-insurers">
+                    {summitNjInsurers.map((insurer) => (
+                      <option key={insurer.name} value={insurer.name}>{insurer.name}</option>
+                    ))}
+                  </datalist>
+                  {recognizedPlanIntakeInsurer && (
+                    <p className="mt-1 text-[10px] font-semibold text-[#0d6664]">
+                      Next fields filtered for {recognizedPlanIntakeInsurer.name}.
+                    </p>
+                  )}
+                </label>
+                <label className="block">
+                  <span className="text-xs font-bold text-[#284e4d]">Coverage type</span>
+                  <select
+                    value={planIntake.planKind}
+                    onChange={(event) => {
+                      setPlanIntake((current) => ({
+                        ...current,
+                        planKind: event.target.value,
+                        planName: "",
+                        pharmacyBenefit: "",
+                      }));
+                      setSubmittedPlanIntake(null);
+                    }}
+                    className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                  >
+                    {availablePlanKinds.map((kind) => <option key={kind}>{kind}</option>)}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="text-xs font-bold text-[#284e4d]">
+                    {isExactPublicWorkflow ? "Plan or formulary name (optional)" : "Plan or formulary name"}
+                  </span>
+                  <input
+                    value={planIntake.planName}
+                    onChange={(event) => setPlanIntake((current) => ({ ...current, planName: event.target.value }))}
+                    list="plan-name-suggestions"
+                    autoComplete="off"
+                    className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                    placeholder={
+                      isExactPublicWorkflow
+                        ? "Optional: paste the plan name from the card"
+                        : recognizedPlanIntakeInsurer && availablePlanNames.length
+                          ? "Select or type the exact plan name"
+                          : "Type the exact plan or formulary name"
+                    }
+                  />
+                  <datalist id="plan-name-suggestions">
+                    {availablePlanNames.map((name) => <option key={name} value={name} />)}
+                  </datalist>
+                </label>
+                <label className="block">
+                  <span className="text-xs font-bold text-[#284e4d]">Pharmacy benefit or drug-list label</span>
+                  <input
+                    value={planIntake.pharmacyBenefit}
+                    onChange={(event) => {
+                      setPlanIntake((current) => ({ ...current, pharmacyBenefit: event.target.value }));
+                      setSubmittedPlanIntake(null);
+                    }}
+                    list="pharmacy-benefit-suggestions"
+                    autoComplete="off"
+                    className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                    placeholder="Example: Advantage 3-Tier"
+                  />
+                  <datalist id="pharmacy-benefit-suggestions">
+                    {availablePharmacyBenefits.map((label) => <option key={label} value={label} />)}
+                  </datalist>
+                </label>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 border-t border-[#cce5df] bg-white px-5 py-4 sm:px-6">
+                <button
+                  type="button"
+                  disabled={
+                    !canStartPlanWorkflow
+                  }
+                  onClick={submitPlanIntake}
+                  className="rounded-full bg-[#173f41] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#0d6664] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {planIntakeActionLabel}
+                </button>
+                <span className="text-xs text-[#55716f]">Plan details stay in this browser session and are not saved.</span>
+              </div>
+              {submittedPlanIntake && intakeInsurer && intakeWorkflow && intakeMatch && !["medicare", "uhc-nj-marketplace", "aetna-nj-familycare", "uhc-nj-community", "fidelis-nj-familycare", "horizon-nj-marketplace", "horizon-classic", "amerihealth-nj-individual", "anthem-ny-select", "uhc-commercial", "oxford-freedom", "cigna-national-preferred", "imported"].includes(intakeMatch.kind) && (
+                <div className="border-t border-[#cce5df] bg-[#f8fcfb] px-5 py-5 sm:px-6">
+                  <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">Plan match</p>
+                      <h3 className="mt-1 text-lg font-bold text-[#173f41]">
+                        {submittedPlanIntake.planName || intakeInsurer.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-[#55716f]">
+                        {submittedPlanIntake.planKind}{submittedPlanIntake.pharmacyBenefit ? ` · ${submittedPlanIntake.pharmacyBenefit}` : ""}
+                      </p>
+                    </div>
+                    <span className="w-fit rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#c9e2dc]">No PHI stored</span>
+                  </div>
+                  <p className="mt-3 max-w-3xl text-sm leading-5 text-[#4e6c68]">
+                    {intakeMatch.kind === "imported"
+                      ? `Exact imported formulary match: ${intakeMatch.plan.name}. Confirm the medication's product, strength, device, and restrictions before acting.`
+                      : intakeMatch.kind === "medicare"
+                        ? "Select the exact Medicare Advantage or standalone Part D plan from the CMS data loaded in this portal. A carrier name alone is not a match."
+                        : intakeMatch.kind === "uhc-nj-marketplace"
+                          ? "Exact 2026 UnitedHealthcare NJ Marketplace plan and drug data are available in this portal. Select the HIOS plan and exact RxNorm product below."
+                        : intakeMatch.kind === "aetna-nj-familycare"
+                          ? "Current Aetna Better Health of New Jersey FamilyCare formulary data are available in this portal. Select the exact product NDC below."
+                        : intakeMatch.kind === "uhc-nj-community"
+                          ? "Current UHC Community Plan NJ Medicaid formulary data are available in this portal. Select the exact medication product below."
+                        : intakeMatch.kind === "fidelis-nj-familycare"
+                          ? "Current Fidelis Care NJ FamilyCare PDL rows are available in this portal. Select the exact medication product below."
+                            : intakeMatch.kind === "horizon-nj-marketplace"
+                              ? "Horizon BCBSNJ Marketplace formulary rows are available in this portal. Choose a medication product from the named Marketplace formulary family below."
+                            : intakeMatch.kind === "horizon-classic"
+                              ? "Horizon Classic formulary rows are available in this portal. Confirm the card or benefits document says Horizon Classic, then choose the medication product below."
+                            : intakeMatch.kind === "amerihealth-nj-individual"
+                              ? "AmeriHealth NJ Individual and Family formulary rows are available in this portal. Choose a medication product from that named formulary family below."
+                            : intakeMatch.kind === "anthem-ny-select"
+                              ? "Anthem New York Individual Select pulmonary formulary rows are available in this portal. Confirm this is a New York Individual Select plan before using the result."
+                            : ["uhc-commercial", "oxford-freedom", "cigna-national-preferred"].includes(intakeMatch.kind)
+                              ? "The exact named commercial PDL baseline is available in this portal. Choose a medication product, then confirm the employer benefit and drug-list variant before acting."
+                        : intakeMatch.kind === "out-of-scope"
+                          ? "This coverage type is outside the current imported data. Treat the result as unconfirmed."
+                        : "This exact plan family is not imported in Formulary Finder yet. Do not infer medication coverage from the insurer name, network, or a different plan."}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {intakeMatch.kind === "medicare" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const isStandalonePartD =
+                            submittedPlanIntake.planKind === "Standalone Medicare Part D (Original / Railroad Medicare)" ||
+                            ["Original Medicare", "Railroad Medicare"].includes(submittedPlanIntake.insurer);
+                          setMedicareBenefitType(isStandalonePartD ? "pdp" : "ma");
+                          setMedicareQuery(submittedPlanIntake.planName);
+                          openMedicareFinder(isStandalonePartD ? "pdp" : "ma");
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Search exact CMS plan in portal
+                      </button>
+                    )}
+                    {intakeMatch.kind === "imported" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPlanFilter(intakeMatch.plan.key);
+                          setView("medications");
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Search imported formulary
+                      </button>
+                    )}
+                    {intakeMatch.kind === "uhc-nj-marketplace" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setUhcQhpPlanQuery(submittedPlanIntake.planName);
+                          if (activeSelected) setUhcQhpDrugQuery(activeSelected.generic);
+                          publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Choose exact UHC Marketplace plan
+                      </button>
+                    )}
+                    {intakeMatch.kind === "aetna-nj-familycare" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (activeSelected) setAetnaFamilyCareDrugQuery(activeSelected.generic);
+                          publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Choose exact Aetna FamilyCare product
+                      </button>
+                    )}
+                    {intakeMatch.kind === "uhc-nj-community" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (activeSelected) setUhcCommunityDrugQuery(activeSelected.generic);
+                          publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Choose UHC Community medication
+                      </button>
+                    )}
+                    {intakeMatch.kind === "fidelis-nj-familycare" && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (activeSelected) setFidelisFamilyCareDrugQuery(activeSelected.generic);
+                          publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Choose Fidelis medication
+                      </button>
+                    )}
+                    {(intakeMatch.kind === "horizon-nj-marketplace" || intakeMatch.kind === "horizon-classic" || intakeMatch.kind === "amerihealth-nj-individual" || intakeMatch.kind === "anthem-ny-select" || intakeMatch.kind === "uhc-commercial" || intakeMatch.kind === "oxford-freedom" || intakeMatch.kind === "cigna-national-preferred") && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (activeSelected) setPublicPlanMedicationQuery(activeSelected.generic);
+                          publicCoverageFinderRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
+                        className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white"
+                      >
+                        Choose medication product
+                      </button>
+                    )}
+                    {intakeMatch.kind === "unconfirmed" && (
+                      <span className="rounded-full bg-[#fff7e8] px-3 py-1.5 text-xs font-bold text-[#8a5a16]">
+                        No imported formulary result
+                      </span>
+                    )}
+                    {intakeMatch.kind === "out-of-scope" && (
+                      <span className="rounded-full bg-[#eef2f1] px-3 py-1.5 text-xs font-bold text-[#526b69]">
+                        Outside current pilot scope
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-3 text-[11px] leading-4 text-[#6a8580]">* Formulary evidence is not eligibility, a benefit guarantee, or a prescription decision. Confirm product, strength, device, and restrictions before acting.</p>
+                </div>
+              )}
+            </section>
+            {intakeMatch?.kind === "medicare" && (
+            <section ref={medicareFinderRef} className="mb-5 overflow-hidden rounded-2xl border border-[#b9ddd5] bg-[#eef8f5] shadow-sm">
+              <div className="border-b border-[#cce5df] bg-white px-5 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                  Step 2 of 3 · Medicare plan finder
+                </p>
+                <h2 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
+                  Find the exact Medicare drug plan.
+                </h2>
+                <p className="mt-1 max-w-3xl text-sm leading-5 text-[#55716f]">
+                  Choose Medicare Advantage or standalone Part D, then use the carrier and exact plan name or contract-plan ID from the correct card.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2" aria-label="Medicare coverage type">
+                  {([
+                    ["ma", "Medicare Advantage"],
+                    ["pdp", "Standalone Part D"],
+                  ] as const).map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={medicareBenefitType === value}
+                      onClick={() => {
+                        setMedicareBenefitType(value);
+                        setMedicareQuery("");
+                        setMedicarePlans([]);
+                        setSelectedMedicarePlan(null);
+                      }}
+                      className={`rounded-full px-3 py-1.5 text-xs font-bold ring-1 transition ${medicareBenefitType === value ? "bg-[#0d6664] text-white ring-[#0d6664]" : "bg-white text-[#55716f] ring-[#bfdcd5]"}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
               <div className="grid gap-4 p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
                 <label className="block">
@@ -2533,20 +4788,16 @@ export const PulmonaryFormularyDashboard = () => {
                     Search carrier, plan name, or plan ID
                   </span>
                   <input
+                    ref={medicareSearchRef}
                     value={medicareQuery}
                     onChange={(event) => {
                       const nextValue = event.target.value;
-                      const exactPlan = medicarePlans.find(
-                        (plan) =>
-                          plan.plan_name === nextValue ||
-                          `${plan.contract_id}-${plan.plan_id}` === nextValue,
-                      );
                       setMedicareQuery(nextValue);
-                      setSelectedMedicarePlan(exactPlan ?? null);
+                      setSelectedMedicarePlan(null);
                     }}
                     list="medicare-plan-suggestions"
                     className="mt-2 h-12 w-full rounded-xl border border-[#bfdcd5] bg-white px-4 text-sm outline-none ring-2 ring-transparent focus:ring-[#55bda8]"
-                    placeholder="Try Humana, Wellcare, H5216-319..."
+                    placeholder={medicareBenefitType === "pdp" ? "Try SilverScript, Wellcare, or S4802-078" : "Try Humana, Wellcare, or H5216-319"}
                     autoComplete="off"
                   />
                   <datalist id="medicare-plan-suggestions">
@@ -2556,20 +4807,25 @@ export const PulmonaryFormularyDashboard = () => {
                   </datalist>
                 </label>
                 <div className="rounded-xl bg-white px-4 py-3 text-xs leading-5 text-[#55716f] ring-1 ring-[#cce4de]">
-                  <span className="font-bold text-[#173f41]">Card check:</span> carrier + plan name/ID<br />
-                  Member ID is not needed here.
+                  <span className="font-bold text-[#173f41]">Card check:</span>{" "}
+                  {medicareBenefitType === "pdp" ? "separate Part D card + exact plan name/ID" : "Medicare Advantage card + exact plan name/ID"}<br />
+                  Member ID is not needed or stored here.
                 </div>
               </div>
-              {(medicarePlanLoading || medicarePlans.length > 0 || selectedMedicarePlan) && (
+              {(medicareQuery.trim().length >= 2 || medicarePlanLoading || medicarePlans.length > 0 || selectedMedicarePlan) && (
                 <div className="border-t border-[#cce5df] bg-white px-5 py-4 sm:px-6">
                   {medicarePlanLoading ? (
                     <p className="text-sm font-semibold text-[#55716f]">Finding NJ Medicare plans…</p>
+                  ) : medicarePlanError ? (
+                    <p className="rounded-xl border border-[#e2c996] bg-[#fff9ea] p-3 text-sm text-[#785313]">
+                      Medicare plan search is temporarily unavailable. Do not infer coverage from this result.
+                    </p>
                   ) : selectedMedicarePlan ? (
                     <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                       <div>
                         <p className="text-sm font-bold text-[#0d6664]">Exact plan selected</p>
                         <p className="text-sm font-semibold text-[#173f41]">{selectedMedicarePlan.plan_name}</p>
-                        <p className="mt-1 text-xs text-[#55716f]">{selectedMedicarePlan.contract_id}-{selectedMedicarePlan.plan_id} · Formulary {selectedMedicarePlan.formulary_id}</p>
+                        <p className="mt-1 text-xs text-[#55716f]">{selectedMedicarePlan.plan_type} · {selectedMedicarePlan.contract_id}-{selectedMedicarePlan.plan_id} · Formulary {selectedMedicarePlan.formulary_id}</p>
                       </div>
                       <button
                         type="button"
@@ -2587,22 +4843,712 @@ export const PulmonaryFormularyDashboard = () => {
                           <button
                             type="button"
                             key={`${plan.contract_id}-${plan.plan_id}-${plan.segment_id}`}
-                            onClick={() => setSelectedMedicarePlan(plan)}
+                            onClick={() => {
+                              setSelectedMedicarePlan(plan);
+                              setView("medications");
+                              setQuery("");
+                              window.setTimeout(() => coverageQuickSearchRef.current?.focus(), 0);
+                            }}
                             className="rounded-xl border border-[#d4e6e2] bg-[#f9fcfb] px-4 py-3 text-left transition hover:border-[#75bdb0] hover:bg-[#eef8f5] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
                           >
                             <span className="block text-sm font-bold text-[#173f41]">{plan.plan_name}</span>
-                            <span className="mt-1 block text-xs text-[#5c7775]">{plan.contract_id}-{plan.plan_id} · Formulary {plan.formulary_id}</span>
+                            <span className="mt-1 block text-xs text-[#5c7775]">{plan.plan_type} · {plan.contract_id}-{plan.plan_id} · Formulary {plan.formulary_id}</span>
                           </button>
                         ))}
                       </div>
                     </div>
                   ) : (
-                    <p className="text-sm text-[#55716f]">No NJ Medicare plan matched that search. Check the card’s carrier and plan ID.</p>
+                    <p className="text-sm text-[#55716f]"><strong>Unconfirmed - not a denial.</strong> No NJ {medicareBenefitType === "pdp" ? "standalone Part D" : "Medicare Advantage"} plan matched that search. Check the correct card's carrier and contract-plan ID.</p>
                   )}
                 </div>
               )}
             </section>
-            <section className="mb-5 overflow-hidden rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">
+            )}
+            {activePublicFormulary && (
+            <section ref={publicCoverageFinderRef} className="mb-5 scroll-mt-4 overflow-hidden rounded-2xl border border-[#9fcfc4] bg-white shadow-sm">
+              <div className="border-b border-[#d8e9e5] bg-[#f3faf8] px-5 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                  Live public formulary data
+                </p>
+                <h2 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
+                  Exact plan check
+                </h2>
+                <p className="mt-1 max-w-3xl text-sm leading-5 text-[#55716f]">
+                  Select the major insurer and coverage type above. Formulary Finder then opens only the relevant plan detail, instead of showing every subplan at once.
+                </p>
+              </div>
+              <div className="grid gap-5 p-5 sm:p-6">
+                {(activePublicFormulary === "horizon-nj-marketplace" || activePublicFormulary === "horizon-classic" || activePublicFormulary === "amerihealth-nj-individual" || activePublicFormulary === "anthem-ny-select" || activePublicFormulary === "uhc-commercial" || activePublicFormulary === "oxford-freedom" || activePublicFormulary === "cigna-national-preferred") && publicPlanKey && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">
+                        {publicPlanEyebrow}
+                      </p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">
+                        {publicPlanHeading}
+                      </h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Pulmonary source rows</span>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-[#55716f]">
+                    This is one named formulary family, not a carrier-wide result. Select the medication product below. {publicPlanBoundary}
+                  </p>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · medication product
+                      {activeSelected && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPublicPlanMedicationQuery(activeSelected.generic);
+                            setSelectedPublicPlanMedication(null);
+                            setPublicPlanCoverageVisible(false);
+                          }}
+                          className="text-[10px] text-[#0d6664] hover:underline"
+                        >
+                          Use {activeSelected.generic}
+                        </button>
+                      )}
+                    </span>
+                    <input
+                      ref={publicPlanMedicationRef}
+                      value={publicPlanMedicationQuery}
+                      onChange={(event) => {
+                        setPublicPlanMedicationQuery(event.target.value);
+                        setSelectedPublicPlanMedication(null);
+                        setPublicPlanCoverageVisible(false);
+                      }}
+                      list="public-plan-medication-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type medication, brand, strength, or form"
+                      autoComplete="off"
+                    />
+                    <datalist id="public-plan-medication-suggestions">
+                      {publicPlanMedicationSuggestions.map((medication) => (
+                        <option key={medication.generic} value={medication.generic} label={medication.productDetails} />
+                      ))}
+                    </datalist>
+                  </label>
+                  {publicPlanMedicationSuggestions.length > 0 && !selectedPublicPlanMedication && (
+                    <div className="mt-2 max-h-64 space-y-1.5 overflow-auto pr-1">
+                      {needsProductCorrectionHint(publicPlanMedicationQuery, publicPlanMedicationSuggestions.map((medication) => `${medication.generic} ${medication.brands}`)) && (
+                        <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">Did you mean one of these listed products?</p>
+                      )}
+                      {publicPlanMedicationSuggestions.map((medication) => (
+                        <button
+                          type="button"
+                          key={medication.generic}
+                          onClick={() => {
+                            setSelectedPublicPlanMedication(medication);
+                            setPublicPlanMedicationQuery(medication.generic);
+                            setPublicPlanCoverageVisible(false);
+                          }}
+                          className="w-full rounded-lg border border-[#d5e6e2] bg-white px-3 py-2 text-left hover:border-[#75bdb0] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
+                        >
+                          <span className="block text-xs font-bold text-[#173f41]">{medication.generic}</span>
+                          <span className="mt-0.5 block text-[10px] text-[#607a77]">{medication.productDetails ?? medication.brands}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {selectedPublicPlanMedication && (
+                    <div className="mt-2 rounded-lg bg-[#eaf6f2] px-3 py-2 text-xs text-[#315b56]">
+                      <strong>Medication selected:</strong> {selectedPublicPlanMedication.generic}
+                      {selectedPublicPlanMedication.productDetails ? ` · ${selectedPublicPlanMedication.productDetails}` : ""}
+                    </div>
+                  )}
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      disabled={!selectedPublicPlanMedication}
+                      onClick={() => setPublicPlanCoverageVisible(true)}
+                      className="rounded-full bg-[#173f41] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#0d6664] focus:outline-none focus:ring-2 focus:ring-[#55bda8] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      Check formulary
+                    </button>
+                    <span className="text-[11px] text-[#607a77]">{selectedPublicPlanMedication ? "Medication product selected." : "Choose a listed medication product first."}</span>
+                  </div>
+                  {publicPlanCoverageVisible && selectedPublicPlanMedication && selectedPublicPlanCoverage && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {selectedPublicPlanCoverage.state === "Source loading" ? (
+                        <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> This medication is not yet mapped to a complete row for this source family.</p>
+                      ) : (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]">
+                            <Icon name="check" className="h-3.5 w-3.5" />
+                            Listed in the selected formulary family
+                          </p>
+                          <div className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                            <p className="text-xs font-bold text-[#173f41]">{selectedPublicPlanCoverage.state}</p>
+                            {selectedPublicPlanCoverage.productNote && <p className="mt-1 text-[10px] leading-4 text-[#58726f]">{selectedPublicPlanCoverage.productNote}</p>}
+                            <div className="mt-2 flex flex-wrap gap-1">
+                              {selectedPublicPlanCoverage.flags?.map((flag) => <span key={flag} className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">{flag}</span>)}
+                              {!selectedPublicPlanCoverage.flags?.length && <span className="text-[10px] text-[#58726f]">No restriction flag in this imported source row.</span>}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* {publicPlanSource?.sourceLabel ?? "Source formulary"}. Listing is not eligibility, a benefit guarantee, cost, payment, or a prescription decision. Confirm the strength, device, and restrictions before acting.</p>
+                </article>
+                )}
+                {activePublicFormulary === "uhc-nj-marketplace" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">2026 NJ Marketplace</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">UnitedHealthcare Individual &amp; Family</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">6 HIOS plans</span>
+                  </div>
+                  <label className="mt-4 block">
+                    <span className="text-xs font-bold text-[#284e4d]">Step 2 of 3 · plan name or HIOS plan ID</span>
+                    <input
+                      ref={uhcQhpPlanRef}
+                      value={uhcQhpPlanQuery}
+                      onChange={(event) => {
+                        setUhcQhpPlanQuery(event.target.value);
+                        setSelectedUhcQhpPlan(null);
+                        setUhcQhpCoverage(null);
+                        setUhcQhpCoverageRequest(0);
+                      }}
+                      list="uhc-qhp-plan-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Try UHC Silver Value or 37777NJ0100005"
+                      autoComplete="off"
+                    />
+                    <datalist id="uhc-qhp-plan-suggestions">
+                      {uhcQhpPlans.map((plan) => (
+                        <option key={plan.planId} value={plan.marketingName} label={plan.planId} />
+                      ))}
+                    </datalist>
+                  </label>
+                  {uhcQhpPlans.length > 0 && !selectedUhcQhpPlan && (
+                    <div className="mt-2 space-y-1.5">
+                      {uhcQhpPlans.map((plan) => (
+                        <button
+                          type="button"
+                          key={plan.planId}
+                          onClick={() => {
+                            setSelectedUhcQhpPlan(plan);
+                            setUhcQhpPlanQuery(plan.marketingName);
+                            setUhcQhpCoverage(null);
+                            setUhcQhpCoverageRequest(0);
+                          }}
+                          className="w-full rounded-lg border border-[#d5e6e2] bg-white px-3 py-2 text-left hover:border-[#75bdb0] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
+                        >
+                          <span className="block text-xs font-bold text-[#173f41]">{plan.marketingName}</span>
+                          <span className="mt-0.5 block text-[10px] text-[#607a77]">{plan.planId}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {selectedUhcQhpPlan && (
+                    <div className="mt-2 rounded-lg bg-[#eaf6f2] px-3 py-2 text-xs text-[#315b56]">
+                      <strong>Exact plan selected:</strong> {selectedUhcQhpPlan.planId}
+                    </div>
+                  )}
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 3 of 3 · exact medication product
+                      {activeSelected && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUhcQhpDrugQuery(activeSelected.generic);
+                            setSelectedUhcQhpDrug(null);
+                            setUhcQhpCoverage(null);
+                            setUhcQhpCoverageRequest(0);
+                          }}
+                          className="text-[10px] text-[#0d6664] hover:underline"
+                        >
+                          Use {activeSelected.generic}
+                        </button>
+                      )}
+                    </span>
+                    <input
+                      value={uhcQhpDrugQuery}
+                      onChange={(event) => {
+                        setUhcQhpDrugQuery(event.target.value);
+                        setSelectedUhcQhpDrug(null);
+                        setUhcQhpCoverage(null);
+                        setUhcQhpCoverageRequest(0);
+                      }}
+                      list="uhc-qhp-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, strength, and form"
+                      autoComplete="off"
+                    />
+                    <datalist id="uhc-qhp-drug-suggestions">
+                      {uhcQhpDrugs.map((drug) => (
+                        <option key={drug.rxcui} value={drug.drugName} label={`RxCUI ${drug.rxcui}`} />
+                      ))}
+                    </datalist>
+                  </label>
+                  {uhcQhpDrugs.length > 0 && !selectedUhcQhpDrug && (
+                    <div className="mt-2 max-h-56 space-y-1.5 overflow-auto pr-1">
+                      {needsProductCorrectionHint(uhcQhpDrugQuery, uhcQhpDrugs.map((drug) => drug.drugName)) && (
+                        <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">
+                          Did you mean one of these exact products?
+                        </p>
+                      )}
+                      {uhcQhpDrugs.map((drug) => (
+                        <button
+                          type="button"
+                          key={drug.rxcui}
+                          onClick={() => {
+                            setSelectedUhcQhpDrug(drug);
+                            setUhcQhpDrugQuery(drug.drugName);
+                            setUhcQhpCoverage(null);
+                            setUhcQhpCoverageRequest(0);
+                          }}
+                          className="w-full rounded-lg border border-[#d5e6e2] bg-white px-3 py-2 text-left hover:border-[#75bdb0] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
+                        >
+                          <span className="block text-xs font-bold text-[#173f41]">{drug.drugName}</span>
+                          <span className="mt-0.5 block text-[10px] text-[#607a77]">RxCUI {drug.rxcui}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {selectedUhcQhpDrug && (
+                    <div className="mt-2 rounded-lg bg-[#eaf6f2] px-3 py-2 text-xs text-[#315b56]">
+                      <strong>Exact product selected:</strong> RxCUI {selectedUhcQhpDrug.rxcui}
+                    </div>
+                  )}
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      disabled={!selectedUhcQhpPlan || !selectedUhcQhpDrug || uhcQhpLoading}
+                      onClick={() => setUhcQhpCoverageRequest((request) => request + 1)}
+                      className="rounded-full bg-[#173f41] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#0d6664] focus:outline-none focus:ring-2 focus:ring-[#55bda8] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {uhcQhpLoading ? "Checking coverage…" : "Check coverage"}
+                    </button>
+                    <span className="text-[11px] text-[#607a77]">
+                      {selectedUhcQhpPlan && selectedUhcQhpDrug
+                        ? "Exact plan and product selected."
+                        : "Choose the exact plan and medication product first."}
+                    </span>
+                  </div>
+                  {(uhcQhpLoading || uhcQhpError || uhcQhpCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {uhcQhpLoading ? (
+                        <p className="text-xs font-semibold text-[#55716f]">Checking the public UHC formulary…</p>
+                      ) : uhcQhpError ? (
+                        <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p>
+                      ) : uhcQhpCoverage?.status === "confirmed" && uhcQhpCoverage.coverage?.length ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]">
+                            <Icon name="check" className="h-3.5 w-3.5" />
+                            Covered in the selected 2026 plan
+                          </p>
+                          {uhcQhpCoverage.coverage.map((row, index) => (
+                            <div key={`${row.drugTier}-${index}`} className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                              <span className="text-xs font-bold text-[#173f41]">{row.drugTier.replaceAll("-", " ")}</span>
+                              <div className="mt-1 flex flex-wrap gap-1">
+                                {row.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                                {row.stepTherapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                                {row.quantityLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL</span>}
+                                {!row.priorAuthorization && !row.stepTherapy && !row.quantityLimit && <span className="text-[10px] text-[#58726f]">No restriction flag in this source row.</span>}
+                              </div>
+                            </div>
+                          ))}
+                          <p className="mt-2 text-[10px] text-[#607a77]">RxCUI {uhcQhpCoverage.drug?.rxcui} · Source {uhcQhpCoverage.source?.drugs?.sourceDate?.slice(0, 10) ?? "current feed"}</p>
+                        </div>
+                      ) : uhcQhpCoverage ? (
+                        <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No complete matching row was found for this exact plan and RxCUI.</p>
+                      ) : null}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* UHC NJ Individual/Family Marketplace only. Not UHC employer, Oxford, Medicare, Medicaid, eligibility, cost, or payment.</p>
+                </article>
+                )}
+
+                {activePublicFormulary === "aetna-nj-familycare" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">NJ FamilyCare Medicaid</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">Aetna Better Health of New Jersey</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Exact NDC</span>
+                  </div>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · exact medication product
+                      {activeSelected && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setAetnaFamilyCareDrugQuery(activeSelected.generic);
+                            setSelectedAetnaFamilyCareNdc("");
+                            setAetnaFamilyCareCoverage(null);
+                            setAetnaFamilyCareCoverageRequest(0);
+                          }}
+                          className="text-[10px] text-[#0d6664] hover:underline"
+                        >
+                          Use {activeSelected.generic}
+                        </button>
+                      )}
+                    </span>
+                    <input
+                      ref={aetnaFamilyCareDrugRef}
+                      value={aetnaFamilyCareDrugQuery}
+                      onChange={(event) => {
+                        setAetnaFamilyCareDrugQuery(event.target.value);
+                        setSelectedAetnaFamilyCareNdc("");
+                        setAetnaFamilyCareCoverage(null);
+                        setAetnaFamilyCareCoverageRequest(0);
+                      }}
+                      list="aetna-familycare-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, strength, and dosage form"
+                      autoComplete="off"
+                    />
+                    <datalist id="aetna-familycare-drug-suggestions">
+                      {aetnaFamilyCareSuggestions.map((suggestion) => (
+                        <option key={suggestion.drugName} value={suggestion.drugName} />
+                      ))}
+                    </datalist>
+                  </label>
+                  {aetnaFamilyCareSuggestions.length > 0 && (
+                    <div className="mt-2 max-h-72 space-y-2 overflow-auto pr-1">
+                      {needsProductCorrectionHint(aetnaFamilyCareDrugQuery, aetnaFamilyCareSuggestions.map((suggestion) => suggestion.drugName)) && (
+                        <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">
+                          Did you mean one of these exact products?
+                        </p>
+                      )}
+                      {aetnaFamilyCareSuggestions.map((suggestion) => (
+                        <div key={suggestion.drugName} className="rounded-lg border border-[#d5e6e2] bg-white p-3">
+                          <p className="text-xs font-bold text-[#173f41]">{suggestion.drugName}</p>
+                          <p className="mt-1 text-[10px] text-[#607a77]">Choose the exact 11-digit NDC</p>
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {suggestion.ndcs.slice(0, 4).map((ndc) => (
+                              <button
+                                type="button"
+                                key={ndc}
+                                aria-pressed={selectedAetnaFamilyCareNdc === ndc}
+                                onClick={() => {
+                                  setSelectedAetnaFamilyCareNdc(ndc);
+                                  setAetnaFamilyCareCoverage(null);
+                                  setAetnaFamilyCareCoverageRequest(0);
+                                }}
+                                className={`rounded-full px-2 py-1 text-[9px] font-bold ring-1 ${selectedAetnaFamilyCareNdc === ndc ? "bg-[#0d6664] text-white ring-[#0d6664]" : "bg-[#f3faf8] text-[#315b56] ring-[#b8d9d1]"}`}
+                              >
+                                {ndc}
+                              </button>
+                            ))}
+                            {suggestion.ndcCount > 4 && <span className="px-1 py-1 text-[9px] text-[#6a817e]">+{suggestion.ndcCount - 4} package NDCs</span>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      disabled={!selectedAetnaFamilyCareNdc || aetnaFamilyCareLoading}
+                      onClick={() => setAetnaFamilyCareCoverageRequest((request) => request + 1)}
+                      className="rounded-full bg-[#173f41] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#0d6664] focus:outline-none focus:ring-2 focus:ring-[#55bda8] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {aetnaFamilyCareLoading ? "Checking coverage…" : "Check coverage"}
+                    </button>
+                    <span className="text-[11px] text-[#607a77]">
+                      {selectedAetnaFamilyCareNdc
+                        ? `Exact NDC ${selectedAetnaFamilyCareNdc} selected.`
+                        : "Choose the exact 11-digit NDC first."}
+                    </span>
+                  </div>
+                  {(aetnaFamilyCareLoading || aetnaFamilyCareError || aetnaFamilyCareCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {aetnaFamilyCareLoading ? (
+                        <p className="text-xs font-semibold text-[#55716f]">Checking the public Aetna FamilyCare formulary…</p>
+                      ) : aetnaFamilyCareError ? (
+                        <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p>
+                      ) : aetnaFamilyCareCoverage?.status === "listed" && aetnaFamilyCareCoverage.matches?.length ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]">
+                            <Icon name="check" className="h-3.5 w-3.5" />
+                            Covered in the current NJ FamilyCare formulary
+                          </p>
+                          {aetnaFamilyCareCoverage.matches.map((row) => (
+                            <div key={row.ndc} className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                              <p className="text-xs font-bold text-[#173f41]">{row.drugName}</p>
+                              <p className="mt-0.5 text-[10px] text-[#607a77]">{row.drugTier} · NDC {row.ndc}</p>
+                              <div className="mt-1 flex flex-wrap gap-1">
+                                {row.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                                {row.stepTherapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                                {row.quantityLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL</span>}
+                                {row.otc && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">OTC</span>}
+                              </div>
+                            </div>
+                          ))}
+                          <p className="mt-2 text-[10px] text-[#607a77]">Effective {aetnaFamilyCareCoverage.source?.effectiveDate ?? "current source"}</p>
+                        </div>
+                      ) : aetnaFamilyCareCoverage ? (
+                        <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No exact NDC row was found in this source.</p>
+                      ) : null}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* Aetna Better Health NJ FamilyCare Medicaid only. Not Aetna commercial, Medicare, eligibility, cost, or payment.</p>
+                </article>
+                )}
+                {activePublicFormulary === "uhc-nj-community" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">NJ Medicaid · 2026</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">UnitedHealthcare Community Plan of New Jersey</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Exact RxNorm product</span>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-[#55716f]">Search the standard UHC Community Plan NJ Medicaid drug list, then select the exact product before checking its published tier and restrictions.</p>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · exact medication product
+                      {activeSelected && <button type="button" onClick={() => { setUhcCommunityDrugQuery(activeSelected.generic); setSelectedUhcCommunityDrug(null); setUhcCommunityCoverage(null); }} className="text-[10px] text-[#0d6664] hover:underline">Use {activeSelected.generic}</button>}
+                    </span>
+                    <input
+                      ref={uhcCommunityDrugRef}
+                      value={uhcCommunityDrugQuery}
+                      onChange={(event) => { setUhcCommunityDrugQuery(event.target.value); setSelectedUhcCommunityDrug(null); setUhcCommunityCoverage(null); }}
+                      list="uhc-community-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, strength, or dosage form"
+                      autoComplete="off"
+                    />
+                    <datalist id="uhc-community-drug-suggestions">
+                      {uhcCommunityDrugs.map((drug) => <option key={drug.rxcui} value={drug.drugName} />)}
+                    </datalist>
+                  </label>
+                  {uhcCommunityDrugs.length > 0 && (
+                    <div className="mt-2 max-h-64 space-y-2 overflow-auto pr-1">
+                      {needsProductCorrectionHint(uhcCommunityDrugQuery, uhcCommunityDrugs.map((drug) => drug.drugName)) && <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">Did you mean one of these exact products?</p>}
+                      {uhcCommunityDrugs.map((drug) => (
+                        <button type="button" key={drug.rxcui} onClick={() => { setSelectedUhcCommunityDrug(drug); setUhcCommunityDrugQuery(drug.drugName); setUhcCommunityCoverage(null); }} className={`block w-full rounded-lg border p-3 text-left ${selectedUhcCommunityDrug?.rxcui === drug.rxcui ? "border-[#0d6664] bg-[#e7f6ef]" : "border-[#d5e6e2] bg-white"}`}>
+                          <p className="text-xs font-bold text-[#173f41]">{drug.drugName}</p>
+                          <p className="mt-1 text-[10px] text-[#607a77]">Select exact product · RxCUI {drug.rxcui}</p>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {(uhcCommunityLoading || uhcCommunityError || uhcCommunityCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {uhcCommunityLoading ? <p className="text-xs font-semibold text-[#55716f]">Checking the current UHC Community NJ formulary…</p> : uhcCommunityError ? <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p> : uhcCommunityCoverage?.status === "listed" && uhcCommunityCoverage.drug ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]"><Icon name="check" className="h-3.5 w-3.5" />Listed on the UHC Community NJ Medicaid formulary</p>
+                          <div className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                            <p className="text-xs font-bold text-[#173f41]">{uhcCommunityCoverage.drug.drugName}</p>
+                            <p className="mt-0.5 text-[10px] text-[#607a77]">{uhcCommunityCoverage.drug.tier} · RxCUI {uhcCommunityCoverage.drug.rxcui}</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {uhcCommunityCoverage.drug.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                              {uhcCommunityCoverage.drug.stepTherapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                              {uhcCommunityCoverage.drug.quantityLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL</span>}
+                            </div>
+                          </div>
+                          <p className="mt-2 text-[10px] text-[#607a77]">Published source: {uhcCommunityCoverage.source?.sourceLastModified ?? "current feed"}</p>
+                        </div>
+                      ) : <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No exact product row was found in this source.</p>}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* Standard UHC Community Plan NJ Medicaid only. Not UHC employer, Marketplace, Medicare, Part D, eligibility, cost, or payment.</p>
+                </article>
+                )}
+                {activePublicFormulary === "fidelis-nj-familycare" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">NJ FamilyCare Medicaid · August 2026</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">Fidelis Care NJ FamilyCare</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Exact pulmonary product</span>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-[#55716f]">Search the current Fidelis NJ FamilyCare PDL, then select the exact product to review its published tier and restrictions.</p>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · exact medication product
+                      {activeSelected && <button type="button" onClick={() => { setFidelisFamilyCareDrugQuery(activeSelected.generic); setSelectedFidelisFamilyCareDrug(null); setFidelisFamilyCareCoverage(null); }} className="text-[10px] text-[#0d6664] hover:underline">Use {activeSelected.generic}</button>}
+                    </span>
+                    <input
+                      ref={fidelisFamilyCareDrugRef}
+                      value={fidelisFamilyCareDrugQuery}
+                      onChange={(event) => { setFidelisFamilyCareDrugQuery(event.target.value); setSelectedFidelisFamilyCareDrug(null); setFidelisFamilyCareCoverage(null); }}
+                      list="fidelis-familycare-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, brand, strength, or form"
+                      autoComplete="off"
+                    />
+                    <datalist id="fidelis-familycare-drug-suggestions">
+                      {fidelisFamilyCareDrugs.map((drug) => <option key={drug.id} value={drug.name} />)}
+                    </datalist>
+                  </label>
+                  {fidelisFamilyCareDrugs.length > 0 && (
+                    <div className="mt-2 max-h-64 space-y-2 overflow-auto pr-1">
+                      {needsProductCorrectionHint(fidelisFamilyCareDrugQuery, fidelisFamilyCareDrugs.map((drug) => `${drug.name} ${drug.aliases.join(" ")}`)) && <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">Did you mean one of these exact products?</p>}
+                      {fidelisFamilyCareDrugs.map((drug) => (
+                        <button type="button" key={drug.id} onClick={() => { setSelectedFidelisFamilyCareDrug(drug); setFidelisFamilyCareDrugQuery(drug.name); setFidelisFamilyCareCoverage(null); }} className={`block w-full rounded-lg border p-3 text-left ${selectedFidelisFamilyCareDrug?.id === drug.id ? "border-[#0d6664] bg-[#e7f6ef]" : "border-[#d5e6e2] bg-white"}`}>
+                          <p className="text-xs font-bold text-[#173f41]">{drug.name}</p>
+                          <p className="mt-1 text-[10px] text-[#607a77]">Select exact product · {drug.tier === "P" ? "Preferred" : "Non-preferred"}{drug.note ? ` · ${drug.note}` : ""}</p>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {(fidelisFamilyCareLoading || fidelisFamilyCareError || fidelisFamilyCareCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {fidelisFamilyCareLoading ? <p className="text-xs font-semibold text-[#55716f]">Checking the current Fidelis NJ FamilyCare PDL…</p> : fidelisFamilyCareError ? <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p> : fidelisFamilyCareCoverage?.status === "listed" && fidelisFamilyCareCoverage.drug ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]"><Icon name="check" className="h-3.5 w-3.5" />Listed in the Fidelis NJ FamilyCare 2026 PDL</p>
+                          <div className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                            <p className="text-xs font-bold text-[#173f41]">{fidelisFamilyCareCoverage.drug.name}</p>
+                            <p className="mt-0.5 text-[10px] text-[#607a77]">{fidelisFamilyCareCoverage.drug.tier === "P" ? "Preferred" : "Non-preferred"}</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {fidelisFamilyCareCoverage.drug.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                              {fidelisFamilyCareCoverage.drug.stepTherapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                              {fidelisFamilyCareCoverage.drug.quantityLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL {fidelisFamilyCareCoverage.drug.quantityText ?? ""}</span>}
+                              {fidelisFamilyCareCoverage.drug.ageLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">Age {fidelisFamilyCareCoverage.drug.ageText ?? "limit"}</span>}
+                            </div>
+                          </div>
+                          {fidelisFamilyCareCoverage.drug.note && <p className="mt-2 text-[10px] leading-4 text-[#607a77]">{fidelisFamilyCareCoverage.drug.note}</p>}
+                        </div>
+                      ) : <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No exact product row was found in this extracted source.</p>}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* Fidelis Care NJ FamilyCare Medicaid only. This is a partial pulmonary extraction from the current PDL. Not Fidelis Marketplace, Medicare, Part D, eligibility, cost, or payment.</p>
+                </article>
+                )}
+                {activePublicFormulary === "horizon-nj-health" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">NJ FamilyCare Medicaid · July 2026</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">Horizon NJ Health</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Exact pulmonary product</span>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-[#55716f]">Search the current Horizon NJ Health Prescription Drug Listing, then select the exact product to review its published limitations.</p>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · exact medication product
+                      {activeSelected && <button type="button" onClick={() => { setHorizonNjHealthDrugQuery(activeSelected.generic); setSelectedHorizonNjHealthDrug(null); setHorizonNjHealthCoverage(null); }} className="text-[10px] text-[#0d6664] hover:underline">Use {activeSelected.generic}</button>}
+                    </span>
+                    <input
+                      ref={horizonNjHealthDrugRef}
+                      value={horizonNjHealthDrugQuery}
+                      onChange={(event) => { setHorizonNjHealthDrugQuery(event.target.value); setSelectedHorizonNjHealthDrug(null); setHorizonNjHealthCoverage(null); }}
+                      list="horizon-nj-health-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, brand, strength, or form"
+                      autoComplete="off"
+                    />
+                    <datalist id="horizon-nj-health-drug-suggestions">
+                      {horizonNjHealthDrugs.map((drug) => <option key={drug.id} value={drug.name} />)}
+                    </datalist>
+                  </label>
+                  {horizonNjHealthDrugs.length > 0 && (
+                    <div className="mt-2 max-h-64 space-y-2 overflow-auto pr-1">
+                      {needsProductCorrectionHint(horizonNjHealthDrugQuery, horizonNjHealthDrugs.map((drug) => `${drug.name} ${drug.aliases.join(" ")}`)) && <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">Did you mean one of these exact products?</p>}
+                      {horizonNjHealthDrugs.map((drug) => (
+                        <button type="button" key={drug.id} onClick={() => { setSelectedHorizonNjHealthDrug(drug); setHorizonNjHealthDrugQuery(drug.name); setHorizonNjHealthCoverage(null); }} className={`block w-full rounded-lg border p-3 text-left ${selectedHorizonNjHealthDrug?.id === drug.id ? "border-[#0d6664] bg-[#e7f6ef]" : "border-[#d5e6e2] bg-white"}`}>
+                          <p className="text-xs font-bold text-[#173f41]">{drug.name}</p>
+                          <p className="mt-1 text-[10px] text-[#607a77]">Select exact product{drug.priorAuthorization ? " · Prior authorization" : ""}{drug.limitations ? " · Limitations may apply" : ""}</p>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {(horizonNjHealthLoading || horizonNjHealthError || horizonNjHealthCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {horizonNjHealthLoading ? <p className="text-xs font-semibold text-[#55716f]">Checking the current Horizon NJ Health formulary…</p> : horizonNjHealthError ? <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p> : horizonNjHealthCoverage?.status === "listed" && horizonNjHealthCoverage.drug ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]"><Icon name="check" className="h-3.5 w-3.5" />Listed in the Horizon NJ Health 2026 drug listing</p>
+                          <div className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                            <p className="text-xs font-bold text-[#173f41]">{horizonNjHealthCoverage.drug.name}</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {horizonNjHealthCoverage.drug.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                              {horizonNjHealthCoverage.drug.limitations && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">Limits</span>}
+                            </div>
+                          </div>
+                          <p className="mt-2 text-[10px] leading-4 text-[#607a77]">The source marks this product as listed. Confirm the member’s exact benefit and current clinical criteria before prescribing.</p>
+                        </div>
+                      ) : <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No exact product row was found in this extracted source.</p>}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* Horizon NJ Health NJ FamilyCare Medicaid only. This is a partial pulmonary extraction from the current approved drug listing. Not Horizon commercial, Marketplace, Medicare, Part D, eligibility, cost, or payment.</p>
+                </article>
+                )}
+                {activePublicFormulary === "wellpoint-nj-familycare" && (
+                <article className="rounded-2xl border border-[#d4e6e2] bg-[#f9fcfb] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">NJ FamilyCare Medicaid · Current machine-readable PDL</p>
+                      <h3 className="mt-1 text-base font-bold text-[#173f41]">Wellpoint New Jersey FamilyCare</h3>
+                    </div>
+                    <span className="rounded-full bg-white px-2.5 py-1 text-[9px] font-bold text-[#0d6664] ring-1 ring-[#b8d9d1]">Exact pulmonary product</span>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-[#55716f]">Search the current Wellpoint NJ Medicaid PDL, then select the exact product and strength to review its published tier and restrictions.</p>
+                  <label className="mt-4 block">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[#284e4d]">
+                      Step 2 of 2 · exact medication product
+                      {activeSelected && <button type="button" onClick={() => { setWellpointNjFamilyCareDrugQuery(activeSelected.generic); setSelectedWellpointNjFamilyCareDrug(null); setWellpointNjFamilyCareCoverage(null); }} className="text-[10px] text-[#0d6664] hover:underline">Use {activeSelected.generic}</button>}
+                    </span>
+                    <input
+                      ref={wellpointNjFamilyCareDrugRef}
+                      value={wellpointNjFamilyCareDrugQuery}
+                      onChange={(event) => { setWellpointNjFamilyCareDrugQuery(event.target.value); setSelectedWellpointNjFamilyCareDrug(null); setWellpointNjFamilyCareCoverage(null); }}
+                      list="wellpoint-nj-familycare-drug-suggestions"
+                      className="mt-2 h-11 w-full rounded-xl border border-[#bfdcd5] bg-white px-3 text-sm outline-none focus:ring-2 focus:ring-[#55bda8]"
+                      placeholder="Type drug, brand, strength, or form"
+                      autoComplete="off"
+                    />
+                    <datalist id="wellpoint-nj-familycare-drug-suggestions">
+                      {wellpointNjFamilyCareDrugs.map((drug) => <option key={drug.id} value={drug.name} />)}
+                    </datalist>
+                  </label>
+                  {wellpointNjFamilyCareDrugs.length > 0 && (
+                    <div className="mt-2 max-h-64 space-y-2 overflow-auto pr-1">
+                      {needsProductCorrectionHint(wellpointNjFamilyCareDrugQuery, wellpointNjFamilyCareDrugs.map((drug) => `${drug.name} ${drug.aliases.join(" ")}`)) && <p className="rounded-lg bg-[#eef8f5] px-3 py-2 text-xs font-semibold text-[#0d6664]">Did you mean one of these exact products?</p>}
+                      {wellpointNjFamilyCareDrugs.map((drug) => (
+                        <button type="button" key={drug.id} onClick={() => { setSelectedWellpointNjFamilyCareDrug(drug); setWellpointNjFamilyCareDrugQuery(drug.name); setWellpointNjFamilyCareCoverage(null); }} className={`block w-full rounded-lg border p-3 text-left ${selectedWellpointNjFamilyCareDrug?.id === drug.id ? "border-[#0d6664] bg-[#e7f6ef]" : "border-[#d5e6e2] bg-white"}`}>
+                          <p className="text-xs font-bold text-[#173f41]">{drug.name}</p>
+                          <p className="mt-1 text-[10px] text-[#607a77]">Select exact product · {drug.tier}{drug.priorAuthorization ? " · PA" : ""}{drug.quantityLimit ? " · QL" : ""}{drug.specialtyPharmacy ? " · Specialty" : ""}</p>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                  {(wellpointNjFamilyCareLoading || wellpointNjFamilyCareError || wellpointNjFamilyCareCoverage) && (
+                    <div className="mt-4 rounded-xl border border-[#d4e6e2] bg-white p-3">
+                      {wellpointNjFamilyCareLoading ? <p className="text-xs font-semibold text-[#55716f]">Checking the current Wellpoint NJ FamilyCare PDL…</p> : wellpointNjFamilyCareError ? <p className="text-xs text-[#785313]"><strong>Temporarily unavailable.</strong> Do not infer coverage.</p> : wellpointNjFamilyCareCoverage?.status === "listed" && wellpointNjFamilyCareCoverage.drug ? (
+                        <div>
+                          <p className="inline-flex items-center gap-1.5 rounded-full bg-[#e7f6ef] px-2.5 py-1 text-xs font-bold text-[#15735f]"><Icon name="check" className="h-3.5 w-3.5" />Listed in the Wellpoint NJ FamilyCare 2026 PDL</p>
+                          <div className="mt-2 rounded-lg bg-[#f3faf8] p-2.5">
+                            <p className="text-xs font-bold text-[#173f41]">{wellpointNjFamilyCareCoverage.drug.name}</p>
+                            <p className="mt-0.5 text-[10px] text-[#607a77]">{wellpointNjFamilyCareCoverage.drug.tier}</p>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {wellpointNjFamilyCareCoverage.drug.priorAuthorization && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">PA</span>}
+                              {wellpointNjFamilyCareCoverage.drug.quantityLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">QL</span>}
+                              {wellpointNjFamilyCareCoverage.drug.stepTherapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
+                              {wellpointNjFamilyCareCoverage.drug.specialtyPharmacy && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">Specialty</span>}
+                              {wellpointNjFamilyCareCoverage.drug.ageLimit && <span className="rounded bg-[#edf2f1] px-1.5 py-1 text-[9px] font-bold text-[#526b69]">Age limit</span>}
+                            </div>
+                          </div>
+                          <p className="mt-2 text-[10px] leading-4 text-[#607a77]">Confirm the member’s exact benefit and current clinical criteria before prescribing.</p>
+                        </div>
+                      ) : <p className="text-xs leading-5 text-[#785313]"><strong>Unconfirmed, not a denial.</strong> No exact product row was found in this extracted source.</p>}
+                    </div>
+                  )}
+                  <p className="mt-3 text-[10px] leading-4 text-[#6a817e]">* Wellpoint NJ FamilyCare Medicaid only. Full machine-readable product feed, not eligibility, cost, payment, or clinical criteria. Not Wellpoint Medicare or Marketplace.</p>
+                </article>
+                )}
+              </div>
+            </section>
+            )}
+            <details className="mb-5 rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-[#173f41] sm:px-6">
+                <span>Need help identifying a plan or drug-list name?</span>
+                <span className="rounded-full bg-[#eef8f5] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0d6664]">Optional reference</span>
+              </summary>
+              <section className="border-t border-[#e1ecea]">
               <div className="border-b border-[#e1ecea] px-5 py-4 sm:px-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
                   Commercial plan finder
@@ -2611,7 +5557,7 @@ export const PulmonaryFormularyDashboard = () => {
                   Match the plan’s drug list before searching.
                 </h2>
                 <p className="mt-1 text-sm leading-5 text-[#55716f]">
-                  Carrier names are not enough. Use the plan or pharmacy-benefit name on the card, then open its official lookup. No member ID is stored here.
+                  Carrier names are not enough. Enter the plan or pharmacy-benefit name above, then search the imported evidence here. Official sources remain available for audit, not as the normal workflow.
                 </p>
               </div>
               <div className="grid gap-3 p-5 sm:grid-cols-2 sm:p-6 xl:grid-cols-3">
@@ -2620,31 +5566,31 @@ export const PulmonaryFormularyDashboard = () => {
                     <h3 className="text-sm font-bold text-[#173f41]">{route.carrier}</h3>
                     <p className="mt-1 min-h-10 text-xs leading-5 text-[#5c7775]">{route.prompt}</p>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      <a
-                        href={route.url}
-                        target="_blank"
-                        rel="noreferrer"
+                      <button
+                        type="button"
+                        onClick={() => openPlanIntake(route.intakeInsurer)}
                         className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0d6664]"
                       >
+                        Enter plan details
+                      </button>
+                    </div>
+                    <details className="mt-3 text-[10px] text-[#55716f]">
+                      <summary className="cursor-pointer font-bold text-[#0d6664]">Evidence source</summary>
+                      <a href={route.url} target="_blank" rel="noreferrer" className="mt-1 inline-block hover:underline">
                         {route.action}
                       </a>
-                      {route.baseline && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPlanFilter(route.baseline!);
-                            setView("medications");
-                          }}
-                          className="rounded-full border border-[#b8d7d1] px-3 py-1.5 text-xs font-bold text-[#0d6664]"
-                        >
-                          Use sourced baseline
-                        </button>
-                      )}
-                    </div>
+                    </details>
                   </article>
                 ))}
               </div>
-            </section>
+              </section>
+            </details>
+            <details className="mb-5 rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-bold text-[#173f41] sm:px-6">
+                <span>Browse named formulary references</span>
+                <span className="rounded-full bg-[#eef8f5] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0d6664]">Optional reference</span>
+              </summary>
+              <div className="border-t border-[#e1ecea] p-5 sm:p-6">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-bold">Commercial and named-plan shortcuts</h2>
@@ -2671,6 +5617,10 @@ export const PulmonaryFormularyDashboard = () => {
                     coverageFor(med, plan.key).state.includes("PA") ||
                     coverageFor(med, plan.key).state === "Tier 2",
                 ).length;
+                const unconfirmed = medications.filter(
+                  (med) => coverageFor(med, plan.key).state === "Source loading",
+                ).length;
+                const isGeneralPdlReference = generalPdlReferenceKeys.has(plan.key);
                 return (
                   <article
                     key={plan.key}
@@ -2691,7 +5641,7 @@ export const PulmonaryFormularyDashboard = () => {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <span className="rounded-lg bg-[#e7f3f1] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#0d6664]">
-                        Formulary
+                        {isGeneralPdlReference ? "General PDL reference" : "Named formulary"}
                       </span>
                       <span className="rounded-full bg-[#f1f5f4] px-2.5 py-1 text-[11px] font-bold text-[#527070]">
                         {plan.region}
@@ -2704,7 +5654,9 @@ export const PulmonaryFormularyDashboard = () => {
                       Source updated {plan.updated}
                     </p>
                     <p className="mt-2 text-xs font-bold text-[#0d6664]">
-                      Click to search this plan’s medicines
+                      {isGeneralPdlReference
+                        ? "Search listings, then confirm the exact employer benefit"
+                        : "Click to search this named formulary"}
                     </p>
                     <div className="mt-5 grid grid-cols-2 gap-3">
                       <div className="rounded-xl bg-[#eef8f4] p-3">
@@ -2722,6 +5674,11 @@ export const PulmonaryFormularyDashboard = () => {
                         <div className="text-xs text-[#7b6a4f]">restricted</div>
                       </div>
                     </div>
+                    {unconfirmed > 0 && (
+                      <p className="mt-3 rounded-lg bg-[#fff8e8] px-3 py-2 text-[10px] leading-4 text-[#785313]">
+                        {unconfirmed} of {medications.length} medication families remain unconfirmed in this reference. Missing is not a denial.
+                      </p>
+                    )}
                     <a
                       href={plan.source}
                       onClick={(event) => event.stopPropagation()}
@@ -2736,6 +5693,8 @@ export const PulmonaryFormularyDashboard = () => {
                 );
               })}
             </div>
+              </div>
+            </details>
 
             <section className="mt-8 rounded-2xl border border-[#cfe0dd] bg-white p-5 shadow-sm sm:p-6">
               <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
@@ -2762,7 +5721,10 @@ export const PulmonaryFormularyDashboard = () => {
                   />
                   <input
                     value={insurerQuery}
-                    onChange={(event) => setInsurerQuery(event.target.value)}
+                    onChange={(event) => {
+                      setInsurerQuery(event.target.value);
+                      setSelectedInsurerName(null);
+                    }}
                     list="insurer-suggestions"
                     className="h-11 w-full rounded-xl border border-[#d9e7e4] bg-[#f7faf9] pl-10 pr-3 text-sm outline-none ring-2 ring-transparent focus:bg-white focus:ring-[#55bda8]"
                     placeholder="Find Aetna, Medicare, UHC..."
@@ -2773,6 +5735,117 @@ export const PulmonaryFormularyDashboard = () => {
                     ))}
                   </datalist>
                 </label>
+              </div>
+              <div className="mt-5 rounded-xl border border-[#b9ddd5] bg-[#eef8f5] p-4 sm:p-5">
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                  Insurance card workflow
+                </p>
+                <h3 className="mt-1 text-lg font-bold tracking-tight text-[#173f41]">
+                  Choose the insurer on the card to see the safe next step.
+                </h3>
+                <p className="mt-1 max-w-3xl text-sm leading-5 text-[#55716f]">
+                  This does not collect member IDs, claim numbers, eligibility, or patient information. It routes staff to the correct plan, pharmacy-benefit, or authorization check.
+                </p>
+                <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                  {workflowInsurers.map((insurer) => (
+                    <button
+                      type="button"
+                      key={insurer.name}
+                      aria-pressed={selectedInsurerName === insurer.name}
+                      onClick={() => setSelectedInsurerName(insurer.name)}
+                      className={`rounded-xl border px-3 py-2.5 text-left transition focus:outline-none focus:ring-2 focus:ring-[#55bda8] ${selectedInsurerName === insurer.name ? "border-[#5aa998] bg-white shadow-sm" : "border-[#cfe2de] bg-[#f8fcfb] hover:border-[#8ec4ba]"}`}
+                    >
+                      <span className="block text-sm font-bold text-[#173f41]">
+                        {insurer.name}
+                      </span>
+                      <span className="mt-1 block text-[10px] font-semibold text-[#4d7470]">
+                        {insurer.category}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                {!insurerQuery && !showAllInsurerWorkflows && (
+                  <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-[#55716f]">
+                    <span>Showing 9 common starting points. Search by the insurer on the card for a direct workflow.</span>
+                    <button
+                      type="button"
+                      onClick={() => setShowAllInsurerWorkflows(true)}
+                      className="font-bold text-[#0d6664] hover:underline"
+                    >
+                      Show all {summitNjInsurers.length} workflows
+                    </button>
+                  </div>
+                )}
+                {summitNjDirectory.length === 0 && (
+                  <p className="mt-4 rounded-lg bg-white p-3 text-sm text-[#55716f]">
+                    No accepted insurer matches that search.
+                  </p>
+                )}
+                {selectedInsurer && selectedWorkflow && (
+                  <article className="mt-5 rounded-xl border border-[#9bcfc4] bg-white p-4 shadow-sm sm:p-5">
+                    <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
+                          {selectedWorkflow.kind}
+                        </p>
+                        <h4 className="mt-1 text-lg font-bold text-[#173f41]">
+                          {selectedInsurer.name} plan check
+                        </h4>
+                      </div>
+                      <span className="w-fit rounded-full bg-[#eef8f5] px-2.5 py-1 text-[10px] font-bold text-[#0d6664] ring-1 ring-[#c9e2dc]">
+                        No PHI entry
+                      </span>
+                    </div>
+                    <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(260px,.65fr)]">
+                      <div>
+                        <p className="text-xs font-bold text-[#284e4d]">Read from the card or benefits document</p>
+                        <p className="mt-1 rounded-lg bg-[#f5faf8] p-3 text-sm leading-5 text-[#55716f]">
+                          {selectedWorkflow.cardCheck}
+                        </p>
+                        <ol className="mt-4 space-y-2 text-sm leading-5 text-[#3f605d]">
+                          {selectedWorkflow.steps.map((step, index) => (
+                            <li key={step} className="flex gap-3">
+                              <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#dff1ec] text-[10px] font-bold text-[#0d6664]">
+                                {index + 1}
+                              </span>
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                      <aside className="rounded-xl border border-[#d9e9e5] bg-[#fbfdfc] p-4">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#55716f]">
+                          Result rule
+                        </p>
+                        <p className="mt-2 text-xs leading-5 text-[#4e6c68]">
+                          {selectedWorkflow.resultRule}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          <button
+                            type="button"
+                            onClick={() => openPlanIntake(selectedInsurer.name)}
+                            className="rounded-full bg-[#173f41] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0d6664]"
+                          >
+                            Enter plan details
+                          </button>
+                          {selectedWorkflow.source && (
+                            <details className="rounded-full border border-[#9bcfc4] px-3 py-1.5 text-xs font-bold text-[#0d6664]">
+                              <summary className="cursor-pointer">Evidence source</summary>
+                              <a href={selectedWorkflow.source.url} target="_blank" rel="noreferrer" className="mt-2 block underline">
+                                {selectedWorkflow.source.label}
+                              </a>
+                            </details>
+                          )}
+                          {selectedWorkflow.cardAction && (
+                            <p className="rounded-lg bg-[#f5faf8] p-2 text-[11px] leading-4 text-[#4e6c68]">
+                              {selectedWorkflow.cardAction}
+                            </p>
+                          )}
+                        </div>
+                      </aside>
+                    </div>
+                  </article>
+                )}
               </div>
               <details className="mt-5 rounded-xl border border-[#d8e8e4] bg-[#f5faf8] p-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
@@ -2890,7 +5963,7 @@ export const PulmonaryFormularyDashboard = () => {
         ) : (
           <div className="grid min-h-[580px] gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,.75fr)]">
             <div className="overflow-hidden rounded-2xl border border-[#d8e5e3] bg-white shadow-sm">
-              <div className="flex items-center justify-between border-b border-[#e4ecea] px-4 py-3 sm:px-5">
+              <div className="flex flex-col gap-3 border-b border-[#e4ecea] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
                 <div>
                   <h2 className="font-bold">Medication coverage</h2>
                   <p className="text-xs text-[#6b8180]" aria-live="polite">
@@ -2898,7 +5971,40 @@ export const PulmonaryFormularyDashboard = () => {
                     formular{visiblePlans.length === 1 ? "y" : "ies"}
                   </p>
                 </div>
-                <Icon name="filter" className="h-5 w-5 text-[#698281]" />
+                <div className="flex items-center gap-2">
+                  <label className="relative block w-full sm:w-72">
+                    <span className="sr-only">Quick search medication coverage</span>
+                    <Icon
+                      name="search"
+                      className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#698281]"
+                    />
+                    <input
+                      id="coverage-quick-search"
+                      ref={coverageQuickSearchRef}
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      list="coverage-medication-suggestions"
+                      autoComplete="off"
+                      className="h-10 w-full rounded-xl border border-[#d9e7e4] bg-[#f7faf9] pl-9 pr-3 text-sm outline-none ring-2 ring-transparent transition focus:bg-white focus:ring-[#55bda8]"
+                      placeholder="Quick search coverage"
+                    />
+                    <datalist id="coverage-medication-suggestions">
+                      {autocompleteOptions.map((option) => (
+                        <option key={option} value={option} />
+                      ))}
+                    </datalist>
+                  </label>
+                  {query && (
+                    <button
+                      type="button"
+                      onClick={() => setQuery("")}
+                      className="shrink-0 rounded-lg px-2 py-2 text-xs font-bold text-[#0d6664] transition hover:bg-[#e7f3f1] focus:outline-none focus:ring-2 focus:ring-[#55bda8]"
+                    >
+                      Clear
+                    </button>
+                  )}
+                  <Icon name="filter" className="hidden h-5 w-5 text-[#698281] sm:block" />
+                </div>
               </div>
               <div className="max-h-[760px] divide-y divide-[#e7eeed] overflow-y-auto">
                 {results.map((med) => (
@@ -2935,6 +6041,15 @@ export const PulmonaryFormularyDashboard = () => {
                               key={plan.key}
                               className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1.5 text-[10px] font-bold ring-1 ring-inset ${toneForState(item.state)}`}
                             >
+                              {isCoveredBySource(item.state) && (
+                                <Icon name="check" className="h-3.5 w-3.5" />
+                              )}
+                              {isCoveredBySource(item.state) && (
+                                <>
+                                  <span>Covered</span>
+                                  <span className="opacity-50">·</span>
+                                </>
+                              )}
                               <span>{plan.short}</span>
                               <span className="opacity-50">·</span>
                               <span>{displayState(item.state)}</span>
@@ -3001,7 +6116,7 @@ export const PulmonaryFormularyDashboard = () => {
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#0d6664]">
-                            Exact Medicare plan result
+                            Selected {selectedMedicarePlan.plan_type}
                           </p>
                           <p className="mt-1 text-sm font-bold text-[#173f41]">
                             {selectedMedicarePlan.plan_name}
@@ -3034,6 +6149,11 @@ export const PulmonaryFormularyDashboard = () => {
                                 {item.step_therapy && <span className="rounded bg-[#fff1d9] px-1.5 py-1 text-[9px] font-bold text-[#8a5a16]">ST</span>}
                                 {!item.prior_authorization && !item.quantity_limit && !item.step_therapy && <span className="text-[10px] text-[#58726f]">No CMS restriction flag on this matched row.</span>}
                               </div>
+                              {(item.rxcui || item.ndc) && (
+                                <p className="mt-2 text-[9px] text-[#6a817e]">
+                                  {item.rxcui ? `RxCUI ${item.rxcui}` : ""}{item.rxcui && item.ndc ? " · " : ""}{item.ndc ? `NDC ${item.ndc}` : ""}
+                                </p>
+                              )}
                             </div>
                           ))}
                           <p className="text-[10px] leading-4 text-[#55716f]">
@@ -3047,6 +6167,7 @@ export const PulmonaryFormularyDashboard = () => {
                       )}
                     </section>
                   )}
+                  {!selectedMedicarePlan && (
                   <div className="mt-5 space-y-3">
                     {visiblePlans.map((plan) => {
                       const item = coverageFor(activeSelected, plan.key);
@@ -3071,7 +6192,18 @@ export const PulmonaryFormularyDashboard = () => {
                             <span
                               className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold ring-1 ring-inset ${toneForState(item.state)}`}
                             >
-                              {displayState(item.state)}
+                              <span className="inline-flex items-center gap-1">
+                                {isCoveredBySource(item.state) && (
+                                  <Icon name="check" className="h-3.5 w-3.5" />
+                                )}
+                                <span>{isCoveredBySource(item.state) ? "Covered" : displayState(item.state)}</span>
+                                {isCoveredBySource(item.state) && (
+                                  <>
+                                    <span className="opacity-50">·</span>
+                                    <span>{displayState(item.state)}</span>
+                                  </>
+                                )}
+                              </span>
                             </span>
                           </div>
                           {item.flags && item.flags.length > 0 && (
@@ -3154,12 +6286,12 @@ export const PulmonaryFormularyDashboard = () => {
                           {!isStraightforwardCoverage(item.state) && (
                             <div className="mt-3 rounded-lg bg-[#f3f8f7] p-2.5">
                               <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#466e69]">
-                                Covered alternatives to {activeSelected.generic}
+                                Same-category reference options
                               </div>
                               {alternatives.length > 0 ? (
                                 <>
                                   <p className="mt-1 text-[10px] leading-4 text-[#718482]">
-                                    Similar or generic options in the same therapeutic area with source-verified coverage on this plan. Select one for its exact tier, restrictions, and PA action.
+                                    Not substitution advice. These medicines share a therapeutic category and have source-listed coverage on this reference plan. Review clinical appropriateness separately.
                                   </p>
                                   <div className="mt-2 flex flex-wrap gap-1.5">
                                     {alternatives.map((alternative) => (
@@ -3188,6 +6320,7 @@ export const PulmonaryFormularyDashboard = () => {
                       );
                     })}
                   </div>
+                  )}
                   <details className="mt-5 rounded-xl border border-[#dfe9e7] bg-[#f8fbfa] p-3 text-[11px] text-[#516b69]">
                     <summary className="cursor-pointer font-bold text-[#244a48]">
                       Restriction glossary

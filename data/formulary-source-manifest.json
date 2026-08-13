@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-08-11",
+  "completenessClassDefinition": "partial-row-extraction means at least one medication is still unconfirmed in the static baseline.",
+  "baselines": [
+    {
+      "planKey": "horizonMarketplace",
+      "sourceUrl": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
+      "scope": "Horizon BCBSNJ 2026 New Jersey 3-tier Marketplace formulary baseline",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after exact product matching against the complete current formulary; absence is not a denial or eligibility determination."
+    },
+    {
+      "planKey": "horizonClassic",
+      "sourceUrl": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/Commercial/5517-L_Horizon_Classic.pdf",
+      "scope": "Horizon BCBSNJ July 2026 Classic Formulary for plans whose pharmacy benefit is explicitly Horizon Classic",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "quarterly and at plan-year rollover",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The public Classic guide is a baseline only; coverage, exclusions, and benefit design can vary. Direct Access alone does not identify this pharmacy formulary."
+    },
+    {
+      "planKey": "uhcCommercial",
+      "sourceUrl": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
+      "scope": "UnitedHealthcare May 2026 commercial PDL baseline; employer benefits can differ",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "Employer and pharmacy-benefit variants must be identified before absence is interpreted."
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "sourceUrl": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
+      "scope": "Oxford Freedom Network commercial baseline using the linked UHC commercial PDL",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The exact Oxford product and drug-list variant must be identified first."
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "sourceUrl": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf",
+      "scope": "Aetna 2026 Medicare HMO formulary family 26010B29zHMO",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only for a plan confirmed to use this exact formulary family; use exact CMS plan data when available."
+    },
+    {
+      "planKey": "amerihealthNj",
+      "sourceUrl": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
+      "scope": "AmeriHealth NJ 2026 Individual and Family formulary baseline",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after confirming the member uses the Individual and Family formulary rather than Value or Select."
+    },
+    {
+      "planKey": "amerihealthValue",
+      "sourceUrl": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-value-formulary-nj.pdf",
+      "scope": "AmeriHealth New Jersey Value Formulary effective July 1, 2026",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "quarterly and at plan-year rollover",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after confirming the member's pharmacy benefit explicitly uses the New Jersey Value Formulary. Group benefit design can still vary."
+    },
+    {
+      "planKey": "amerihealthSelect",
+      "sourceUrl": "https://amerihealth.com/pdfs/providers/pharmacy_information/select_drug/ah-select-drug-formulary-nj.pdf",
+      "scope": "AmeriHealth New Jersey Select Formulary effective July 1, 2026",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "quarterly and at plan-year rollover",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after confirming the member's pharmacy benefit explicitly uses the New Jersey Select Formulary. Group benefit design can still vary."
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "sourceUrl": "https://www.cigna.com/static/www-cigna-com/docs/ifp/cigna-national-preferred-formulary-abridged.pdf",
+      "scope": "Cigna National Preferred 3-tier employer formulary abridged baseline",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The source is abridged and employer drug-list variants can differ."
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "sourceUrl": "https://www.hioscar.com/search-documents/drug-formularies/document?state=NJ&year=2026&planType=INDIVIDUAL",
+      "scope": "Oscar 2026 New Jersey Individual standard formulary route",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after confirming the exact policy and current formulary document."
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "sourceUrl": "https://www.wellcare.com/en/New-Jersey/Providers/Medicare/Pharmacy",
+      "scope": "Wellcare New Jersey Medicare H0913-002 and H0913-021 source route",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "This is a pharmacy document route, not one immutable comprehensive formulary file; use exact CMS plan data."
+    },
+    {
+      "planKey": "humanaNj26408",
+      "sourceUrl": "https://assets.humana.com/is/content/humana/20260009PDG2640826Cpdf",
+      "scope": "Humana 2026 New Jersey Medicare formulary 26408 baseline",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after exact plan and formulary confirmation; Part B versus Part D rules can still apply."
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "sourceUrl": "https://mydirectory.bravenhealth.com/",
+      "scope": "Braven Health New Jersey Medicare H0885 plan-document route",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The linked directory is a plan-document route; use exact CMS plan and formulary data."
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "sourceUrl": "https://www.healthspring.com/static/docs/medicare/plans/2026/formulary-mapd.pdf",
+      "scope": "HealthSpring 2026 Medicare Advantage formulary baseline for H3949-054 and H7849-149",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after the exact plan and current formulary are confirmed."
+    },
+    {
+      "planKey": "cloverNj2026",
+      "sourceUrl": "https://cdn.cloverhealth.com/filer_cloudrun_public/filer_public/c5/9f/c59f4269-fd6e-4d72-9580-cb812b952e43/25mx108a_2026_formulary_ch_nj_cy26_5t_gs_core_july_26.pdf",
+      "scope": "Clover Health New Jersey 2026 five-tier Medicare formulary 00026082",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly CMS refresh plus payer document check",
+      "absenceCanImplyNotListed": true,
+      "absenceQualification": "Only after exact plan and product matching; Part B versus Part D rules can still apply."
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "sourceUrl": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json",
+      "scope": "Wellpoint New Jersey FamilyCare machine-readable formulary effective August 1, 2026",
+      "completenessClass": "full-machine-readable-feed",
+      "refreshCadence": "source refresh plus monthly payer-document check",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The feed is complete for its published product rows, but confirm the member's exact NJ FamilyCare benefit, product, restrictions, and current PDL before treating absence as noncoverage."
+    }
+  ]
+}

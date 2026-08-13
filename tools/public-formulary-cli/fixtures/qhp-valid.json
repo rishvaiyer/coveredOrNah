@@ -1,0 +1,17 @@
+[
+  {
+    "rxnorm_id": "1649961",
+    "drug_name": "200 ACTUAT albuterol 0.09 MG/ACTUAT Dry Powder Inhaler [ProAir]",
+    "plans": [
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "12345NJ1234567",
+        "drug_tier": "PREFERRED-BRAND",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": true,
+        "years": [2026]
+      }
+    ]
+  }
+]
