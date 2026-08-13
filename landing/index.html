@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Formulary Finder makes source-visible medication and plan lookups easier for New Jersey clinic teams." />
+    <meta name="theme-color" content="#123e40" />
+    <title>Formulary Finder | Clearer medication plan lookups</title>
+    <link rel="preload" as="image" href="./assets/clinical-plan-workflow.jpg" />
+    <style>
+      :root {
+        --ink: #123e40;
+        --ink-soft: #365c5c;
+        --mint: #e9f6ef;
+        --mint-strong: #ccebdc;
+        --coral: #e57955;
+        --coral-dark: #b95638;
+        --cream: #fbfaf5;
+        --paper: #ffffff;
+        --line: #d5e5df;
+        --shadow: 0 24px 70px rgba(18, 62, 64, 0.14);
+        --radius: 24px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      a { color: inherit; }
+      .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+      .eyebrow {
+        color: var(--coral-dark);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .nav {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 0;
+      }
+      .brand { align-items: center; display: inline-flex; gap: 11px; text-decoration: none; font-weight: 850; letter-spacing: -0.03em; }
+      .brand-mark { align-items: center; background: var(--ink); border-radius: 11px; color: var(--mint); display: inline-flex; height: 34px; justify-content: center; width: 34px; }
+      .brand-mark svg { height: 22px; width: 22px; }
+      .brand-name { font-size: 1.08rem; }
+      .nav-links { align-items: center; display: flex; gap: 28px; }
+      .nav-links a { color: var(--ink-soft); font-size: 0.9rem; font-weight: 650; text-decoration: none; }
+      .nav-links a:hover { color: var(--coral-dark); }
+      .nav-cta, .button-primary {
+        background: var(--coral);
+        border: 1px solid var(--coral);
+        border-radius: 999px;
+        color: #fff;
+        display: inline-flex;
+        font-size: 0.9rem;
+        font-weight: 800;
+        justify-content: center;
+        padding: 12px 18px;
+        text-decoration: none;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+      .nav-cta:hover, .button-primary:hover { background: var(--coral-dark); transform: translateY(-2px); }
+      .button-secondary {
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        display: inline-flex;
+        font-size: 0.9rem;
+        font-weight: 800;
+        gap: 8px;
+        justify-content: center;
+        padding: 12px 18px;
+        text-decoration: none;
+        background: rgba(255,255,255,0.55);
+      }
+      .button-secondary:hover { border-color: var(--ink); background: var(--paper); }
+
+      .hero { padding: 64px 0 84px; }
+      .hero-grid { align-items: center; display: grid; gap: 62px; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+      h1 { font-size: clamp(3.1rem, 7vw, 5.7rem); letter-spacing: -0.075em; line-height: 0.96; margin: 18px 0 24px; max-width: 660px; }
+      .hero-copy { color: var(--ink-soft); font-size: 1.13rem; max-width: 550px; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+      .hero-note { color: #6b8580; font-size: 0.82rem; margin: 17px 0 0; }
+      .hero-visual { position: relative; }
+      .hero-visual::before { background: var(--mint-strong); border-radius: 42% 58% 52% 48%; content: ""; height: 110%; left: -9%; opacity: .56; position: absolute; top: -7%; transform: rotate(-8deg); width: 115%; z-index: -1; }
+      .browser { background: #edf4f0; border: 1px solid rgba(18,62,64,.15); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; transform: rotate(1.3deg); }
+      .browser-bar { align-items: center; background: #f7fbf8; border-bottom: 1px solid #dce9e2; display: flex; gap: 7px; padding: 12px 16px; }
+      .dot { background: #cbddd5; border-radius: 50%; height: 7px; width: 7px; }
+      .address { background: #e9f2ed; border-radius: 7px; color: #6f8983; font-size: 0.63rem; margin-left: 8px; overflow: hidden; padding: 5px 10px; text-overflow: ellipsis; white-space: nowrap; }
+      .browser img { display: block; height: auto; width: 100%; }
+      .visual-caption { align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; bottom: -20px; box-shadow: 0 12px 34px rgba(18, 62, 64, .13); display: flex; gap: 10px; padding: 13px 15px; position: absolute; right: -10px; width: min(258px, 54%); }
+      .check { align-items: center; background: var(--mint-strong); border-radius: 50%; color: var(--ink); display: inline-flex; flex: none; font-size: 0.92rem; font-weight: 900; height: 27px; justify-content: center; width: 27px; }
+      .visual-caption strong { display: block; font-size: 0.79rem; line-height: 1.15; }
+      .visual-caption span { color: var(--ink-soft); display: block; font-size: 0.68rem; margin-top: 2px; }
+
+      .stats { border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); padding: 26px 0; }
+      .stats-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); }
+      .stat { border-right: 1px solid var(--line); padding-left: 25px; }
+      .stat:first-child { padding-left: 0; }
+      .stat:last-child { border-right: 0; }
+      .stat-number { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 850; letter-spacing: -0.06em; }
+      .stat-label { color: var(--ink-soft); font-size: 0.87rem; margin-top: 1px; }
+
+      section { padding: 110px 0; }
+      .section-heading { max-width: 680px; }
+      h2 { font-size: clamp(2.1rem, 4.5vw, 3.7rem); letter-spacing: -0.065em; line-height: 1.02; margin: 13px 0 17px; }
+      .section-intro { color: var(--ink-soft); font-size: 1.05rem; max-width: 590px; }
+      .tension { background: var(--ink); color: #f8fff9; }
+      .tension .eyebrow { color: var(--mint-strong); }
+      .tension .section-intro { color: #c3dcce; }
+      .tension-grid { align-items: end; display: grid; gap: 50px; grid-template-columns: 1.05fr .95fr; }
+      .quote-card { background: #28595a; border: 1px solid rgba(214,242,225,.22); border-radius: var(--radius); padding: 30px; }
+      .quote-card p { font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.25; margin: 0; }
+      .quote-card small { color: #c3dcce; display: block; font-size: 0.78rem; margin-top: 25px; }
+      .workflow-grid { display: grid; gap: 17px; grid-template-columns: repeat(4, 1fr); margin-top: 52px; }
+      .step { background: var(--paper); border: 1px solid var(--line); border-radius: 17px; min-height: 235px; padding: 22px; }
+      .step-num { align-items: center; background: var(--mint); border-radius: 9px; color: var(--ink); display: flex; font-size: 0.75rem; font-weight: 850; height: 30px; justify-content: center; width: 30px; }
+      .step h3 { font-size: 1.02rem; letter-spacing: -0.02em; margin: 31px 0 9px; }
+      .step p { color: var(--ink-soft); font-size: 0.87rem; margin: 0; }
+
+      .connectors { background: #f0f8f3; }
+      .connector-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin-top: 42px; }
+      .connector { background: rgba(255,255,255,.75); border: 1px solid var(--line); border-radius: 16px; padding: 23px; }
+      .connector-mark { color: var(--coral-dark); font-size: 0.75rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+      .connector h3 { font-size: 1.05rem; margin: 12px 0 7px; }
+      .connector p { color: var(--ink-soft); font-size: 0.84rem; margin: 0; }
+      .connector-wide { grid-column: span 2; }
+
+      .guardrails-grid { align-items: start; display: grid; gap: 62px; grid-template-columns: .82fr 1.18fr; }
+      .guardrails-list { border-top: 1px solid var(--line); }
+      .guardrail { border-bottom: 1px solid var(--line); display: grid; gap: 15px; grid-template-columns: 34px 1fr; padding: 20px 0; }
+      .guardrail-icon { align-items: center; background: var(--mint); border-radius: 50%; display: inline-flex; font-size: .8rem; font-weight: 900; height: 28px; justify-content: center; margin-top: 2px; width: 28px; }
+      .guardrail h3 { font-size: .96rem; margin: 0 0 4px; }
+      .guardrail p { color: var(--ink-soft); font-size: .82rem; margin: 0; }
+
+      .cta { background: var(--mint); padding: 78px 0; }
+      .cta-box { align-items: center; display: flex; gap: 35px; justify-content: space-between; }
+      .cta h2 { margin-bottom: 0; max-width: 670px; }
+      .cta-actions { display: flex; flex: none; flex-wrap: wrap; gap: 10px; }
+      footer { background: var(--ink); color: #d7ece0; padding: 27px 0; }
+      .footer-row { align-items: center; display: flex; font-size: .78rem; justify-content: space-between; }
+      .footer-row a { color: #f5fff7; font-weight: 750; text-decoration: none; }
+
+      @media (max-width: 900px) {
+        .hero-grid, .tension-grid, .guardrails-grid { grid-template-columns: 1fr; }
+        .hero { padding-top: 38px; }
+        .hero-visual { margin: 10px auto 0; max-width: 680px; width: 100%; }
+        .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+        .connector-grid { grid-template-columns: repeat(2, 1fr); }
+        .connector-wide { grid-column: span 2; }
+        .guardrails-grid { gap: 35px; }
+        .cta-box { align-items: start; flex-direction: column; }
+      }
+      @media (max-width: 620px) {
+        .wrap { width: min(100% - 28px, 1160px); }
+        .nav { padding: 17px 0; }
+        .nav-links a:not(.nav-cta) { display: none; }
+        h1 { font-size: clamp(2.75rem, 15vw, 4.25rem); }
+        section { padding: 76px 0; }
+        .stats-grid { gap: 13px; grid-template-columns: 1fr; }
+        .stat { border-bottom: 1px solid var(--line); border-right: 0; padding: 13px 0; }
+        .stat:last-child { border-bottom: 0; }
+        .workflow-grid, .connector-grid { grid-template-columns: 1fr; }
+        .connector-wide { grid-column: auto; }
+        .visual-caption { bottom: -30px; right: 6px; width: 60%; }
+        .footer-row { align-items: start; flex-direction: column; gap: 10px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap nav">
+      <a class="brand" href="#top" aria-label="Formulary Finder home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M4 12h16"/><path d="M6.5 6.5 17.5 17.5M17.5 6.5 6.5 17.5" opacity=".52"/></svg>
+        </span>
+        <span class="brand-name">Formulary Finder</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#workflow">How it works</a>
+        <a href="#sources">Sources</a>
+        <a href="#guardrails">Confidence</a>
+        <a class="nav-cta" href="https://formulary-finder-pilot-production.up.railway.app/">Open the portal <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <div class="eyebrow">The modern formulary workflow</div>
+            <h1>Turn formulary questions into clear next steps.</h1>
+            <p class="hero-copy">Formulary Finder brings payer, plan, product, and medication context into one focused workspace, so physicians, nurses, and pharmacy teams can move faster with confidence.</p>
+            <div class="hero-actions">
+              <a class="button-primary" href="https://formulary-finder-pilot-production.up.railway.app/">Try the live workflow <span aria-hidden="true">↗</span></a>
+              <a class="button-secondary" href="#workflow">See how it works <span aria-hidden="true">↓</span></a>
+            </div>
+            <p class="hero-note">Built for fast, PHI-free plan and medication research.</p>
+          </div>
+          <div class="hero-visual">
+            <div class="browser" aria-label="Formulary Finder portal preview">
+              <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="address">portal.formularyfinder.com</span></div>
+              <img src="./assets/clinical-plan-workflow.jpg" alt="Formulary Finder plan and medication workflow" />
+            </div>
+            <div class="visual-caption"><span class="check" aria-hidden="true">✓</span><div><strong>Exact plan context first</strong><span>Then match the medication</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="stats">
+        <div class="wrap stats-grid">
+          <div class="stat"><div class="stat-number">85</div><div class="stat-label">medication families in quick search</div></div>
+          <div class="stat"><div class="stat-number">16</div><div class="stat-label">New Jersey plan-family baselines</div></div>
+          <div class="stat"><div class="stat-number">NJ-first</div><div class="stat-label">source-backed workflow, PHI-free by design</div></div>
+        </div>
+      </div>
+
+      <section class="tension">
+        <div class="wrap tension-grid">
+          <div class="section-heading"><div class="eyebrow">One focused workspace</div><h2>From payer name to medication path in seconds.</h2><p class="section-intro">Stop switching between payer pages, PDF lists, and disconnected plan details. Formulary Finder guides each choice, keeps the context visible, and surfaces the next useful action.</p></div>
+          <div class="quote-card"><p>“Find the plan. Find the product. Find the next step.”</p><small>A workflow designed around how clinic teams actually move.</small></div>
+        </div>
+      </section>
+
+      <section id="workflow">
+        <div class="wrap">
+          <div class="section-heading"><div class="eyebrow">A four-step workflow</div><h2>Less hunting. More momentum.</h2><p class="section-intro">Smart narrowing and autocomplete keep the experience quick, familiar, and easy to teach across a clinic.</p></div>
+          <div class="workflow-grid">
+            <article class="step"><div class="step-num">01</div><h3>Choose the insurer</h3><p>Search the NJ insurer directory or select a major payer route.</p></article>
+            <article class="step"><div class="step-num">02</div><h3>Set coverage type</h3><p>Commercial, Medicare, Marketplace, or Medicaid filters the next options.</p></article>
+            <article class="step"><div class="step-num">03</div><h3>Confirm the plan</h3><p>Use autocomplete and exact plan or product identifiers where available.</p></article>
+            <article class="step"><div class="step-num">04</div><h3>Search the medicine</h3><p>Choose the suggested product, then review tier and published restrictions.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="sources" class="connectors">
+        <div class="wrap">
+          <div class="section-heading"><div class="eyebrow">Connected to the sources teams use</div><h2>More payer context, right where the work happens.</h2><p class="section-intro">Current public formularies and payer feeds are organized into practical in-portal workflows, with a foundation that can expand as your organization’s needs grow.</p></div>
+          <div class="connector-grid">
+            <article class="connector"><div class="connector-mark">Medicare</div><h3>CMS plan selection</h3><p>Exact NJ Medicare Advantage and standalone Part D plan context before medication results.</p></article>
+            <article class="connector"><div class="connector-mark">Marketplace</div><h3>Exact product checks</h3><p>UHC NJ Marketplace product and plan identifiers stay inside the portal.</p></article>
+            <article class="connector"><div class="connector-mark">FamilyCare</div><h3>Published Medicaid feeds</h3><p>Aetna, UHC Community, Wellpoint, Fidelis, and Horizon NJ Health paths use payer-published sources where validated.</p></article>
+            <article class="connector connector-wide"><div class="connector-mark">Commercial</div><h3>Named formulary families</h3><p>Horizon, AmeriHealth, UHC/Oxford, Cigna, and other public formulary baselines are separated by plan family. A generic carrier match never substitutes for the member’s exact pharmacy benefit.</p></article>
+            <article class="connector"><div class="connector-mark">Next layer</div><h3>Expand by demand</h3><p>Additional clinics and specialties can add validated payer sources without changing the core workflow.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="guardrails">
+        <div class="wrap guardrails-grid">
+          <div class="section-heading"><div class="eyebrow">Confidence by design</div><h2>Built to support the next clinical conversation.</h2><p class="section-intro">The result is easy to read, easy to explain, and easy to carry into the next step with a patient, pharmacist, or payer team.</p></div>
+          <div class="guardrails-list">
+            <article class="guardrail"><span class="guardrail-icon">✓</span><div><h3>“Listed” is not “guaranteed paid”</h3><p>Results reflect the identified source and plan context. They are not an eligibility, cost, payment, or approval determination.</p></div></article>
+            <article class="guardrail"><span class="guardrail-icon">!</span><div><h3>Unconfirmed is not a denial</h3><p>If the exact benefit is not available, the portal says so and points staff to the next confirmation step.</p></div></article>
+            <article class="guardrail"><span class="guardrail-icon">→</span><div><h3>Exact product matters</h3><p>Strength, dosage form, device, and product identifier can change the result. Suggested options help staff choose the right one.</p></div></article>
+            <article class="guardrail"><span class="guardrail-icon">•</span><div><h3>PHI-free starting point</h3><p>The initial workflow is built around plan and medication information, not patient names or member IDs.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="wrap cta-box"><h2>Give your team a clearer first answer.</h2><div class="cta-actions"><a class="button-primary" href="https://formulary-finder-pilot-production.up.railway.app/">Open Formulary Finder <span aria-hidden="true">↗</span></a><a class="button-secondary" href="#top">Back to top <span aria-hidden="true">↑</span></a></div></div>
+      </section>
+    </main>
+
+    <footer><div class="wrap footer-row"><span>Formulary Finder · New Jersey clinic product · Source-visible medication workflow</span><a href="https://formulary-finder-pilot-production.up.railway.app/">Open the portal ↗</a></div></footer>
+  </body>
+</html>
