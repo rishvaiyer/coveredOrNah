@@ -194,18 +194,6 @@ export const plans: Array<{
     priorAuthorizationLabel: "Open Oscar PA portal (sign-in required)",
   },
   {
-    key: "anthemNySelect",
-    short: "Anthem NY",
-    name: "Anthem BCBS NY Individual Select 3-Tier formulary",
-    region: "NY",
-    updated: "Aug 1, 2026",
-    source:
-      "https://fm.formularynavigator.com/FBO/143/2026_Select_3_Tier_NY_ABS_IND.pdf",
-    priorAuthorizationUrl:
-      "https://providers.anthem.com/new-york-provider/resources/pharmacy-information",
-    priorAuthorizationLabel: "Open Anthem pharmacy PA route",
-  },
-  {
     key: "wellcareNjH0913",
     short: "Wellcare NJ",
     name: "Wellcare NJ Medicare H0913-002/021 formulary",
@@ -455,6 +443,24 @@ const planNameOptionsFor = (insurerName: string, planKind: string) => {
   if (insurerName === "UnitedHealthcare" && planKind === "Medicaid / public coverage") {
     ["UHC Community Plan NJ", "UnitedHealthcare Community Plan of New Jersey"].forEach((name) => names.add(name));
   }
+  if (insurerName === "UnitedHealthcare" && planKind === "Commercial / employer") {
+    ["UnitedHealthcare Commercial PDL baseline", "UHC Commercial"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "Oxford Health" && planKind === "Commercial / employer") {
+    ["Oxford Freedom Network commercial PDL baseline", "Oxford Freedom"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "Aetna" && ["Commercial / employer", "ACA marketplace / individual"].includes(planKind)) {
+    ["Advanced Control Plan", "Aetna Health Exchange Plan", "Standard Opt-Out Plan"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "Cigna" && planKind === "Commercial / employer") {
+    ["Cigna National Preferred 3-Tier employer formulary", "Cigna 3-Tier"].forEach((name) => names.add(name));
+  }
+  if (insurerName === "AmeriHealth / AmeriHealth Administrators") {
+    if (planKind === "ACA marketplace / individual") names.add("AmeriHealth NJ Individual and Family");
+    if (planKind === "Commercial / employer") {
+      ["AmeriHealth New Jersey Value Formulary", "AmeriHealth New Jersey Select Formulary"].forEach((name) => names.add(name));
+    }
+  }
   if (insurerName === "Fidelis Care" && planKind === "Medicaid / public coverage") {
     ["Fidelis Care NJ FamilyCare", "Fidelis Care New Jersey FamilyCare", "Fidelis / WellCare NJ FamilyCare PDL"].forEach((name) => names.add(name));
   }
@@ -496,7 +502,7 @@ const pharmacyBenefitOptionsFor = (insurerName: string, planKind: string) => {
     options.add("Performance");
     options.add("Advantage");
   }
-  if (insurerName === "Anthem BCBS" || insurerName === "Empire BCBS of NY") options.add("Select 3-Tier");
+  if (insurerName === "Anthem BCBS") options.add("Confirm state and exact Anthem drug list");
   if (insurerName === "Oscar Health") options.add("Oscar formulary");
   if (planKind === "Medicare Advantage" || planKind === "Standalone Medicare Part D (Original / Railroad Medicare)") {
     options.add("Medicare formulary");
@@ -928,6 +934,8 @@ type PlanIntakeMatch =
   | { kind: "horizon-nj-marketplace" }
   | { kind: "horizon-classic" }
   | { kind: "amerihealth-nj-individual" }
+  | { kind: "aetna-commercial-variant" }
+  | { kind: "anthem-nj-mismatch" }
   | { kind: "anthem-ny-select" }
   | { kind: "uhc-commercial" }
   | { kind: "oxford-freedom" }
@@ -1157,6 +1165,11 @@ const planIntakeMatchFor = (intake: PlanIntake): PlanIntakeMatch => {
     return { kind: "medicare" };
   const normalizedName = normalizedPlanText(intake.planName);
   if (
+    intake.insurer === "Anthem BCBS" &&
+    ["Commercial / employer", "ACA marketplace / individual"].includes(intake.planKind)
+  )
+    return { kind: "anthem-nj-mismatch" };
+  if (
     intake.insurer === "UnitedHealthcare" &&
     intake.planKind === "ACA marketplace / individual"
   )
@@ -1166,6 +1179,12 @@ const planIntakeMatchFor = (intake: PlanIntake): PlanIntakeMatch => {
     intake.planKind === "Medicaid / public coverage"
   )
     return { kind: "aetna-nj-familycare" };
+  if (
+    intake.insurer === "Aetna" &&
+    ["Commercial / employer", "ACA marketplace / individual"].includes(intake.planKind) &&
+    ["Advanced Control Plan", "Aetna Health Exchange Plan", "Standard Opt-Out Plan"].includes(intake.planName.trim())
+  )
+    return { kind: "aetna-commercial-variant" };
   if (
     intake.insurer === "Fidelis Care" &&
     intake.planKind === "Medicaid / public coverage" &&
@@ -3420,7 +3439,6 @@ export const PulmonaryFormularyDashboard = () => {
   const [selected, setSelected] = useState<Medication | null>(medications[0]);
   const medicationDetailRef = useRef<HTMLElement | null>(null);
   const coverageQuickSearchRef = useRef<HTMLInputElement | null>(null);
-  const [apiConnected, setApiConnected] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [insurerQuery, setInsurerQuery] = useState("");
   const [selectedInsurerName, setSelectedInsurerName] = useState<string | null>(
@@ -3532,17 +3550,6 @@ export const PulmonaryFormularyDashboard = () => {
   const [publicPlanMedicationQuery, setPublicPlanMedicationQuery] = useState("");
   const [selectedPublicPlanMedication, setSelectedPublicPlanMedication] = useState<Medication | null>(null);
   const [publicPlanCoverageVisible, setPublicPlanCoverageVisible] = useState(false);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("/api/health", { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) throw new Error("API unavailable");
-        return response.json();
-      })
-      .then((payload) => setApiConnected(payload.status === "ok"))
-      .catch(() => setApiConnected(false));
-    return () => controller.abort();
-  }, []);
   useEffect(() => {
     const search = medicareQuery.trim();
     if (search.length < 2) {
@@ -4081,6 +4088,10 @@ export const PulmonaryFormularyDashboard = () => {
         ? "Choose Horizon NJ Health medication"
       : planIntakeNextMatch.kind === "wellpoint-nj-familycare"
         ? "Choose Wellpoint medication"
+        : planIntakeNextMatch.kind === "aetna-commercial-variant"
+          ? "Confirm Aetna drug list"
+        : planIntakeNextMatch.kind === "anthem-nj-mismatch"
+          ? "Confirm plan state"
         : planIntakeNextMatch.kind === "horizon-nj-marketplace"
           ? "Choose Horizon medication"
           : planIntakeNextMatch.kind === "horizon-classic"
@@ -4315,18 +4326,11 @@ export const PulmonaryFormularyDashboard = () => {
                 <span className="text-[17px] font-bold tracking-tight">
                   Formulary Finder
                 </span>
-                <span className="rounded-full bg-[#e7f4f1] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0d6664]">
-                  Clinical pilot
-                </span>
               </div>
               <p className="text-xs text-[#627b7b]">
                 Regional coverage evidence for care teams
               </p>
             </div>
-          </div>
-          <div className="hidden items-center gap-2 rounded-full border border-[#d9e6e4] bg-[#f8fbfa] px-3 py-2 text-xs font-medium text-[#4c6868] md:flex">
-            <Icon name="shield" className="h-4 w-4 text-[#198f7c]" />
-            {apiConnected ? "API connected · " : ""}{medications.length} medication families · {plans.length} plan families · No patient information collected
           </div>
         </div>
       </header>
@@ -4633,8 +4637,12 @@ export const PulmonaryFormularyDashboard = () => {
                               ? "Horizon BCBSNJ Marketplace formulary rows are available in this portal. Choose a medication product from the named Marketplace formulary family below."
                             : intakeMatch.kind === "horizon-classic"
                               ? "Horizon Classic formulary rows are available in this portal. Confirm the card or benefits document says Horizon Classic, then choose the medication product below."
-                            : intakeMatch.kind === "amerihealth-nj-individual"
+                        : intakeMatch.kind === "amerihealth-nj-individual"
                               ? "AmeriHealth NJ Individual and Family formulary rows are available in this portal. Choose a medication product from that named formulary family below."
+                            : intakeMatch.kind === "aetna-commercial-variant"
+                              ? "This exact Aetna commercial drug-list variant is recognized. Aetna’s public source requires the plan-specific drug list; no generic Aetna result is inferred. Confirm the member’s exact plan before acting."
+                            : intakeMatch.kind === "anthem-nj-mismatch"
+                              ? "New Jersey’s Blue Cross Blue Shield carrier is Horizon BCBSNJ. Anthem plans are state-specific; confirm the state of the health plan and its exact drug list before using this portal result."
                             : intakeMatch.kind === "anthem-ny-select"
                               ? "Anthem New York Individual Select pulmonary formulary rows are available in this portal. Confirm this is a New York Individual Select plan before using the result."
                             : ["uhc-commercial", "oxford-freedom", "cigna-national-preferred"].includes(intakeMatch.kind)
