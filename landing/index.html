@@ -125,6 +125,22 @@
       .step-num { align-items: center; background: var(--mint); border-radius: 9px; color: var(--ink); display: flex; font-size: 0.75rem; font-weight: 850; height: 30px; justify-content: center; width: 30px; }
       .step h3 { font-size: 1.02rem; letter-spacing: -0.02em; margin: 31px 0 9px; }
       .step p { color: var(--ink-soft); font-size: 0.87rem; margin: 0; }
+      .action-section { background: var(--paper); border-top: 1px solid var(--line); }
+      .action-grid { align-items: center; display: grid; gap: 70px; grid-template-columns: .92fr 1.08fr; }
+      .action-copy h2 { margin-bottom: 15px; }
+      .action-copy p { color: var(--ink-soft); font-size: 1rem; max-width: 530px; }
+      .action-copy strong { color: var(--ink); }
+      .result-card { background: #f5faf7; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 18px 46px rgba(18, 62, 64, .1); padding: 20px; }
+      .result-top { align-items: center; display: flex; justify-content: space-between; }
+      .result-kicker { color: #55736e; font-size: .68rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+      .result-badge { background: #fff0d5; border-radius: 999px; color: #8a5a16; font-size: .68rem; font-weight: 850; padding: 6px 9px; }
+      .result-card h3 { font-size: 1.25rem; letter-spacing: -.03em; margin: 23px 0 4px; }
+      .result-meta { color: #5c7671; font-size: .78rem; margin: 0; }
+      .result-rule { border-top: 1px solid #d9e8e1; margin: 18px 0 14px; }
+      .result-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+      .result-button { align-items: center; background: var(--ink); border-radius: 8px; color: #fff; display: inline-flex; font-size: .73rem; font-weight: 850; gap: 7px; padding: 10px 12px; }
+      .result-button.alt { background: #fff; color: var(--ink); outline: 1px solid #c8ddd5; }
+      .result-footnote { color: #77908a; font-size: .68rem; line-height: 1.45; margin: 13px 0 0; }
 
       .connectors { background: #f0f8f3; }
       .connector-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin-top: 42px; }
@@ -150,9 +166,10 @@
       .footer-row a { color: #f5fff7; font-weight: 750; text-decoration: none; }
 
       @media (max-width: 900px) {
-        .hero-grid, .tension-grid, .guardrails-grid { grid-template-columns: 1fr; }
+        .hero-grid, .tension-grid, .guardrails-grid, .action-grid { grid-template-columns: 1fr; }
         .hero { padding-top: 38px; }
         .hero-visual { margin: 10px auto 0; max-width: 680px; width: 100%; }
+        .action-grid { gap: 35px; }
         .workflow-grid { grid-template-columns: repeat(2, 1fr); }
         .connector-grid { grid-template-columns: repeat(2, 1fr); }
         .connector-wide { grid-column: span 2; }
@@ -237,6 +254,20 @@
             <article class="step"><div class="step-num">02</div><h3>Set coverage type</h3><p>Commercial, Medicare, Marketplace, or Medicaid filters the next options.</p></article>
             <article class="step"><div class="step-num">03</div><h3>Confirm the plan</h3><p>Use autocomplete and exact plan or product identifiers where available.</p></article>
             <article class="step"><div class="step-num">04</div><h3>Search the medicine</h3><p>Choose the suggested product, then review tier and published restrictions.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="action-section">
+        <div class="wrap action-grid">
+          <div class="action-copy"><div class="eyebrow">From result to action</div><h2>No dead ends after the result.</h2><p>When prior authorization is flagged, the result card puts the next move right beside the medication details. <strong>Download the official PA form immediately</strong> when the selected plan provides a downloadable form, or open that payer’s official PA route in one click.</p><p>That means less searching, fewer wrong forms, and a faster handoff from clinical decision to administrative action.</p></div>
+          <div class="result-card" aria-label="Medication result with prior authorization actions">
+            <div class="result-top"><span class="result-kicker">Medication result</span><span class="result-badge">PA required</span></div>
+            <h3>Trelegy Ellipta</h3>
+            <p class="result-meta">Exact plan selected · source-backed result</p>
+            <div class="result-rule"></div>
+            <div class="result-actions"><span class="result-button">↓ Download PA form</span><span class="result-button alt">↗ Open official PA route</span></div>
+            <p class="result-footnote">The action shown follows the selected plan’s published workflow.</p>
           </div>
         </div>
       </section>
