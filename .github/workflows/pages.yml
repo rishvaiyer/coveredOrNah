@@ -3,7 +3,7 @@ name: Deploy Formulary Finder landing page
 on:
   push:
     branches:
-      - codex/formulary-sellable-pilot
+      - main
     paths:
       - landing/**
       - .github/workflows/pages.yml
