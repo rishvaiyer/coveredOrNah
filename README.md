@@ -89,6 +89,7 @@ The portal also includes dated, plan-specific or general-PDL references for sele
 ## Data design and safety
 
 - The application is intentionally PHI-free and does not store patient identifiers.
+- The clinic plan-list intake stays template-only. No files are uploaded, reviewed, or stored by the app.
 - Insurer name alone never establishes medication coverage.
 - Missing data is shown as unconfirmed, never as a denial.
 - Exact connectors preserve the source date and use bounded, read-only retrieval and caching.
@@ -102,6 +103,7 @@ The portal also includes dated, plan-specific or general-PDL references for sele
 - [Sellable product brief](docs/SELLABLE_PRODUCT_BRIEF.md)
 - [Market pricing and packaging](docs/MARKET_PRICING_AND_PACKAGING.md)
 - [Specialty expansion plan](docs/SPECIALTY_EXPANSION_PLAN.md)
+- [PHI-free clinic plan-list template](public/clinic-plan-intake-template.csv)
 
 Recommended demo sequence: start with **By plan**, use a Horizon Marketplace or AmeriHealth Individual & Family example, choose a medication with autocomplete, press **Check formulary**, then show the source date and restriction flags. Finish with an exact UHC or Medicare plan lookup to demonstrate the stronger product-level connectors.
 

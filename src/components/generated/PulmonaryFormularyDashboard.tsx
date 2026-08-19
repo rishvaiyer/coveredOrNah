@@ -366,17 +366,6 @@ type PlanIntake = {
   pharmacyBenefit: string;
 };
 
-type IntakeFile = {
-  id: string;
-  name: string;
-  size: number;
-  type: string;
-  file: File;
-};
-
-const maxIntakeFileBytes = 20 * 1024 * 1024;
-const intakeFileAccept = ".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.png,.jpg,.jpeg,.webp";
-
 const planKinds = [
   "Commercial / employer",
   "ACA marketplace / individual",
@@ -3838,9 +3827,6 @@ export const PulmonaryFormularyDashboard = () => {
     pharmacyBenefit: "",
   });
   const [submittedPlanIntake, setSubmittedPlanIntake] = useState<PlanIntake | null>(null);
-  const [intakeFiles, setIntakeFiles] = useState<IntakeFile[]>([]);
-  const [intakeFileMessage, setIntakeFileMessage] = useState<string | null>(null);
-  const [intakeUploadState, setIntakeUploadState] = useState<"idle" | "uploading" | "submitted" | "error">("idle");
   const planIntakeRef = useRef<HTMLElement | null>(null);
   const planIntakeInsurerRef = useRef<HTMLInputElement | null>(null);
   const medicareFinderRef = useRef<HTMLElement | null>(null);
@@ -4598,55 +4584,6 @@ export const PulmonaryFormularyDashboard = () => {
     planIntakeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     window.setTimeout(() => planIntakeInsurerRef.current?.focus(), 250);
   };
-  const stageIntakeFiles = (files: FileList | null) => {
-    if (!files?.length) return;
-    const acceptedExtensions = new Set(["pdf", "doc", "docx", "xls", "xlsx", "csv", "txt", "png", "jpg", "jpeg", "webp"]);
-    const rejected: string[] = [];
-    const nextFiles = Array.from(files).filter((file) => {
-      const extension = file.name.toLowerCase().split(".").pop() ?? "";
-      if (!acceptedExtensions.has(extension)) {
-        rejected.push(`${file.name} (file type)`);
-        return false;
-      }
-      if (file.size > maxIntakeFileBytes) {
-        rejected.push(`${file.name} (over 20 MB)`);
-        return false;
-      }
-      return true;
-    }).map((file) => ({
-      id: `${file.name}:${file.size}:${file.lastModified}`,
-      name: file.name,
-      size: file.size,
-      type: file.type || "Unknown file type",
-      file,
-    }));
-    setIntakeFiles((current) => {
-      const merged = [...current, ...nextFiles];
-      return merged.filter((file, index) => merged.findIndex((candidate) => candidate.id === file.id) === index).slice(0, 10);
-    });
-    setIntakeFileMessage(rejected.length > 0 ? `Not staged: ${rejected.join(", ")}. Add PDF, Word, spreadsheet, CSV, text, or image files up to 20 MB each.` : null);
-  };
-  const submitIntakeFiles = async () => {
-    if (!intakeFiles.length || intakeUploadState === "uploading") return;
-    setIntakeUploadState("uploading");
-    setIntakeFileMessage(null);
-    const formData = new FormData();
-    intakeFiles.forEach(({ file }) => formData.append("files", file, file.name));
-    formData.append("insurer", planIntake.insurer.trim());
-    formData.append("coverageType", planIntake.planKind);
-    formData.append("planName", planIntake.planName.trim());
-    formData.append("pharmacyBenefit", planIntake.pharmacyBenefit.trim());
-    try {
-      const response = await fetch("/api/plan-intake/files", { method: "POST", body: formData });
-      const result = await response.json().catch(() => null);
-      if (!response.ok) throw new Error(result?.message || "The intake files could not be submitted.");
-      setIntakeUploadState("submitted");
-      setIntakeFileMessage(`Received ${result.fileCount} file${result.fileCount === 1 ? "" : "s"} for intake review. No coverage result was published.`);
-    } catch (error) {
-      setIntakeUploadState("error");
-      setIntakeFileMessage(error instanceof Error ? error.message : "The intake files could not be submitted.");
-    }
-  };
   const submitPlanIntake = () => {
     if (!canStartPlanWorkflow) return;
     setSubmittedPlanIntake(planIntake);
@@ -4944,67 +4881,12 @@ export const PulmonaryFormularyDashboard = () => {
                   </a>
                 </div>
                 <div className="mt-3 rounded-xl border border-dashed border-[#9bcfc4] bg-[#f8fcfb] px-3 py-3">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-xs font-bold text-[#284e4d]">Have insurer documents already?</p>
-                      <p className="mt-0.5 text-[11px] leading-4 text-[#55716f]">
-                        Add PDFs, Word files, spreadsheets, text files, or screenshots for intake review. Files stay in this browser until you choose to send them; they are never automatically treated as coverage evidence.
-                      </p>
-                    </div>
-                    <label className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#e5f3f0] px-3 py-2 text-xs font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] hover:bg-[#d9eee9]">
-                      Add source files
-                      <input
-                        type="file"
-                        multiple
-                        accept={intakeFileAccept}
-                        onChange={(event) => {
-                          stageIntakeFiles(event.currentTarget.files);
-                          event.currentTarget.value = "";
-                        }}
-                        className="sr-only"
-                        aria-label="Add insurer source files for intake review"
-                      />
-                    </label>
-                  </div>
-                  {intakeFileMessage && (
-                    <p className="mt-2 text-[11px] font-semibold leading-4 text-[#8a5a16]" role="status">
-                      {intakeFileMessage}
-                    </p>
-                  )}
-                  {intakeFiles.length > 0 && (
-                    <div className="mt-3 flex flex-col gap-3">
-                      <div className="flex flex-wrap gap-2" aria-label="Staged insurer source files">
-                        {intakeFiles.map((file) => (
-                          <span key={file.id} className="inline-flex items-center gap-2 rounded-full bg-white px-2.5 py-1.5 text-[10px] font-semibold text-[#526b69] ring-1 ring-[#d2e5e0]">
-                            <span className="max-w-[15rem] truncate">{file.name}</span>
-                            <span className="text-[#819694]">{(file.size / 1024 / 1024).toFixed(1)} MB</span>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setIntakeFiles((current) => current.filter((candidate) => candidate.id !== file.id));
-                                setIntakeUploadState("idle");
-                              }}
-                              className="font-bold text-[#0d6664] hover:text-[#074f4d]"
-                              aria-label={`Remove ${file.name}`}
-                            >
-                              ×
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap items-center gap-3">
-                        <button
-                          type="button"
-                          onClick={submitIntakeFiles}
-                          disabled={intakeUploadState === "uploading"}
-                          className="rounded-full bg-[#173f41] px-3 py-2 text-xs font-bold text-white hover:bg-[#0d6664] disabled:cursor-wait disabled:opacity-60"
-                        >
-                          {intakeUploadState === "uploading" ? "Sending for review…" : intakeUploadState === "submitted" ? "Submitted for review" : "Send files for intake review"}
-                        </button>
-                        <span className="text-[10px] leading-4 text-[#6a8580]">The server validates the files and returns intake metadata only; it does not retain contents or publish coverage automatically.</span>
-                      </div>
-                    </div>
-                  )}
+                  <p className="text-xs font-bold text-[#284e4d]">
+                    Use the template for a PHI-free clinic plan list.
+                  </p>
+                  <p className="mt-1 text-[11px] leading-4 text-[#55716f]">
+                    No files are uploaded, reviewed, or stored by this app. Keep insurer documents outside the portal and use the template only for a PHI-free plan list.
+                  </p>
                 </div>
               </div>
               <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6 xl:grid-cols-4">

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { once } from "node:events";
 import { spawn } from "node:child_process";
-import { test, after } from "node:test";
+import { readFileSync, readdirSync } from "node:fs";
+import path from "node:path";
+import { after, test } from "node:test";
 
 const port = 31_000 + Math.floor(Math.random() * 500);
 const child = spawn("./node_modules/.bin/tsx", ["server.ts"], {
@@ -27,34 +28,20 @@ const waitForServer = async () => {
 
 after(() => child.kill());
 
-test("accepts an allowed intake file without retaining contents", async () => {
+test("returns 404 for the removed intake upload endpoint", async () => {
   await waitForServer();
-  const form = new FormData();
-  form.append("files", new Blob(["insurer,plan\nExample,Preferred\n"], { type: "text/csv" }), "plans.csv");
-  const response = await fetch(`${baseUrl}/api/plan-intake/files`, { method: "POST", body: form });
-  const body = await response.json() as { status: string; fileCount: number; stored: boolean; reviewRequired: boolean; files: unknown[]; message: string };
-  assert.equal(response.status, 200);
-  assert.equal(body.status, "received");
-  assert.equal(body.fileCount, 1);
-  assert.equal(body.stored, false);
-  assert.equal(body.reviewRequired, true);
-  assert.equal(body.files.length, 1);
-  assert.match(body.message, /not retained/);
-});
-
-test("rejects unsupported file types", async () => {
-  const form = new FormData();
-  form.append("files", new Blob(["not an insurer document"], { type: "application/octet-stream" }), "payload.exe");
-  const response = await fetch(`${baseUrl}/api/plan-intake/files`, { method: "POST", body: form });
-  const body = await response.json() as { status: string; message: string };
-  assert.equal(response.status, 400);
-  assert.equal(body.status, "rejected");
-  assert.match(body.message, /PDF, Word, spreadsheet/);
-});
-
-test("rejects an empty intake request", async () => {
   const response = await fetch(`${baseUrl}/api/plan-intake/files`, { method: "POST" });
-  const body = await response.json() as { status: string; message: string };
-  assert.equal(response.status, 400);
-  assert.deepEqual(body, { status: "rejected", message: "Add at least one insurer source file." });
+  assert.equal(response.status, 404);
+});
+
+test("keeps the PHI-free intake template link and no-upload statement in the built client bundle", () => {
+  const distDir = path.join(process.cwd(), "dist");
+  const assetDir = path.join(distDir, "assets");
+  const bundleName = readdirSync(assetDir).find((entry) => /^index-.*\.js$/.test(entry));
+  assert.ok(bundleName, "Expected a built client bundle in dist/assets.");
+  const bundle = readFileSync(path.join(assetDir, bundleName), "utf8");
+  assert.match(bundle, /\/clinic-plan-intake-template\.csv/);
+  assert.match(bundle, /No files are uploaded, reviewed, or stored by this app\./);
+  assert.doesNotMatch(bundle, /Send files for intake review/);
+  assert.doesNotMatch(bundle, /Submitted for review/);
 });
