@@ -138,8 +138,16 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
 
   assertCoverage("Albuterol HFA", { state: "Tier 1B" });
   assertCoverage("Arformoterol", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Formoterol", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Ipratropium", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Ipratropium / albuterol", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Tiotropium (generic capsule-inhaler)", { state: "Tier 1A", flags: ["QL"] });
   assertCoverage("Incruse Ellipta (brand)", { state: "Tier 2", flags: ["QL"] });
+  assertCoverage("Budesonide inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
+  assertCoverage("Fluticasone furoate", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Fluticasone propionate HFA 44 mcg", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Fluticasone / vilanterol", { state: "Tier 1B" });
+  assertCoverage("Fluticasone / salmeterol (generic)", { state: "Tier 1B" });
   assertCoverage("Montelukast", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Zafirlukast", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Varenicline", {
@@ -157,6 +165,10 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
     productNote: "ACA preventive smoking-cessation benefit.",
   });
   assertCoverage("Zileuton ER", { state: "Tier 1B", flags: ["PA", "QL"] });
+  assertCoverage("Ambrisentan", { state: "Tier 1B", flags: ["PA", "QL"] });
+  assertCoverage("Sildenafil 20 mg", { state: "Tier 1A", flags: ["PA", "QL"] });
+  assertCoverage("Tadalafil for PAH", { state: "Tier 1A", flags: ["PA", "QL"] });
+  assertCoverage("Tobramycin inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
 
   const tiotropiumGeneric = ambetterCoverage("Tiotropium (generic capsule-inhaler)");
   assert.equal(tiotropiumGeneric.state, "Tier 1A");
