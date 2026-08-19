@@ -1,6 +1,6 @@
 # Plan Source Matrix
 
-As of August 12, 2026, Formulary Finder has 16 New Jersey-focused static formulary baselines. Horizon Marketplace, Horizon Classic, AmeriHealth Individual & Family, AmeriHealth Value, AmeriHealth Select, and Wellpoint NJ FamilyCare are included in that count.
+As of August 19, 2026, Formulary Finder has 17 active New Jersey-focused plan-family baselines. Horizon Marketplace, Ambetter Marketplace, Horizon Classic, AmeriHealth Individual & Family, AmeriHealth Value, AmeriHealth Select, and Wellpoint NJ FamilyCare are included in that count.
 
 These baselines are source-backed reference layers, not member-specific coverage determinations. The static application data is a partial medication-row extraction from each source. For Medicare Advantage, the exact CMS plan workflow should be used whenever a contract, plan, and segment are available.
 
@@ -15,6 +15,7 @@ These baselines are source-backed reference layers, not member-specific coverage
 | Plan family | Exactness level | Official source | Refresh cadence | Important exclusions and interpretation |
 |---|---|---|---|---|
 | **Horizon BCBSNJ Marketplace** (`horizonMarketplace`) | Named formulary family: 2026 NJ 3-tier Marketplace products | [Horizon BCBSNJ Marketplace Drug Guide](https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf) | Monthly and at plan-year rollover | Not Horizon employer, Medicaid, Medicare, or other Horizon drug lists. Absence can mean not listed only after exact product, strength, form, and current-formulary matching. It is not a denial or eligibility determination. |
+| **Ambetter from WellCare of New Jersey Marketplace** (`ambetterNjMarketplace`) | Named formulary family: 2026 NJ Marketplace formulary | [Ambetter from WellCare of New Jersey 2026 formulary](https://www.ambetterhealth.com/content/dam/centene/new-jersey/ambetter/pdf/2026-nj-formulary.pdf) | Monthly and at plan-year rollover | Not WellCare Medicare, another state, or a non-Marketplace product. Keep nonmatching rows unconfirmed unless the exact product is present in the current formulary. |
 | **Horizon BCBSNJ Classic** (`horizonClassic`) | Named formulary family: Horizon Classic pharmacy benefit | [Horizon BCBSNJ Classic Formulary July 2026](https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/Commercial/5517-L_Horizon_Classic.pdf) | Quarterly and at plan-year rollover | Apply only when the pharmacy benefit is explicitly Horizon Classic. Direct Access alone identifies the medical product, not necessarily the pharmacy formulary. Coverage and exclusions can vary by benefit design. |
 | **UnitedHealthcare Commercial** (`uhcCommercial`) | General carrier PDL | [UnitedHealthcare May 2026 Commercial PDL](https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf) | Monthly and at plan-year rollover | Employer and pharmacy-benefit variants can differ. The PDL does not define member coverage, and absence cannot safely mean noncoverage. |
 | **Oxford Freedom Network** (`oxfordFreedom`) | General carrier PDL used as an Oxford reference baseline | [UnitedHealthcare May 2026 Commercial PDL](https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf) | Monthly and at plan-year rollover | Not an exact Oxford Freedom benefit determination. Confirm the Oxford product and drug-list variant first; exclude Compass, Garden State, and any other product not proven to use this list. |
@@ -41,4 +42,4 @@ These baselines are source-backed reference layers, not member-specific coverage
 
 ## URL verification
 
-All 16 active URLs above match the New Jersey-focused baseline inventory and were checked on August 12, 2026. Each returned its intended payer page or PDF.
+All 17 active URLs above match the New Jersey-focused baseline inventory and were checked on August 19, 2026. Each returned its intended payer page or PDF.

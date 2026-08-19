@@ -181,7 +181,7 @@ def build_overview():
             "85 pulmonary and commonly used medication families.",
             "17 New Jersey plan-family baselines.",
             "Exact NJ Medicare Advantage and standalone Part D plan selection.",
-            "Exact public-data connectors for UHC Marketplace, Aetna NJ FamilyCare, UHC Community NJ Medicaid, and Wellpoint NJ FamilyCare.",
+            "Exact or payer-published connectors for UHC Marketplace, Aetna NJ FamilyCare, UHC Community NJ Medicaid, Fidelis NJ FamilyCare, Horizon NJ Health, and Wellpoint NJ FamilyCare.",
             "Source-visible evidence designed to reduce carrier-level assumptions.",
         ]),
     ]
@@ -198,9 +198,9 @@ def build_overview():
 
     pricing = Table(
         [[
-            [p("60-DAY CLINIC PROOF", "eyebrow"), p("$500 total", "price"), p("One NJ location; credited toward annual conversion.", "small")],
-            [p("CLINIC CORE", "eyebrow"), p("$149 / month", "price"), p("Per location; up to 10 prescribers; unlimited support staff.", "small")],
-            [p("CLINIC PLUS", "eyebrow"), p("$249 / month", "price"), p("Per location; up to 25 prescribers and a broader plan pack.", "small")],
+            [p("60-DAY CLINIC PROOF", "eyebrow"), p("$500 total", "price"), p("Pricing hypothesis for one NJ location; credited toward annual conversion.", "small")],
+            [p("CLINIC CORE", "eyebrow"), p("$149 / month", "price"), p("Pricing hypothesis per location; up to 10 prescribers; unlimited support staff.", "small")],
+            [p("CLINIC PLUS", "eyebrow"), p("$249 / month", "price"), p("Pricing hypothesis per location; up to 25 prescribers and a broader plan pack.", "small")],
         ]],
         colWidths=[2.37 * inch, 2.37 * inch, 2.37 * inch],
     )
@@ -326,9 +326,9 @@ def build_runbook():
     offer = [
         p("THE OFFER", "eyebrow"),
         p("Low-risk pricing that respects clinic budgets", "h2"),
-        p("<b>$500 clinic proof</b><br/>60 days, one NJ location, credited toward annual conversion.", "body"),
-        p("<b>$149 Core / month</b><br/>Up to 10 prescribers and unlimited support staff.", "body"),
-        p("<b>$249 Plus / month</b><br/>Up to 25 prescribers, a broader plan pack, and feasible standard source additions.", "body"),
+        p("<b>$500 clinic proof</b><br/>60 days, one NJ location, credited toward annual conversion. Pricing hypothesis only until qualified clinic feedback confirms it.", "body"),
+        p("<b>$149 Core / month</b><br/>Pricing hypothesis for up to 10 prescribers and unlimited support staff.", "body"),
+        p("<b>$249 Plus / month</b><br/>Pricing hypothesis for up to 25 prescribers, a broader plan pack, and feasible standard source additions.", "body"),
         p("No per-seat fees for nurses, medical assistants, or authorization staff.", "small"),
     ]
     story += [two_col(discovery, offer), Spacer(1, 0.2 * inch)]

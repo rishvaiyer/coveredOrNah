@@ -374,7 +374,7 @@ def cover_story():
                     p("Formulary Finder", "title"),
                     p("A clinic-configured medication-access workflow for New Jersey specialty practices.", "cover_sub"),
                     Spacer(1, 0.22 * inch),
-                    p("Pricing, packaging, market position, launch gates, sales motion, and 90-day execution.", "cover_sub"),
+                    p("Pricing hypotheses, packaging, market position, launch gates, sales motion, and 90-day execution.", "cover_sub"),
                 ]
             ]
         ],
@@ -396,8 +396,8 @@ def cover_story():
         brand,
         Spacer(1, 0.35 * inch),
         note_box(
-            "Launch decision",
-            "Start with a $500 paid design-partner proof. Convert only after the clinic's high-volume supported plans are configured and the workflow demonstrates practical value. Recurring launch pricing is $149 Core or $249 Plus per location monthly, with no per-staff fees.",
+            "Launch pricing hypothesis",
+            "Start with a $500 paid design-partner proof. Convert only after the clinic's high-volume supported plans are configured and the workflow demonstrates practical value. Test $149 Core and $249 Plus per location monthly, with no per-staff fees, across the first qualified clinic conversations.",
             fill=GOLD_PALE,
             accent=GOLD,
         ),
@@ -406,7 +406,7 @@ def cover_story():
             [
                 [p("Prepared for", "body_small"), p("Rishva Iyer - Product owner", "card_title")],
                 [p("Market", "body_small"), p("New Jersey pulmonary and adjacent specialty clinics", "card_title")],
-                [p("Version", "body_small"), p("August 13, 2026 - Launch plan v1.0", "card_title")],
+                [p("Version", "body_small"), p("August 19, 2026 - Launch plan v1.1", "card_title")],
             ],
             colWidths=[1.1 * inch, 5.1 * inch],
             style=TableStyle(
@@ -430,7 +430,7 @@ def build_story():
     story.extend(cover_story())
     story.append(PageBreak())
 
-    story.extend(section_header("01 / Executive decision", "What we are launching", "A focused clinic product, not an unlimited national formulary promise."))
+    story.extend(section_header("01 / Executive decision", "What we are launching", "A focused clinic proof, not an unlimited national formulary promise."))
     story.append(
         note_box(
             "Primary offer",
@@ -474,7 +474,7 @@ def build_story():
     )
     story.append(PageBreak())
 
-    story.extend(section_header("02 / Pricing", "A credible low-friction clinic offer", "Low enough to avoid procurement drama, high enough to fund source maintenance and support."))
+    story.extend(section_header("02 / Pricing", "A credible low-friction clinic offer", "Pricing remains a hypothesis until qualified clinic buyers react to it."))
     story.append(pricing_cards())
     story.append(Spacer(1, 0.18 * inch))
     story.append(p("Additional commercial terms", "h2"))
@@ -501,7 +501,7 @@ def build_story():
     )
     story.append(Spacer(1, 0.16 * inch))
     story.append(p("Price validation rule", "h2"))
-    story.append(p("Keep this pricing if at least two of the first five qualified NJ clinics accept the $500 proof without a special discount. Reduce scope before reducing price when custom-source labor is the objection."))
+    story.append(p("Keep this pricing hypothesis if at least two of the first five qualified NJ clinics accept the $500 proof without a special discount. Reduce scope before reducing price when custom-source labor is the objection."))
     story.append(PageBreak())
 
     story.extend(section_header("03 / Market position", "Why this will not get laughed out of the room", "The price is anchored below multi-seat prescribing tools and far below integrated PA automation, while preserving a paid operational service."))
@@ -553,7 +553,7 @@ def build_story():
         bullet_list(
             [
                 "Live New Jersey-focused clinician portal with 85 medication families and 17 plan-family baselines.",
-                "Exact Medicare Advantage and standalone Part D routing plus validated public NJ payer sources.",
+                "Exact Medicare Advantage and standalone Part D routing plus validated UHC Marketplace, Aetna NJ FamilyCare, UHC Community, Fidelis NJ FamilyCare, Horizon NJ Health, and Wellpoint NJ FamilyCare workflows.",
                 "Deterministic local audit records 1,009 of 1,445 medication-plan cells as source-confirmed; 436 remain explicitly unconfirmed.",
                 "Clinician guide, demo package, source matrix, sales materials, and PHI-free plan-list intake template are prepared.",
             ]
@@ -664,7 +664,7 @@ def build_story():
     story.append(
         bullet_list(
             [
-                "GO: at least two qualified clinics accept the paid proof; supported workflows are trusted; maintenance costs fit the price.",
+                "GO: at least two qualified clinics accept the paid proof; supported workflows are trusted; maintenance costs fit the pricing hypothesis.",
                 "REVISE: buyers want the product but custom-source work exceeds the service budget. Tighten scope or raise Plus pricing.",
                 "NO-GO: clinics consistently prefer existing EHR/payer workflows and measured time-to-answer does not improve.",
             ]
@@ -677,7 +677,7 @@ def build_story():
         data_table(
             ["Owner action", "Status / required evidence"],
             [
-                ["Approve the launch prices", "$500 proof; $149 Core; $249 Plus; multi-site from $599."],
+                ["Test the launch prices", "$500 proof; $149 Core; $249 Plus; multi-site from $599."],
                 ["Choose an intake destination", "Approved business email, CRM form, or secure upload path. Do not publish a personal address by default."],
                 ["Build the first 25-account list", "NJ pulmonary and allergy clinics with 5-20 prescribers and visible formulary burden."],
                 ["Book five discovery calls", "Capture plan mix, staff workflow, price reaction, and success criteria."],

@@ -2,7 +2,7 @@
 
 ## Executive decision
 
-The fastest defensible path is a paid New Jersey pulmonary pilot, followed by adjacent specialty packs and one neighboring market. Formulary Finder should be sold as a source-visible medication-access evidence layer, not as an eligibility, cost, coverage-adjudication, or prior-authorization submission product.
+The fastest defensible path is a paid New Jersey pulmonary design-partner proof, followed by adjacent specialty packs and one neighboring market. Formulary Finder should be sold as a source-visible medication-access evidence layer, not as an eligibility, cost, coverage-adjudication, or prior-authorization submission product.
 
 ## Why this wedge
 
@@ -57,7 +57,7 @@ Package each expansion as a specialty pack, not as an unlimited national drug pr
 - Billing/RCM consultants and EHR implementation partners.
 - Short monthly product demonstrations and one-page case studies.
 
-Avoid paid advertising until two or three pilots show repeatable conversion and measurable time savings.
+Avoid paid advertising until two or three proofs show repeatable conversion and measurable time savings.
 
 ## Competitive positioning
 
@@ -85,7 +85,7 @@ Do not compete head-on with these platforms on ePA submission. Win on fast, insp
 
 ### Days 61-90
 
-- Convert pilots to annual contracts.
+- Convert successful proofs to annual contracts.
 - Add one neighboring state or specialty only if refresh ownership and exact-match QA are working.
 - Pursue one EHR, RCM, or specialty-network referral partnership.
 - Decide whether licensed F&B/RTPB data is justified by pilot demand.
@@ -98,8 +98,8 @@ Do not claim “any insurer” or “any state” until the sold pack has:
 - Effective-date and source-drift monitoring.
 - Exact product/strength/device QA above 90% for the sold plan pack.
 - Legal review of source rights and any licensed data requirement.
-- Measured pilot evidence showing improved staff workflow.
+- Measured proof evidence showing improved staff workflow.
 
 ## Immediate next action
 
-Ask Summit for a de-identified export of plan names and lookup volume, or have staff record the top 20 plan/product combinations for two weeks. That list becomes the highest-value connector backlog and the foundation for the first paid pilot.
+Ask Summit for a de-identified export of plan names and lookup volume, or have staff record the top 20 plan/product combinations for two weeks. That list becomes the highest-value connector backlog and the foundation for the first paid proof.

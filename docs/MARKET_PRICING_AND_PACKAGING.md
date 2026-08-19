@@ -1,8 +1,8 @@
 # Formulary Finder: Market Pricing and Commercial Packaging
 
-## Decision
+## Pricing hypothesis
 
-Launch with a low-risk paid proof, then price by clinic location rather than by staff seat.
+Test a low-risk paid proof, then price by clinic location rather than by staff seat if the first buyer conversations validate it.
 
 - **60-day design-partner proof:** $500 total, credited toward an annual subscription.
 - **Clinic Core:** $149 per location per month.
@@ -11,7 +11,7 @@ Launch with a low-risk paid proof, then price by clinic location rather than by 
 - **New unsupported payer-source onboarding:** $250-$750 one time, only after source feasibility and deliverables are confirmed.
 - **Annual option:** 10% discount and a 12-month price lock.
 
-These are launch prices to validate with the first five New Jersey clinic buyers. They are not evidence of a final willingness-to-pay ceiling.
+These are launch pricing hypotheses to validate with the first five New Jersey clinic buyers. They are not evidence of a final willingness-to-pay ceiling.
 
 ## Why this price will survive buyer scrutiny
 

@@ -49,9 +49,9 @@ Pulmonary is the proven entry point. The commercial story should be broader: the
 
 ## Initial offer
 
-### Clinic implementation package
+### Clinic proof package
 
-- 30-day supervised implementation.
+- 60-day supervised design-partner proof.
 - Five to ten named staff users.
 - PHI-free scenarios only.
 - Configuration around the clinic’s highest-volume plan families and medication products.
@@ -115,7 +115,7 @@ Ask:
 - Which staff role owns the final verification?
 - What would make the workflow safe enough for routine use?
 
-### Step 4: quantified implementation
+### Step 4: quantified proof
 
 Request ten to twenty de-identified plan and medication scenarios. Measure the current workflow, run the same scenarios in Formulary Finder, and report the differences.
 
@@ -162,11 +162,11 @@ Avoid broad claims such as “all plans covered” or “instant prior authoriza
 
 - Run live demos for qualified prospects.
 - Capture objections and repeated questions.
-- Offer a scoped implementation with no PHI and no payer submission.
+- Offer a scoped design-partner proof with no PHI and no payer submission.
 
 ### Days 22 to 30: close and measure
 
-- Select the first implementation customer.
+- Select the first design-partner clinic.
 - Gather de-identified scenarios.
 - Establish source-refresh ownership and weekly review.
 - Produce the first measured workflow report.
@@ -184,7 +184,7 @@ Track these weekly:
 - Correction rate after manual review.
 - Unconfirmed-result rate by payer and medication family.
 - Source freshness exceptions.
-- Proposals sent, implementations started, and annual conversions.
+- Proposals sent, proofs started, and annual conversions.
 
 Do not claim savings or clinical outcomes until they are measured against the clinic’s current process.
 

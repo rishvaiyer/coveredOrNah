@@ -9,8 +9,8 @@
 
 - Pulmonologists, advanced practice clinicians, nurses, and medical assistants who perform medication coverage checks.
 - Prior-authorization and benefits-verification staff who need exact plan and product evidence.
-- Practice administrators evaluating a bounded clinic implementation.
-- Clinical and IT leaders reviewing workflow safety, source traceability, and implementation scope.
+- Practice administrators evaluating a bounded clinic proof.
+- Clinical and IT leaders reviewing workflow safety, source traceability, and proof scope.
 
 ## Client value in one sentence
 
@@ -83,11 +83,11 @@ Say:
 
 > Missing evidence is never displayed as a denial. Staff are directed to verify the exact benefit rather than infer coverage from another plan or an incomplete source.
 
-### 4:40 to 5:00 | Close with the implementation ask
+### 4:40 to 5:00 | Close with the design-partner proof ask
 
 Say:
 
-> The proposed implementation is PHI-free and operationally bounded. We will validate the clinic's most common plans and pulmonary medications, measure lookup speed and agreement with current verification, and use discrepancies to prioritize the next connectors.
+> The proposed 60-day design-partner proof is PHI-free and operationally bounded. We will validate the clinic's most common plans and pulmonary medications, measure lookup speed and agreement with current verification, and use discrepancies to prioritize the next connectors.
 
 Ask for:
 
@@ -150,16 +150,23 @@ Ask for:
 | New Jersey standalone Part D | Current CMS PDP region 04 plans | S-contract, plan, segment and medication product |
 | UnitedHealthcare NJ Individual and Family Marketplace | 2026 UHC NJ QHP dataset | Exact HIOS plan ID and RxCUI |
 | Aetna Better Health of New Jersey FamilyCare | Current public NJ Medicaid formulary | Exact 11-digit NDC |
+| UHC Community Plan New Jersey Medicaid | Current payer-published Medicaid feed | Exact matched product from the feed |
+| Fidelis Care New Jersey FamilyCare | Current bounded Medicaid extraction | Exact bounded pulmonary product |
+| Horizon NJ Health | Current bounded Medicaid extraction | Exact bounded pulmonary product |
+| Wellpoint New Jersey FamilyCare | Current machine-readable Medicaid feed | Exact matched product from the feed |
 
 ### Dated reference formularies
 
-The portal includes 13 source-backed baseline references:
+The portal includes 17 source-backed plan-family baselines:
 
 - Horizon BCBSNJ Marketplace.
+- Ambetter from WellCare of New Jersey Marketplace.
 - UnitedHealthcare Commercial PDL baseline.
 - Oxford Freedom Network commercial baseline.
 - Aetna Medicare HMO baseline.
 - AmeriHealth NJ Individual and Family.
+- AmeriHealth NJ Value.
+- AmeriHealth NJ Select.
 - Cigna National Preferred 3-Tier employer baseline.
 - Oscar NJ Individual standard formulary.
 - Anthem BCBS NY Individual Select 3-Tier.
@@ -203,7 +210,7 @@ Measure these during the 60-day design-partner proof using deidentified workflow
 | Safety-language compliance | 100% of missing or unavailable matches remain unconfirmed, never denied | Weekly result-state audit |
 | Source traceability | 100% of confirmed results retain source and exact identifiers | Weekly record review without patient information |
 | Critical false-confirmed results | 0 | Clinical reviewer escalation and root-cause review |
-| Staff usability | At least 80% of users rate the workflow 4 out of 5 or better | End-of-implementation survey |
+| Staff usability | At least 80% of users rate the workflow 4 out of 5 or better | End-of-proof survey |
 
 ## Product rollout gate
 

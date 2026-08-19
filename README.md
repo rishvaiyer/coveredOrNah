@@ -14,12 +14,14 @@ Clinical formulary lookup for care teams. The application keeps the routine work
 - Select the exact Medicare Advantage or standalone Part D plan before reviewing CMS medication results.
 - Check exact 2026 UnitedHealthcare New Jersey Marketplace coverage by HIOS plan and RxNorm product.
 - Check Aetna Better Health of New Jersey FamilyCare coverage by exact 11-digit NDC.
-- Check Wellpoint New Jersey FamilyCare PDL-listed medication products in the portal.
+- Check UHC Community Plan New Jersey Medicaid coverage by exact medication product from the payer feed.
+- Check Fidelis Care New Jersey FamilyCare and Horizon NJ Health bounded Medicaid product lookups in the portal.
+- Check Wellpoint New Jersey FamilyCare medication products from the full machine-readable payer feed in the portal.
 - Check Horizon BCBSNJ Marketplace and AmeriHealth NJ Individual & Family source-listed products in the portal.
 - Check Horizon BCBSNJ Classic source-listed products when the pharmacy benefit explicitly says Classic.
 - Check AmeriHealth New Jersey Value source-listed products when the pharmacy benefit explicitly says Value.
 - Check AmeriHealth New Jersey Select source-listed products when the pharmacy benefit explicitly says Select.
-- Check the named Oxford Freedom, UnitedHealthcare Commercial, and Cigna National Preferred baseline PDLs without leaving the portal.
+- Check Ambetter from WellCare of New Jersey Marketplace, Oscar NJ Individual, and the named Oxford Freedom, UnitedHealthcare Commercial, and Cigna National Preferred baselines without leaving the portal.
 - Review tier, prior authorization, step therapy, quantity-limit, and source information when supplied by the selected source.
 
 ![Exact UHC plan and medication check](docs/images/uhc-exact-coverage.png)
@@ -65,6 +67,10 @@ Formulary evidence is not eligibility, a benefit guarantee, a payment determinat
 | CMS New Jersey standalone Part D | Contract, plan, segment, medication | Formulary rows, tier and restriction flags when matched |
 | UHC New Jersey Individual and Family Marketplace | 2026 HIOS plan and RxCUI | Tier and PA, ST, QL flags |
 | Aetna Better Health of New Jersey FamilyCare | Exact 11-digit NDC | Tier and PA, ST, QL, OTC flags |
+| UHC Community Plan New Jersey Medicaid | Exact product from the payer feed | Preferred status plus published restriction flags when matched |
+| Fidelis Care New Jersey FamilyCare | Exact bounded pulmonary product | Tier and published restriction flags when matched |
+| Horizon NJ Health | Exact bounded pulmonary product | Listed status, PA, and limitation markers when matched |
+| Wellpoint New Jersey FamilyCare | Exact product from the full machine-readable payer feed | Preferred status and published restriction flags when matched |
 
 ### Public source-backed plan-family checks
 
@@ -75,12 +81,14 @@ Formulary evidence is not eligibility, a benefit guarantee, a payment determinat
 | AmeriHealth NJ Individual & Family | Individual & Family coverage type and medication product | Source-listed formulary-family result with tier/restriction flags when loaded; not Value, Select, employer, or Medicare |
 | AmeriHealth NJ Value | Exact New Jersey Value formulary and medication product | Source-backed Value baseline; confirm the card or benefit document says Value |
 | AmeriHealth NJ Select | Exact New Jersey Select formulary and medication product | Source-backed Select baseline; confirm the card or benefit document says Select |
+| Ambetter from WellCare of New Jersey Marketplace | Ambetter Marketplace family and medication product | Source-backed Ambetter Marketplace baseline; not WellCare Medicare or another state |
 | Oxford Freedom Network | Exact Oxford Freedom baseline and medication product | UHC-linked commercial PDL baseline; confirm the Oxford product and employer benefit |
 | UnitedHealthcare Commercial | Exact UnitedHealthcare Commercial PDL baseline and medication product | General commercial PDL reference; employer benefit variants can differ |
 | Cigna National Preferred 3-Tier | Exact named employer baseline and medication product | Abridged source-backed baseline; confirm the employer drug-list variant |
+| Oscar NJ Individual | Exact Oscar NJ baseline and medication product | Named NJ individual-market baseline; confirm the current policy and document year |
 | Wellpoint New Jersey FamilyCare | NJ FamilyCare PDL and medication product | Source-listed product with PA, specialty-pharmacy, and quantity-limit flags where published; not Wellpoint commercial or Medicare |
 
-These two public formulary guides are useful for a bounded clinic pilot, but they are not substitutes for an authenticated member-benefit lookup. The portal keeps the source family visible and returns **unconfirmed, not a denial** when a complete product mapping is unavailable.
+These public formulary guides are useful for a bounded clinic proof, but they are not substitutes for an authenticated member-benefit lookup. The portal keeps the source family visible and returns **unconfirmed, not a denial** when a complete product mapping is unavailable.
 
 ### Source-backed reference formularies
 
@@ -162,3 +170,15 @@ DATABASE_URL='postgresql://...' CMS_CHECK_STATE='NJ' npm run cms:check
 - `GET /api/aetna-nj-familycare/metadata`
 - `GET /api/aetna-nj-familycare/drugs?q=albuterol&limit=20`
 - `GET /api/aetna-nj-familycare/coverage?ndc=00054074287`
+- `GET /api/uhc-nj-community/metadata`
+- `GET /api/uhc-nj-community/drugs?q=albuterol&limit=20`
+- `GET /api/uhc-nj-community/coverage?id=uhc-community-...`
+- `GET /api/fidelis-nj-familycare/metadata`
+- `GET /api/fidelis-nj-familycare/drugs?q=albuterol&limit=20`
+- `GET /api/fidelis-nj-familycare/coverage?id=fidelis-...`
+- `GET /api/horizon-nj-health/metadata`
+- `GET /api/horizon-nj-health/drugs?q=albuterol&limit=20`
+- `GET /api/horizon-nj-health/coverage?id=horizon-nj-health-...`
+- `GET /api/wellpoint-nj-familycare/metadata`
+- `GET /api/wellpoint-nj-familycare/drugs?q=albuterol&limit=20`
+- `GET /api/wellpoint-nj-familycare/coverage?id=wellpoint-...`

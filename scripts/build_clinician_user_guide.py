@@ -370,12 +370,12 @@ def build():
     # Page 8
     add_paragraph(doc, "SCOPE AND CLINIC CHECK", size=9.5, color=TEAL, bold=True, after=4)
     add_heading(doc, "What is loaded today", level=1)
-    add_paragraph(doc, "The live pilot currently includes 85 medication records and 16 New Jersey-focused formulary baselines. The New Jersey-focused CMS finder has separate Medicare Advantage and standalone Part D paths and does not verify county availability, enrollment, or eligibility. The insurer directory identifies network participation only, not medication coverage.", after=8)
+    add_paragraph(doc, "The live pilot currently includes 85 medication records and 17 New Jersey-focused plan-family baselines. The New Jersey-focused CMS finder has separate Medicare Advantage and standalone Part D paths and does not verify county availability, enrollment, or eligibility. The insurer directory identifies network participation only, not medication coverage.", after=8)
     add_table(
         doc,
         ["Named baseline formularies", "Region / plan family"],
         [
-            ("Horizon Marketplace; Horizon Classic; UHC Commercial; Oxford Freedom", "NJ commercial and marketplace plan families"),
+            ("Horizon Marketplace; Ambetter Marketplace; Horizon Classic; UHC Commercial; Oxford Freedom", "NJ commercial and marketplace plan families"),
             ("Aetna HMO; Wellcare NJ; Humana NJ; Braven NJ; HealthSpring NJ; Clover NJ", "Named Medicare plan families; use exact CMS plan selection when available"),
             ("AmeriHealth NJ; Cigna 3-Tier; Oscar NJ; Wellpoint NJ FamilyCare", "Named commercial, individual, and NJ FamilyCare plan families"),
         ],
@@ -396,7 +396,7 @@ def build():
         label_width=True,
     )
     add_paragraph(doc, "Live portal: formulary-finder-pilot-production.up.railway.app", size=10.5, color=TEAL, bold=True, after=2)
-    add_paragraph(doc, "Guide version: August 12, 2026. Evidence sources and plan formularies change. Recheck the source date shown in the portal before acting.", size=9.5, color=MUTED, italic=True, after=0)
+    add_paragraph(doc, "Guide version: August 19, 2026. Evidence sources and plan formularies change. Recheck the source date shown in the portal before acting.", size=9.5, color=MUTED, italic=True, after=0)
 
     doc.core_properties.title = "Formulary Finder Clinician User Guide"
     doc.core_properties.subject = "Plan-level formulary workflow guide"
