@@ -51,7 +51,7 @@ The reference-plan browser is intentionally secondary. It supports plan identifi
 
 | Result | Meaning |
 | --- | --- |
-| **Covered** | The selected medication product appears in the selected source. Restrictions may still apply. |
+| **Source-listed** | The selected medication product appears in the selected source. Restrictions may still apply. Reserve `Covered` for exact connector output tied to a selected plan or NDC. |
 | **Unconfirmed, not a denial** | The portal does not have a complete exact source match. It is not a coverage decision. |
 | **Reference listing** | A static, dated formulary reference. Confirm the patient’s exact benefit before relying on it. |
 

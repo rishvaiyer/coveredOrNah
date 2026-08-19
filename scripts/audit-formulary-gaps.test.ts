@@ -100,12 +100,16 @@ test("static source-backed UI uses source-listed language instead of covered lan
     new URL("../src/components/generated/PulmonaryFormularyDashboard.tsx", import.meta.url),
     "utf8",
   );
+  const readmeSource = readFileSync(new URL("../README.md", import.meta.url), "utf8");
 
   assert.match(dashboardSource, /Source-listed on the published tier shown here\./);
   assert.match(dashboardSource, /Source-listed on a higher published tier\./);
   assert.match(dashboardSource, /<span>Source-listed<\/span>/);
   assert.doesNotMatch(dashboardSource, /Covered on a higher tier\./);
   assert.doesNotMatch(dashboardSource, /<span>Covered<\/span>/);
+  assert.match(readmeSource, /\| \*\*Source-listed\*\* \| The selected medication product appears in the selected source\./);
+  assert.match(readmeSource, /Reserve `Covered` for exact connector output tied to a selected plan or NDC\./);
+  assert.doesNotMatch(readmeSource, /\| \*\*Covered\*\* \| The selected medication product appears in the selected source\./);
 });
 
 test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed semantics", () => {
@@ -135,7 +139,7 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assertCoverage("Albuterol HFA", { state: "Tier 1B" });
   assertCoverage("Arformoterol", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Tiotropium (generic capsule-inhaler)", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Incruse Ellipta (brand)", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Incruse Ellipta (brand)", { state: "Tier 2", flags: ["QL"] });
   assertCoverage("Montelukast", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Zafirlukast", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Varenicline", {
@@ -152,7 +156,15 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
     flags: ["QL"],
     productNote: "ACA preventive smoking-cessation benefit.",
   });
-  assertCoverage("Zileuton ER", { state: "Tier 1", flags: ["PA", "QL"] });
+  assertCoverage("Zileuton ER", { state: "Tier 1B", flags: ["PA", "QL"] });
+
+  const tiotropiumGeneric = ambetterCoverage("Tiotropium (generic capsule-inhaler)");
+  assert.equal(tiotropiumGeneric.state, "Tier 1A");
+  assert.deepEqual(tiotropiumGeneric.flags, ["QL"]);
+
+  const incruseBrand = ambetterCoverage("Incruse Ellipta (brand)");
+  assert.equal(incruseBrand.state, "Tier 2");
+  assert.deepEqual(incruseBrand.flags, ["QL"]);
 
   const famotidine = ambetterCoverage("Famotidine");
   assert.equal(famotidine.state, "Tier varies");
