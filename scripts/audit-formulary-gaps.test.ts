@@ -169,6 +169,8 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assertCoverage("Sildenafil 20 mg", { state: "Tier 1A", flags: ["PA", "QL"] });
   assertCoverage("Tadalafil for PAH", { state: "Tier 1A", flags: ["PA", "QL"] });
   assertCoverage("Tobramycin inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
+  assertCoverage("Fluticasone nasal", { state: "Tier 1A", flags: ["QL"] });
+  assertCoverage("Azelastine nasal", { state: "Tier 1B" });
   assertCoverage("Cetirizine", { state: "Tier 1A", flags: ["QL"] });
   assertCoverage("Azithromycin", { state: "Tier 1A", flags: ["QL"] });
   assertCoverage("Pantoprazole", { state: "Tier 1B", flags: ["QL"] });
@@ -177,6 +179,7 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assertCoverage("Amlodipine", { state: "Tier 1B" });
   assertCoverage("Atorvastatin", { state: "Tier 1A", flags: ["QL"] });
   assertCoverage("Sertraline", { state: "Tier 1B" });
+  assertCoverage("Epinephrine auto-injector", { state: "Tier 1B", flags: ["QL"] });
 
   const tiotropiumGeneric = ambetterCoverage("Tiotropium (generic capsule-inhaler)");
   assert.equal(tiotropiumGeneric.state, "Tier 1A");
@@ -190,6 +193,24 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assert.equal(famotidine.state, "Tier varies");
   assert.match(famotidine.productNote ?? "", /Tier 1A RX\/OTC/);
   assert.match(famotidine.productNote ?? "", /Tier 1B/);
+
+  const albuterolNebulizer = ambetterCoverage("Albuterol nebulizer solution");
+  assert.equal(albuterolNebulizer.state, "Tier varies");
+  assert.deepEqual(albuterolNebulizer.flags, ["QL"]);
+  assert.match(albuterolNebulizer.productNote ?? "", /0\.083% nebulizer row is Tier 1A/);
+  assert.match(albuterolNebulizer.productNote ?? "", /0\.63 mg\/3 mL and 1\.25 mg\/3 mL nebulizer rows are Tier 1B/);
+
+  const levalbuterol = ambetterCoverage("Levalbuterol");
+  assert.equal(levalbuterol.state, "Tier varies");
+  assert.deepEqual(levalbuterol.flags, ["QL"]);
+  assert.match(levalbuterol.productNote ?? "", /tartrate HFA row is Tier 1A/);
+  assert.match(levalbuterol.productNote ?? "", /HCl nebulizer rows are Tier 1B/);
+
+  const roflumilast = ambetterCoverage("Roflumilast");
+  assert.equal(roflumilast.state, "Tier varies");
+  assert.deepEqual(roflumilast.flags, ["QL"]);
+  assert.match(roflumilast.productNote ?? "", /250 mcg row is Tier 1A/);
+  assert.match(roflumilast.productNote ?? "", /500 mcg row is Tier 1B/);
 
   const levofloxacin = ambetterCoverage("Levofloxacin");
   assert.equal(levofloxacin.state, "Tier varies");
@@ -214,10 +235,45 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assert.match(losartan.productNote ?? "", /25 mg is Tier 1A/);
   assert.match(losartan.productNote ?? "", /50 mg and 100 mg rows are Tier 1B/);
 
+  const prednisone = ambetterCoverage("Prednisone");
+  assert.equal(prednisone.state, "Tier varies");
+  assert.match(prednisone.productNote ?? "", /2\.5 mg, 10 mg, 20 mg, and 50 mg tablet rows are Tier 1A/);
+  assert.match(prednisone.productNote ?? "", /solution, 1 mg and 5 mg tablet rows, and dose-pack row are Tier 1B/);
+
+  const prednisolone = ambetterCoverage("Prednisolone");
+  assert.equal(prednisolone.state, "Tier varies");
+  assert.match(prednisolone.productNote ?? "", /Tablet row is Tier 1A/);
+  assert.match(prednisolone.productNote ?? "", /solution row is Tier 1B/);
+
   const ibuprofen = ambetterCoverage("Ibuprofen");
   assert.equal(ibuprofen.state, "Tier varies");
   assert.match(ibuprofen.productNote ?? "", /400 mg and 600 mg tablets are Tier 1A/);
   assert.match(ibuprofen.productNote ?? "", /suspension and 800 mg tablet rows are Tier 1B/);
+
+  const amoxicillinClavulanate = ambetterCoverage("Amoxicillin / clavulanate");
+  assert.equal(amoxicillinClavulanate.state, "Tier varies");
+  assert.match(amoxicillinClavulanate.productNote ?? "", /CHEW, suspension, 500\/875 mg tablets, and TB12 rows are Tier 1B/);
+  assert.match(amoxicillinClavulanate.productNote ?? "", /250 mg tablet row is Tier 1A/);
+
+  const doxycycline = ambetterCoverage("Doxycycline");
+  assert.equal(doxycycline.state, "Tier varies");
+  assert.deepEqual(doxycycline.flags, ["QL"]);
+  assert.match(doxycycline.productNote ?? "", /Monohydrate capsule rows and hyclate capsule row are Tier 1A/);
+  assert.match(doxycycline.productNote ?? "", /monohydrate tablet rows and hyclate tablet rows are Tier 1B/);
+
+  const pirfenidone = ambetterCoverage("Pirfenidone");
+  assert.equal(pirfenidone.state, "Tier varies");
+  assert.deepEqual(pirfenidone.flags, ["PA", "QL"]);
+  assert.match(pirfenidone.productNote ?? "", /Capsule and 267 mg or 801 mg tablet rows are Tier 1B/);
+  assert.match(pirfenidone.productNote ?? "", /534 mg tablet row is Tier 4/);
+
+  assertCoverage("Bosentan", { state: "Tier 1B", flags: ["PA", "QL"] });
+
+  const metformin = ambetterCoverage("Metformin");
+  assert.equal(metformin.state, "Tier varies");
+  assert.deepEqual(metformin.flags, ["QL"]);
+  assert.match(metformin.productNote ?? "", /850 mg tablet row is Tier 0/);
+  assert.match(metformin.productNote ?? "", /500 mg and 1000 mg tablet rows plus 500 mg and 750 mg extended-release tablet rows are Tier 1B/);
 
   assertCoverage("Glycopyrrolate / formoterol", {
     state: "Source loading",
