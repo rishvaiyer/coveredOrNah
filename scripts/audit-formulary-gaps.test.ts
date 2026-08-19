@@ -17,9 +17,9 @@ test("reports the current static formulary gap inventory deterministically", () 
     medicationCount: 85,
     planCount: 17,
     totalCells: 1445,
-    confirmedCells: 1009,
-    unconfirmedCells: 436,
-    unconfirmedPercent: 30.17,
+    confirmedCells: 1011,
+    unconfirmedCells: 434,
+    unconfirmedPercent: 30.03,
   });
 
   assert.deepEqual(
@@ -27,7 +27,7 @@ test("reports the current static formulary gap inventory deterministically", () 
     {
       horizonMarketplace: 16,
       horizonClassic: 16,
-      ambetterNjMarketplace: 17,
+      ambetterNjMarketplace: 15,
       uhcCommercial: 21,
       oxfordFreedom: 21,
       aetnaMedicareHmo: 15,
@@ -136,20 +136,101 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
     }
   };
 
-  assertCoverage("Albuterol HFA", { state: "Tier 1B" });
-  assertCoverage("Arformoterol", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Formoterol", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Ipratropium", { state: "Tier varies", flags: ["QL"] });
-  assertCoverage("Ipratropium / albuterol", { state: "Tier varies", flags: ["QL"] });
-  assertCoverage("Tiotropium (generic capsule-inhaler)", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Incruse Ellipta (brand)", { state: "Tier 2", flags: ["QL"] });
-  assertCoverage("Budesonide inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
-  assertCoverage("Fluticasone furoate", { state: "Tier varies", flags: ["QL"] });
-  assertCoverage("Fluticasone propionate HFA 44 mcg", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Fluticasone / vilanterol", { state: "Tier varies" });
-  assertCoverage("Fluticasone / salmeterol (generic)", { state: "Tier 1B" });
-  assertCoverage("Montelukast", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Zafirlukast", { state: "Tier 1B", flags: ["QL"] });
+  const expectedAmbetterMatrix = {
+    "Albuterol HFA": { state: "Tier 1B", flags: [] },
+    "Albuterol nebulizer solution": { state: "Tier varies", flags: ["QL"] },
+    Levalbuterol: { state: "Tier varies", flags: ["QL"] },
+    Arformoterol: { state: "Tier 1B", flags: ["QL"] },
+    Formoterol: { state: "Tier 1B", flags: ["QL"] },
+    Salmeterol: { state: "Tier 2", flags: ["QL"] },
+    Ipratropium: { state: "Tier varies", flags: ["QL"] },
+    "Ipratropium / albuterol": { state: "Tier varies", flags: ["QL"] },
+    "Tiotropium (generic capsule-inhaler)": { state: "Tier 1A", flags: ["QL"] },
+    "Spiriva HandiHaler / Respimat (brand)": { state: "Tier 2", flags: ["QL"] },
+    "Incruse Ellipta (brand)": { state: "Tier 2", flags: ["QL"] },
+    "Anoro Ellipta (brand)": { state: "Source loading", flags: [] },
+    "Glycopyrrolate / formoterol": { state: "Source loading", flags: [] },
+    Revefenacin: { state: "Source loading", flags: [] },
+    "Tiotropium / olodaterol": { state: "Tier 2", flags: [] },
+    Olodaterol: { state: "Tier 2", flags: [] },
+    Aclidinium: { state: "Source loading", flags: [] },
+    "Fluticasone / umeclidinium / vilanterol": { state: "Tier 2", flags: ["QL"] },
+    "Budesonide / glycopyrrolate / formoterol": { state: "Tier 2", flags: ["QL"] },
+    Roflumilast: { state: "Tier varies", flags: ["QL"] },
+    Ensifentrine: { state: "Source loading", flags: [] },
+    "Budesonide inhalation": { state: "Tier 1B", flags: ["PA", "QL"] },
+    "Budesonide (Flexhaler)": { state: "Tier 2", flags: [] },
+    "Fluticasone furoate": { state: "Tier varies", flags: ["QL"] },
+    "Fluticasone propionate HFA 44 mcg": { state: "Tier 1B", flags: ["QL"] },
+    "QVAR RediHaler (brand)": { state: "Tier 2", flags: [] },
+    Ciclesonide: { state: "Tier 3", flags: ["PA"] },
+    Mometasone: { state: "Source loading", flags: [] },
+    "Advair Diskus / HFA (brand)": { state: "Source loading", flags: [] },
+    "Symbicort (brand)": { state: "Source loading", flags: [] },
+    "Budesonide / formoterol (generic)": { state: "Tier 1A", flags: [] },
+    "Mometasone / formoterol": { state: "Tier 2", flags: [] },
+    "Fluticasone / vilanterol": { state: "Tier varies", flags: [] },
+    "Albuterol / budesonide": { state: "Source loading", flags: [] },
+    "Fluticasone / salmeterol (generic)": { state: "Tier 1B", flags: [] },
+    Montelukast: { state: "Tier 1B", flags: ["QL"] },
+    Zafirlukast: { state: "Tier 1B", flags: ["QL"] },
+    "Zileuton ER": { state: "Tier 1B", flags: ["PA", "QL"] },
+    Prednisone: { state: "Tier varies", flags: [] },
+    Prednisolone: { state: "Tier varies", flags: [] },
+    Dupilumab: { state: "Tier 4", flags: ["PA", "QL"] },
+    Benralizumab: { state: "Tier 4", flags: ["PA", "QL"] },
+    Mepolizumab: { state: "Source loading", flags: [] },
+    Reslizumab: { state: "Source loading", flags: [] },
+    Tezepelumab: { state: "Source loading", flags: [] },
+    Omalizumab: { state: "Source loading", flags: [] },
+    Nintedanib: { state: "Tier 4", flags: ["PA", "QL"] },
+    Pirfenidone: { state: "Tier varies", flags: ["PA", "QL"] },
+    Ambrisentan: { state: "Tier 1B", flags: ["PA", "QL"] },
+    Bosentan: { state: "Tier varies", flags: ["PA", "QL"] },
+    "Sildenafil 20 mg": { state: "Tier 1A", flags: ["PA", "QL"] },
+    "Tadalafil for PAH": { state: "Tier 1A", flags: ["PA", "QL"] },
+    "Treprostinil inhaled": { state: "Tier 4", flags: ["PA"] },
+    Selexipag: { state: "Tier 4", flags: ["PA", "QL"] },
+    Riociguat: { state: "Tier 4", flags: ["PA", "QL"] },
+    "Sotatercept-csrk": { state: "Source loading", flags: [] },
+    "Tobramycin inhalation": { state: "Tier 1B", flags: ["PA", "QL"] },
+    "Aztreonam inhalation": { state: "Tier 4", flags: ["PA", "QL"] },
+    "Dornase alfa": { state: "Tier 4", flags: ["PA", "QL"] },
+    "Elexacaftor / tezacaftor / ivacaftor": { state: "Tier 4", flags: ["PA", "QL"] },
+    "Fluticasone nasal": { state: "Tier 1A", flags: ["QL"] },
+    "Azelastine nasal": { state: "Tier 1B", flags: [] },
+    Cetirizine: { state: "Tier 1A", flags: ["QL"] },
+    Varenicline: { state: "Tier 0", flags: ["QL"] },
+    "Nicotine replacement": { state: "Tier 0", flags: [] },
+    "Bupropion SR 150 mg": { state: "Tier 0", flags: ["QL"] },
+    Azithromycin: { state: "Tier 1A", flags: ["QL"] },
+    "Amoxicillin / clavulanate": { state: "Tier varies", flags: [] },
+    Doxycycline: { state: "Tier varies", flags: ["QL"] },
+    Levofloxacin: { state: "Tier varies", flags: [] },
+    Benzonatate: { state: "Tier varies", flags: ["QL"] },
+    "Guaifenesin ER": { state: "Source loading", flags: [] },
+    Famotidine: { state: "Tier varies", flags: [] },
+    Pantoprazole: { state: "Tier 1B", flags: ["QL"] },
+    "Epinephrine auto-injector": { state: "Tier 1B", flags: ["QL"] },
+    Furosemide: { state: "Tier 1A", flags: [] },
+    Apixaban: { state: "Tier 2", flags: ["QL"] },
+    Lisinopril: { state: "Tier 1A", flags: [] },
+    Losartan: { state: "Tier varies", flags: ["QL"] },
+    Amlodipine: { state: "Tier 1B", flags: [] },
+    Atorvastatin: { state: "Tier 1A", flags: ["QL"] },
+    Metformin: { state: "Tier varies", flags: ["QL"] },
+    Omeprazole: { state: "Tier varies", flags: ["QL"] },
+    Sertraline: { state: "Tier 1B", flags: [] },
+    Ibuprofen: { state: "Tier varies", flags: [] },
+  } satisfies Record<string, { state: string; flags: string[] }>;
+
+  assert.equal(Object.keys(expectedAmbetterMatrix).length, 85);
+  assert.deepEqual(new Set(Object.keys(expectedAmbetterMatrix)), new Set(medications.map((row) => row.generic)));
+
+  for (const [generic, expected] of Object.entries(expectedAmbetterMatrix)) {
+    assertCoverage(generic, expected);
+  }
+
   assertCoverage("Varenicline", {
     state: "Tier 0",
     flags: ["QL"],
@@ -164,22 +245,6 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
     flags: ["QL"],
     productNote: "ACA preventive smoking-cessation benefit.",
   });
-  assertCoverage("Zileuton ER", { state: "Tier 1B", flags: ["PA", "QL"] });
-  assertCoverage("Ambrisentan", { state: "Tier 1B", flags: ["PA", "QL"] });
-  assertCoverage("Sildenafil 20 mg", { state: "Tier 1A", flags: ["PA", "QL"] });
-  assertCoverage("Tadalafil for PAH", { state: "Tier 1A", flags: ["PA", "QL"] });
-  assertCoverage("Tobramycin inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
-  assertCoverage("Fluticasone nasal", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Azelastine nasal", { state: "Tier 1B" });
-  assertCoverage("Cetirizine", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Azithromycin", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Pantoprazole", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Furosemide", { state: "Tier 1A" });
-  assertCoverage("Lisinopril", { state: "Tier 1A" });
-  assertCoverage("Amlodipine", { state: "Tier 1B" });
-  assertCoverage("Atorvastatin", { state: "Tier 1A", flags: ["QL"] });
-  assertCoverage("Sertraline", { state: "Tier 1B" });
-  assertCoverage("Epinephrine auto-injector", { state: "Tier 1B", flags: ["QL"] });
 
   const ipratropium = ambetterCoverage("Ipratropium");
   assert.equal(ipratropium.state, "Tier varies");
@@ -196,6 +261,12 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   const tiotropiumGeneric = ambetterCoverage("Tiotropium (generic capsule-inhaler)");
   assert.equal(tiotropiumGeneric.state, "Tier 1A");
   assert.deepEqual(tiotropiumGeneric.flags, ["QL"]);
+
+  const spirivaBrand = ambetterCoverage("Spiriva HandiHaler / Respimat (brand)");
+  assert.equal(spirivaBrand.state, "Tier 2");
+  assert.deepEqual(spirivaBrand.flags, ["QL"]);
+  assert.match(spirivaBrand.productNote ?? "", /Spiriva Respimat row is Tier 2/);
+  assert.match(spirivaBrand.productNote ?? "", /no exact Spiriva HandiHaler row was found/);
 
   const incruseBrand = ambetterCoverage("Incruse Ellipta (brand)");
   assert.equal(incruseBrand.state, "Tier 2");
@@ -214,11 +285,26 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
 
   assertCoverage("Budesonide (Flexhaler)", { state: "Tier 2" });
 
+  const budesonideFormoterolMedication = medications.find((row) => row.generic === "Budesonide / formoterol (generic)");
+  assert.ok(budesonideFormoterolMedication);
+  assert.equal(budesonideFormoterolMedication.brands, "Generic budesonide-formoterol");
+
+  const budesonideFormoterolGeneric = ambetterCoverage("Budesonide / formoterol (generic)");
+  assert.equal(budesonideFormoterolGeneric.state, "Tier 1A");
+  assert.deepEqual(budesonideFormoterolGeneric.flags, []);
+  assert.match(budesonideFormoterolGeneric.productNote ?? "", /Generic budesonide-formoterol fumarate dihydrate row is Tier 1A/);
+  assert.match(budesonideFormoterolGeneric.productNote ?? "", /no exact Breyna brand row was found/);
+
   const fluticasoneFuroate = ambetterCoverage("Fluticasone furoate");
   assert.equal(fluticasoneFuroate.state, "Tier varies");
   assert.deepEqual(fluticasoneFuroate.flags, ["QL"]);
   assert.match(fluticasoneFuroate.productNote ?? "", /Generic fluticasone furoate inhalation row is Tier 1B/);
   assert.match(fluticasoneFuroate.productNote ?? "", /brand Arnuity Ellipta rows are Tier 2/);
+
+  const ciclesonide = ambetterCoverage("Ciclesonide");
+  assert.equal(ciclesonide.state, "Tier 3");
+  assert.deepEqual(ciclesonide.flags, ["PA"]);
+  assert.equal(ciclesonide.productNote, "Alvesco inhaler row.");
 
   const fluticasoneVilanterol = ambetterCoverage("Fluticasone \/ vilanterol");
   assert.equal(fluticasoneVilanterol.state, "Tier varies");
@@ -233,7 +319,7 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   const albuterolNebulizer = ambetterCoverage("Albuterol nebulizer solution");
   assert.equal(albuterolNebulizer.state, "Tier varies");
   assert.deepEqual(albuterolNebulizer.flags, ["QL"]);
-  assert.match(albuterolNebulizer.productNote ?? "", /0\.083% nebulizer row is Tier 1A/);
+  assert.match(albuterolNebulizer.productNote ?? "", /0\.083% and strength-unspecified nebulizer rows are Tier 1A/);
   assert.match(albuterolNebulizer.productNote ?? "", /0\.63 mg\/3 mL and 1\.25 mg\/3 mL nebulizer rows are Tier 1B/);
 
   const levalbuterol = ambetterCoverage("Levalbuterol");
@@ -250,8 +336,8 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
 
   const levofloxacin = ambetterCoverage("Levofloxacin");
   assert.equal(levofloxacin.state, "Tier varies");
-  assert.match(levofloxacin.productNote ?? "", /500 mg is Tier 1A/);
-  assert.match(levofloxacin.productNote ?? "", /250\/750 mg tablet rows are Tier 1B/);
+  assert.match(levofloxacin.productNote ?? "", /500 mg tablet row is Tier 1A/);
+  assert.match(levofloxacin.productNote ?? "", /IV 500 mg\/100 mL in D5W row, oral solution row, and 250\/750 mg tablet rows are Tier 1B/);
 
   const benzonatate = ambetterCoverage("Benzonatate");
   assert.equal(benzonatate.state, "Tier varies");
@@ -262,8 +348,8 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   const omeprazole = ambetterCoverage("Omeprazole");
   assert.equal(omeprazole.state, "Tier varies");
   assert.deepEqual(omeprazole.flags, ["QL"]);
-  assert.match(omeprazole.productNote ?? "", /Capsule rows are Tier 1A/);
-  assert.match(omeprazole.productNote ?? "", /magnesium capsule and delayed-release tablet rows are Tier 1B/);
+  assert.match(omeprazole.productNote ?? "", /Generic omeprazole CPDR row is Tier 1A/);
+  assert.match(omeprazole.productNote ?? "", /omeprazole magnesium CPDR rows and omeprazole TBEC row are Tier 1B/);
 
   const losartan = ambetterCoverage("Losartan");
   assert.equal(losartan.state, "Tier varies");
@@ -308,6 +394,18 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assert.deepEqual(bosentan.flags, ["PA", "QL"]);
   assert.match(bosentan.productNote ?? "", /Generic bosentan tablet and oral-suspension rows are Tier 1B/);
   assert.match(bosentan.productNote ?? "", /brand Tracleer oral-suspension row is Tier 4/);
+
+  const treprostinilInhaled = ambetterCoverage("Treprostinil inhaled");
+  assert.equal(treprostinilInhaled.state, "Tier 4");
+  assert.deepEqual(treprostinilInhaled.flags, ["PA"]);
+  assert.match(treprostinilInhaled.productNote ?? "", /Tyvaso refill kit, starter kit, and nebulized solution rows are Tier 4/);
+  assert.match(treprostinilInhaled.productNote ?? "", /no exact Tyvaso DPI row was found/);
+
+  const tobramycinInhalation = ambetterCoverage("Tobramycin inhalation");
+  assert.equal(tobramycinInhalation.state, "Tier 1B");
+  assert.deepEqual(tobramycinInhalation.flags, ["PA", "QL"]);
+  assert.match(tobramycinInhalation.productNote ?? "", /Generic tobramycin nebulizer row is Tier 1B/);
+  assert.match(tobramycinInhalation.productNote ?? "", /no exact TOBI Podhaler row was found/);
 
   const metformin = ambetterCoverage("Metformin");
   assert.equal(metformin.state, "Tier varies");
