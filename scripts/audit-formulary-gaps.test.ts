@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
+  coverageFor,
   medications,
   primaryNjPlans,
   type Coverage,
@@ -92,4 +93,75 @@ test("source manifest covers every baseline with the audited official URL", () =
     assert.ok(source.refreshCadence);
     assert.equal(typeof source.absenceCanImplyNotListed, "boolean");
   }
+});
+
+test("static source-backed UI uses source-listed language instead of covered language", () => {
+  const dashboardSource = readFileSync(
+    new URL("../src/components/generated/PulmonaryFormularyDashboard.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(dashboardSource, /Source-listed on the published tier shown here\./);
+  assert.match(dashboardSource, /Source-listed on a higher published tier\./);
+  assert.match(dashboardSource, /<span>Source-listed<\/span>/);
+  assert.doesNotMatch(dashboardSource, /Covered on a higher tier\./);
+  assert.doesNotMatch(dashboardSource, /<span>Covered<\/span>/);
+});
+
+test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed semantics", () => {
+  const ambetterPlan = primaryNjPlans.find((plan) => plan.key === "ambetterNjMarketplace");
+  assert.ok(ambetterPlan, "Missing Ambetter baseline plan");
+
+  const ambetterCoverage = (generic: string) => {
+    const medication = medications.find((row) => row.generic === generic);
+    assert.ok(medication, `Missing medication fixture for ${generic}`);
+    return coverageFor(medication, ambetterPlan.key);
+  };
+
+  const assertCoverage = (
+    generic: string,
+    expected: { state: string; flags?: string[]; productNote?: string },
+  ) => {
+    const actual = ambetterCoverage(generic);
+    assert.equal(actual.state, expected.state);
+    if (expected.flags) {
+      assert.deepEqual(actual.flags, expected.flags);
+    }
+    if (expected.productNote) {
+      assert.equal(actual.productNote, expected.productNote);
+    }
+  };
+
+  assertCoverage("Albuterol HFA", { state: "Tier 1B" });
+  assertCoverage("Arformoterol", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Tiotropium (generic capsule-inhaler)", { state: "Tier 1A", flags: ["QL"] });
+  assertCoverage("Incruse Ellipta (brand)", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Montelukast", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Zafirlukast", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Varenicline", {
+    state: "Tier 0",
+    flags: ["QL"],
+    productNote: "ACA preventive smoking-cessation benefit.",
+  });
+  assertCoverage("Nicotine replacement", {
+    state: "Tier 0",
+    productNote: "ACA preventive smoking-cessation benefit.",
+  });
+  assertCoverage("Bupropion SR 150 mg", {
+    state: "Tier 0",
+    flags: ["QL"],
+    productNote: "ACA preventive smoking-cessation benefit.",
+  });
+  assertCoverage("Zileuton ER", { state: "Tier 1", flags: ["PA", "QL"] });
+
+  const famotidine = ambetterCoverage("Famotidine");
+  assert.equal(famotidine.state, "Tier varies");
+  assert.match(famotidine.productNote ?? "", /Tier 1A RX\/OTC/);
+  assert.match(famotidine.productNote ?? "", /Tier 1B/);
+
+  assertCoverage("Glycopyrrolate / formoterol", {
+    state: "Source loading",
+    flags: [],
+    productNote: "No exact Bevespi product row was found in the current Ambetter NJ formulary.",
+  });
 });

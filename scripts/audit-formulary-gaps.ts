@@ -13,8 +13,11 @@ import {
 export const VALID_COVERAGE_STATES = [
   "Preferred",
   "Preferred + PA",
+  "Tier 0",
   "Tier 1",
   "Tier 1 + PA",
+  "Tier 1A",
+  "Tier 1B",
   "Tier 2",
   "Tier 2 + PA",
   "Tier 3",

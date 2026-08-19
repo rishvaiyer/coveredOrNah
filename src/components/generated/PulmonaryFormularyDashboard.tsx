@@ -2,8 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 export type CoverageState =
   | "Preferred"
   | "Preferred + PA"
+  | "Tier 0"
   | "Tier 1"
   | "Tier 1 + PA"
+  | "Tier 1A"
+  | "Tier 1B"
   | "Tier 2"
   | "Tier 2 + PA"
   | "Tier 3"
@@ -2846,7 +2849,7 @@ const planCoverageOverrides: Partial<
     Prednisolone: coverage("Tier 1", [], "Oral solution entries."),
     "Azelastine nasal": coverage("Tier 1", ["QL"]),
     Varenicline: coverage("Tier varies", [], "The source marks varenicline as ACA tobacco-cessation coverage rather than a numeric tier."),
-    "Nicotine replacement": coverage("Tier varies", [], "Covered gum, lozenge, and patch products are marked ACA; benefit rules apply."),
+    "Nicotine replacement": coverage("Tier varies", [], "Source-listed gum, lozenge, and patch products are marked ACA; benefit rules apply."),
     "Bupropion SR 150 mg": coverage("Tier 1", [], "Bupropion sustained-release entry; smoking-deterrent use is marked ACA."),
     Azithromycin: coverage("Tier 1", ["QL"], "Tablet entries have a quantity limit."),
     "Amoxicillin / clavulanate": coverage("Tier varies", [], "Most suspension/tablet entries are Tier 1; one Augmentin suspension entry is Tier 3."),
@@ -2868,17 +2871,17 @@ const planCoverageOverrides: Partial<
     Ibuprofen: coverage("Tier 1"),
   },
   ambetterNjMarketplace: {
-    "Albuterol HFA": coverage("Tier 1"),
+    "Albuterol HFA": coverage("Tier 1B"),
     "Albuterol nebulizer solution": coverage("Tier varies", ["QL"], "Nebulizer products span Tiers 1A/1B; QL is 15 mL/day."),
     Levalbuterol: coverage("Tier varies", ["QL"]),
-    Arformoterol: coverage("Tier 1", ["QL"]),
+    Arformoterol: coverage("Tier 1B", ["QL"]),
     Formoterol: coverage("Tier 1", ["QL"]),
     Salmeterol: coverage("Tier 2", ["QL"], "Serevent Diskus row."),
     Ipratropium: coverage("Tier 1", ["QL"]),
     "Ipratropium / albuterol": coverage("Tier 1", ["QL"]),
-    "Tiotropium (generic capsule-inhaler)": coverage("Tier 1", ["QL"]),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 1A", ["QL"]),
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
-    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Tier 1B", ["QL"]),
     "Tiotropium / olodaterol": coverage("Tier 2"),
     Olodaterol: coverage("Tier 2"),
     "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
@@ -2892,8 +2895,8 @@ const planCoverageOverrides: Partial<
     "Mometasone / formoterol": coverage("Tier 2"),
     "Fluticasone / vilanterol": coverage("Tier 1"),
     "Fluticasone / salmeterol (generic)": coverage("Tier 1"),
-    Montelukast: coverage("Tier 1", ["QL"]),
-    Zafirlukast: coverage("Tier 1", ["QL"]),
+    Montelukast: coverage("Tier 1B", ["QL"]),
+    Zafirlukast: coverage("Tier 1B", ["QL"]),
     "Zileuton ER": coverage("Tier 1", ["PA", "QL"]),
     Prednisone: coverage("Tier varies"),
     Prednisolone: coverage("Tier varies"),
@@ -2915,15 +2918,15 @@ const planCoverageOverrides: Partial<
     "Fluticasone nasal": coverage("Tier 1", ["QL"]),
     "Azelastine nasal": coverage("Tier 1"),
     Cetirizine: coverage("Tier 1", ["QL"]),
-    Varenicline: coverage("Tier 1", ["QL"], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
-    "Nicotine replacement": coverage("Tier 1", [], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
-    "Bupropion SR 150 mg": coverage("Tier 1", ["QL"], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
+    Varenicline: coverage("Tier 0", ["QL"], "ACA preventive smoking-cessation benefit."),
+    "Nicotine replacement": coverage("Tier 0", [], "ACA preventive smoking-cessation benefit."),
+    "Bupropion SR 150 mg": coverage("Tier 0", ["QL"], "ACA preventive smoking-cessation benefit."),
     Azithromycin: coverage("Tier 1", ["QL"]),
     "Amoxicillin / clavulanate": coverage("Tier 1"),
     Doxycycline: coverage("Tier varies", ["QL"]),
     Levofloxacin: coverage("Tier 1"),
     Benzonatate: coverage("Tier 1", ["QL"]),
-    Famotidine: coverage("Tier 1", [], "20 mg is marked RX/OTC; 40 mg is Tier 1B."),
+    Famotidine: coverage("Tier varies", [], "20 mg tablets are Tier 1A RX/OTC; 40 mg tablets and liquid rows are Tier 1B."),
     Pantoprazole: coverage("Tier 1", ["QL"]),
     Omeprazole: coverage("Tier 1", ["QL"]),
     "Epinephrine auto-injector": coverage("Tier 1", ["QL"]),
@@ -3663,7 +3666,7 @@ const branches = [
 ];
 const toneForState = (state: CoverageState) => {
   if (
-    ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
+    ["Preferred", "Tier 0", "Tier 1", "Tier 1A", "Tier 1B", "Generic", "Low-cost generic", "Preferred brand"].includes(
       state,
     )
   )
@@ -3701,7 +3704,7 @@ const restrictionNames: Record<Restriction, string> = {
   LD: "Limited distribution",
 };
 const isStraightforwardCoverage = (state: CoverageState) =>
-  ["Preferred", "Tier 1", "Generic", "Low-cost generic", "Preferred brand"].includes(
+  ["Preferred", "Tier 0", "Tier 1", "Tier 1A", "Tier 1B", "Generic", "Low-cost generic", "Preferred brand"].includes(
     state,
   );
 const isSourceListedCoverage = (state: CoverageState) =>
@@ -3717,13 +3720,13 @@ const actionForCoverage = (state: CoverageState) => {
   if (state === "Listed in PDL")
     return "Listed in the source PDL. Confirm the member's exact pharmacy benefit, tier, cost, and current restrictions.";
   if (isStraightforwardCoverage(state))
-    return "Preferred or first-tier listing. Verify the exact product and benefit.";
-  if (state.includes("PA"))
-    return "Review prior-authorization criteria before prescribing.";
-  if (state.startsWith("Tier"))
-    return "Covered on a higher tier. Check restrictions and preferred options.";
+    return "Source-listed on the published tier shown here. Verify the exact product, benefit, and current restrictions.";
   if (state === "Tier varies")
-    return "Tier differs by product or strength. Check the product detail below.";
+    return "Source-listed, but the published tier differs by product, strength, or dosage form. Check the product detail below.";
+  if (state.includes("PA"))
+    return "Source-listed with prior-authorization requirements. Review the criteria before prescribing.";
+  if (state.startsWith("Tier"))
+    return "Source-listed on a higher published tier. Check restrictions and preferred options.";
   if (state === "Source loading")
     return "Please verify coverage directly with the insurer. We could not find an official source for this exact medication and plan combination. It may still be covered; confirm before submitting prior authorization.";
   if (state === "Non-preferred")
@@ -6447,7 +6450,7 @@ export const PulmonaryFormularyDashboard = () => {
                               )}
                               {isCoveredBySource(item.state) && (
                                 <>
-                                  <span>Covered</span>
+                                  <span>Source-listed</span>
                                   <span className="opacity-50">·</span>
                                 </>
                               )}
@@ -6597,7 +6600,7 @@ export const PulmonaryFormularyDashboard = () => {
                                 {isCoveredBySource(item.state) && (
                                   <Icon name="check" className="h-3.5 w-3.5" />
                                 )}
-                                <span>{isCoveredBySource(item.state) ? "Covered" : displayState(item.state)}</span>
+                                <span>{isCoveredBySource(item.state) ? "Source-listed" : displayState(item.state)}</span>
                                 {isCoveredBySource(item.state) && (
                                   <>
                                     <span className="opacity-50">·</span>
