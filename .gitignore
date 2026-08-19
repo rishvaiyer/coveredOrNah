@@ -4,5 +4,7 @@ output/
 tmp/
 .DS_Store
 *.log
+__pycache__/
+*.pyc
 magicpath-code.json
 .railway/
