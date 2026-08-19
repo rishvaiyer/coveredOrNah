@@ -9,7 +9,7 @@
 
 - Pulmonologists, advanced practice clinicians, nurses, and medical assistants who perform medication coverage checks.
 - Prior-authorization and benefits-verification staff who need exact plan and product evidence.
-- Practice administrators evaluating a bounded clinic pilot.
+- Practice administrators evaluating a bounded clinic implementation.
 - Clinical and IT leaders reviewing workflow safety, source traceability, and implementation scope.
 
 ## Client value in one sentence
@@ -83,18 +83,18 @@ Say:
 
 > Missing evidence is never displayed as a denial. Staff are directed to verify the exact benefit rather than infer coverage from another plan or an incomplete source.
 
-### 4:40 to 5:00 | Close with the pilot ask
+### 4:40 to 5:00 | Close with the implementation ask
 
 Say:
 
-> The proposed pilot is PHI-free and operationally bounded. We will validate the clinic's most common plans and pulmonary medications, measure lookup speed and agreement with current verification, and use discrepancies to prioritize the next connectors.
+> The proposed implementation is PHI-free and operationally bounded. We will validate the clinic's most common plans and pulmonary medications, measure lookup speed and agreement with current verification, and use discrepancies to prioritize the next connectors.
 
 Ask for:
 
 - The clinic's top plan families and counties served.
 - The 25 to 50 most frequent pulmonary prescriptions, including device and strength.
 - Deidentified examples of common and difficult coverage checks.
-- A clinical operations owner for weekly pilot review.
+- A clinical operations owner for weekly review.
 
 ## Realistic test cases
 
@@ -189,13 +189,13 @@ Formulary Finder currently does **not**:
 - Establish medical-benefit coverage for infused or clinician-administered medications.
 - Submit prescriptions, prior authorizations, exceptions, appeals, or messages to payers.
 
-## Pilot success metrics
+## Product success metrics
 
-Measure these during a 30-day pilot using deidentified workflow observations:
+Measure these during the 60-day design-partner proof using deidentified workflow observations:
 
-| Metric | Pilot target | Measurement method |
+| Metric | Target | Measurement method |
 | --- | ---: | --- |
-| Successful in-portal routing | At least 90% of pilot lookups reach the correct plan-family workflow | Compare entered card type with the selected workflow |
+| Successful in-portal routing | At least 90% of lookups reach the correct plan-family workflow | Compare entered card type with the selected workflow |
 | Exact-plan or product selection | At least 95% where the source requires it | Audit contract-plan-segment, HIOS, RxCUI or NDC capture |
 | Median first-pass lookup time | 2 minutes or less | Time from insurer selection to interpretable result |
 | External-site avoidance | At least 70% of supported-scope lookups completed without starting on another site | Staff workflow observation |
@@ -203,9 +203,9 @@ Measure these during a 30-day pilot using deidentified workflow observations:
 | Safety-language compliance | 100% of missing or unavailable matches remain unconfirmed, never denied | Weekly result-state audit |
 | Source traceability | 100% of confirmed results retain source and exact identifiers | Weekly record review without patient information |
 | Critical false-confirmed results | 0 | Clinical reviewer escalation and root-cause review |
-| Staff usability | At least 80% of pilot users rate the workflow 4 out of 5 or better | End-of-pilot survey |
+| Staff usability | At least 80% of users rate the workflow 4 out of 5 or better | End-of-implementation survey |
 
-## Pilot decision gate
+## Product rollout gate
 
 Proceed to a broader clinic rollout only when:
 
@@ -215,4 +215,4 @@ Proceed to a broader clinic rollout only when:
 - Source refresh ownership, incident handling, and clinical escalation are documented.
 - Staff confirm that the portal reduces, rather than adds to, routine verification work.
 
-If these conditions are not met, keep the product as a bounded design-partner pilot and prioritize the plan families responsible for the highest volume of unconfirmed lookups.
+If these conditions are not met, keep the product bounded and prioritize the plan families responsible for the highest volume of unconfirmed lookups.

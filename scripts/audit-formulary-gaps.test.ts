@@ -14,31 +14,32 @@ test("reports the current static formulary gap inventory deterministically", () 
 
   assert.deepEqual(audit.summary, {
     medicationCount: 85,
-    planCount: 16,
-    totalCells: 1360,
-    confirmedCells: 682,
-    unconfirmedCells: 678,
-    unconfirmedPercent: 49.85,
+    planCount: 17,
+    totalCells: 1445,
+    confirmedCells: 1009,
+    unconfirmedCells: 436,
+    unconfirmedPercent: 30.17,
   });
 
   assert.deepEqual(
     Object.fromEntries(audit.byPlan.map((row) => [row.planKey, row.unconfirmedCells])),
     {
-      horizonMarketplace: 40,
+      horizonMarketplace: 16,
       horizonClassic: 16,
-      uhcCommercial: 44,
-      oxfordFreedom: 44,
-      aetnaMedicareHmo: 45,
-      amerihealthNj: 43,
-      amerihealthValue: 35,
-      amerihealthSelect: 32,
-      cignaNationalPreferred: 54,
+      ambetterNjMarketplace: 17,
+      uhcCommercial: 21,
+      oxfordFreedom: 21,
+      aetnaMedicareHmo: 15,
+      amerihealthNj: 4,
+      amerihealthValue: 3,
+      amerihealthSelect: 4,
+      cignaNationalPreferred: 38,
       oscarNjIndividual: 54,
-      wellcareNjH0913: 52,
+      wellcareNjH0913: 25,
       humanaNj26408: 26,
       bravenNjH0885: 76,
-      healthspringNj26096: 30,
-      cloverNj2026: 24,
+      healthspringNj26096: 17,
+      cloverNj2026: 20,
       wellpointNjFamilyCare: 63,
     },
   );
@@ -49,7 +50,7 @@ test("reports the current static formulary gap inventory deterministically", () 
   );
   assert.equal(
     audit.byTherapeuticArea.find((row) => row.therapeuticArea === "Rescue inhalers")?.unconfirmedCells,
-    20,
+    10,
   );
 });
 
@@ -87,7 +88,7 @@ test("source manifest covers every baseline with the audited official URL", () =
     assert.equal(source.sourceUrl, plan.source);
     assert.match(source.sourceUrl, /^https:\/\//);
     assert.ok(source.scope);
-    assert.equal(source.completenessClass, "partial-row-extraction");
+    assert.ok(["partial-row-extraction", "full-machine-readable-feed"].includes(source.completenessClass));
     assert.ok(source.refreshCadence);
     assert.equal(typeof source.absenceCanImplyNotListed, "boolean");
   }

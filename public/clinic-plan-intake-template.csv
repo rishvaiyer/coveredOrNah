@@ -1,0 +1,2 @@
+insurer_name,coverage_type,exact_plan_or_formulary_name,plan_identifier_if_known,pharmacy_benefit_manager_if_known,approximate_monthly_lookup_volume,priority_medications_or_devices,current_source_or_portal,staff_notes_no_phi
+Example Health Plan,Commercial,Example Preferred Formulary,,,25,"Example inhaler; Example biologic",https://example.com/formulary,"Do not include patient names, member IDs, dates of birth, or other PHI"

@@ -19,6 +19,7 @@
     "fidelis:nj:test": "tsx --test src/server-data/fidelis-nj-familycare.test.ts",
     "formulary:gaps": "tsx scripts/audit-formulary-gaps.ts",
     "formulary:gaps:test": "tsx --test scripts/audit-formulary-gaps.test.ts",
+    "plan-intake:test": "tsx --test scripts/plan-intake-files.test.ts",
     "horizon:classic:test": "tsx --test scripts/horizon-classic.test.ts",
     "formulary-data": "tsx tools/public-formulary-cli/index.ts",
     "formulary-data:typecheck": "tsc -p tools/public-formulary-cli/tsconfig.json",
@@ -27,6 +28,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
     "express": "^5.1.0",
+    "multer": "^2.2.0",
     "pg": "^8.23.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -35,6 +37,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
+    "@types/multer": "^2.2.0",
     "@types/node": "^24.3.0",
     "@types/pg": "^8.21.0",
     "@types/react": "^19.1.10",

@@ -8,15 +8,11 @@ The product should expand by reusing one workflow engine and adding specialty-sp
 
 Highest reuse and volume. Prioritize hypertension, diabetes, lipid management, anticoagulation, thyroid, gastrointestinal, and common antibiotics. The existing catalog already includes a starting set such as lisinopril, losartan, amlodipine, atorvastatin, metformin, apixaban, omeprazole, prednisone, doxycycline, and ibuprofen.
 
-### 2. Cardiology
-
-Build from the primary-care set with heart-failure, antianginal, antiplatelet, rhythm, and lipid-intensification products. Use exact product and strength because device and dosage-form differences matter.
-
-### 3. Endocrinology
+### 2. Endocrinology
 
 Add insulin and GLP-1 product variants only with exact product, strength, and device. Restrictions and quantity limits must remain visible.
 
-### 4. Rheumatology and gastroenterology
+### 3. Rheumatology and gastroenterology
 
 Add specialty pharmacy products after a payer source is validated. Do not infer specialty coverage from a general PDL row.
 

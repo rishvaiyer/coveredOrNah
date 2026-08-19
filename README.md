@@ -94,12 +94,13 @@ The portal also includes dated, plan-specific or general-PDL references for sele
 - Exact connectors preserve the source date and use bounded, read-only retrieval and caching.
 - External sources are retained for evidence and audit, not as the default clinical workflow.
 
-## Pilot-ready demo package
+## Product demo package
 
 - [Clinician user guide](output/Formulary_Finder_Clinician_User_Guide.pdf)
 - [Demo package and script](docs/DEMO_PACKAGE.md)
 - [Plan/source matrix](docs/PLAN_SOURCE_MATRIX.md)
-- [Sellable pilot brief](docs/SELLABLE_PILOT_BRIEF.md)
+- [Sellable product brief](docs/SELLABLE_PRODUCT_BRIEF.md)
+- [Market pricing and packaging](docs/MARKET_PRICING_AND_PACKAGING.md)
 - [Specialty expansion plan](docs/SPECIALTY_EXPANSION_PLAN.md)
 
 Recommended demo sequence: start with **By plan**, use a Horizon Marketplace or AmeriHealth Individual & Family example, choose a medication with autocomplete, press **Check formulary**, then show the source date and restriction flags. Finish with an exact UHC or Medicare plan lookup to demonstrate the stronger product-level connectors.

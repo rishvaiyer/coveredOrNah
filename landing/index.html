@@ -23,13 +23,14 @@
       }
 
       * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
+      html { overflow-x: hidden; scroll-behavior: smooth; }
       body {
         margin: 0;
         color: var(--ink);
         background: var(--cream);
         font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.5;
+        overflow-x: hidden;
       }
       a { color: inherit; }
       .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
@@ -150,6 +151,27 @@
       .connector p { color: var(--ink-soft); font-size: 0.84rem; margin: 0; }
       .connector-wide { grid-column: span 2; }
 
+      .pilot { background: var(--paper); border-top: 1px solid var(--line); }
+      .pilot-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, 1fr); margin-top: 42px; }
+      .pilot-card { background: #f5faf7; border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+      .pilot-card.featured { background: var(--ink); border-color: var(--ink); color: #f8fff9; }
+      .pilot-label { color: var(--coral-dark); font-size: .72rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+      .pilot-card.featured .pilot-label { color: var(--mint-strong); }
+      .pilot-card h3 { font-size: 1.15rem; letter-spacing: -.03em; margin: 12px 0 6px; }
+      .pilot-price { font-size: 1.42rem; font-weight: 850; letter-spacing: -.04em; margin: 0 0 12px; }
+      .pilot-card p { color: var(--ink-soft); font-size: .84rem; margin: 0; }
+      .pilot-card.featured p { color: #c3dcce; }
+      .pilot-card ul { color: var(--ink-soft); font-size: .82rem; margin: 18px 0 0; padding-left: 18px; }
+      .pilot-card.featured ul { color: #d7ece0; }
+      .pilot-card li + li { margin-top: 7px; }
+      .pilot-note { color: #6b8580; font-size: .76rem; margin: 18px 0 0; }
+      .pilot-note strong { color: var(--ink); }
+      .onboarding { border-top: 1px solid var(--line); display: grid; gap: 22px; grid-template-columns: repeat(3, 1fr); margin-top: 46px; padding-top: 28px; }
+      .onboarding-item { display: grid; gap: 12px; grid-template-columns: 30px 1fr; }
+      .onboarding-num { align-items: center; background: var(--mint-strong); border-radius: 50%; display: inline-flex; font-size: .75rem; font-weight: 850; height: 27px; justify-content: center; width: 27px; }
+      .onboarding-item h3 { font-size: .95rem; margin: 0 0 3px; }
+      .onboarding-item p { color: var(--ink-soft); font-size: .8rem; margin: 0; }
+
       .guardrails-grid { align-items: start; display: grid; gap: 62px; grid-template-columns: .82fr 1.18fr; }
       .guardrails-list { border-top: 1px solid var(--line); }
       .guardrail { border-bottom: 1px solid var(--line); display: grid; gap: 15px; grid-template-columns: 34px 1fr; padding: 20px 0; }
@@ -173,6 +195,7 @@
         .workflow-grid { grid-template-columns: repeat(2, 1fr); }
         .connector-grid { grid-template-columns: repeat(2, 1fr); }
         .connector-wide { grid-column: span 2; }
+        .pilot-grid, .onboarding { grid-template-columns: 1fr; }
         .guardrails-grid { gap: 35px; }
         .cta-box { align-items: start; flex-direction: column; }
       }
@@ -203,6 +226,7 @@
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#workflow">How it works</a>
         <a href="#sources">Sources</a>
+        <a href="#pilot">For clinics</a>
         <a href="#guardrails">Confidence</a>
         <a class="nav-cta" href="https://formulary-finder-pilot-production.up.railway.app/">Open the portal <span aria-hidden="true">↗</span></a>
       </nav>
@@ -217,7 +241,7 @@
             <p class="hero-copy">Formulary Finder brings payer, plan, product, and medication context into one focused workspace, so physicians, nurses, and pharmacy teams can move faster with confidence.</p>
             <div class="hero-actions">
               <a class="button-primary" href="https://formulary-finder-pilot-production.up.railway.app/">Try the live workflow <span aria-hidden="true">↗</span></a>
-              <a class="button-secondary" href="#workflow">See how it works <span aria-hidden="true">↓</span></a>
+              <a class="button-secondary" href="#pilot">Bring your plan list <span aria-hidden="true">↓</span></a>
             </div>
             <p class="hero-note">Built for fast, PHI-free plan and medication research.</p>
           </div>
@@ -281,6 +305,24 @@
             <article class="connector"><div class="connector-mark">FamilyCare</div><h3>Published Medicaid feeds</h3><p>Aetna, UHC Community, Wellpoint, Fidelis, and Horizon NJ Health paths use payer-published sources where validated.</p></article>
             <article class="connector connector-wide"><div class="connector-mark">Commercial</div><h3>Named formulary families</h3><p>Horizon, AmeriHealth, UHC/Oxford, Cigna, and other public formulary baselines are separated by plan family. A generic carrier match never substitutes for the member’s exact pharmacy benefit.</p></article>
             <article class="connector"><div class="connector-mark">Next layer</div><h3>Expand by demand</h3><p>Additional clinics and specialties can add validated payer sources without changing the core workflow.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pilot" class="pilot">
+        <div class="wrap">
+          <div class="section-heading"><div class="eyebrow">A practical way to start</div><h2>Bring your plan mix. We shape the workflow around it.</h2><p class="section-intro">Start with the insurer and medication combinations your team sees most. A supervised, PHI-free implementation gives you a measured path from demo to daily use.</p></div>
+          <div class="pilot-grid">
+            <article class="pilot-card"><div class="pilot-label">Design partner</div><h3>60-day clinic proof</h3><div class="pilot-price">$500 total</div><p>Credited toward annual conversion for one New Jersey clinic.</p><ul><li>De-identified scenarios only</li><li>Clinic insurer-list intake</li><li>Before/after time-to-answer review</li></ul></article>
+            <article class="pilot-card featured"><div class="pilot-label">Clinic plans</div><h3>Configured for your team</h3><div class="pilot-price">$149–$249 / month</div><p>One location, no per-staff fees, and a plan pack shaped around actual clinic demand.</p><ul><li>Up to 10 or 20 supported plan families</li><li>Staff onboarding and source review</li><li>Monthly updates and correction path</li></ul></article>
+            <article class="pilot-card"><div class="pilot-label">Multi-site</div><h3>Built to extend</h3><div class="pilot-price">From $599 / month</div><p>For groups sharing one payer configuration across as many as five locations.</p><ul><li>Shared source and QA plan</li><li>Specialty packs by demand</li><li>Security and contracting review</li></ul></article>
+          </div>
+          <p class="pilot-note"><strong>Launch pricing.</strong> Unsupported sources are added only after feasibility review; custom licensing, integrations, and unusual maintenance are scoped separately.</p>
+          <div class="hero-actions"><a class="button-secondary" href="./assets/clinic-plan-intake-template.csv" download>Download the PHI-free plan-list template <span aria-hidden="true">↓</span></a></div>
+          <div class="onboarding" aria-label="Clinic onboarding steps">
+            <div class="onboarding-item"><span class="onboarding-num">1</span><div><h3>Share the list</h3><p>Bring your top 10–20 insurers or plan families and the medications that create the most work.</p></div></div>
+            <div class="onboarding-item"><span class="onboarding-num">2</span><div><h3>Run real workflows</h3><p>Use de-identified examples to test exact plan selection, product matching, and next steps.</p></div></div>
+            <div class="onboarding-item"><span class="onboarding-num">3</span><div><h3>Measure the lift</h3><p>Review time-to-answer, corrections, unconfirmed results, and the next highest-value connector.</p></div></div>
           </div>
         </div>
       </section>

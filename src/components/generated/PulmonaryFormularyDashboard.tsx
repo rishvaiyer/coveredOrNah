@@ -34,6 +34,7 @@ export type PlanKey =
   | "njuhc"
   | "pama"
   | "horizonMarketplace"
+  | "ambetterNjMarketplace"
   | "horizonClassic"
   | "uhcCommercial"
   | "oxfordFreedom"
@@ -63,7 +64,7 @@ export type Medication = {
   branch: string;
   use: string;
   productDetails?: string;
-  coverage: Record<PlanKey, Coverage>;
+  coverage: Partial<Record<PlanKey, Coverage>>;
 };
 export const plans: Array<{
   key: PlanKey;
@@ -95,6 +96,18 @@ export const plans: Array<{
       "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/Commercial/5517-L_Horizon_Classic.pdf",
     priorAuthorizationUrl: "https://www.horizonblue.com/providers/pharmacy",
     priorAuthorizationLabel: "Open Horizon pharmacy PA route",
+  },
+  {
+    key: "ambetterNjMarketplace",
+    short: "Ambetter NJ Marketplace",
+    name: "Ambetter from WellCare of New Jersey Marketplace Formulary",
+    region: "NJ",
+    updated: "Aug 2026",
+    source:
+      "https://www.ambetterhealth.com/content/dam/centene/new-jersey/ambetter/pdf/2026-nj-formulary.pdf",
+    priorAuthorizationUrl:
+      "https://www.ambetterhealth.com/en/nj/provider-resources/pharmacy/",
+    priorAuthorizationLabel: "Open Ambetter pharmacy resources",
   },
   {
     key: "uhcCommercial",
@@ -353,6 +366,17 @@ type PlanIntake = {
   pharmacyBenefit: string;
 };
 
+type IntakeFile = {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  file: File;
+};
+
+const maxIntakeFileBytes = 20 * 1024 * 1024;
+const intakeFileAccept = ".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.png,.jpg,.jpeg,.webp";
+
 const planKinds = [
   "Commercial / employer",
   "ACA marketplace / individual",
@@ -407,6 +431,7 @@ const planKindsForInsurer = (insurerName: string) => {
     return ["Commercial / employer", "ACA marketplace / individual", "Medicare Advantage"];
   }
   if (insurer.name === "Oscar Health") return ["ACA marketplace / individual", "Commercial / employer"];
+  if (insurer.name === "Ambetter from WellCare NJ") return ["ACA marketplace / individual"];
   if (category.includes("workers compensation")) return ["Workers' compensation / MVA"];
   if (category.includes("network")) return ["Network or administrator"];
   if (category.includes("government employee") || category === "government" || category.includes("tricare")) {
@@ -504,6 +529,7 @@ const pharmacyBenefitOptionsFor = (insurerName: string, planKind: string) => {
   }
   if (insurerName === "Anthem BCBS") options.add("Confirm state and exact Anthem drug list");
   if (insurerName === "Oscar Health") options.add("Oscar formulary");
+  if (insurerName === "Ambetter from WellCare NJ") options.add("Ambetter NJ 2026 Formulary");
   if (planKind === "Medicare Advantage" || planKind === "Standalone Medicare Part D (Original / Railroad Medicare)") {
     options.add("Medicare formulary");
   }
@@ -547,6 +573,19 @@ export const summitNjFormularySources: SummitNjFormularySource[] = [
       "This quarterly Classic drug list is a source-backed baseline only when the card or benefits document confirms the Horizon Classic pharmacy benefit. Direct Access is not automatically Classic.",
     priorAuthorizationUrl: "https://www.horizonblue.com/providers/pharmacy",
     priorAuthorizationLabel: "Open Horizon pharmacy PA route",
+  },
+  {
+    insurer: "Ambetter from WellCare NJ",
+    planScope: "NJ Marketplace individual plans",
+    status: "Pulmonary formulary loaded",
+    source:
+      "https://www.ambetterhealth.com/content/dam/centene/new-jersey/ambetter/pdf/2026-nj-formulary.pdf",
+    sourceLabel: "Ambetter NJ 2026 Formulary",
+    detail:
+      "Exact pulmonary catalog rows are mapped from the current Ambetter NJ formulary. Confirm the member's product, strength, device, and plan benefit before acting on the result.",
+    priorAuthorizationUrl:
+      "https://www.ambetterhealth.com/en/nj/provider-resources/pharmacy/",
+    priorAuthorizationLabel: "Open Ambetter pharmacy resources",
   },
   {
     insurer: "UnitedHealthcare / Oxford",
@@ -898,6 +937,12 @@ export const summitNjInsurers: SummitNjInsurer[] = [
     note: "Managed Medicare",
   },
   {
+    name: "Ambetter from WellCare NJ",
+    category: "ACA marketplace",
+    participation: "Accepted",
+    note: "Ambetter Marketplace plans for New Jersey",
+  },
+  {
     name: "Wellpoint",
     category: "Medicare Advantage",
     participation: "Accepted",
@@ -1118,6 +1163,7 @@ const medicationSuggestionScore = (query: string, medication: Medication) => {
 
 const importedPlanOwners: Partial<Record<PlanKey, string[]>> = {
   horizonMarketplace: ["Horizon BCBSNJ"],
+  ambetterNjMarketplace: ["Ambetter from WellCare NJ"],
   uhcCommercial: ["UnitedHealthcare"],
   oxfordFreedom: ["Oxford Health"],
   aetnaMedicareHmo: ["Aetna"],
@@ -1138,6 +1184,7 @@ const importedPlanOwners: Partial<Record<PlanKey, string[]>> = {
 
 const importedPlanKinds: Partial<Record<PlanKey, string[]>> = {
   horizonMarketplace: ["ACA marketplace / individual"],
+  ambetterNjMarketplace: ["ACA marketplace / individual"],
   uhcCommercial: ["Commercial / employer"],
   oxfordFreedom: ["Commercial / employer"],
   aetnaMedicareHmo: ["Medicare Advantage"],
@@ -1509,6 +1556,10 @@ const c = (
   horizonClassic: {
     state: horizonClassic,
     flags: horizonClassicFlags,
+  },
+  ambetterNjMarketplace: {
+    state: "Source loading",
+    flags: [],
   },
   uhcCommercial: {
     state: uhcCommercial,
@@ -2465,7 +2516,6 @@ const planCoverageOverrides: Partial<
     "Sildenafil 20 mg": coverage("Generic", ["PA", "SP"]),
     "Tadalafil for PAH": coverage("Generic", ["PA", "SP"]),
     "Sotatercept-csrk": coverage("Non-preferred", ["PA", "SP"], "Winrevair injection entry."),
-    "Tobramycin inhalation": coverage("Source loading", [], "No exact inhaled tobramycin row was found in the Select source; do not infer from ophthalmic products."),
     "Dornase alfa": coverage("Preferred brand", ["SP"]),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Non-preferred", ["PA", "SP"]),
     "Fluticasone nasal": coverage("Generic"),
@@ -2475,6 +2525,38 @@ const planCoverageOverrides: Partial<
     "Bupropion SR 150 mg": coverage("Generic"),
     Benzonatate: coverage("Low-cost generic"),
     "Epinephrine auto-injector": coverage("Tier varies", ["QL"], "0.3 mg generic pen is generic; 0.15 mg pen is preferred brand; brand EpiPen products are non-preferred with PA."),
+    "Albuterol HFA": coverage("Generic"),
+    "Albuterol nebulizer solution": coverage("Generic"),
+    Levalbuterol: coverage("Tier varies", ["QL"], "Levalbuterol HFA is non-preferred with a quantity limit; nebulizer solution is generic."),
+    Aclidinium: coverage("Non-preferred drug", ["PA"], "Tudorza Pressair entry."),
+    Ensifentrine: coverage("Non-preferred drug", ["PA", "QL"], "Ohtuvayre suspension entry."),
+    "Albuterol / budesonide": coverage("Non-preferred drug", ["PA"], "Airsupra entry."),
+    Prednisone: coverage("Low-cost generic"),
+    Prednisolone: coverage("Non-preferred drug", ["PA"], "Prednisolone 5 mg tablet entry."),
+    "Treprostinil inhaled": coverage("Non-preferred drug", ["PA", "SP"], "Tyvaso entry."),
+    Selexipag: coverage("Non-preferred drug", ["PA", "SP"], "Uptravi entry."),
+    Riociguat: coverage("Preferred brand", ["PA", "SP"], "Adempas entry."),
+    "Aztreonam inhalation": coverage("Non-preferred drug", ["PA", "SP"], "Cayston entry."),
+    Azithromycin: coverage("Generic"),
+    Doxycycline: coverage("Tier varies", [], "Multiple doxycycline strengths and dosage forms are listed."),
+    Levofloxacin: coverage("Low-cost generic"),
+    Famotidine: coverage("Generic"),
+    Pantoprazole: coverage("Generic", ["QL"]),
+    Furosemide: coverage("Low-cost generic"),
+    Apixaban: coverage("Preferred brand", [], "Eliquis entry."),
+    Lisinopril: coverage("Low-cost generic"),
+    Losartan: coverage("Generic"),
+    Amlodipine: coverage("Low-cost generic"),
+    Atorvastatin: coverage("Generic"),
+    Metformin: coverage("Generic"),
+    Omeprazole: coverage("Generic", ["QL"]),
+    Sertraline: coverage("Low-cost generic"),
+    Ibuprofen: coverage("Generic", ["QL"]),
+    "Amoxicillin / clavulanate": coverage("Generic"),
+    Reslizumab: coverage("Source loading", [], "No exact Reslizumab/Cinqair row was found in the current Select formulary PDF."),
+    "Tobramycin inhalation": coverage("Source loading", [], "No exact inhaled tobramycin row was found; the PDF's tobramycin entries are ophthalmic products."),
+    Cetirizine: coverage("Source loading", [], "No exact Cetirizine row was found in the current Select formulary PDF."),
+    "Guaifenesin ER": coverage("Source loading", [], "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row."),
   },
   amerihealthValue: {
     Arformoterol: coverage("Generic"),
@@ -2527,6 +2609,41 @@ const planCoverageOverrides: Partial<
     "Bupropion SR 150 mg": coverage("Generic"),
     Benzonatate: coverage("Low-cost generic"),
     "Epinephrine auto-injector": coverage("Tier varies", ["QL"], "0.3 mg generic pen is generic; 0.15 mg pen is preferred brand; Auvi-Q differs by strength."),
+    "Albuterol HFA": coverage("Generic"),
+    "Albuterol nebulizer solution": coverage("Generic"),
+    Levalbuterol: coverage("Tier varies", ["QL"], "Levalbuterol HFA is non-preferred; nebulizer solution is generic."),
+    Formoterol: coverage("Generic"),
+    "Tiotropium (generic capsule-inhaler)": coverage("Non-formulary", [], "Tiotropium bromide 18 mcg capsule entry."),
+    "Incruse Ellipta (brand)": coverage("Non-formulary"),
+    Aclidinium: coverage("Non-formulary", [], "Tudorza Pressair entry."),
+    Ensifentrine: coverage("Non-formulary", ["QL"], "Ohtuvayre suspension entry."),
+    "Albuterol / budesonide": coverage("Non-preferred drug", ["PA"], "Airsupra entry."),
+    Prednisone: coverage("Low-cost generic"),
+    Prednisolone: coverage("Non-preferred drug", ["PA"], "Prednisolone 5 mg tablet entry."),
+    Ambrisentan: coverage("Generic", ["PA", "SP"]),
+    "Treprostinil inhaled": coverage("Non-preferred drug", ["PA", "SP"], "Tyvaso entry."),
+    Selexipag: coverage("Non-preferred drug", ["PA", "SP"], "Uptravi entry."),
+    Riociguat: coverage("Preferred brand", ["PA", "SP"], "Adempas entry."),
+    "Sotatercept-csrk": coverage("Non-preferred drug", ["PA", "SP"], "Winrevair injection entry."),
+    Azithromycin: coverage("Generic"),
+    Doxycycline: coverage("Tier varies", [], "Multiple doxycycline strengths and dosage forms are listed."),
+    Levofloxacin: coverage("Low-cost generic"),
+    Famotidine: coverage("Generic"),
+    Pantoprazole: coverage("Generic", ["QL"]),
+    Furosemide: coverage("Low-cost generic"),
+    Apixaban: coverage("Preferred brand", [], "Eliquis entry."),
+    Lisinopril: coverage("Low-cost generic"),
+    Losartan: coverage("Generic"),
+    Amlodipine: coverage("Low-cost generic"),
+    Atorvastatin: coverage("Generic"),
+    Metformin: coverage("Generic"),
+    Omeprazole: coverage("Generic", ["QL"]),
+    Sertraline: coverage("Low-cost generic"),
+    Ibuprofen: coverage("Generic", ["QL"]),
+    "Amoxicillin / clavulanate": coverage("Generic"),
+    Reslizumab: coverage("Source loading", [], "No exact Reslizumab/Cinqair row was found in the current Value formulary PDF."),
+    Cetirizine: coverage("Source loading", [], "No exact Cetirizine row was found in the current Value formulary PDF."),
+    "Guaifenesin ER": coverage("Source loading", [], "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row."),
   },
   horizonClassic: {
     "Albuterol HFA": coverage("Tier 1", ["QL"], "Albuterol sulfate HFA inhaler entry in the July 2026 Horizon Classic Formulary."),
@@ -2678,7 +2795,6 @@ const planCoverageOverrides: Partial<
     "Glycopyrrolate / formoterol": coverage("Source loading"),
     Revefenacin: coverage("Source loading"),
     "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
-    Olodaterol: coverage("Tier 3", ["QL"], "Striverdi Respimat entry."),
     "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2 + PA", [
       "PA",
       "QL",
@@ -2736,12 +2852,122 @@ const planCoverageOverrides: Partial<
       "SP",
       "LD",
     ]),
+    Levalbuterol: coverage("Tier varies", ["QL"], "Nebulizer and concentrate entries are Tier 1; HFA is Tier 3 with a quantity limit."),
+    Prednisone: coverage("Tier varies", ["PA", "QL"], "Tablets and therapy packs are Tier 1; oral solution is Tier 2 with PA and quantity limits."),
+    Prednisolone: coverage("Tier 1", [], "Oral solution entries."),
+    "Azelastine nasal": coverage("Tier 1", ["QL"]),
+    Varenicline: coverage("Tier varies", [], "The source marks varenicline as ACA tobacco-cessation coverage rather than a numeric tier."),
+    "Nicotine replacement": coverage("Tier varies", [], "Covered gum, lozenge, and patch products are marked ACA; benefit rules apply."),
+    "Bupropion SR 150 mg": coverage("Tier 1", [], "Bupropion sustained-release entry; smoking-deterrent use is marked ACA."),
+    Azithromycin: coverage("Tier 1", ["QL"], "Tablet entries have a quantity limit."),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Most suspension/tablet entries are Tier 1; one Augmentin suspension entry is Tier 3."),
+    Doxycycline: coverage("Tier varies", ["QL"], "Capsule/tablet entries are Tier 1; selected strengths carry quantity limits."),
+    Levofloxacin: coverage("Tier 1", ["QL"], "Solution and tablet entries are Tier 1; tablets carry a quantity limit."),
+    Benzonatate: coverage("Tier 1"),
+    Famotidine: coverage("Tier 1"),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    "Epinephrine auto-injector": coverage("Tier varies", ["QL"], "Auvi-Q is Tier 2; EpiPen products are Tier 1; listed products carry quantity limits."),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 2", [], "Eliquis entry."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1", ["QL"]),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier 1", ["QL"], "Immediate-release and extended-release entries."),
+    Omeprazole: coverage("Tier 1", ["QL"]),
+    Sertraline: coverage("Tier 1"),
+    Ibuprofen: coverage("Tier 1"),
+  },
+  ambetterNjMarketplace: {
+    "Albuterol HFA": coverage("Tier 1"),
+    "Albuterol nebulizer solution": coverage("Tier varies", ["QL"], "Nebulizer products span Tiers 1A/1B; QL is 15 mL/day."),
+    Levalbuterol: coverage("Tier varies", ["QL"]),
+    Arformoterol: coverage("Tier 1", ["QL"]),
+    Formoterol: coverage("Tier 1", ["QL"]),
+    Salmeterol: coverage("Tier 2", ["QL"], "Serevent Diskus row."),
+    Ipratropium: coverage("Tier 1", ["QL"]),
+    "Ipratropium / albuterol": coverage("Tier 1", ["QL"]),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 1", ["QL"]),
+    "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
+    "Incruse Ellipta (brand)": coverage("Tier 2", ["QL"]),
+    "Tiotropium / olodaterol": coverage("Tier 2"),
+    Olodaterol: coverage("Tier 2"),
+    "Fluticasone / umeclidinium / vilanterol": coverage("Tier 2", ["QL"]),
+    "Budesonide / glycopyrrolate / formoterol": coverage("Tier 2", ["QL"]),
+    Roflumilast: coverage("Tier varies", ["QL"]),
+    "Budesonide inhalation": coverage("Tier 1", ["PA", "QL"]),
+    "Budesonide (Flexhaler)": coverage("Tier 2"),
+    "Fluticasone furoate": coverage("Tier 1", ["QL"]),
+    "Fluticasone propionate HFA 44 mcg": coverage("Tier 1", ["QL"]),
+    "QVAR RediHaler (brand)": coverage("Tier 2"),
+    "Mometasone / formoterol": coverage("Tier 2"),
+    "Fluticasone / vilanterol": coverage("Tier 1"),
+    "Fluticasone / salmeterol (generic)": coverage("Tier 1"),
+    Montelukast: coverage("Tier 1", ["QL"]),
+    Zafirlukast: coverage("Tier 1", ["QL"]),
+    "Zileuton ER": coverage("Tier 1", ["PA", "QL"]),
+    Prednisone: coverage("Tier varies"),
+    Prednisolone: coverage("Tier varies"),
+    Dupilumab: coverage("Tier 4", ["PA", "QL"]),
+    Benralizumab: coverage("Tier 4", ["PA", "QL"]),
+    Nintedanib: coverage("Tier 4", ["PA", "QL"]),
+    Pirfenidone: coverage("Tier varies", ["PA", "QL"]),
+    Ambrisentan: coverage("Tier 1", ["PA", "QL"]),
+    Bosentan: coverage("Tier varies", ["PA", "QL"]),
+    "Sildenafil 20 mg": coverage("Tier 1", ["PA", "QL"]),
+    "Tadalafil for PAH": coverage("Tier 1", ["PA", "QL"]),
+    "Treprostinil inhaled": coverage("Tier 4", ["PA"], "Tyvaso inhaled rows; injectable treprostinil is separate."),
+    Selexipag: coverage("Tier 4", ["PA", "QL"]),
+    Riociguat: coverage("Tier 4", ["PA", "QL"]),
+    "Tobramycin inhalation": coverage("Tier 1", ["PA", "QL"]),
+    "Aztreonam inhalation": coverage("Tier 4", ["PA", "QL"]),
+    "Dornase alfa": coverage("Tier 4", ["PA", "QL"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 4", ["PA", "QL"]),
+    "Fluticasone nasal": coverage("Tier 1", ["QL"]),
+    "Azelastine nasal": coverage("Tier 1"),
+    Cetirizine: coverage("Tier 1", ["QL"]),
+    Varenicline: coverage("Tier 1", ["QL"], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
+    "Nicotine replacement": coverage("Tier 1", [], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
+    "Bupropion SR 150 mg": coverage("Tier 1", ["QL"], "ACA preventive smoking-cessation benefit; source uses a Tier 0 marker."),
+    Azithromycin: coverage("Tier 1", ["QL"]),
+    "Amoxicillin / clavulanate": coverage("Tier 1"),
+    Doxycycline: coverage("Tier varies", ["QL"]),
+    Levofloxacin: coverage("Tier 1"),
+    Benzonatate: coverage("Tier 1", ["QL"]),
+    Famotidine: coverage("Tier 1", [], "20 mg is marked RX/OTC; 40 mg is Tier 1B."),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    Omeprazole: coverage("Tier 1", ["QL"]),
+    "Epinephrine auto-injector": coverage("Tier 1", ["QL"]),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 2", ["QL"]),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1", ["QL"]),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier varies", ["QL"]),
+    Sertraline: coverage("Tier 1"),
+    Ibuprofen: coverage("Tier 1"),
+    "Glycopyrrolate / formoterol": coverage("Source loading", [], "No exact Bevespi product row was found in the current Ambetter NJ formulary."),
+    Revefenacin: coverage("Source loading", [], "No exact Revefenacin product row was found in the current Ambetter NJ formulary."),
+    Aclidinium: coverage("Source loading", [], "No exact Aclidinium product row was found in the current Ambetter NJ formulary."),
+    Ensifentrine: coverage("Source loading", [], "No exact Ensifentrine product row was found in the current Ambetter NJ formulary."),
+    Ciclesonide: coverage("Source loading", [], "No exact Ciclesonide product row was found in the current Ambetter NJ formulary."),
+    "Albuterol / budesonide": coverage("Source loading", [], "No exact Airsupra product row was found in the current Ambetter NJ formulary."),
+    "Symbicort (brand)": coverage("Source loading", [], "No exact brand Symbicort product row was found in the current Ambetter NJ formulary."),
+    "Advair Diskus / HFA (brand)": coverage("Source loading", [], "No exact brand Advair product row was found in the current Ambetter NJ formulary."),
+    Mometasone: coverage("Source loading", [], "No exact inhaled Mometasone product row was found in the current Ambetter NJ formulary."),
+    Reslizumab: coverage("Source loading", [], "No exact Reslizumab product row was found in the current Ambetter NJ formulary."),
+    Tezepelumab: coverage("Source loading", [], "No exact Tezepelumab product row was found in the current Ambetter NJ formulary."),
+    Omalizumab: coverage("Source loading", [], "No exact Omalizumab product row was found in the current Ambetter NJ formulary."),
+    "Sotatercept-csrk": coverage("Source loading", [], "No exact Sotatercept/Winrevair product row was found in the current Ambetter NJ formulary."),
+    "Guaifenesin ER": coverage("Source loading", [], "No exact extended-release Guaifenesin product row was found in the current Ambetter NJ formulary."),
   },
   uhcCommercial: {
     "Albuterol HFA": coverage("Tier 2", ["QL"]),
     "Albuterol nebulizer solution": coverage("Tier varies", [], "0.083%, 0.63 mg/3 mL, and 1.25 mg/3 mL are Tier 1; 0.5% is Tier 3."),
     Levalbuterol: coverage("Tier 3", ["QL"]),
-    Arformoterol: coverage("Source loading", [], "No exact arformoterol product row was found in the May 2026 UHC commercial PDL."),
+    Arformoterol: coverage("Source loading", [], "No exact arformoterol/Brovana row was found in the May 2026 UHC commercial PDL."),
+    Formoterol: coverage("Tier 4", ["QL"], "Perforomist nebulizer solution entry."),
     Salmeterol: coverage("Tier 2", ["QL"]),
     Ipratropium: coverage("Tier 1"),
     "Ipratropium / albuterol": coverage("Tier 2"),
@@ -2749,9 +2975,9 @@ const planCoverageOverrides: Partial<
     "Spiriva HandiHaler / Respimat (brand)": coverage("Tier 2", ["QL"]),
     "Incruse Ellipta (brand)": coverage("Source loading", [], "No exact Incruse Ellipta row was found in the May 2026 UHC commercial PDL."),
     "Anoro Ellipta (brand)": coverage("Tier 3", ["QL"]),
+    Olodaterol: coverage("Tier 2", ["QL"], "STRIVERDI RESPIMAT exact product row."),
     "Glycopyrrolate / formoterol": coverage("Tier 2", ["QL"], "Bevespi Aerosphere entry."),
     "Tiotropium / olodaterol": coverage("Tier 2", ["QL"]),
-    Olodaterol: coverage("Tier 2", ["QL"], "Striverdi Respimat entry."),
     Revefenacin: coverage("Tier 4", ["PA", "QL"], "Yupelri entry."),
     "Fluticasone / salmeterol (generic)": coverage("Tier 3", ["QL", "RS"], "Wixela Inhub entry."),
     "Fluticasone furoate": coverage("Tier 1", ["QL"], "Arnuity Ellipta entry."),
@@ -2789,6 +3015,30 @@ const planCoverageOverrides: Partial<
     Nintedanib: coverage("Tier 4", ["PA", "QL", "SP"]),
     Pirfenidone: coverage("Tier 2", ["PA", "QL", "SP"]),
     Zafirlukast: coverage("Tier 1"),
+    "Albuterol / budesonide": coverage("Tier 3", ["QL"], "Airsupra entry."),
+    Montelukast: coverage("Tier varies", [], "Packet is Tier 2; tablet and chewable entries are Tier 1."),
+    Dupilumab: coverage("Tier 2", ["PA", "QL", "SP"], "Dupixent entry."),
+    Prednisone: coverage("Tier 1"),
+    Prednisolone: coverage("Source loading", [], "The May 2026 PDL lists oral solution products only; confirm the exact strength and dosage form."),
+    Varenicline: coverage("Tier 3"),
+    "Nicotine replacement": coverage("Tier varies", [], "Nicotine patch and polacrilex entries are Tier 1; tobacco-cessation benefit rules apply."),
+    "Bupropion SR 150 mg": coverage("Tier 1", [], "Bupropion sustained-release entry."),
+    Azithromycin: coverage("Tier 1", [], "Oral packet entry."),
+    "Amoxicillin / clavulanate": coverage("Tier 1"),
+    Doxycycline: coverage("Tier varies", [], "Capsule and tablet strengths are Tier 1-2; suspension is Tier 3."),
+    Levofloxacin: coverage("Tier 1"),
+    Famotidine: coverage("Source loading", [], "The May 2026 PDL lists an oral suspension row only; confirm the exact dosage form."),
+    Pantoprazole: coverage("Tier 1"),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 2", ["QL"], "Eliquis entry."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1"),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", [], "10-80 mg tablet entries are Tier 1; verify strength-specific rules."),
+    Metformin: coverage("Tier 1"),
+    Omeprazole: coverage("Tier 1"),
+    Sertraline: coverage("Tier 1"),
+    Ibuprofen: coverage("Tier 1"),
   },
   aetnaMedicareHmo: {
     "Albuterol HFA": coverage("Tier 2", ["QL"]),
@@ -2863,6 +3113,37 @@ const planCoverageOverrides: Partial<
     "Tadalafil for PAH": coverage("Tier 5", ["PA"], "Generic Adcirca entry."),
     "Treprostinil inhaled": coverage("Tier 5", ["PA", "LD"], "Tyvaso starter and refill kit entries."),
     Riociguat: coverage("Tier 5", ["PA", "QL", "LD"], "Adempas entry."),
+    Arformoterol: coverage("Tier 4", ["QL"], "Arformoterol nebulization entry; Part B/D determination applies."),
+    "Tiotropium / olodaterol": coverage("Tier 3", ["QL"], "Stiolto Respimat entry."),
+    Olodaterol: coverage("Tier 3", ["QL"], "Striverdi Respimat entry."),
+    Prednisone: coverage("Tier varies", [], "Tablets and therapy packs are Tier 2; solution products are Tier 4 with Part B/D determination."),
+    Prednisolone: coverage("Tier varies", [], "Oral solution products range from Tier 2 to Tier 4 with Part B/D determination."),
+    Mepolizumab: coverage("Tier 5", ["PA", "QL"], "Nucala injection entries."),
+    "Aztreonam inhalation": coverage("Tier 5", ["PA", "QL"], "Cayston nebulization entry."),
+    Cetirizine: coverage("Tier 2", ["QL"], "Cetirizine oral solution entry."),
+    Azithromycin: coverage("Tier varies", [], "Tablet entries are Tier 1; suspension is Tier 2; injection is Tier 4."),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Tablets are Tier 2 or 4; suspension products are Tier 2 or 4; extended-release is Tier 4."),
+    Doxycycline: coverage("Tier varies", [], "Capsule/tablet products range from Tier 2 to Tier 4; suspension is Tier 4."),
+    Levofloxacin: coverage("Tier 2", [], "Oral tablet entry; solution and injection products are Tier 4."),
+    Famotidine: coverage("Tier 1", [], "20 mg and 40 mg tablet entries."),
+    Furosemide: coverage("Tier 1", [], "Oral solution and tablet entries."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier 1", ["QL"]),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier 1", ["QL"]),
+    Sertraline: coverage("Tier varies", ["QL"], "Tablets are Tier 1; concentrate is Tier 4."),
+    Ibuprofen: coverage("Tier 2", [], "400/600/800 mg tablet entry; suspension is Tier 2."),
+    Selexipag: coverage("Tier 5", ["PA", "QL", "LD"], "Uptravi entry; ACS/limited-distribution handling applies."),
+    "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL", "LD"], "Winrevair entry; ACS/limited-distribution handling applies."),
+    "Tobramycin inhalation": coverage("Tier 5", ["PA", "QL", "LD"], "TOBI Podhaler entry."),
+    Varenicline: coverage("Tier 4"),
+    "Bupropion SR 150 mg": coverage("Tier varies", ["QL"], "Sustained-release bupropion entry; confirm product and indication."),
+    Benzonatate: coverage("Source loading", [], "No exact benzonatate row was found in the current Aetna formulary."),
+    Pantoprazole: coverage("Tier 1", ["QL"], "20 mg and 40 mg delayed-release tablet entries."),
+    "Epinephrine auto-injector": coverage("Tier 3", ["QL"], "Auto-injector entry; quantity limit 2 per 30 days."),
+    Apixaban: coverage("Tier 3", ["QL"], "Eliquis entry."),
+    Omeprazole: coverage("Tier 1", ["QL"], "Delayed-release capsule entries."),
   },
   amerihealthNj: {
     "Albuterol HFA": coverage("Generic"),
@@ -2915,6 +3196,49 @@ const planCoverageOverrides: Partial<
     Omalizumab: coverage("Preferred brand", ["SP", "PA"]),
     "Benzonatate": coverage("Low-cost generic"),
     "Epinephrine auto-injector": coverage("Generic", ["QL"]),
+    "Budesonide / formoterol (generic)": coverage("Generic"),
+    Prednisone: coverage("Low-cost generic"),
+    Prednisolone: coverage("Non-preferred drug", ["PA"], "Prednisolone 5 mg tablet entry."),
+    Dupilumab: coverage("Preferred brand", ["PA", "SP"]),
+    Benralizumab: coverage("Preferred brand", ["PA", "SP"]),
+    Nintedanib: coverage("Non-preferred drug", ["PA", "SP"], "Ofev entry."),
+    Pirfenidone: coverage("Generic", ["PA", "SP"]),
+    Ambrisentan: coverage("Generic", ["PA", "SP"]),
+    Bosentan: coverage("Generic", ["PA", "SP"]),
+    "Sildenafil 20 mg": coverage("Generic", ["PA", "SP"]),
+    "Tadalafil for PAH": coverage("Generic", ["PA", "SP"], "Generic Adcirca entry."),
+    "Treprostinil inhaled": coverage("Non-preferred drug", ["PA", "SP"], "Tyvaso entry."),
+    Selexipag: coverage("Non-preferred drug", ["PA", "SP"], "Uptravi entry."),
+    Riociguat: coverage("Preferred brand", ["PA", "SP"], "Adempas entry."),
+    "Sotatercept-csrk": coverage("Non-preferred drug", ["PA", "SP"], "Winrevair injection entry."),
+    "Aztreonam inhalation": coverage("Non-preferred drug", ["PA", "SP"], "Cayston entry."),
+    "Dornase alfa": coverage("Preferred brand", ["SP"]),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Non-preferred drug", ["PA", "SP"], "Trikafta entry."),
+    "Fluticasone nasal": coverage("Generic"),
+    "Azelastine nasal": coverage("Generic"),
+    Varenicline: coverage("Generic", ["QL"]),
+    "Bupropion SR 150 mg": coverage("Generic"),
+    Azithromycin: coverage("Generic"),
+    Doxycycline: coverage("Tier varies", [], "Multiple doxycycline strengths and dosage forms are listed."),
+    Levofloxacin: coverage("Low-cost generic"),
+    Famotidine: coverage("Generic"),
+    Pantoprazole: coverage("Generic", ["QL"]),
+    Furosemide: coverage("Low-cost generic"),
+    Apixaban: coverage("Preferred brand", [], "Eliquis entry."),
+    Lisinopril: coverage("Low-cost generic"),
+    Losartan: coverage("Generic"),
+    Amlodipine: coverage("Low-cost generic"),
+    Atorvastatin: coverage("Generic"),
+    Metformin: coverage("Generic"),
+    Omeprazole: coverage("Generic", ["QL"]),
+    Sertraline: coverage("Low-cost generic"),
+    Ibuprofen: coverage("Generic", ["QL"]),
+    "Amoxicillin / clavulanate": coverage("Generic"),
+    "Nicotine replacement": coverage("Generic", [], "Nicotine replacement products are listed under the ACA tobacco-cessation benefit; eligibility and product limits apply."),
+    Reslizumab: coverage("Source loading", [], "No exact Reslizumab/Cinqair row was found in the current Individual & Family formulary PDF."),
+    "Tobramycin inhalation": coverage("Source loading", [], "No exact inhaled tobramycin row was found; the PDF's tobramycin entries are ophthalmic products."),
+    Cetirizine: coverage("Source loading", [], "No exact Cetirizine row was found in the current Individual & Family formulary PDF."),
+    "Guaifenesin ER": coverage("Source loading", [], "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row."),
   },
   cignaNationalPreferred: {
     "Albuterol HFA": coverage("Listed in PDL", ["QL"]),
@@ -2948,6 +3272,22 @@ const planCoverageOverrides: Partial<
     "Fluticasone nasal": coverage("Listed in PDL", ["QL"], "Fluticasone spray entry."),
     "Azelastine nasal": coverage("Listed in PDL", ["QL"], "Azelastine 0.1% nasal spray entry."),
     Ibuprofen: coverage("Listed in PDL", [], "Oral suspension and 400 mg, 600 mg, or 800 mg tablet entries."),
+    "Symbicort (brand)": coverage("Listed in PDL", ["QL"], "Symbicort entry."),
+    Prednisone: coverage("Listed in PDL"),
+    "Tobramycin inhalation": coverage("Listed in PDL", ["PA", "QL"], "Tobi Podhaler entry."),
+    Azithromycin: coverage("Listed in PDL", ["PA"], "Oral suspension, packet, and tablet entries."),
+    "Amoxicillin / clavulanate": coverage("Listed in PDL"),
+    Doxycycline: coverage("Listed in PDL", ["ST"], "Doxycycline hyclate and monohydrate entries vary by strength."),
+    Benzonatate: coverage("Listed in PDL"),
+    Famotidine: coverage("Listed in PDL", [], "Oral suspension and 40 mg tablet entries."),
+    Pantoprazole: coverage("Listed in PDL", [], "Delayed-release 40 mg tablet entry."),
+    Omeprazole: coverage("Listed in PDL", ["QL"], "Delayed-release capsule entry."),
+    Furosemide: coverage("Listed in PDL", [], "Oral solution and tablet entries."),
+    Apixaban: coverage("Listed in PDL", [], "Eliquis entry."),
+    Amlodipine: coverage("Listed in PDL"),
+    Atorvastatin: coverage("Listed in PDL", ["QL"]),
+    Metformin: coverage("Listed in PDL", ["QL"], "Metformin ER tablet entry."),
+    Sertraline: coverage("Listed in PDL", ["QL"], "Sertraline concentrate and tablet entries."),
   },
   oscarNjIndividual: {
     "Albuterol HFA": coverage("Tier 1", ["QL"]),
@@ -3050,6 +3390,34 @@ const planCoverageOverrides: Partial<
     "Dornase alfa": coverage("Tier 5", [], "Part B/D determination applies."),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL", "LD"]),
     "Sotatercept-csrk": coverage("Tier 5", ["PA", "QL"]),
+    "Tobramycin inhalation": coverage("Tier 5", ["PA", "QL"], "Tobramycin inhalation solution entry."),
+    "Azelastine nasal": coverage("Tier 2", ["QL"]),
+    Prednisone: coverage("Tier varies", [], "Tablets are Tier 1; oral solution and concentrate are Tier 4."),
+    Prednisolone: coverage("Tier 4", [], "Oral solution entries."),
+    Varenicline: coverage("Tier 4"),
+    "Bupropion SR 150 mg": coverage("Tier 2", ["QL"], "Sustained-release 150 mg entry."),
+    Azithromycin: coverage("Tier varies", [], "Suspension is Tier 2; tablet entries are Tier 2; injection is Tier 4."),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Suspension entries are Tier 2 or 4; tablet entries are Tier 2 or 4."),
+    Doxycycline: coverage("Tier 2", [], "Hyclate and monohydrate capsule/tablet entries are Tier 2."),
+    Levofloxacin: coverage("Tier 1", [], "Oral tablet and solution entries."),
+    Benzonatate: coverage("Tier 2"),
+    "Guaifenesin ER": coverage("Source loading", [], "No exact extended-release guaifenesin row was found; only guaifenesin-codeine and OTC entries are listed."),
+    Famotidine: coverage("Tier 1", [], "Oral tablet entry."),
+    Pantoprazole: coverage("Tier 1", ["QL"]),
+    "Epinephrine auto-injector": coverage("Tier 3", ["QL"]),
+    Furosemide: coverage("Tier 1"),
+    Apixaban: coverage("Tier 3", ["QL"], "Eliquis entry."),
+    Lisinopril: coverage("Tier 1"),
+    Losartan: coverage("Tier varies", ["QL"], "100 mg and 25/50 mg tablet entries carry quantity limits."),
+    Amlodipine: coverage("Tier 1"),
+    Atorvastatin: coverage("Tier 1", ["QL"]),
+    Metformin: coverage("Tier varies", ["QL"], "Immediate-release and extended-release entries; source uses $0 tier notation."),
+    Omeprazole: coverage("Tier 1", ["QL"]),
+    Sertraline: coverage("Tier varies", ["QL"], "Concentrate is Tier 2; tablets are Tier 1 with quantity limits."),
+    Ibuprofen: coverage("Tier varies", [], "400/600/800 mg tablets are Tier 1; suspension is Tier 2."),
+    Ambrisentan: coverage("Tier 5", ["PA", "QL"], "Ambrisentan tablet entry."),
+    Bosentan: coverage("Tier 5", ["PA", "QL"], "Bosentan tablet entry."),
+    "Aztreonam inhalation": coverage("Tier 5", ["PA", "QL"], "CAYSTON inhalation entry; source also marks limited availability."),
   },
   humanaNj26408: {
     "Albuterol HFA": coverage("Tier 3", ["QL"]),
@@ -3127,7 +3495,6 @@ const planCoverageOverrides: Partial<
     "Albuterol HFA": coverage("Tier 2", ["QL"]),
     "Albuterol nebulizer solution": coverage("Tier 2", ["PA"], "Part B/D determination applies."),
     Arformoterol: coverage("Tier 4", ["PA"], "Part B/D determination applies."),
-    Formoterol: coverage("Tier 4", ["PA", "QL"], "Perforomist entry; Part B/D determination applies."),
     Levalbuterol: coverage("Tier varies", ["PA"], "Nebulizer is Tier 3; HFA is Tier 4 with a quantity limit."),
     Salmeterol: coverage("Tier 3", ["QL"], "Serevent Diskus entry."),
     Ipratropium: coverage("Tier varies", ["PA", "QL"], "Nebulizer is Tier 2; HFA is Tier 4 with a quantity limit."),
@@ -3153,8 +3520,6 @@ const planCoverageOverrides: Partial<
     Roflumilast: coverage("Tier 4", ["PA", "QL"]),
     "Sildenafil 20 mg": coverage("Tier 3", ["PA", "QL"]),
     "Tadalafil for PAH": coverage("Tier 4", ["PA", "QL"]),
-    "Treprostinil inhaled": coverage("Tier 5", ["PA"], "Tyvaso entry; Part B/D determination applies."),
-    Olodaterol: coverage("Tier 2", ["QL"], "Striverdi Respimat entry."),
     "Glycopyrrolate / formoterol": coverage("Tier 2", ["QL"], "Bevespi entry."),
     "Fluticasone / salmeterol (generic)": coverage("Tier 2", ["QL"], "Generic DPI formulary entry."),
     "Budesonide / formoterol (generic)": coverage("Tier 1", ["QL"], "Generic budesonide-formoterol entry."),
@@ -3179,6 +3544,22 @@ const planCoverageOverrides: Partial<
     Omeprazole: coverage("Tier 1", ["QL"]),
     Sertraline: coverage("Tier 1", ["QL"]),
     Ibuprofen: coverage("Tier varies", [], "Tablets are Tier 1; oral suspension is Tier 2."),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 4", ["QL"], "Tiotropium bromide entry."),
+    Olodaterol: coverage("Tier 3", ["QL"], "Striverdi Respimat entry."),
+    "Tobramycin inhalation": coverage("Tier 5", ["PA", "QL"], "Tobramycin inhalation solution entry; Part B/D and supply limits apply."),
+    "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"], "Trikafta sequential tablet and granule entries."),
+    "Dornase alfa": coverage("Tier 5", ["PA", "QL"], "Pulmozyme entry; Part B/D determination applies."),
+    Selexipag: coverage("Tier 5", ["PA", "QL"], "Uptravi entry."),
+    "Treprostinil inhaled": coverage("Tier 5", ["PA"], "Tyvaso entry; Part B/D determination applies."),
+    "Azelastine nasal": coverage("Tier 2", ["QL"]),
+    Varenicline: coverage("Tier 4"),
+    "Bupropion SR 150 mg": coverage("Tier 2", ["QL"]),
+    "Epinephrine auto-injector": coverage("Tier 2", ["QL"]),
+    Formoterol: coverage("Tier 4", ["PA", "QL"], "Formoterol fumarate entry; Part B/D determination applies."),
+    Dupilumab: coverage("Tier 5", ["PA", "QL"], "Dupixent pen and syringe entries."),
+    "Advair Diskus / HFA (brand)": coverage("Tier varies", ["QL"], "Advair HFA and generic fluticasone-salmeterol rows differ by product."),
+    Riociguat: coverage("Tier 5", ["PA", "QL"], "Adempas entry."),
+    Apixaban: coverage("Tier 3", [], "Eliquis entry; no additional restriction marker shown."),
   },
   cloverNj2026: {
     "Albuterol HFA": coverage("Tier 3", ["QL"], "Two inhalers per 30 days."),
@@ -3240,12 +3621,16 @@ const planCoverageOverrides: Partial<
     Omeprazole: coverage("Tier 1"),
     Sertraline: coverage("Tier 1"),
     Ibuprofen: coverage("Tier varies", [], "Oral tablets are Tier 1; suspension is Tier 3."),
+    "Amoxicillin / clavulanate": coverage("Tier varies", [], "Clover lists suspension products in Tiers 3-4 and tablet products in Tiers 2-3."),
     "Tobramycin inhalation": coverage("Tier 5", ["PA"], "Tobramycin nebulizer and Tobi Podhaler entries; not available by mail order."),
     "Dornase alfa": coverage("Tier 5", ["PA"], "Pulmozyme entry; not available by mail order."),
     "Elexacaftor / tezacaftor / ivacaftor": coverage("Tier 5", ["PA", "QL"], "Trikafta entry; not available by mail order."),
     "Fluticasone nasal": coverage("Tier 2", ["QL"], "Fluticasone propionate nasal spray entry."),
     "Azelastine nasal": coverage("Tier 2", [], "Azelastine 0.1% nasal solution entry."),
     "Epinephrine auto-injector": coverage("Tier 3", [], "Generic EpiPen and Adrenaclick entries."),
+    Varenicline: coverage("Tier 4", ["QL"], "Varenicline tablet and starter-pack entries."),
+    "Bupropion SR 150 mg": coverage("Tier 2", ["QL"], "Sustained-release 150 mg smoking-cessation entry."),
+    Bosentan: coverage("Tier 5", ["PA", "QL"], "Bosentan tablet entry."),
   },
   wellpointNjFamilyCare: {
     "Albuterol HFA": coverage("Listed in PDL", ["QL"], "Albuterol sulfate HFA entry."),
@@ -3278,7 +3663,8 @@ export const coverageFor = (medication: Medication, plan: PlanKey): Coverage => 
   return (
     planCoverageOverrides[plan]?.[medication.generic] ??
     planCoverageOverrides[coveragePlan]?.[medication.generic] ??
-    medication.coverage[coveragePlan]
+    medication.coverage[coveragePlan] ??
+    coverage("Source loading", [], "No exact product row has been mapped for this formulary source.")
   );
 };
 
@@ -3452,6 +3838,9 @@ export const PulmonaryFormularyDashboard = () => {
     pharmacyBenefit: "",
   });
   const [submittedPlanIntake, setSubmittedPlanIntake] = useState<PlanIntake | null>(null);
+  const [intakeFiles, setIntakeFiles] = useState<IntakeFile[]>([]);
+  const [intakeFileMessage, setIntakeFileMessage] = useState<string | null>(null);
+  const [intakeUploadState, setIntakeUploadState] = useState<"idle" | "uploading" | "submitted" | "error">("idle");
   const planIntakeRef = useRef<HTMLElement | null>(null);
   const planIntakeInsurerRef = useRef<HTMLInputElement | null>(null);
   const medicareFinderRef = useRef<HTMLElement | null>(null);
@@ -4209,6 +4598,55 @@ export const PulmonaryFormularyDashboard = () => {
     planIntakeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     window.setTimeout(() => planIntakeInsurerRef.current?.focus(), 250);
   };
+  const stageIntakeFiles = (files: FileList | null) => {
+    if (!files?.length) return;
+    const acceptedExtensions = new Set(["pdf", "doc", "docx", "xls", "xlsx", "csv", "txt", "png", "jpg", "jpeg", "webp"]);
+    const rejected: string[] = [];
+    const nextFiles = Array.from(files).filter((file) => {
+      const extension = file.name.toLowerCase().split(".").pop() ?? "";
+      if (!acceptedExtensions.has(extension)) {
+        rejected.push(`${file.name} (file type)`);
+        return false;
+      }
+      if (file.size > maxIntakeFileBytes) {
+        rejected.push(`${file.name} (over 20 MB)`);
+        return false;
+      }
+      return true;
+    }).map((file) => ({
+      id: `${file.name}:${file.size}:${file.lastModified}`,
+      name: file.name,
+      size: file.size,
+      type: file.type || "Unknown file type",
+      file,
+    }));
+    setIntakeFiles((current) => {
+      const merged = [...current, ...nextFiles];
+      return merged.filter((file, index) => merged.findIndex((candidate) => candidate.id === file.id) === index).slice(0, 10);
+    });
+    setIntakeFileMessage(rejected.length > 0 ? `Not staged: ${rejected.join(", ")}. Add PDF, Word, spreadsheet, CSV, text, or image files up to 20 MB each.` : null);
+  };
+  const submitIntakeFiles = async () => {
+    if (!intakeFiles.length || intakeUploadState === "uploading") return;
+    setIntakeUploadState("uploading");
+    setIntakeFileMessage(null);
+    const formData = new FormData();
+    intakeFiles.forEach(({ file }) => formData.append("files", file, file.name));
+    formData.append("insurer", planIntake.insurer.trim());
+    formData.append("coverageType", planIntake.planKind);
+    formData.append("planName", planIntake.planName.trim());
+    formData.append("pharmacyBenefit", planIntake.pharmacyBenefit.trim());
+    try {
+      const response = await fetch("/api/plan-intake/files", { method: "POST", body: formData });
+      const result = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(result?.message || "The intake files could not be submitted.");
+      setIntakeUploadState("submitted");
+      setIntakeFileMessage(`Received ${result.fileCount} file${result.fileCount === 1 ? "" : "s"} for intake review. No coverage result was published.`);
+    } catch (error) {
+      setIntakeUploadState("error");
+      setIntakeFileMessage(error instanceof Error ? error.message : "The intake files could not be submitted.");
+    }
+  };
   const submitPlanIntake = () => {
     if (!canStartPlanWorkflow) return;
     setSubmittedPlanIntake(planIntake);
@@ -4495,6 +4933,79 @@ export const PulmonaryFormularyDashboard = () => {
                 <p className="mt-3 text-xs font-semibold text-[#0d6664]">
                   Step 1: choose the major insurer. Step 2: choose its exact plan detail. Step 3: choose the medicine.
                 </p>
+                <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-[#cce5df] bg-white px-3 py-2.5 text-xs leading-5 text-[#55716f]">
+                  <span>Need to prepare the clinic’s plan list?</span>
+                  <a
+                    href="/clinic-plan-intake-template.csv"
+                    download
+                    className="font-bold text-[#0d6664] underline decoration-[#8fc9bd] underline-offset-2 hover:text-[#074f4d]"
+                  >
+                    Download the PHI-free template
+                  </a>
+                </div>
+                <div className="mt-3 rounded-xl border border-dashed border-[#9bcfc4] bg-[#f8fcfb] px-3 py-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-xs font-bold text-[#284e4d]">Have insurer documents already?</p>
+                      <p className="mt-0.5 text-[11px] leading-4 text-[#55716f]">
+                        Add PDFs, Word files, spreadsheets, text files, or screenshots for intake review. Files stay in this browser until you choose to send them; they are never automatically treated as coverage evidence.
+                      </p>
+                    </div>
+                    <label className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#e5f3f0] px-3 py-2 text-xs font-bold text-[#0d6664] ring-1 ring-[#b9d8d2] hover:bg-[#d9eee9]">
+                      Add source files
+                      <input
+                        type="file"
+                        multiple
+                        accept={intakeFileAccept}
+                        onChange={(event) => {
+                          stageIntakeFiles(event.currentTarget.files);
+                          event.currentTarget.value = "";
+                        }}
+                        className="sr-only"
+                        aria-label="Add insurer source files for intake review"
+                      />
+                    </label>
+                  </div>
+                  {intakeFileMessage && (
+                    <p className="mt-2 text-[11px] font-semibold leading-4 text-[#8a5a16]" role="status">
+                      {intakeFileMessage}
+                    </p>
+                  )}
+                  {intakeFiles.length > 0 && (
+                    <div className="mt-3 flex flex-col gap-3">
+                      <div className="flex flex-wrap gap-2" aria-label="Staged insurer source files">
+                        {intakeFiles.map((file) => (
+                          <span key={file.id} className="inline-flex items-center gap-2 rounded-full bg-white px-2.5 py-1.5 text-[10px] font-semibold text-[#526b69] ring-1 ring-[#d2e5e0]">
+                            <span className="max-w-[15rem] truncate">{file.name}</span>
+                            <span className="text-[#819694]">{(file.size / 1024 / 1024).toFixed(1)} MB</span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setIntakeFiles((current) => current.filter((candidate) => candidate.id !== file.id));
+                                setIntakeUploadState("idle");
+                              }}
+                              className="font-bold text-[#0d6664] hover:text-[#074f4d]"
+                              aria-label={`Remove ${file.name}`}
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <button
+                          type="button"
+                          onClick={submitIntakeFiles}
+                          disabled={intakeUploadState === "uploading"}
+                          className="rounded-full bg-[#173f41] px-3 py-2 text-xs font-bold text-white hover:bg-[#0d6664] disabled:cursor-wait disabled:opacity-60"
+                        >
+                          {intakeUploadState === "uploading" ? "Sending for review…" : intakeUploadState === "submitted" ? "Submitted for review" : "Send files for intake review"}
+                        </button>
+                        <span className="text-[10px] leading-4 text-[#6a8580]">The server validates the files and returns intake metadata only; it does not retain contents or publish coverage automatically.</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6 xl:grid-cols-4">
                 <label className="block">
@@ -4748,7 +5259,7 @@ export const PulmonaryFormularyDashboard = () => {
                     )}
                     {intakeMatch.kind === "out-of-scope" && (
                       <span className="rounded-full bg-[#eef2f1] px-3 py-1.5 text-xs font-bold text-[#526b69]">
-                        Outside current pilot scope
+                        Outside current plan scope
                       </span>
                     )}
                   </div>
@@ -6370,7 +6881,7 @@ export const PulmonaryFormularyDashboard = () => {
               className="mt-0.5 h-4 w-4 shrink-0 text-[#157765]"
             />
             <p>
-              <strong>Evidence-first pilot.</strong> No patient data,
+              <strong>Evidence-first medication access.</strong> No patient data,
               eligibility checks, or medical advice. “Not listed” does not mean
               not covered.
             </p>

@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ensureFormularySchema, pool } from "./db.js";
@@ -92,6 +93,15 @@ const paFormDownloads = new Map(
       },
     ]),
 );
+const intakeAllowedExtensions = new Set([".pdf", ".doc", ".docx", ".xls", ".xlsx", ".csv", ".txt", ".png", ".jpg", ".jpeg", ".webp"]);
+const intakeUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 10, fileSize: 20 * 1024 * 1024 },
+  fileFilter: (_request, file, callback) => {
+    const extension = path.extname(file.originalname).toLowerCase();
+    callback(intakeAllowedExtensions.has(extension) ? null : new Error("UNSUPPORTED_FILE_TYPE"), intakeAllowedExtensions.has(extension));
+  },
+});
 
 app.disable("x-powered-by");
 app.use((_request, response, next) => {
@@ -110,6 +120,30 @@ app.get("/api/health", (_request, response) => {
     service: "formulary-finder-api",
     medicationCount: medications.length,
     planCount: primaryNjPlans.length,
+  });
+});
+
+app.post("/api/plan-intake/files", (request, response) => {
+  intakeUpload.array("files", 10)(request, response, (error) => {
+    if (error instanceof multer.MulterError) {
+      const message = error.code === "LIMIT_FILE_SIZE"
+        ? "Each intake file must be 20 MB or smaller."
+        : error.code === "LIMIT_FILE_COUNT"
+          ? "Add no more than 10 intake files at a time."
+          : "The intake files could not be accepted.";
+      return response.status(400).json({ status: "rejected", message });
+    }
+    if (error) return response.status(400).json({ status: "rejected", message: error.message === "UNSUPPORTED_FILE_TYPE" ? "Use PDF, Word, spreadsheet, CSV, text, or image files only." : "The intake files could not be accepted." });
+    const files = (request.files as Express.Multer.File[] | undefined) ?? [];
+    if (!files.length) return response.status(400).json({ status: "rejected", message: "Add at least one insurer source file." });
+    response.json({
+      status: "received",
+      fileCount: files.length,
+      files: files.map((file) => ({ name: file.originalname, bytes: file.size, contentType: file.mimetype })),
+      reviewRequired: true,
+      stored: false,
+      message: "Files were validated for intake. No coverage result was published and file contents were not retained by this endpoint.",
+    });
   });
 });
 

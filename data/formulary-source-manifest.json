@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-08-11",
+  "asOf": "2026-08-13",
   "completenessClassDefinition": "partial-row-extraction means at least one medication is still unconfirmed in the static baseline.",
   "baselines": [
     {
@@ -20,6 +20,15 @@
       "refreshCadence": "quarterly and at plan-year rollover",
       "absenceCanImplyNotListed": false,
       "absenceQualification": "The public Classic guide is a baseline only; coverage, exclusions, and benefit design can vary. Direct Access alone does not identify this pharmacy formulary."
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "sourceUrl": "https://www.ambetterhealth.com/content/dam/centene/new-jersey/ambetter/pdf/2026-nj-formulary.pdf",
+      "scope": "Ambetter from WellCare of New Jersey 2026 ACA Marketplace formulary",
+      "completenessClass": "partial-row-extraction",
+      "refreshCadence": "monthly and at plan-year rollover",
+      "absenceCanImplyNotListed": false,
+      "absenceQualification": "The PDF is not a complete list and plan designs may vary; confirm the exact product, strength, device, and member benefit before treating absence as noncoverage."
     },
     {
       "planKey": "uhcCommercial",
