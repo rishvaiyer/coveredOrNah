@@ -101,6 +101,10 @@ test("static source-backed UI uses source-listed language instead of covered lan
     "utf8",
   );
   const readmeSource = readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  const launchPlanGeneratorSource = readFileSync(
+    new URL("./build_launch_plan_pdf.py", import.meta.url),
+    "utf8",
+  );
 
   assert.match(dashboardSource, /Source-listed on the published tier shown here\./);
   assert.match(dashboardSource, /Source-listed on a higher published tier\./);
@@ -110,6 +114,8 @@ test("static source-backed UI uses source-listed language instead of covered lan
   assert.match(readmeSource, /\| \*\*Source-listed\*\* \| The selected medication product appears in the selected source\./);
   assert.match(readmeSource, /Reserve `Covered` for exact connector output tied to a selected plan or NDC\./);
   assert.doesNotMatch(readmeSource, /\| \*\*Covered\*\* \| The selected medication product appears in the selected source\./);
+  assert.match(launchPlanGeneratorSource, /1,011 of 1,445 medication-plan cells as source-confirmed; 434 remain explicitly unconfirmed/);
+  assert.doesNotMatch(launchPlanGeneratorSource, /1,009 of 1,445 medication-plan cells as source-confirmed; 436 remain explicitly unconfirmed/);
 });
 
 test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed semantics", () => {

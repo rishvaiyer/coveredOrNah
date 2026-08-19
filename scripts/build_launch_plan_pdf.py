@@ -554,7 +554,7 @@ def build_story():
             [
                 "Live New Jersey-focused clinician portal with 85 medication families and 17 plan-family baselines.",
                 "Exact Medicare Advantage and standalone Part D routing plus validated UHC Marketplace, Aetna NJ FamilyCare, UHC Community, Fidelis NJ FamilyCare, Horizon NJ Health, and Wellpoint NJ FamilyCare workflows.",
-                "Deterministic local audit records 1,009 of 1,445 medication-plan cells as source-confirmed; 436 remain explicitly unconfirmed.",
+                "Deterministic local audit records 1,011 of 1,445 medication-plan cells as source-confirmed; 434 remain explicitly unconfirmed.",
                 "Clinician guide, demo package, source matrix, sales materials, and PHI-free plan-list intake template are prepared.",
             ]
         )
