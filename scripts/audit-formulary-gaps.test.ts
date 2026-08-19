@@ -139,14 +139,14 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assertCoverage("Albuterol HFA", { state: "Tier 1B" });
   assertCoverage("Arformoterol", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Formoterol", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Ipratropium", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Ipratropium / albuterol", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Ipratropium", { state: "Tier varies", flags: ["QL"] });
+  assertCoverage("Ipratropium / albuterol", { state: "Tier varies", flags: ["QL"] });
   assertCoverage("Tiotropium (generic capsule-inhaler)", { state: "Tier 1A", flags: ["QL"] });
   assertCoverage("Incruse Ellipta (brand)", { state: "Tier 2", flags: ["QL"] });
   assertCoverage("Budesonide inhalation", { state: "Tier 1B", flags: ["PA", "QL"] });
-  assertCoverage("Fluticasone furoate", { state: "Tier 1B", flags: ["QL"] });
+  assertCoverage("Fluticasone furoate", { state: "Tier varies", flags: ["QL"] });
   assertCoverage("Fluticasone propionate HFA 44 mcg", { state: "Tier 1B", flags: ["QL"] });
-  assertCoverage("Fluticasone / vilanterol", { state: "Tier 1B" });
+  assertCoverage("Fluticasone / vilanterol", { state: "Tier varies" });
   assertCoverage("Fluticasone / salmeterol (generic)", { state: "Tier 1B" });
   assertCoverage("Montelukast", { state: "Tier 1B", flags: ["QL"] });
   assertCoverage("Zafirlukast", { state: "Tier 1B", flags: ["QL"] });
@@ -181,6 +181,18 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assertCoverage("Sertraline", { state: "Tier 1B" });
   assertCoverage("Epinephrine auto-injector", { state: "Tier 1B", flags: ["QL"] });
 
+  const ipratropium = ambetterCoverage("Ipratropium");
+  assert.equal(ipratropium.state, "Tier varies");
+  assert.deepEqual(ipratropium.flags, ["QL"]);
+  assert.match(ipratropium.productNote ?? "", /Generic ipratropium HFA and 0\.02% solution rows are Tier 1B/);
+  assert.match(ipratropium.productNote ?? "", /brand Atrovent HFA row is Tier 3/);
+
+  const ipratropiumAlbuterol = ambetterCoverage("Ipratropium \/ albuterol");
+  assert.equal(ipratropiumAlbuterol.state, "Tier varies");
+  assert.deepEqual(ipratropiumAlbuterol.flags, ["QL"]);
+  assert.match(ipratropiumAlbuterol.productNote ?? "", /Generic ipratropium-albuterol solution row is Tier 1B/);
+  assert.match(ipratropiumAlbuterol.productNote ?? "", /brand Combivent Respimat row is Tier 2/);
+
   const tiotropiumGeneric = ambetterCoverage("Tiotropium (generic capsule-inhaler)");
   assert.equal(tiotropiumGeneric.state, "Tier 1A");
   assert.deepEqual(tiotropiumGeneric.flags, ["QL"]);
@@ -188,6 +200,30 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   const incruseBrand = ambetterCoverage("Incruse Ellipta (brand)");
   assert.equal(incruseBrand.state, "Tier 2");
   assert.deepEqual(incruseBrand.flags, ["QL"]);
+
+  const budesonideInhalationMedication = medications.find((row) => row.generic === "Budesonide inhalation");
+  assert.ok(budesonideInhalationMedication);
+  assert.equal(budesonideInhalationMedication.brands, "Pulmicort Respules");
+  assert.match(budesonideInhalationMedication.productDetails ?? "", /Flexhaler is tracked separately/);
+
+  const budesonideInhalation = ambetterCoverage("Budesonide inhalation");
+  assert.equal(budesonideInhalation.state, "Tier 1B");
+  assert.deepEqual(budesonideInhalation.flags, ["PA", "QL"]);
+  assert.match(budesonideInhalation.productNote ?? "", /Nebulized budesonide suspension row only/);
+  assert.match(budesonideInhalation.productNote ?? "", /Pulmicort Flexhaler is tracked separately at Tier 2/);
+
+  assertCoverage("Budesonide (Flexhaler)", { state: "Tier 2" });
+
+  const fluticasoneFuroate = ambetterCoverage("Fluticasone furoate");
+  assert.equal(fluticasoneFuroate.state, "Tier varies");
+  assert.deepEqual(fluticasoneFuroate.flags, ["QL"]);
+  assert.match(fluticasoneFuroate.productNote ?? "", /Generic fluticasone furoate inhalation row is Tier 1B/);
+  assert.match(fluticasoneFuroate.productNote ?? "", /brand Arnuity Ellipta rows are Tier 2/);
+
+  const fluticasoneVilanterol = ambetterCoverage("Fluticasone \/ vilanterol");
+  assert.equal(fluticasoneVilanterol.state, "Tier varies");
+  assert.match(fluticasoneVilanterol.productNote ?? "", /Generic fluticasone furoate-vilanterol row is Tier 1B/);
+  assert.match(fluticasoneVilanterol.productNote ?? "", /brand Breo Ellipta rows are Tier 2/);
 
   const famotidine = ambetterCoverage("Famotidine");
   assert.equal(famotidine.state, "Tier varies");
@@ -242,8 +278,8 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
 
   const prednisolone = ambetterCoverage("Prednisolone");
   assert.equal(prednisolone.state, "Tier varies");
-  assert.match(prednisolone.productNote ?? "", /Tablet row is Tier 1A/);
-  assert.match(prednisolone.productNote ?? "", /solution row is Tier 1B/);
+  assert.match(prednisolone.productNote ?? "", /15 mg\/5 mL sodium-phosphate solution row and tablet row are Tier 1A/);
+  assert.match(prednisolone.productNote ?? "", /5 mg\/5 mL, 10 mg\/5 mL, and 25 mg\/5 mL sodium-phosphate solutions, TBDP row, and other solution row are Tier 1B/);
 
   const ibuprofen = ambetterCoverage("Ibuprofen");
   assert.equal(ibuprofen.state, "Tier varies");
@@ -267,7 +303,11 @@ test("ambetter preserves reviewed Tier 0, Tier 1A, Tier 1B, and unconfirmed sema
   assert.match(pirfenidone.productNote ?? "", /Capsule and 267 mg or 801 mg tablet rows are Tier 1B/);
   assert.match(pirfenidone.productNote ?? "", /534 mg tablet row is Tier 4/);
 
-  assertCoverage("Bosentan", { state: "Tier 1B", flags: ["PA", "QL"] });
+  const bosentan = ambetterCoverage("Bosentan");
+  assert.equal(bosentan.state, "Tier varies");
+  assert.deepEqual(bosentan.flags, ["PA", "QL"]);
+  assert.match(bosentan.productNote ?? "", /Generic bosentan tablet and oral-suspension rows are Tier 1B/);
+  assert.match(bosentan.productNote ?? "", /brand Tracleer oral-suspension row is Tier 4/);
 
   const metformin = ambetterCoverage("Metformin");
   assert.equal(metformin.state, "Tier varies");
