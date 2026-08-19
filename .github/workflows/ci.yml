@@ -1,0 +1,95 @@
+name: Formulary Finder CI
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/ci.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "vite.config.ts"
+      - "server.ts"
+      - "db.ts"
+      - "uhc-nj-qhp.ts"
+      - "uhc-nj-qhp.test.ts"
+      - "src/**"
+      - "scripts/**"
+      - "tools/**"
+      - "data/**"
+      - "public/**"
+  push:
+    branches:
+      - main
+      - "codex/**"
+      - "fix/**"
+    paths:
+      - ".github/workflows/ci.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
+      - "vite.config.ts"
+      - "server.ts"
+      - "db.ts"
+      - "uhc-nj-qhp.ts"
+      - "uhc-nj-qhp.test.ts"
+      - "src/**"
+      - "scripts/**"
+      - "tools/**"
+      - "data/**"
+      - "public/**"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Run CMS utility tests
+        run: npm run cms:test
+
+      - name: Run UHC QHP tests
+        run: npm run uhc:qhp:test
+
+      - name: Run Aetna FamilyCare tests
+        run: npm run aetna:familycare:test
+
+      - name: Run UHC Community tests
+        run: npm run uhc:community:test
+
+      - name: Run Fidelis NJ tests
+        run: npm run fidelis:nj:test
+
+      - name: Run Horizon Classic tests
+        run: npm run horizon:classic:test
+
+      - name: Run formulary gap tests
+        run: npm run formulary:gaps:test
+
+      - name: Run safe plan-intake route test
+        run: npm run plan-intake:test
+
+      - name: Run formulary-data typecheck
+        run: npm run formulary-data:typecheck
+
+      - name: Run formulary-data tests
+        run: npm run formulary-data:test
+
+      - name: Verify tracked tree stays clean
+        run: |
+          git diff --check
+          git diff --exit-code
