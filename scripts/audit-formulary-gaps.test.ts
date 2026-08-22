@@ -17,9 +17,9 @@ test("reports the current static formulary gap inventory deterministically", () 
     medicationCount: 85,
     planCount: 17,
     totalCells: 1445,
-      confirmedCells: 1074,
-      unconfirmedCells: 371,
-      unconfirmedPercent: 25.67,
+      confirmedCells: 1128,
+      unconfirmedCells: 317,
+      unconfirmedPercent: 21.94,
   });
 
   assert.deepEqual(
@@ -37,11 +37,11 @@ test("reports the current static formulary gap inventory deterministically", () 
       cignaNationalPreferred: 38,
       oscarNjIndividual: 15,
       wellcareNjH0913: 20,
-      humanaNj26408: 26,
+      humanaNj26408: 21,
       bravenNjH0885: 76,
       healthspringNj26096: 15,
       cloverNj2026: 17,
-      wellpointNjFamilyCare: 49,
+      wellpointNjFamilyCare: 0,
     },
   );
 
@@ -51,7 +51,7 @@ test("reports the current static formulary gap inventory deterministically", () 
   );
   assert.equal(
     audit.byTherapeuticArea.find((row) => row.therapeuticArea === "Rescue inhalers")?.unconfirmedCells,
-    9,
+    8,
   );
 });
 

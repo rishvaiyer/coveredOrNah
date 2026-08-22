@@ -7,9 +7,9 @@
     "medicationCount": 85,
     "planCount": 17,
     "totalCells": 1445,
-    "confirmedCells": 1074,
-    "unconfirmedCells": 371,
-    "unconfirmedPercent": 25.67
+    "confirmedCells": 1128,
+    "unconfirmedCells": 317,
+    "unconfirmedPercent": 21.94
   },
   "plans": [
     {
@@ -230,8 +230,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://provider.humana.com/pharmacy-resources/prior-authorizations",
       "totalCells": 85,
-      "confirmedCells": 59,
-      "unconfirmedCells": 26
+      "confirmedCells": 64,
+      "unconfirmedCells": 21
     },
     {
       "planKey": "bravenNjH0885",
@@ -298,8 +298,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.provider.wellpoint.com/new-jersey-provider/member-eligibility-and-pharmacy/pharmacy-information",
       "totalCells": 85,
-      "confirmedCells": 36,
-      "unconfirmedCells": 49
+      "confirmedCells": 85,
+      "unconfirmedCells": 0
     }
   ]
 }

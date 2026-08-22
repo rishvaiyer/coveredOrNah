@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "ox-alpha evidence-gated loop",
+  "generatedAt": "2026-08-22",
+  "batches": [
+    {
+      "plan": {
+        "planKey": "wellpointNjFamilyCare",
+        "planName": "Wellpoint NJ FamilyCare",
+        "coverageLane": "medicaid_managed_care",
+        "sourceName": "FormularyNavigator New Jersey Medicaid machine-readable feed",
+        "sourceUrl": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json",
+        "effectiveDate": "2026-08-01",
+        "verifiedReachableOn": "2026-08-21"
+      },
+      "method": "Ingredient-level exact matching against the live public JSON feed (170,121 NDC rows). Flags are conservative: where PA/QL encoding applied only to outlier variants (for example 40 mg delayed-release doxycycline or ER osmotic metformin), the flag is omitted from flags and the nuance is captured in the product note.",
+      "promotedCells": 49,
+      "medications": ["Amlodipine", "Amoxicillin / clavulanate", "Apixaban", "Atorvastatin", "Azelastine nasal", "Azithromycin", "Benralizumab", "Benzonatate", "Bosentan", "Budesonide (Flexhaler)", "Budesonide / glycopyrrolate / formoterol", "Bupropion SR 150 mg", "Cetirizine", "Ciclesonide", "Doxycycline", "Elexacaftor / tezacaftor / ivacaftor", "Epinephrine auto-injector", "Famotidine", "Fluticasone / umeclidinium / vilanterol", "Fluticasone / vilanterol", "Fluticasone nasal", "Furosemide", "Guaifenesin ER", "Ibuprofen", "Levalbuterol", "Levofloxacin", "Lisinopril", "Losartan", "Mepolizumab", "Metformin", "Mometasone / formoterol", "Mometasone", "Nicotine replacement", "Nintedanib", "Omeprazole", "Pantoprazole", "Pirfenidone", "Prednisolone", "Prednisone", "QVAR RediHaler (brand)", "Riociguat", "Selexipag", "Sertraline", "Sotatercept-csrk", "Symbicort (brand)", "Tezepelumab", "Treprostinil inhaled", "Varenicline", "Advair Diskus / HFA (brand)"],
+      "remainingUnconfirmed": 0
+    },
+    {
+      "plan": {
+        "planKey": "humanaNj26408",
+        "planName": "Humana NJ formulary 26408",
+        "coverageLane": "medicare_advantage_part_d",
+        "exactnessLevel": "plan_family",
+        "sourceName": "Humana Prescription Drug Guide, updated 08/01/2026 (20260009PDG2640826C)",
+        "sourceUrl": "https://assets.humana.com/is/content/humana/20260009PDG2640826Cpdf",
+        "verifiedReachableOn": "2026-08-21"
+      },
+      "method": "Deterministic text-layer extraction of the official PDF; only exact ingredient/product rows promoted.",
+      "promotions": [
+        { "medication": "Bupropion SR 150 mg", "tier": "Tier 3", "flags": ["QL"], "page": 23, "evidence": "bupropion hcl 150 mg TABLET SR 12 HR; QL 90 per 30 days; MO notation" },
+        { "medication": "Mometasone", "tier": "Tier 4", "flags": ["QL"], "page": 90, "evidence": "mometasone 50 mcg/actuation nasal spray (generic Nasonex-type); QL 34 per 30 days" },
+        { "medication": "Olodaterol", "tier": "Tier 3", "flags": ["QL"], "page": 90, "evidence": "STRIVERDI RESPIMAT 2.5 MCG/ACTUATION MIST; QL 4 per 30 days" },
+        { "medication": "Tiotropium (generic capsule-inhaler)", "tier": "Tier 3", "flags": ["QL"], "page": 90, "evidence": "SPIRIVA WITH HANDIHALER 18 MCG capsule with inhalation device; QL 30 per 30 days; brand row accepted per catalog convention" },
+        { "medication": "Varenicline", "tier": "Tier 3", "flags": ["QL"], "page": 13, "evidence": "varenicline tartrate tablets and dose pack; QL 56 per 28 days (tablets), 53 per 28 days (pack)" }
+      ],
+      "absentConfirmed": 21,
+      "absentNote": "The remaining 21 catalog products have no row in this document (including aclidinium/Tudorza, Anoro Ellipta, Breyna, Alvesco, Ohtuvayre, Tyvaso, Tezspire, Cinqair, Yupelri, Serevent, Zyflo CR, Bevespi, Dulera, Pulmicort Flexhaler, QVAR RediHaler, and others). Absence remains explicitly unconfirmed, not a denial."
+    }
+  ],
+  "auditDelta": { "confirmedBefore": 1074, "confirmedAfter": 1128, "unconfirmedBefore": 371, "unconfirmedAfter": 317 },
+  "boundaries": "Source-listed results only; not eligibility, payment, approval, or denial. No PHI, credentials, login, CAPTCHA, or restricted access used."
+}
