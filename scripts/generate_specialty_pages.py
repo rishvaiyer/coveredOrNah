@@ -23,9 +23,33 @@ SEEDS = [
     {
         "slug": "dermatology",
         "seed": ROOT / "data" / "specialty-demo-dermatology-starter-v1.json",
-        "evidence": ROOT / "data" / "dermatology-evidence-v1.json",
         "tagline": "A scoped dermatology medication-access research preview for New Jersey clinics.",
         "status": "starter catalog: 20 medication families, exact-row evidence pass complete",
+        "evidence": ROOT / "data" / "dermatology-evidence-v1.json",
+    },
+    {
+        "slug": "allergy-immunology",
+        "seed": ROOT / "data" / "specialty-demo-allergy-immunology-starter-v1.json",
+        "tagline": "A scoped allergy and immunology medication-access research preview for New Jersey clinics.",
+        "status": "starter catalog: evidence pass not started; rows shown as candidates only",
+    },
+    {
+        "slug": "cardiology",
+        "seed": ROOT / "data" / "specialty-demo-cardiology-starter-v1.json",
+        "tagline": "A scoped cardiology medication-access research preview for New Jersey clinics.",
+        "status": "starter catalog: evidence pass not started; rows shown as candidates only",
+    },
+    {
+        "slug": "gastroenterology",
+        "seed": ROOT / "data" / "specialty-demo-gastroenterology-starter-v1.json",
+        "tagline": "A scoped gastroenterology medication-access research preview for New Jersey clinics.",
+        "status": "starter catalog: evidence pass not started; rows shown as candidates only",
+    },
+    {
+        "slug": "endocrinology",
+        "seed": ROOT / "data" / "specialty-demo-endocrinology-starter-v1.json",
+        "tagline": "A scoped endocrinology and diabetes medication-access research preview for New Jersey clinics.",
+        "status": "starter catalog: evidence pass not started; rows shown as candidates only",
     },
 ]
 
@@ -215,7 +239,7 @@ def main() -> None:
         else:
             out_dir.mkdir(parents=True, exist_ok=True)
             target.write_text(page)
-        items.append(f"<li><a href=\"/specialty/{entry['slug']}/\">{esc(entry['seed_name'] if 'seed_name' in entry else json.loads(entry['seed'].read_text())['specialty'])} research preview</a></li>")
+        items.append(f"<li><a href=\"/specialty/{entry['slug']}/\">{esc(json.loads(entry['seed'].read_text())['specialty'])} research preview</a></li>")
     index_html = INDEX_TMPL.format(items="\n".join(items))
     index_target = index_root / "index.html"
     if args.check:

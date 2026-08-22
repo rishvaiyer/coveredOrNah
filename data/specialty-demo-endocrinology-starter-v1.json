@@ -1,0 +1,312 @@
+{
+  "clinic_display_name": "Example New Jersey Endocrinology and Diabetes Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Endocrinology and diabetes",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: ADA Standards of Care 2026 pharmacologic-approach sections, AJMC 2026 GLP-1 prior-authorization burden reporting, and public NJ plan formulary documents listed below. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "metformin-ir",
+      "display_name": "Metformin immediate-release (Glucophage)",
+      "clinical_bucket": "biguanide first-line oral",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "metformin-er",
+      "display_name": "Metformin extended-release (Glucophage XR)",
+      "clinical_bucket": "biguanide once-daily oral",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "semaglutide-ozempic",
+      "display_name": "Ozempic (semaglutide injectable)",
+      "clinical_bucket": "GLP-1 injectable, diabetes labeled",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "semaglutide-wegovy",
+      "display_name": "Wegovy (semaglutide weight management)",
+      "clinical_bucket": "GLP-1 injectable, obesity labeled",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "semaglutide-rybelsus",
+      "display_name": "Rybelsus (oral semaglutide)",
+      "clinical_bucket": "GLP-1 oral tablet",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tirzepatide-mounjaro",
+      "display_name": "Mounjaro (tirzepatide diabetes labeled)",
+      "clinical_bucket": "GIP/GLP-1 injectable, diabetes labeled",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tirzepatide-zepbound",
+      "display_name": "Zepbound (tirzepatide weight management)",
+      "clinical_bucket": "GIP/GLP-1 injectable, obesity labeled",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dulaglutide",
+      "display_name": "Trulicity (dulaglutide)",
+      "clinical_bucket": "GLP-1 injectable, diabetes labeled",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "liraglutide-victoza",
+      "display_name": "Victoza (liraglutide diabetes labeled)",
+      "clinical_bucket": "GLP-1 injectable, diabetes labeled",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "liraglutide-saxenda",
+      "display_name": "Saxenda (liraglutide weight management)",
+      "clinical_bucket": "GLP-1 injectable, obesity labeled",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "insulin-glargine-biosimilars",
+      "display_name": "Insulin glargine biosimilars vs Lantus (Semglee, Rezvoglar)",
+      "clinical_bucket": "basal insulin with biosimilar churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "insulin-degludec",
+      "display_name": "Tresiba (insulin degludec)",
+      "clinical_bucket": "long-acting basal insulin analog",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "empagliflozin",
+      "display_name": "Jardiance (empagliflozin)",
+      "clinical_bucket": "SGLT2 inhibitor cardiorenal",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dapagliflozin",
+      "display_name": "Farxiga (dapagliflozin)",
+      "clinical_bucket": "SGLT2 inhibitor cardiorenal",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pioglitazone",
+      "display_name": "Pioglitazone (Actos)",
+      "clinical_bucket": "thiazolidinedione insulin sensitizer",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "sitagliptin",
+      "display_name": "Januvia (sitagliptin)",
+      "clinical_bucket": "DPP-4 inhibitor oral",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levothyroxine",
+      "display_name": "Levothyroxine (Synthroid, Levoxyl)",
+      "clinical_bucket": "thyroid hormone replacement anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "liothyronine",
+      "display_name": "Liothyronine (Cytomel)",
+      "clinical_bucket": "T3 thyroid hormone replacement",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methimazole",
+      "display_name": "Methimazole (Tapazole)",
+      "clinical_bucket": "antithyroid therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "fludrocortisone",
+      "display_name": "Fludrocortisone (Florinef)",
+      "clinical_bucket": "mineralocorticoid adrenal replacement",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "denosumab-prolia",
+      "display_name": "Prolia (denosumab osteoporosis dosing)",
+      "clinical_bucket": "RANKL inhibitor biologic, osteoporosis labeled",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "denosumab-xgeva",
+      "display_name": "Xgeva (denosumab oncology dosing)",
+      "clinical_bucket": "RANKL inhibitor biologic, oncology labeled",
+      "specialty_relevance": 2,
+      "service_line_match": 2,
+      "public_condition_match": 2,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "teriparatide",
+      "display_name": "Teriparatide (Forteo, Bonsity)",
+      "clinical_bucket": "anabolic osteoporosis agent",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

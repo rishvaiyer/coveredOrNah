@@ -1,0 +1,257 @@
+{
+  "clinic_display_name": "Example New Jersey Allergy and Immunology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Allergy and Immunology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AMA 2025 prior-authorization survey (asthma and allergy biologics cited among most burdensome PA categories), AAAAI biologic access commentary applying AAD-style dermatology PA-burden logic to allergy biologics, and published asthma biologic step-therapy coverage reporting. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "allergen-immunotherapy-extracts",
+      "display_name": "Allergen immunotherapy extracts (SCIT mixes and SLIT tablets)",
+      "clinical_bucket": "immunotherapy extracts",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "omalizumab",
+      "display_name": "Xolair (omalizumab)",
+      "clinical_bucket": "anti-IgE biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mepolizumab",
+      "display_name": "Nucala (mepolizumab)",
+      "clinical_bucket": "IL-5 biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "benralizumab",
+      "display_name": "Fasenra (benralizumab)",
+      "clinical_bucket": "IL-5 receptor biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tezepelumab",
+      "display_name": "Tezspire (tezepelumab)",
+      "clinical_bucket": "TSLP biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dupilumab",
+      "display_name": "Dupixent (dupilumab)",
+      "clinical_bucket": "IL-4/IL-13 biologic across asthma, nasal polyps, and atopic dermatitis",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fluticasone-nasal",
+      "display_name": "Fluticasone propionate nasal spray (Flonase)",
+      "clinical_bucket": "intranasal corticosteroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "mometasone-nasal",
+      "display_name": "Mometasone nasal spray (Nasonex)",
+      "clinical_bucket": "intranasal corticosteroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "azelastine-nasal",
+      "display_name": "Azelastine nasal spray (Astelin/Astepro)",
+      "clinical_bucket": "intranasal antihistamine",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fluticasone-azelastine-nasal",
+      "display_name": "Dymista (fluticasone/azelastine nasal)",
+      "clinical_bucket": "combination intranasal therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levocetirizine",
+      "display_name": "Levocetirizine (Xyzal)",
+      "clinical_bucket": "oral antihistamine",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "desloratadine",
+      "display_name": "Desloratadine (Clarinex)",
+      "clinical_bucket": "oral antihistamine",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "montelukast",
+      "display_name": "Montelukast (Singulair)",
+      "clinical_bucket": "leukotriene modifier",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "cromolyn-nasal",
+      "display_name": "Cromolyn nasal spray (Nasalcrom)",
+      "clinical_bucket": "mast cell stabilizer",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "ipratropium-nasal",
+      "display_name": "Ipratropium nasal spray (Atrovent Nasal)",
+      "clinical_bucket": "intranasal anticholinergic",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 2,
+      "source_readiness": 3,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "epinephrine-auto-injector",
+      "display_name": "Epinephrine auto-injectors (EpiPen/Auvi-Q/generic)",
+      "clinical_bucket": "anaphylaxis rescue device",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cetirizine",
+      "display_name": "Cetirizine (Zyrtec)",
+      "clinical_bucket": "oral antihistamine",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "fexofenadine",
+      "display_name": "Fexofenadine (Allegra)",
+      "clinical_bucket": "oral antihistamine",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    }
+  ]
+}

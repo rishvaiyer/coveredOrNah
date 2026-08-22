@@ -1,0 +1,268 @@
+{
+  "clinic_display_name": "Example New Jersey Gastroenterology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Gastroenterology and hepatology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: Crohn's and Colitis Foundation biologic therapy guidance, AJMC 2025-2026 IBD prior-authorization burden reporting, and public NJ plan formulary documents. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "mesalamine-oral-distinct-products",
+      "display_name": "Mesalamine oral (Apriso/Lialda/Asacol HD)",
+      "clinical_bucket": "5-ASA with distinct delivery systems",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mesalamine-rectal",
+      "display_name": "Mesalamine rectal (Canasa suppository/Rowasa enema)",
+      "clinical_bucket": "distal UC topical 5-ASA",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "balsalazide",
+      "display_name": "Balsalazide (Colazal/Giazo)",
+      "clinical_bucket": "5-ASA colonic prodrug",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "infliximab-iv",
+      "display_name": "Infliximab IV (Remicade/Inflectra/Avsola)",
+      "clinical_bucket": "medical-benefit buy-and-bill contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "adalimumab-biosimilars-gi",
+      "display_name": "Adalimumab biosimilars vs brand (GI indications)",
+      "clinical_bucket": "TNF biologic with biosimilar churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ustekinumab-biosimilars-gi",
+      "display_name": "Ustekinumab biosimilars vs brand Stelara",
+      "clinical_bucket": "IL-12/23 biologic with preferred-product churn",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "vedolizumab",
+      "display_name": "Entyvio (vedolizumab) IV and subcutaneous",
+      "clinical_bucket": "gut-selective integrin biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "risankizumab",
+      "display_name": "Skyrizi (risankizumab)",
+      "clinical_bucket": "IL-23 biologic for IBD",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "etrasimod",
+      "display_name": "Velsipity (etrasimod)",
+      "clinical_bucket": "oral S1P modulator, UC only",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ozanimod",
+      "display_name": "Zeposia (ozanimod)",
+      "clinical_bucket": "oral S1P modulator with titration pack",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "upadacitinib",
+      "display_name": "Rinvoq (upadacitinib ER)",
+      "clinical_bucket": "oral JAK inhibitor, UC and Crohn",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tofacitinib",
+      "display_name": "Xeljanz/Xeljanz XR (tofacitinib)",
+      "clinical_bucket": "oral JAK inhibitor, UC only",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prednisone-bridge",
+      "display_name": "Prednisone (flare bridge)",
+      "clinical_bucket": "systemic corticosteroid bridge",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "budesonide-targeted-forms",
+      "display_name": "Budesonide MMX tablet vs rectal foam (Uceris/Uceris rectal foam)",
+      "clinical_bucket": "targeted-release corticosteroid, distinct forms",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rifaximin",
+      "display_name": "Xifaxan (rifaximin), HE and IBS-D indications",
+      "clinical_bucket": "gut-selective antibiotic, indication-driven coverage",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lubiprostone",
+      "display_name": "Amitiza (lubiprostone)",
+      "clinical_bucket": "chloride channel activator for IBS-C/CIC",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "linaclotide",
+      "display_name": "Linzess (linaclotide), IBS-C vs CIC doses",
+      "clinical_bucket": "GC-C agonist, indication-specific dosing",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "plecanatide",
+      "display_name": "Trulance (plecanatide)",
+      "clinical_bucket": "GC-C agonist alternative",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ursodiol",
+      "display_name": "Ursodiol (Actigall/Urso), PBC weight-based dosing",
+      "clinical_bucket": "hepatology bile acid therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

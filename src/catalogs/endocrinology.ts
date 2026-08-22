@@ -1,0 +1,33 @@
+import type { ClinicCatalog } from "./catalogTypes";
+
+export const endocrinologyCatalog: ClinicCatalog = {
+  slug: "endocrinology",
+  name: "Endocrinology and Diabetes Starter Catalog",
+  specialty: "Endocrinology and diabetes",
+  status: "starter",
+  medications: [
+    ["Metformin IR", "Glucophage", "Diabetes", "Type 2 diabetes first-line therapy", "Immediate-release tablets; generic IR and ER are not interchangeable."],
+    ["Metformin ER", "Glucophage XR, Fortamet", "Diabetes", "Type 2 diabetes first-line therapy with once-daily dosing", "Extended-release tablets and ER-based combinations differ by manufacturer."],
+    ["Semaglutide (Ozempic)", "Ozempic", "Diabetes and weight management", "Type 2 diabetes injectable", "Prefilled pen strengths (0.25/0.5 mg, 1 mg, 2 mg) are distinct NDCs; device and indication must be matched."],
+    ["Semaglutide (Wegovy)", "Wegovy", "Weight management", "Chronic weight management", "Weight management plus established cardiovascular disease risk reduction (2024 label); pen dose escalation schedule differs from Ozempic and plans treat it as a separate product."],
+    ["Semaglutide (Rybelsus)", "Rybelsus", "Diabetes", "Type 2 diabetes oral", "Oral tablet only; must be taken fasting and is a distinct product from injectable semaglutide."],
+    ["Tirzepatide (Mounjaro)", "Mounjaro", "Diabetes and weight management", "Type 2 diabetes injectable", "KwikPen strengths 2.5 mg through 15 mg; diabetes-labeled product, distinct NDCs from Zepbound."],
+    ["Tirzepatide (Zepbound)", "Zepbound", "Weight management", "Chronic weight management and obstructive sleep apnea", "Weight-management labeled pens; same molecule as Mounjaro but plans cover them under different criteria."],
+    ["Dulaglutide", "Trulicity", "Diabetes", "Type 2 diabetes injectable", "Single-dose pen strengths 0.75 mg to 4.5 mg; device strength must be matched."],
+    ["Liraglutide (Victoza)", "Victoza", "Diabetes", "Type 2 diabetes injectable", "Diabetes-labeled pen (0.6 mg, 1.2 mg, 1.8 mg); distinct from Saxenda despite same molecule."],
+    ["Liraglutide (Saxenda)", "Saxenda", "Weight management", "Chronic weight management", "Weight-management labeled multidose pen with titration; separate coverage criteria from Victoza."],
+    ["Insulin glargine biosimilars", "Semglee, Rezvoglar, Lantus", "Diabetes", "Basal insulin for type 1 and type 2 diabetes", "Biosimilar interchangeability varies by plan; U-100 pens and vials differ and brand-to-biosimilar switches need review."],
+    ["Insulin degludec", "Tresiba", "Diabetes", "Basal insulin for type 1 and type 2 diabetes", "U-100 and U-200 FlexTouch products are distinct; U-200 requires its own device."],
+    ["Empagliflozin", "Jardiance", "Diabetes and cardiovascular", "Type 2 diabetes, heart failure, and chronic kidney disease", "10 mg and 25 mg tablets; combination products with metformin or linagliptin are separate lines."],
+    ["Dapagliflozin", "Farxiga", "Diabetes and cardiorenal", "Type 2 diabetes, heart failure, and chronic kidney disease", "5 mg and 10 mg tablets; Qtern and other combination products differ."],
+    ["Pioglitazone", "Actos", "Diabetes", "Type 2 diabetes with insulin resistance", "Generic tablets and fixed-dose combinations with metformin differ."],
+    ["Sitagliptin", "Januvia", "Diabetes", "Type 2 DPP-4 inhibitor therapy", "25 mg, 50 mg, and 100 mg tablets with renal dose adjustments; Janumet combinations are separate lines."],
+    ["Levothyroxine", "Synthroid, Levoxyl, Unithroid", "Thyroid", "Hypothyroidism", "Tablet strengths from 25 to 300 mcg; brand-versus-generic substitution can matter clinically."],
+    ["Liothyronine", "Cytomel", "Thyroid", "Hypothyroidism and thyroid cancer follow-up", "5, 25, and 50 mcg tablets; short half-life dosing differs from levothyroxine."],
+    ["Methimazole", "Tapazole", "Thyroid", "Hyperthyroidism and Graves disease", "5 mg and 10 mg tablets; propylthiouracil is the alternate agent in first-trimester pregnancy."],
+    ["Fludrocortisone", "Florinef", "Adrenal", "Adrenal insufficiency mineralocorticoid replacement", "0.1 mg tablets; distinct from glucocorticoid replacement such as hydrocortisone."],
+    ["Denosumab (Prolia)", "Prolia", "Bone metabolism", "Osteoporosis treatment", "60 mg subcutaneous injection every six months; osteoporosis-labeled product, distinct from Xgeva."],
+    ["Denosumab (Xgeva)", "Xgeva", "Bone metabolism", "Skeletal-related events in oncology", "120 mg oncology dosing every four weeks; oncology benefit and prior authorization differ from Prolia."],
+    ["Teriparatide", "Forteo, Bonsity", "Bone metabolism", "Severe or high-fracture-risk osteoporosis", "Daily pen versus Bonsity minipump devices are distinct; anabolic-agent step requirements vary by plan."],
+  ].map(([generic, brands, category, commonUses, productDetails]) => ({ generic, brands, category, commonUses, productDetails })),
+};

@@ -1,0 +1,257 @@
+{
+  "clinic_display_name": "Example New Jersey Cardiology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Cardiology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: ACC prior-authorization survey coverage (Cardiology Magazine 2022), AJMC 2026 cardiovascular PA-burden reporting, PCNA/JACC literature on PCSK9 inhibitor and SGLT2 inhibitor access friction. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "apixaban",
+      "display_name": "Apixaban (Eliquis)",
+      "clinical_bucket": "direct oral anticoagulant",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rivaroxaban",
+      "display_name": "Rivaroxaban (Xarelto)",
+      "clinical_bucket": "direct oral anticoagulant with indication-dependent dosing",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clopidogrel",
+      "display_name": "Clopidogrel (Plavix)",
+      "clinical_bucket": "P2Y12 antiplatelet",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ticagrelor",
+      "display_name": "Ticagrelor (Brilinta)",
+      "clinical_bucket": "P2Y12 antiplatelet post-stent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "atorvastatin-high-intensity",
+      "display_name": "Atorvastatin high-intensity (40/80 mg)",
+      "clinical_bucket": "high-intensity statin",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ezetimibe",
+      "display_name": "Ezetimibe (Zetia)",
+      "clinical_bucket": "add-on lipid lowering",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "alirocumab",
+      "display_name": "Alirocumab (Praluent)",
+      "clinical_bucket": "PCSK9 inhibitor biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "inclisiran",
+      "display_name": "Inclisiran (Leqvio)",
+      "clinical_bucket": "siRNA LDL-lowering clinic injection",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sacubitril-valsartan",
+      "display_name": "Sacubitril/valsartan (Entresto)",
+      "clinical_bucket": "ARNI for HFrEF titration",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "spironolactone",
+      "display_name": "Spironolactone (Aldactone)",
+      "clinical_bucket": "mineralocorticoid receptor antagonist",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "empagliflozin",
+      "display_name": "Empagliflozin (Jardiance)",
+      "clinical_bucket": "SGLT2 inhibitor heart-failure benefit",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dapagliflozin",
+      "display_name": "Dapagliflozin (Farxiga)",
+      "clinical_bucket": "SGLT2 inhibitor HF/CKD indications",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metoprolol-succinate",
+      "display_name": "Metoprolol succinate ER (Toprol XL)",
+      "clinical_bucket": "extended-release beta blocker for HFrEF",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "carvedilol",
+      "display_name": "Carvedilol (Coreg/Coreg CR)",
+      "clinical_bucket": "beta blocker with IR vs CR formulation split",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "amiodarone",
+      "display_name": "Amiodarone (Cordarone/Pacerone)",
+      "clinical_bucket": "class III antiarrhythmic with monitoring burden",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "digoxin",
+      "display_name": "Digoxin (Lanoxin)",
+      "clinical_bucket": "rate control and inotrope narrow therapeutic index",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "furosemide",
+      "display_name": "Furosemide (Lasix)",
+      "clinical_bucket": "loop diuretic volume management",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pde5-pah",
+      "display_name": "Sildenafil/tadalafil PAH products (Revatio; Adcirca/Alyq)",
+      "clinical_bucket": "PAH PDE5 inhibitor distinct from BPH/ED products",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

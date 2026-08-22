@@ -21,6 +21,26 @@ def test_pages_exist_and_are_current() -> None:
     )
 
 
+def test_all_specialty_pages_render_seed_and_safe_language() -> None:
+    import json
+    seeds = {
+        "allergy-immunology": "data/specialty-demo-allergy-immunology-starter-v1.json",
+        "cardiology": "data/specialty-demo-cardiology-starter-v1.json",
+        "gastroenterology": "data/specialty-demo-gastroenterology-starter-v1.json",
+        "endocrinology": "data/specialty-demo-endocrinology-starter-v1.json",
+    }
+    for slug, seed_path in seeds.items():
+        page = ROOT / "public" / "specialty" / slug / "index.html"
+        assert page.exists(), f"missing {page}"
+        html = page.read_text()
+        seed = json.loads((ROOT / seed_path).read_text())
+        for medication in seed["medications"]:
+            assert medication["display_name"] in html, f"{slug}: missing {medication['display_name']}"
+        for plan in seed["plan_families"]:
+            assert plan["source_url"] in html
+        assert "unconfirmed" in html and "not a denial" in html
+
+
 def test_dermatology_page_lists_full_seed_and_safe_language() -> None:
     seed = json.loads(SEED.read_text())
     html = DERM.read_text()
@@ -34,8 +54,9 @@ def test_dermatology_page_lists_full_seed_and_safe_language() -> None:
 
 
 def test_no_overclaim_language_on_generated_pages() -> None:
-    banned = [" is covered", " approved for", " eligible for", " guaranteed", " will pay"]
-    for page in (DERM, INDEX):
+    banned = ["covered", "approved for", "eligible", "guaranteed", "will pay", "reimbursed"]
+    pages = [INDEX] + sorted((ROOT / "public" / "specialty").glob("*/index.html"))
+    for page in pages:
         text = page.read_text().lower()
         for phrase in banned:
             assert phrase not in text, f"overclaim phrase '{phrase}' in {page.name}"
@@ -48,21 +69,23 @@ def test_derm_page_has_full_evidence_matrix() -> None:
     assert "Exact-row evidence matrix" in html
     for fam in data["families"]:
         assert fam["display"] in html
-    listed = sum(1 for f in data["families"] for c in f["cells"].values() if c["s"] == "listed")
-    absent = sum(1 for f in data["families"] for c in f["cells"].values() if c["s"] == "absent")
+    states = [c["s"] for f in data["families"] for c in f["cells"].values()]
+    absent = states.count("absent")
+    assert len(states) == len(data["families"]) * len(data["sources"])
     assert html.count('class="absent">Not listed<') == absent
-    assert listed + absent + sum(1 for f in data["families"] for c in f["cells"].values() if c["s"] == "ambiguous") == 100
 
 
 def test_index_links_all_specialties() -> None:
     html = INDEX.read_text()
-    assert "/specialty/dermatology/" in html
+    for slug in ("dermatology", "allergy-immunology", "cardiology", "gastroenterology", "endocrinology"):
+        assert f"/specialty/{slug}/" in html
 
 
 if __name__ == "__main__":
     test_pages_exist_and_are_current()
     test_dermatology_page_lists_full_seed_and_safe_language()
+    test_all_specialty_pages_render_seed_and_safe_language()
     test_no_overclaim_language_on_generated_pages()
     test_derm_page_has_full_evidence_matrix()
     test_index_links_all_specialties()
-    print("specialty page tests: 5/5 passed")
+    print("specialty page tests: 6/6 passed")
