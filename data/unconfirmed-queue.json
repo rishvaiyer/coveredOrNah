@@ -1,0 +1,3703 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/generate-phase0-artifacts.ts",
+  "generatedAt": "2026-08-22",
+  "freshnessAsOf": "2026-08-13",
+  "summary": {
+    "totalUnconfirmed": 410,
+    "ambiguousProduct": 58,
+    "noExactProduct": 352
+  },
+  "cells": [
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact benzonatate row was found in the current Aetna formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "aetnaMedicareHmo",
+      "planName": "Aetna Medicare HMO formulary baseline",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Aclidinium product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Advair Diskus / HFA (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact brand Advair product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Airsupra product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Anoro Ellipta (brand)",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Ensifentrine product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Bevespi product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact extended-release Guaifenesin product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Mepolizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact inhaled Mometasone product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Omalizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Omalizumab product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Reslizumab product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Revefenacin product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Sotatercept/Winrevair product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Symbicort (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact brand Symbicort product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "ambetterNjMarketplace",
+      "planName": "Ambetter from WellCare of New Jersey Marketplace Formulary",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Tezepelumab product row was found in the current Ambetter NJ formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthNj",
+      "planName": "AmeriHealth NJ Individual and Family",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Cetirizine row was found in the current Individual & Family formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthNj",
+      "planName": "AmeriHealth NJ Individual and Family",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthNj",
+      "planName": "AmeriHealth NJ Individual and Family",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Reslizumab/Cinqair row was found in the current Individual & Family formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthNj",
+      "planName": "AmeriHealth NJ Individual and Family",
+      "medication": "Tobramycin inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact inhaled tobramycin row was found; the PDF's tobramycin entries are ophthalmic products.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthSelect",
+      "planName": "AmeriHealth New Jersey Select Formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Cetirizine row was found in the current Select formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthSelect",
+      "planName": "AmeriHealth New Jersey Select Formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthSelect",
+      "planName": "AmeriHealth New Jersey Select Formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Reslizumab/Cinqair row was found in the current Select formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthSelect",
+      "planName": "AmeriHealth New Jersey Select Formulary",
+      "medication": "Tobramycin inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact inhaled tobramycin row was found; the PDF's tobramycin entries are ophthalmic products.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthValue",
+      "planName": "AmeriHealth New Jersey Value Formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Cetirizine row was found in the current Value formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthValue",
+      "planName": "AmeriHealth New Jersey Value Formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The PDF lists guaifenesin-codeine, but no exact extended-release guaifenesin row.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "amerihealthValue",
+      "planName": "AmeriHealth New Jersey Value Formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Reslizumab/Cinqair row was found in the current Value formulary PDF.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Advair Diskus / HFA (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Ambrisentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Amlodipine",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Amoxicillin / clavulanate",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Anoro Ellipta (brand)",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Apixaban",
+      "therapeuticArea": "Pulmonary vascular",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Arformoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Atorvastatin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Azelastine nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Azithromycin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Aztreonam inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Benralizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Bosentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Budesonide / formoterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Budesonide / glycopyrrolate / formoterol",
+      "therapeuticArea": "Triple therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Bupropion SR 150 mg",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Dornase alfa",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Doxycycline",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Dupilumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Elexacaftor / tezacaftor / ivacaftor",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Epinephrine auto-injector",
+      "therapeuticArea": "Allergy and anaphylaxis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Famotidine",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone / salmeterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone / umeclidinium / vilanterol",
+      "therapeuticArea": "Triple therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone / vilanterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone furoate",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Furosemide",
+      "therapeuticArea": "Pulmonary hypertension support",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Ibuprofen",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Incruse Ellipta (brand)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Ipratropium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Levalbuterol",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Levofloxacin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Lisinopril",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Losartan",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Mepolizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Metformin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Omalizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Omeprazole",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Pantoprazole",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Prednisone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Riociguat",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Salmeterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Selexipag",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Sertraline",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Sildenafil 20 mg",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Spiriva HandiHaler / Respimat (brand)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Tadalafil for PAH",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Tiotropium / olodaterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Tobramycin inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Varenicline",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Zafirlukast",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "bravenNjH0885",
+      "planName": "Braven NJ Medicare H0885 formulary",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Ambrisentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Arformoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Aztreonam inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Bosentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Budesonide inhalation",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Bupropion SR 150 mg",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Dornase alfa",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Elexacaftor / tezacaftor / ivacaftor",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Epinephrine auto-injector",
+      "therapeuticArea": "Allergy and anaphylaxis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Fluticasone / salmeterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Fluticasone furoate",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Ipratropium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Levalbuterol",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Levofloxacin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Lisinopril",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Losartan",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Pirfenidone",
+      "therapeuticArea": "Interstitial lung disease",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Roflumilast",
+      "therapeuticArea": "COPD oral therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Salmeterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Sildenafil 20 mg",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Tadalafil for PAH",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Varenicline",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Zafirlukast",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cignaNationalPreferred",
+      "planName": "Cigna National Preferred 3-Tier employer formulary",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Mepolizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Tiotropium / olodaterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "cloverNj2026",
+      "planName": "Clover NJ Medicare formulary 00026082",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Symbicort (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Tiotropium / olodaterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "healthspringNj26096",
+      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Aclidinium product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Albuterol/budesonide product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The Classic list includes nebulized budesonide, but no exact Flexhaler row was found.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Cetirizine product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Ciclesonide product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Ensifentrine product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Fluticasone nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Fluticasone nasal product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Fluticasone propionate HFA 44 mcg row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Formoterol product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Glycopyrrolate/formoterol product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Guaifenesin ER product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Reslizumab product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Revefenacin product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Sotatercept-csrk product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The Classic list includes oral treprostinil, but no exact inhaled product row was found.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonClassic",
+      "planName": "Horizon BCBSNJ Classic Formulary",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Zileuton ER product row was found in the July 2026 Horizon Classic Formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Fluticasone nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "horizonMarketplace",
+      "planName": "Horizon BCBSNJ Marketplace",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Anoro Ellipta (brand)",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Bosentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Budesonide / formoterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Bupropion SR 150 mg",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Formoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Incruse Ellipta (brand)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Salmeterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Varenicline",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "humanaNj26408",
+      "planName": "Humana NJ Medicare formulary 26408",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Albuterol / budesonide",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Ambrisentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Amlodipine",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Amoxicillin / clavulanate",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Apixaban",
+      "therapeuticArea": "Pulmonary vascular",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Arformoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Atorvastatin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Azelastine nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Azithromycin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Bosentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Budesonide / formoterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Budesonide / glycopyrrolate / formoterol",
+      "therapeuticArea": "Triple therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Bupropion SR 150 mg",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Dornase alfa",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Doxycycline",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Epinephrine auto-injector",
+      "therapeuticArea": "Allergy and anaphylaxis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Famotidine",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Fluticasone / salmeterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Fluticasone nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Furosemide",
+      "therapeuticArea": "Pulmonary hypertension support",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Glycopyrrolate / formoterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Ibuprofen",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Levofloxacin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Lisinopril",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Losartan",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Metformin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Omeprazole",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Pantoprazole",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Prednisone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Riociguat",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Salmeterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Selexipag",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Sertraline",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Sildenafil 20 mg",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Tadalafil for PAH",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Tiotropium / olodaterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oscarNjIndividual",
+      "planName": "Oscar NJ Individual 5-Tier standard formulary",
+      "medication": "Varenicline",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Ambrisentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact ambrisentan row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Arformoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact arformoterol/Brovana row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Aztreonam inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Budesonide / formoterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact generic budesonide/formoterol row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Famotidine",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The May 2026 PDL lists an oral suspension row only; confirm the exact dosage form.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Incruse Ellipta (brand)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Incruse Ellipta row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Dulera/mometasone-formoterol row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The May 2026 PDL lists oral solution products only; confirm the exact strength and dosage form.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Selexipag",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact generic tiotropium capsule row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "oxfordFreedom",
+      "planName": "Oxford Freedom Network commercial PDL baseline",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Ambrisentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact ambrisentan row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Arformoterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact arformoterol/Brovana row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Aztreonam inhalation",
+      "therapeuticArea": "Inhaled anti-infectives",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Budesonide / formoterol (generic)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact generic budesonide/formoterol row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Famotidine",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The May 2026 PDL lists an oral suspension row only; confirm the exact dosage form.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Incruse Ellipta (brand)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Incruse Ellipta row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact Dulera/mometasone-formoterol row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "The May 2026 PDL lists oral solution products only; confirm the exact strength and dosage form.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Selexipag",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact generic tiotropium capsule row was found in the May 2026 UHC commercial PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "uhcCommercial",
+      "planName": "UnitedHealthcare Commercial PDL baseline",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Aclidinium",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Ensifentrine",
+      "therapeuticArea": "COPD nebulized therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Fluticasone propionate HFA 44 mcg",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No exact extended-release guaifenesin row was found; only guaifenesin-codeine and OTC entries are listed.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Mepolizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Olodaterol",
+      "therapeuticArea": "Long-acting bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Reslizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Revefenacin",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Symbicort (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Tiotropium (generic capsule-inhaler)",
+      "therapeuticArea": "Anticholinergics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Tiotropium / olodaterol",
+      "therapeuticArea": "Combination bronchodilators",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellcareNjH0913",
+      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
+      "medication": "Zileuton ER",
+      "therapeuticArea": "Leukotriene modifiers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Advair Diskus / HFA (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Amlodipine",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Amoxicillin / clavulanate",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Apixaban",
+      "therapeuticArea": "Pulmonary vascular",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Atorvastatin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Azelastine nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Azithromycin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Benralizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Benzonatate",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Bosentan",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Budesonide (Flexhaler)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Budesonide / glycopyrrolate / formoterol",
+      "therapeuticArea": "Triple therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Bupropion SR 150 mg",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Cetirizine",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Ciclesonide",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Doxycycline",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Elexacaftor / tezacaftor / ivacaftor",
+      "therapeuticArea": "Cystic fibrosis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Epinephrine auto-injector",
+      "therapeuticArea": "Allergy and anaphylaxis",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Famotidine",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Fluticasone / umeclidinium / vilanterol",
+      "therapeuticArea": "Triple therapy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Fluticasone / vilanterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Fluticasone nasal",
+      "therapeuticArea": "Upper airway / allergy",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Furosemide",
+      "therapeuticArea": "Pulmonary hypertension support",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Guaifenesin ER",
+      "therapeuticArea": "Cough and mucus",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Ibuprofen",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Levalbuterol",
+      "therapeuticArea": "Rescue inhalers",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Levofloxacin",
+      "therapeuticArea": "Respiratory infections",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Lisinopril",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Losartan",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Mepolizumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Metformin",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Mometasone",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Mometasone / formoterol",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Nicotine replacement",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Nintedanib",
+      "therapeuticArea": "Interstitial lung disease",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Omeprazole",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Pantoprazole",
+      "therapeuticArea": "Reflux and upper airway",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Pirfenidone",
+      "therapeuticArea": "Interstitial lung disease",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Prednisolone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Prednisone",
+      "therapeuticArea": "Systemic corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "QVAR RediHaler (brand)",
+      "therapeuticArea": "Inhaled corticosteroids",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Riociguat",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Selexipag",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Sertraline",
+      "therapeuticArea": "Common primary care",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Sotatercept-csrk",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Symbicort (brand)",
+      "therapeuticArea": "ICS / LABA combinations",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Tezepelumab",
+      "therapeuticArea": "Asthma biologics",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Treprostinil inhaled",
+      "therapeuticArea": "Pulmonary hypertension",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    },
+    {
+      "planKey": "wellpointNjFamilyCare",
+      "planName": "Wellpoint New Jersey FamilyCare PDL",
+      "medication": "Varenicline",
+      "therapeuticArea": "Smoking cessation",
+      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
+      "productNote": null,
+      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+    }
+  ]
+}
