@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Oral Oncology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Oral oncology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AMA 2025 prior-authorization survey on PA burden for specialty therapies, plus public specialty-tier and FDA REMS program context for oral anticancer agents (lenalidomide REMS). Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "tamoxifen",
+      "display_name": "Tamoxifen (Soltamox)",
+      "clinical_bucket": "SERM endocrine therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "anastrozole",
+      "display_name": "Anastrozole (Arimidex)",
+      "clinical_bucket": "aromatase inhibitor endocrine therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "letrozole",
+      "display_name": "Letrozole (Femara)",
+      "clinical_bucket": "aromatase inhibitor endocrine therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "exemestane",
+      "display_name": "Exemestane (Aromasin)",
+      "clinical_bucket": "steroidal aromatase inhibitor",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "abiraterone",
+      "display_name": "Abiraterone acetate (Zytiga generics)",
+      "clinical_bucket": "androgen biosynthesis inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "enzalutamide",
+      "display_name": "Enzalutamide (Xtandi)",
+      "clinical_bucket": "androgen receptor inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apalutamide",
+      "display_name": "Apalutamide (Erleada)",
+      "clinical_bucket": "androgen receptor inhibitor nmCRPC",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "imatinib",
+      "display_name": "Imatinib (Gleevec)",
+      "clinical_bucket": "BCR-ABL TKI",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ibrutinib",
+      "display_name": "Ibrutinib (Imbruvica)",
+      "clinical_bucket": "BTK inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "acalabrutinib",
+      "display_name": "Acalabrutinib (Calquence)",
+      "clinical_bucket": "second-generation BTK inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lenalidomide",
+      "display_name": "Lenalidomide (Revlimid)",
+      "clinical_bucket": "IMiD with REMS program",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "capecitabine",
+      "display_name": "Capecitabine (Xeloda)",
+      "clinical_bucket": "oral fluoropyrimidine prodrug",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sorafenib",
+      "display_name": "Sorafenib (Nexavar)",
+      "clinical_bucket": "multikinase inhibitor HCC/RCC",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sunitinib",
+      "display_name": "Sunitinib (Sutent)",
+      "clinical_bucket": "multikinase inhibitor RCC/GIST",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "palbociclib",
+      "display_name": "Palbociclib (Ibrance)",
+      "clinical_bucket": "CDK4/6 inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "olaparib",
+      "display_name": "Olaparib (Lynparza tablets)",
+      "clinical_bucket": "PARP inhibitor with biomarker gating",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

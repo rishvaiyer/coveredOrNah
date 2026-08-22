@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ophthalmology research preview | Formulary Finder</title>
+<meta name="description" content="Bounded, PHI-free ophthalmology medication-access research preview." />
+<style>
+:root { color-scheme: light; }
+body { font-family: Georgia, 'Times New Roman', serif; margin: 0; background: #f6f1e7; color: #14213d; }
+main { max-width: 60rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+h1 { font-size: 2rem; margin: 0 0 .35rem; }
+h2 { font-size: 1.15rem; margin-top: 2rem; }
+.matrix th, .matrix td { font-size: .8rem; padding: .35rem .45rem; }
+.matrix td { font-family: ui-monospace, monospace; }
+.absent { color: #8a7f6a; }
+.badge { display: inline-block; font-family: ui-monospace, monospace; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; background: #14213d; color: #f6f1e7; padding: .25rem .55rem; border-radius: 3px; }
+.note { background: #fffaf0; border: 1px solid #d8c4a0; padding: .9rem 1rem; border-radius: 6px; font-size: .95rem; }
+table { border-collapse: collapse; width: 100%; margin-top: 1rem; background: #fffdf8; }
+th, td { border: 1px solid #e0d5bd; padding: .5rem .65rem; text-align: left; vertical-align: top; font-size: .92rem; }
+th { background: #efe6d2; font-family: ui-monospace, monospace; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; }
+td.num { text-align: center; font-family: ui-monospace, monospace; }
+footer { margin-top: 3rem; font-size: .85rem; color: #5a5347; border-top: 1px solid #d8c4a0; padding-top: 1rem; }
+a { color: #0e366e; }
+</style>
+</head>
+<body>
+<main>
+<h1>Ophthalmology research preview</h1>
+<p><span class="badge">starter catalog: evidence pass not started; rows shown as candidates only</span></p>
+<p>A scoped ophthalmology medication-access research preview for New Jersey clinics.</p>
+<div class="note">
+<strong>Research preview.</strong> This page shows a bounded, PHI-free demo scope built from public payer sources. It is not a patient-specific benefit check, not a coverage determination, and not medical advice. Rows without exact evidence stay <em>unconfirmed</em>, which is never a denial. Exact-plan results always require the clinic's real plan list.
+</div>
+<h2>Plan families in scope</h2>
+<table>
+<tr><th>Plan family</th><th>Coverage type</th><th>Source state</th><th>Official source</th></tr>
+<tr><td>Horizon BCBSNJ Marketplace</td><td>marketplace</td><td>public_current</td><td><a href="https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf">official source</a></td></tr>
+<tr><td>AmeriHealth NJ Individual &amp; Family</td><td>marketplace</td><td>public_current</td><td><a href="https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf">official source</a></td></tr>
+<tr><td>Wellpoint NJ FamilyCare (Medicaid)</td><td>medicaid</td><td>public_current</td><td><a href="https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json">official source</a></td></tr>
+<tr><td>Aetna Medicare HMO 26010</td><td>medicare</td><td>public_current</td><td><a href="https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf">official source</a></td></tr>
+<tr><td>UnitedHealthcare Commercial PDL baseline</td><td>commercial</td><td>public_needs_review</td><td><a href="https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf">official source</a></td></tr>
+</table>
+<h2>Starter medication families (16)</h2>
+<table>
+<tr><th>#</th><th>Medication family</th><th>Clinical bucket</th><th>Evidence posture</th></tr>
+<tr><td class="num">1</td><td>Latanoprost 0.005% drops</td><td>prostaglandin analog glaucoma anchor</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">2</td><td>Bimatoprost (Lumigan) drops</td><td>prostaglandin analog</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">3</td><td>Timolol maleate drops</td><td>beta blocker glaucoma drops</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">4</td><td>Dorzolamide/timolol fixed combo (Cosopt)</td><td>glaucoma combination drops</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">5</td><td>Brimonidine (Alphagan P)</td><td>alpha-2 agonist drops</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">6</td><td>Netarsudil/latanoprost (Rocklatan)</td><td>brand-only combination glaucoma drop</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">7</td><td>Cyclosporine 0.05% emulsion (Restasis and generics)</td><td>dry eye immunomodulator emulsion</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">8</td><td>Cyclosporine 0.09% solution (Cequa)</td><td>dry eye nanomicellar solution</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">9</td><td>Lifitegrast 5% (Xiidra)</td><td>dry eye LFA-1 antagonist solution</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">10</td><td>Loteprednol etabonate (Lotemax gel vs suspension)</td><td>soft steroid with vehicle-distinct products</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">11</td><td>Moxifloxacin 0.5% drops</td><td>fluoroquinolone ocular anti-infective</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">12</td><td>Erythromycin 0.5% ointment</td><td>ocular anti-infective ointment</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">13</td><td>Prednisolone acetate 1% drops</td><td>ocular corticosteroid suspension</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">14</td><td>Ketorolac ophthalmic drops</td><td>ocular NSAID</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">15</td><td>Faricimab (Vabysmo) intravitreal</td><td>retina medical-benefit biologic</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+<tr><td class="num">16</td><td>Ranibizumab (Lucentis, Byooviz, Cimerli) intravitreal</td><td>medical-benefit biosimilar churn contrast row</td><td>Source-listed where an exact product row exists; otherwise unconfirmed, not a denial.</td></tr>
+</table>
+
+<footer>
+Formulary Finder is an evidence layer for medication access: AI should not make coverage decisions; it should make the evidence inspectable. In the full product, every confirmed mapping carries its official source URL, source date, and refresh owner; this static preview shows the scoped candidate set only. <a href="/specialty/">All specialty previews</a>.
+</footer>
+</main>
+</body>
+</html>

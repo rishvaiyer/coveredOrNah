@@ -1,0 +1,236 @@
+{
+  "clinic_display_name": "Example New Jersey Women's Health Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Obstetrics and gynecology and women's health",
+  "specialty_display": "Women's health",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: public NJ plan formularies (Horizon BCBSNJ Marketplace, AmeriHealth NJ IFP, Wellpoint NJ FamilyCare Medicaid, Aetna Medicare HMO 26010, UHC Commercial PDL) plus published contraceptive and menopause therapy access reporting. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "norethindrone-ethinyl-estradiol-coc",
+      "display_name": "Norethindrone / ethinyl estradiol COC generics (Junel and others)",
+      "clinical_bucket": "combined oral contraceptive generic tiers",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "drospirenone-coc-yaz-family",
+      "display_name": "Drospirenone-containing COC: Yaz vs Gianvi/Ocella/Loryna",
+      "clinical_bucket": "COC with PMDD and acne labeling",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "norelgestromin-patch-xulane",
+      "display_name": "Norelgestromin / ethinyl estradiol patch (Xulane; Twirla distinct)",
+      "clinical_bucket": "transdermal contraceptive patch",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "etonogestrel-ring-nuvaring-elryng",
+      "display_name": "Etonogestrel / ethinyl estradiol ring: NuvaRing vs generic EluRyng",
+      "clinical_bucket": "vaginal contraceptive ring brand-generic split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "medroxyprogesterone-im-depo-provera",
+      "display_name": "Medroxyprogesterone injection IM (Depo-Provera 150 mg/mL)",
+      "clinical_bucket": "injectable progestin IM formulation",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "medroxyprogesterone-sc-depo-subq",
+      "display_name": "Medroxyprogesterone injection SC (Depo-SubQ Provera 104)",
+      "clinical_bucket": "injectable progestin SC formulation contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levonorgestrel-ius-mirena-liletta",
+      "display_name": "Levonorgestrel IUS: Mirena/Liletta/Kyleena/Skyla",
+      "clinical_bucket": "intrauterine system medical-benefit contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levonorgestrel-ec-otc",
+      "display_name": "Levonorgestrel emergency contraceptive 1.5 mg OTC (Plan B One-Step)",
+      "clinical_bucket": "OTC emergency contraceptive",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "tranexamic-acid-lysteda-hmb",
+      "display_name": "Tranexamic acid oral (Lysteda) for heavy menstrual bleeding",
+      "clinical_bucket": "antifibrinolytic nonhormonal HMB therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "spironolactone-hormonal-acne",
+      "display_name": "Spironolactone for hormonal acne (Aldactone and generics)",
+      "clinical_bucket": "off-label hormonal acne use with monitoring edits",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metronidazole-vaginal-gel",
+      "display_name": "Metronidazole vaginal gel 0.75% (MetroGel-Vaginal/Vandazole)",
+      "clinical_bucket": "vaginal antibacterial gel vs oral split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clotrimazole-vaginal-cream",
+      "display_name": "Clotrimazole vaginal cream (Gyne-Lotrimin and generics)",
+      "clinical_bucket": "vaginal antifungal cream",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "conjugated-estrogens-premarin",
+      "display_name": "Conjugated estrogens (Premarin)",
+      "clinical_bucket": "branded systemic estrogen therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "estradiol-oral-vs-patch",
+      "display_name": "Estradiol: oral tablets vs transdermal patches (Estrace, Climara, Vivelle-Dot)",
+      "clinical_bucket": "estrogen therapy vehicle/route split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "progesterone-micronized-prometrium",
+      "display_name": "Progesterone micronized capsules (Prometrium and generics)",
+      "clinical_bucket": "micronized progesterone endometrial protection",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ospemifene-osphena-dyspareunia",
+      "display_name": "Ospemifene 60 mg (Osphena) for dyspareunia",
+      "clinical_bucket": "SERM branded-only dyspareunia therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

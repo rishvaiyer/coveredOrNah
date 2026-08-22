@@ -1,0 +1,31 @@
+import type { ClinicCatalog } from "./catalogTypes";
+
+export const behavioralHealthCatalog: ClinicCatalog = {
+  slug: "behavioral-health",
+  name: "Behavioral Health Starter Catalog",
+  specialty: "Behavioral health and psychiatry",
+  status: "starter",
+  medications: [
+    ["Sertraline", "Zoloft", "Antidepressants", "Depression, anxiety, and PTSD", "Tablets and oral concentrate products differ."],
+    ["Escitalopram", "Lexapro", "Antidepressants", "Depression and generalized anxiety", "Tablet and solution products differ."],
+    ["Fluoxetine", "Prozac, Sarafem", "Antidepressants", "Depression, OCD, panic, and bulimia", "Daily capsule, tablet, solution, and once-weekly 90 mg tablet are distinct products."],
+    ["Fluoxetine weekly", "Prozac Weekly", "Antidepressants", "Maintenance depression therapy after stabilization", "90 mg once-weekly tablets are distinct from daily fluoxetine strengths."],
+    ["Bupropion XL", "Wellbutrin XL, Aplenzin differs by salt", "Antidepressants", "Depression and seasonal affective disorder", "150 mg and 300 mg extended-release tablets; titration steps up through pack changes."],
+    ["Bupropion SR", "Wellbutrin SR", "Antidepressants", "Depression, with smoking cessation under Zyban labeling", "Twice-daily 100 mg, 150 mg, and 200 mg sustained-release tablets differ from XL."],
+    ["Venlafaxine ER", "Effexor XR", "Antidepressants", "Depression, anxiety, and panic disorders", "Extended-release capsule and tablet strengths must be matched during titration."],
+    ["Duloxetine", "Cymbalta", "Antidepressants", "Depression, anxiety, neuropathic pain, and fibromyalgia", "Delayed-release capsules; 20 mg starter titration packs exist alongside 30 mg and 60 mg."],
+    ["Mirtazapine", "Remeron", "Antidepressants", "Depression, often with insomnia or poor appetite", "Immediate-release tablets and orally disintegrating tablets differ."],
+    ["Trazodone", "Desyrel", "Antidepressants", "Depression and off-label sleep support", "Tablet strengths vary widely; low-dose sleep use still requires exact strength matching."],
+    ["Aripiprazole", "Abilify, Abilify Maintena", "Antipsychotics", "Schizophrenia, bipolar disorder, adjunct depression", "Oral tablets and discmelt differ from Abilify Maintena LAI, which is typically medical benefit rather than pharmacy benefit."],
+    ["Quetiapine IR", "Seroquel", "Antipsychotics", "Schizophrenia and bipolar disorder", "Immediate-release 25 mg to 400 mg tablets titrate in divided doses."],
+    ["Quetiapine XR", "Seroquel XR", "Antipsychotics", "Schizophrenia, bipolar disorder, and adjunct depression", "Once-daily extended-release tablets are distinct products from IR."],
+    ["Olanzapine", "Zyprexa", "Antipsychotics", "Schizophrenia and bipolar disorder", "Tablets, orally disintegrating tablets, and intramuscular formulations differ."],
+    ["Lurasidone", "Latuda", "Antipsychotics", "Schizophrenia and bipolar depression", "Must be taken with food; tablet strengths and food requirement matter for coverage."],
+    ["Cariprazine", "Vraylar", "Antipsychotics", "Schizophrenia, bipolar disorder, and adjunct depression", "Capsules titrate over weeks; brand-only status keeps PA friction high."],
+    ["Lithium ER", "Lithobid", "Mood stabilizers", "Bipolar disorder maintenance", "Extended-release tablets differ from immediate-release carbonate capsules and require level monitoring."],
+    ["Lamotrigine", "Lamictal", "Mood stabilizers", "Bipolar maintenance and seizure control", "Titration packs with escalating strengths are distinct products; rash warnings drive slow titration."],
+    ["Valproate ER", "Depakote ER", "Mood stabilizers", "Bipolar disorder and seizures", "ER and delayed-release tablets are not interchangeable; dosing differs between forms."],
+    ["Buspirone", "BuSpar", "Anxiolytics", "Generalized anxiety disorder", "Tablets titrated twice or three times daily; not PRN like benzodiazepines."],
+    ["Hydroxyzine", "Vistaril, Atarax", "Anxiolytics", "Anxiety, pruritus, and sedation", "Capsule, tablet, and syrup forms use different salts and strengths."],
+  ].map(([generic, brands, category, commonUses, productDetails]) => ({ generic, brands, category, commonUses, productDetails })),
+};

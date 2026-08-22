@@ -23,17 +23,15 @@ def test_pages_exist_and_are_current() -> None:
 
 def test_all_specialty_pages_render_seed_and_safe_language() -> None:
     import json
-    seeds = {
-        "allergy-immunology": "data/specialty-demo-allergy-immunology-starter-v1.json",
-        "cardiology": "data/specialty-demo-cardiology-starter-v1.json",
-        "gastroenterology": "data/specialty-demo-gastroenterology-starter-v1.json",
-        "endocrinology": "data/specialty-demo-endocrinology-starter-v1.json",
-    }
-    for slug, seed_path in seeds.items():
+    import re as _re
+    gen = (ROOT / "scripts" / "generate_specialty_pages.py").read_text()
+    pairs = _re.findall(r'"slug": "([a-z-]+)",\s*"seed": ROOT / "data" / "([^"]+)"', gen)
+    assert len(pairs) >= 15, f"expected >=15 registered specialties, found {len(pairs)}"
+    for slug, seed_path in pairs:
         page = ROOT / "public" / "specialty" / slug / "index.html"
         assert page.exists(), f"missing {page}"
         html = page.read_text()
-        seed = json.loads((ROOT / seed_path).read_text())
+        seed = json.loads((ROOT / "data" / seed_path).read_text())
         for medication in seed["medications"]:
             assert medication["display_name"] in html, f"{slug}: missing {medication['display_name']}"
         for plan in seed["plan_families"]:
@@ -76,9 +74,13 @@ def test_derm_page_has_full_evidence_matrix() -> None:
 
 
 def test_index_links_all_specialties() -> None:
+    import re as _re
     html = INDEX.read_text()
-    for slug in ("dermatology", "allergy-immunology", "cardiology", "gastroenterology", "endocrinology"):
-        assert f"/specialty/{slug}/" in html
+    gen = (ROOT / "scripts" / "generate_specialty_pages.py").read_text()
+    slugs = _re.findall(r'"slug": "([a-z-]+)"', gen)
+    assert len(slugs) == len(set(slugs)), "duplicate slugs in generator"
+    for slug in slugs:
+        assert f"/specialty/{slug}/" in html, f"index missing {slug}"
 
 
 if __name__ == "__main__":

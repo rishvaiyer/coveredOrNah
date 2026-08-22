@@ -1,0 +1,257 @@
+{
+  "clinic_display_name": "Example New Jersey Neurology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Neurology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: American Headache Society CGRP preventive-therapy position statements, AAN prior-authorization survey reporting on neurologic medication barriers, and 2026 NJ commercial formulary CGRP step-therapy patterns. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "sumatriptan",
+      "display_name": "Sumatriptan (Imitrex)",
+      "clinical_bucket": "acute triptan, tablet and injection contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rizatriptan",
+      "display_name": "Rizatriptan (Maxalt, Maxalt-MLT)",
+      "clinical_bucket": "acute triptan",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "eletriptan",
+      "display_name": "Eletriptan (Relpax)",
+      "clinical_bucket": "acute triptan",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ubrogepant",
+      "display_name": "Ubrogepant (Ubrelvy)",
+      "clinical_bucket": "gepant acute therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rimegepant",
+      "display_name": "Rimegepant (Nurtec ODT)",
+      "clinical_bucket": "gepant acute and prevention dual-use",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "eptinezumab",
+      "display_name": "Eptinezumab (Vyepti IV)",
+      "clinical_bucket": "CGRP preventive biologic, medical-benefit infusion contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "erenumab",
+      "display_name": "Erenumab (Aimovig)",
+      "clinical_bucket": "CGRP preventive biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fremanezumab",
+      "display_name": "Fremanezumab (Ajovy)",
+      "clinical_bucket": "CGRP preventive biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "galcanezumab",
+      "display_name": "Galcanezumab (Emgality)",
+      "clinical_bucket": "CGRP preventive biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "topiramate",
+      "display_name": "Topiramate (Topamax, XR variants)",
+      "clinical_bucket": "oral preventive anchor with epilepsy overlap",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "divalproex-er",
+      "display_name": "Divalproex ER (Depakote ER)",
+      "clinical_bucket": "oral preventive, ER vs delayed-release distinction row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lamotrigine",
+      "display_name": "Lamotrigine (Lamictal, Lamictal XR)",
+      "clinical_bucket": "epilepsy antiseizure with titration rules",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levetiracetam",
+      "display_name": "Levetiracetam (Keppra and XR variants)",
+      "clinical_bucket": "epilepsy antiseizure anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pregabalin",
+      "display_name": "Pregabalin (Lyrica, Lyrica CR)",
+      "clinical_bucket": "neuropathic pain and seizure therapy, controlled substance",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "gabapentin",
+      "display_name": "Gabapentin (Neurontin, Gralise, Horizant)",
+      "clinical_bucket": "neuropathic pain and seizure therapy, formulation churn row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levodopa-carbidopa",
+      "display_name": "Levodopa/carbidopa (Sinemet vs Rytary)",
+      "clinical_bucket": "Parkinson anchor, immediate vs extended release distinction row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rasagiline",
+      "display_name": "Rasagiline (Azilect)",
+      "clinical_bucket": "MAO-B inhibitor Parkinson therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pramipexole",
+      "display_name": "Pramipexole (Mirapex, Mirapex ER)",
+      "clinical_bucket": "dopamine agonist Parkinson therapy, IR vs ER row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

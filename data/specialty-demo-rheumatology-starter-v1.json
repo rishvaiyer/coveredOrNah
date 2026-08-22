@@ -1,0 +1,257 @@
+{
+  "clinic_display_name": "Example New Jersey Rheumatology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Rheumatology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AMA prior-authorization physician survey (2023), The Rheumatologist (ACR) reporting on prior-authorization burden in rheumatology biologic and JAK prescribing. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "methotrexate-oral",
+      "display_name": "Methotrexate oral",
+      "clinical_bucket": "conventional DMARD anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sulfasalazine",
+      "display_name": "Sulfasalazine",
+      "clinical_bucket": "conventional DMARD",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "hydroxychloroquine",
+      "display_name": "Hydroxychloroquine",
+      "clinical_bucket": "antimalarial DMARD",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "leflunomide",
+      "display_name": "Leflunomide",
+      "clinical_bucket": "conventional DMARD",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "adalimumab-biosimilars",
+      "display_name": "Adalimumab biosimilars vs brand Humira",
+      "clinical_bucket": "TNF biologic with biosimilar churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "etanercept",
+      "display_name": "Enbrel/Etanercept (plan-dependent biosimilars)",
+      "clinical_bucket": "TNF biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "infliximab-iv",
+      "display_name": "Infliximab IV (Remicade/Inflectra)",
+      "clinical_bucket": "medical-benefit buy-and-bill contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 3,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "abatacept",
+      "display_name": "Orencia (abatacept) SC vs IV",
+      "clinical_bucket": "T-cell costimulation blocker with route split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tocilizumab",
+      "display_name": "Actemra (tocilizumab) with biosimilars",
+      "clinical_bucket": "IL-6 receptor biologic with preferred-product churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sarilumab",
+      "display_name": "Kevzara (sarilumab)",
+      "clinical_bucket": "IL-6 receptor biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "guselkumab",
+      "display_name": "Tremfya (guselkumab)",
+      "clinical_bucket": "IL-23 biologic for PsA",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "secukinumab",
+      "display_name": "Cosentyx (secukinumab)",
+      "clinical_bucket": "IL-17A biologic across PsA and AS",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ixekizumab",
+      "display_name": "Taltz (ixekizumab)",
+      "clinical_bucket": "IL-17A biologic across PsA and AS",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "upadacitinib",
+      "display_name": "Rinvoq (upadacitinib ER)",
+      "clinical_bucket": "oral JAK inhibitor with RA vs PsA indication split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tofacitinib",
+      "display_name": "Xeljanz/Xeljanz XR (tofacitinib)",
+      "clinical_bucket": "oral JAK inhibitor with boxed-warning criteria",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "baricitinib",
+      "display_name": "Olumiant (baricitinib)",
+      "clinical_bucket": "oral JAK inhibitor, RA-labeled only",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apremilast",
+      "display_name": "Otezla (apremilast)",
+      "clinical_bucket": "oral PDE4 inhibitor for PsA",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prednisone",
+      "display_name": "Prednisone",
+      "clinical_bucket": "systemic corticosteroid bridge",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

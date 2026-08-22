@@ -1,0 +1,257 @@
+{
+  "clinic_display_name": "Example New Jersey Nephrology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Nephrology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: KDIGO CKD mineral-and-bone disorder guideline (2017), KDIGO anemia-in-CKD guidance, CMS ESRD Conditions for Coverage and Medicare Part B dialysis drug billing rules, AJMC 2026 reporting on phosphate-binder access burden. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "sevelamer-carbonate",
+      "display_name": "Sevelamer carbonate (Renvela)",
+      "clinical_bucket": "non-calcium phosphate binder",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lanthanum-carbonate",
+      "display_name": "Lanthanum carbonate (Fosrenol)",
+      "clinical_bucket": "non-calcium phosphate binder",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sucroferric-oxyhydroxide",
+      "display_name": "Sucroferric oxyhydroxide (Velphoro)",
+      "clinical_bucket": "iron-based phosphate binder",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ferric-citrate",
+      "display_name": "Ferric citrate (Auryxia)",
+      "clinical_bucket": "iron-based phosphate binder with iron-repletion indication",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "calcitriol-oral",
+      "display_name": "Calcitriol oral (Rocaltrol)",
+      "clinical_bucket": "active vitamin D analog",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "paricalcitol",
+      "display_name": "Paricalcitol (Zemplar)",
+      "clinical_bucket": "vitamin D analog oral-versus-IV route split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cinacalcet",
+      "display_name": "Cinacalcet (Sensipar)",
+      "clinical_bucket": "oral calcimimetic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "etelcalcetide-iv",
+      "display_name": "Etelcalcetide IV (Parsabiv)",
+      "clinical_bucket": "dialysis-center IV calcimimetic distinct from oral route",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "darbepoetin",
+      "display_name": "Darbepoetin alfa (Aranesp)",
+      "clinical_bucket": "medical-benefit ESA dialysis-center row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "epoetin-alfa",
+      "display_name": "Epoetin alfa (Epogen/Procrit)",
+      "clinical_bucket": "medical-benefit ESA Part B-versus-pharmacy split",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sodium-zirconium-cyclosilicate",
+      "display_name": "Sodium zirconium cyclosilicate (Lokelma)",
+      "clinical_bucket": "novel potassium binder",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "patiromer",
+      "display_name": "Patiromer (Veltassa)",
+      "clinical_bucket": "novel potassium binder",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sodium-polystyrene-sulfonate",
+      "display_name": "Sodium polystyrene sulfonate (Kayexalate/Kionex)",
+      "clinical_bucket": "legacy potassium binder",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "furosemide",
+      "display_name": "Furosemide (Lasix)",
+      "clinical_bucket": "loop diuretic anchor",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "torsemide",
+      "display_name": "Torsemide (Soaanz/Demadex)",
+      "clinical_bucket": "loop diuretic brand-versus-generic split",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metoprolol-succinate",
+      "display_name": "Metoprolol succinate ER (Toprol-XL/Kapspargo)",
+      "clinical_bucket": "cardiorenal beta blocker",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "amlodipine",
+      "display_name": "Amlodipine (Norvasc)",
+      "clinical_bucket": "hypertension calcium channel blocker",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "iron-sucrose-iv",
+      "display_name": "Iron sucrose IV (Venofer)",
+      "clinical_bucket": "medical-benefit IV iron dialysis-center contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

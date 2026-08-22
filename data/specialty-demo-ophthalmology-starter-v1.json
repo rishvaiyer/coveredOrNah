@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Ophthalmology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Ophthalmology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AAO preferred practice patterns and IRIS registry reporting, AJMC 2026 ophthalmology prior-authorization and medical-benefit coverage commentary, AMD intravitreal therapy access studies. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "latanoprost",
+      "display_name": "Latanoprost 0.005% drops",
+      "clinical_bucket": "prostaglandin analog glaucoma anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "bimatoprost",
+      "display_name": "Bimatoprost (Lumigan) drops",
+      "clinical_bucket": "prostaglandin analog",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "timolol-maleate-drops",
+      "display_name": "Timolol maleate drops",
+      "clinical_bucket": "beta blocker glaucoma drops",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dorzolamide-timolol-combo",
+      "display_name": "Dorzolamide/timolol fixed combo (Cosopt)",
+      "clinical_bucket": "glaucoma combination drops",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "brimonidine",
+      "display_name": "Brimonidine (Alphagan P)",
+      "clinical_bucket": "alpha-2 agonist drops",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "netarsudil-latanoprost",
+      "display_name": "Netarsudil/latanoprost (Rocklatan)",
+      "clinical_bucket": "brand-only combination glaucoma drop",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyclosporine-restasis",
+      "display_name": "Cyclosporine 0.05% emulsion (Restasis and generics)",
+      "clinical_bucket": "dry eye immunomodulator emulsion",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyclosporine-cequa",
+      "display_name": "Cyclosporine 0.09% solution (Cequa)",
+      "clinical_bucket": "dry eye nanomicellar solution",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lifitegrast-xiidra",
+      "display_name": "Lifitegrast 5% (Xiidra)",
+      "clinical_bucket": "dry eye LFA-1 antagonist solution",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "loteprednol-etabonate",
+      "display_name": "Loteprednol etabonate (Lotemax gel vs suspension)",
+      "clinical_bucket": "soft steroid with vehicle-distinct products",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "moxifloxacin-drops",
+      "display_name": "Moxifloxacin 0.5% drops",
+      "clinical_bucket": "fluoroquinolone ocular anti-infective",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "erythromycin-ointment",
+      "display_name": "Erythromycin 0.5% ointment",
+      "clinical_bucket": "ocular anti-infective ointment",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prednisolone-acetate-1",
+      "display_name": "Prednisolone acetate 1% drops",
+      "clinical_bucket": "ocular corticosteroid suspension",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ketorolac-drops",
+      "display_name": "Ketorolac ophthalmic drops",
+      "clinical_bucket": "ocular NSAID",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "faricimab-vabysmo",
+      "display_name": "Faricimab (Vabysmo) intravitreal",
+      "clinical_bucket": "retina medical-benefit biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ranibizumab-lucentis",
+      "display_name": "Ranibizumab (Lucentis, Byooviz, Cimerli) intravitreal",
+      "clinical_bucket": "medical-benefit biosimilar churn contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "clinic_display_name": "Example New Jersey Infectious Disease Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Infectious disease",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: IDSA practice guidance on outpatient antimicrobial stewardship and C. difficile treatment, AJMC 2026 reporting on antiviral access friction, and public NJ plan formularies listed below. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "amoxicillin-clavulanate",
+      "display_name": "Amoxicillin/clavulanate (Augmentin)",
+      "clinical_bucket": "beta-lactam plus inhibitor",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cefdinir",
+      "display_name": "Cefdinir",
+      "clinical_bucket": "oral third-generation cephalosporin",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cefpodoxime",
+      "display_name": "Cefpodoxime",
+      "clinical_bucket": "oral third-generation cephalosporin",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ciprofloxacin",
+      "display_name": "Ciprofloxacin",
+      "clinical_bucket": "fluoroquinolone",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levofloxacin",
+      "display_name": "Levofloxacin",
+      "clinical_bucket": "respiratory fluoroquinolone",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "moxifloxacin",
+      "display_name": "Moxifloxacin",
+      "clinical_bucket": "respiratory fluoroquinolone",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "doxycycline",
+      "display_name": "Doxycycline",
+      "clinical_bucket": "tetracycline with salt-level product churn",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "minocycline",
+      "display_name": "Minocycline",
+      "clinical_bucket": "tetracycline with IR vs ER formulation split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azithromycin",
+      "display_name": "Azithromycin",
+      "clinical_bucket": "macrolide dose-pack anchor",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clarithromycin",
+      "display_name": "Clarithromycin",
+      "clinical_bucket": "macrolide with IR vs XL split",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "linezolid",
+      "display_name": "Linezolid",
+      "clinical_bucket": "oxazolidinone for resistant gram-positive infections",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "daptomycin-iv",
+      "display_name": "Daptomycin IV (Cubicin)",
+      "clinical_bucket": "medical-benefit buy-and-bill contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "vancomycin-po-cdiff",
+      "display_name": "Vancomycin oral for C. diff",
+      "clinical_bucket": "PO-only C. difficile therapy distinct from IV vancomycin",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metronidazole",
+      "display_name": "Metronidazole",
+      "clinical_bucket": "nitroimidazole with IR vs ER split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "nitrofurantoin-macrocrystals-vs-monohydrate",
+      "display_name": "Nitrofurantoin macrocrystals vs monohydrate/macrocrystals",
+      "clinical_bucket": "urinary anti-infective with distinct product dosing",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fluconazole",
+      "display_name": "Fluconazole",
+      "clinical_bucket": "azole antifungal",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "terbinafine-oral",
+      "display_name": "Terbinafine oral",
+      "clinical_bucket": "onychomycosis systemic antifungal",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "oseltamivir",
+      "display_name": "Oseltamivir (Tamiflu)",
+      "clinical_bucket": "influenza antiviral",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "valacyclovir",
+      "display_name": "Valacyclovir (Valtrex)",
+      "clinical_bucket": "herpesvirus antiviral",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}
