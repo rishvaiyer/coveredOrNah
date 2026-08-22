@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "generatedBy": "scripts/generate-phase0-artifacts.ts",
   "generatedAt": "2026-08-22",
-  "freshnessAsOf": "2026-08-13",
+  "freshnessAsOf": "2026-08-21",
   "summary": {
-    "totalUnconfirmed": 410,
-    "ambiguousProduct": 58,
-    "noExactProduct": 352
+    "totalUnconfirmed": 371,
+    "ambiguousProduct": 60,
+    "noExactProduct": 311
   },
   "cells": [
     {
@@ -2235,42 +2235,6 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Ambrisentan",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Amlodipine",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Amoxicillin / clavulanate",
-      "therapeuticArea": "Respiratory infections",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Apixaban",
-      "therapeuticArea": "Pulmonary vascular",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Arformoterol",
       "therapeuticArea": "Long-acting bronchodilators",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2280,80 +2244,8 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Atorvastatin",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Azelastine nasal",
-      "therapeuticArea": "Upper airway / allergy",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Azithromycin",
-      "therapeuticArea": "Respiratory infections",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Benzonatate",
-      "therapeuticArea": "Cough and mucus",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Bosentan",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Budesonide (Flexhaler)",
       "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Budesonide / formoterol (generic)",
-      "therapeuticArea": "ICS / LABA combinations",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Budesonide / glycopyrrolate / formoterol",
-      "therapeuticArea": "Triple therapy",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Bupropion SR 150 mg",
-      "therapeuticArea": "Smoking cessation",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
@@ -2372,24 +2264,15 @@
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Ciclesonide",
       "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "Only ciclesonide candidate is nasal Omnaris spray; no inhaled Alvesco row in the August 2026 Oscar formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Dornase alfa",
       "therapeuticArea": "Cystic fibrosis",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Doxycycline",
-      "therapeuticArea": "Respiratory infections",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
@@ -2406,69 +2289,6 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Epinephrine auto-injector",
-      "therapeuticArea": "Allergy and anaphylaxis",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Famotidine",
-      "therapeuticArea": "Reflux and upper airway",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Fluticasone / salmeterol (generic)",
-      "therapeuticArea": "ICS / LABA combinations",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Fluticasone nasal",
-      "therapeuticArea": "Upper airway / allergy",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Fluticasone propionate HFA 44 mcg",
-      "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Furosemide",
-      "therapeuticArea": "Pulmonary hypertension support",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Glycopyrrolate / formoterol",
-      "therapeuticArea": "Combination bronchodilators",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Guaifenesin ER",
       "therapeuticArea": "Cough and mucus",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2478,107 +2298,8 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Ibuprofen",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Levofloxacin",
-      "therapeuticArea": "Respiratory infections",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Lisinopril",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Losartan",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Metformin",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Mometasone",
       "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Nicotine replacement",
-      "therapeuticArea": "Smoking cessation",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Olodaterol",
-      "therapeuticArea": "Long-acting bronchodilators",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Omeprazole",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Pantoprazole",
-      "therapeuticArea": "Reflux and upper airway",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Prednisolone",
-      "therapeuticArea": "Systemic corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Prednisone",
-      "therapeuticArea": "Systemic corticosteroids",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
@@ -2604,15 +2325,6 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Riociguat",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Salmeterol",
       "therapeuticArea": "Long-acting bronchodilators",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2622,80 +2334,17 @@
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Selexipag",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Sertraline",
-      "therapeuticArea": "Common primary care",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Sildenafil 20 mg",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Sotatercept-csrk",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Tadalafil for PAH",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Tiotropium (generic capsule-inhaler)",
       "therapeuticArea": "Anticholinergics",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "Source lists brand Spiriva HandiHaler 18 mcg only; no generic tiotropium row in the August 2026 Oscar formulary.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "oscarNjIndividual",
       "planName": "Oscar NJ Individual 5-Tier standard formulary",
       "medication": "Tiotropium / olodaterol",
       "therapeuticArea": "Combination bronchodilators",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Treprostinil inhaled",
-      "therapeuticArea": "Pulmonary hypertension",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oscarNjIndividual",
-      "planName": "Oscar NJ Individual 5-Tier standard formulary",
-      "medication": "Varenicline",
-      "therapeuticArea": "Smoking cessation",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"

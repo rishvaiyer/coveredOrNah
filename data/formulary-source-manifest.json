@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-08-13",
+  "asOf": "2026-08-21",
   "completenessClassDefinition": "partial-row-extraction means at least one medication is still unconfirmed in the static baseline.",
   "baselines": [
     {
@@ -156,5 +156,6 @@
       "absenceCanImplyNotListed": false,
       "absenceQualification": "The feed is complete for its published product rows, but confirm the member's exact NJ FamilyCare benefit, product, restrictions, and current PDL before treating absence as noncoverage."
     }
-  ]
+  ],
+  "verificationNote": "All 17 baseline source URLs re-verified reachable on 2026-08-21 with expected content type; Oscar NJ Individual resolves to the August 2026 edition as of 07/27/2026."
 }

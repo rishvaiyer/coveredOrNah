@@ -17,9 +17,9 @@ test("reports the current static formulary gap inventory deterministically", () 
     medicationCount: 85,
     planCount: 17,
     totalCells: 1445,
-      confirmedCells: 1035,
-      unconfirmedCells: 410,
-      unconfirmedPercent: 28.37,
+      confirmedCells: 1074,
+      unconfirmedCells: 371,
+      unconfirmedPercent: 25.67,
   });
 
   assert.deepEqual(
@@ -35,7 +35,7 @@ test("reports the current static formulary gap inventory deterministically", () 
       amerihealthValue: 3,
       amerihealthSelect: 4,
       cignaNationalPreferred: 38,
-      oscarNjIndividual: 54,
+      oscarNjIndividual: 15,
       wellcareNjH0913: 20,
       humanaNj26408: 26,
       bravenNjH0885: 76,

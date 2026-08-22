@@ -14,7 +14,7 @@ Finish a fast, PHI-free formulary dashboard for Summit Health NJ pulmonary teams
 - Live: https://formulary-finder-pilot-production.up.railway.app/
 - Repo: https://github.com/rishvaiyer/coveredOrNah
 - Stack: React/Vite client, Express server, Railway Postgres.
-- 85 searchable pulmonary/common-clinic products and 13 source-backed plan-family baselines.
+- 85 searchable pulmonary/common-clinic products and 17 source-backed plan-family baselines.
 - Exact Medicare plans are already imported from CMS and selectable, but the selected Medicare plan does **not yet** change the coverage detail.
 - Commercial finder cards exist for Horizon, UHC/Oxford, Aetna, Cigna, AmeriHealth, and Oscar. They give the staff member the exact plan/formulary selection route and official lookup link.
 
