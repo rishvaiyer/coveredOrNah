@@ -24,7 +24,7 @@ SEEDS = [
         "slug": "dermatology",
         "seed": ROOT / "data" / "specialty-demo-dermatology-starter-v1.json",
         "tagline": "A scoped dermatology medication-access research preview for New Jersey clinics.",
-        "status": "starter catalog: 20 products, evidence pass in progress",
+        "status": "starter catalog: 20 medication families, evidence pass in progress",
     },
 ]
 
@@ -75,7 +75,7 @@ a {{ color: #0e366e; }}
 {med_rows}
 </table>
 <footer>
-Formulary Finder is an evidence layer for medication access: AI should not make coverage decisions; it should make the evidence inspectable. Source dates, official URLs, and refresh ownership accompany every confirmed mapping. <a href="/specialty/">All specialty previews</a>.
+Formulary Finder is an evidence layer for medication access: AI should not make coverage decisions; it should make the evidence inspectable. In the full product, every confirmed mapping carries its official source URL, source date, and refresh owner; this static preview shows the scoped candidate set only. <a href="/specialty/">All specialty previews</a>.
 </footer>
 </main>
 </body>

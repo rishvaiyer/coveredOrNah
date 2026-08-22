@@ -32,6 +32,41 @@ def require(condition: bool, message: str) -> None:
         raise ValueError(message)
 
 
+FORBIDDEN_KEY_STEMS = (
+    "patient",
+    "member",
+    "subscriber",
+    "medicalrecord",
+    "mrn",
+    "dateofbirth",
+    "dob",
+    "claim",
+    "chartnote",
+    "ssn",
+)
+
+
+def _normalized_key(key: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", key.lower())
+
+
+def contains_forbidden_key(value: Any) -> str | None:
+    if isinstance(value, dict):
+        for key, nested_value in value.items():
+            normalized = _normalized_key(key)
+            if any(stem in normalized for stem in FORBIDDEN_KEY_STEMS):
+                return key
+            nested = contains_forbidden_key(nested_value)
+            if nested:
+                return nested
+    if isinstance(value, list):
+        for item in value:
+            nested = contains_forbidden_key(item)
+            if nested:
+                return nested
+    return None
+
+
 def validate_sandbox(case: dict[str, Any]) -> None:
     require(case.get("synthetic") is True, "Only synthetic cases are allowed")
     mode = case.get("mode", "synthetic_local_only")
@@ -44,6 +79,8 @@ def validate_sandbox(case: dict[str, Any]) -> None:
     require(settings.get("require_disclosure", True) is True, "Synthetic disclosure is required")
     require(settings.get("require_human_review", True) is True, "Human review is required")
     require(case.get("human_approved") is True, "Named test operator must approve simulation")
+    phi_key = contains_forbidden_key(case)
+    require(phi_key is None, f"PHI-like key is prohibited in sandbox input: {phi_key}")
     serialized = json.dumps(case)
     require(not PHONE_PATTERN.search(serialized), "Phone-like value is prohibited in sandbox input")
 

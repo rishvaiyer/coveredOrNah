@@ -16,18 +16,29 @@ from pathlib import Path
 from typing import Any
 
 
-FORBIDDEN_KEYS = {
+FORBIDDEN_KEY_STEMS = (
     "patient",
-    "patient_name",
-    "date_of_birth",
-    "dob",
-    "member_id",
-    "subscriber_id",
-    "medical_record_number",
+    "member",
+    "subscriber",
+    "medicalrecord",
     "mrn",
+    "dateofbirth",
+    "dob",
     "claim",
-    "chart_note",
-}
+    "chartnote",
+    "ssn",
+)
+
+
+def _normalized_key(key: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", key.lower())
+
+
+def is_forbidden_key(key: str) -> bool:
+    normalized = _normalized_key(key)
+    return any(stem in normalized for stem in FORBIDDEN_KEY_STEMS)
+
+
 SOURCE_STATUSES = {"public_current", "public_needs_review", "unavailable"}
 
 
@@ -39,7 +50,7 @@ def require(condition: bool, message: str) -> None:
 def contains_forbidden_key(value: Any) -> str | None:
     if isinstance(value, dict):
         for key, nested_value in value.items():
-            if key.lower() in FORBIDDEN_KEYS:
+            if is_forbidden_key(key):
                 return key
             nested = contains_forbidden_key(nested_value)
             if nested:

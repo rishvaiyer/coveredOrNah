@@ -114,7 +114,7 @@ test("static source-backed UI uses source-listed language instead of covered lan
   assert.match(readmeSource, /\| \*\*Source-listed\*\* \| The selected medication product appears in the selected source\./);
   assert.match(readmeSource, /Reserve `Covered` for exact connector output tied to a selected plan or NDC\./);
   assert.doesNotMatch(readmeSource, /\| \*\*Covered\*\* \| The selected medication product appears in the selected source\./);
-  assert.match(launchPlanGeneratorSource, /1,035 of 1,445 medication-plan cells as source-confirmed; 410 remain explicitly unconfirmed/);
+  assert.match(launchPlanGeneratorSource, /1,144 of 1,445 medication-plan cells as source-confirmed; 301 remain explicitly unconfirmed/);
   assert.doesNotMatch(launchPlanGeneratorSource, /1,009 of 1,445 medication-plan cells as source-confirmed; 436 remain explicitly unconfirmed/);
 });
 

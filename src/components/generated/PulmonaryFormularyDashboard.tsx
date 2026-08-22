@@ -2844,7 +2844,7 @@ const planCoverageOverrides: Partial<
     "Epinephrine auto-injector": coverage("Tier 3", ["QL"], "Auto-injector entry; quantity limit 2 per 30 days."),
     Apixaban: coverage("Tier 3", ["QL"], "Eliquis entry."),
     Omeprazole: coverage("Tier 1", ["QL"], "Delayed-release capsule entries."),
-    Mometasone: coverage("Tier 2", ["QL"], "MOMETASONE NASAL 50 mcg entry, QL 34 GM per 30 days, generic Nasonex-equivalent; brand Nasonex absent from formulary 00026096 updated 08/01/2026."),
+    Mometasone: coverage("Tier 2", ["QL"], "Mometasone furoate suspension 50 mcg/actuation nasal spray entry, QL 34 GM per 30 days, mail-order notation, in Aetna Medicare formulary 26010 version 16 (plan 26010B29zHMO), updated 08/01/2026."),
   },
   amerihealthNj: {
     "Albuterol HFA": coverage("Generic"),
@@ -3235,7 +3235,7 @@ const planCoverageOverrides: Partial<
     "Bupropion SR 150 mg": coverage("Tier 3", ["QL"], "Bupropion HCl 150 mg SR tablet, QL 90 per 30 days; mail-order notation in source."),
     Mometasone: coverage("Tier 4", ["QL"], "Mometasone 50 mcg/actuation nasal spray (generic Nasonex-type), QL 34 per 30 days."),
     Olodaterol: coverage("Tier 3", ["QL"], "STRIVERDI RESPIMAT 2.5 mcg/actuation mist, QL 4 per 30 days."),
-    "Tiotropium (generic capsule-inhaler)": coverage("Tier 3", ["QL"], "SPIRIVA WITH HANDIHALER 18 mcg capsule with inhalation device, QL 30 per 30 days."),
+    "Tiotropium (generic capsule-inhaler)": coverage("Tier 3", ["QL"], "SPIRIVA WITH HANDIHALER 18 mcg capsule with inhalation device, brand row accepted per catalog convention; no generic tiotropium label in formulary 26408, QL 30 per 30 days."),
     Varenicline: coverage("Tier 3", ["QL"], "Varenicline tartrate tablets and dose pack, QL 53 per 28 days (pack) and 56 per 28 days (tablets)."),
   },
   bravenNjH0885: {
@@ -3472,7 +3472,7 @@ const planCoverageOverrides: Partial<
     Pirfenidone: coverage("Listed in PDL", ["PA", "QL"], "Generic pirfenidone full titration ladder 267/534/801 mg, Non-Preferred, PA and QL; Esbriet brand absent. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
     Prednisolone: coverage("Listed in PDL", [], "Prednisolone liquids Preferred unflagged; the 5 mg tablet variant is Non-Preferred with PA and QL; dispersible tabs carry QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
     Prednisone: coverage("Listed in PDL", [], "Prednisone IR tablets Preferred unflagged; only 1/2 mg delayed-release variants are Non-Preferred with PA. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
-    "QVAR RediHaler (brand)": coverage("Listed in PDL", ["PA", "QL"], "QVAR RediHaler beclomethasone breath-actuated HFA 40 and 80 mcg, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
+    "QVAR RediHaler (brand)": coverage("Listed in PDL", ["PA", "QL"], "QVAR RediHaler beclomethasone breath-actuated HFA 40 and 80 mcg, brand-only label in this feed, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
     Riociguat: coverage("Listed in PDL", ["PA", "QL"], "Adempas 0.5 through 2.5 mg brand only, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
     Selexipag: coverage("Listed in PDL", ["PA", "QL"], "Uptravi brand only including reconstituted form, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."),
     Sertraline: coverage("Listed in PDL", [], "Sertraline tablets up to 100 mg, Preferred. The 150/200 mg capsule variants are Non-Preferred with PA. Wellpoint NJ Medicaid feed, effective 2026-08-01."),

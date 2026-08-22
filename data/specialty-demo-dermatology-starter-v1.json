@@ -2,12 +2,16 @@
   "clinic_display_name": "Example New Jersey Dermatology Clinic",
   "clinic_website_url": "https://example.invalid",
   "specialty": "Dermatology",
-  "region": { "state": "NJ" },
+  "region": {
+    "state": "NJ"
+  },
   "public_context_note": "Synthetic starter seed. Research basis: AAD prior-authorization survey (Dermatol Online J 2021), AJMC 2026 dermatology PA-burden reporting, Dermatol Ther 2024 atopic-dermatitis biologic access study. Replace clinic fields only with cited public context.",
   "privacy_mode": "phi_free_only",
   "outbound_mode": "draft_only",
   "max_medication_families": 10,
-  "prospect": { "role": "prior-authorization workflow owner" },
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
   "plan_families": [
     {
       "id": "horizon-marketplace",
@@ -51,25 +55,225 @@
     }
   ],
   "medications": [
-    { "id": "tretinoin-topical", "display_name": "Tretinoin topical", "clinical_bucket": "retinoid", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 5, "source_readiness": 5, "therapy_friction": 4, "requires_exact_product": true },
-    { "id": "clobetasol-0.05", "display_name": "Clobetasol propionate 0.05%", "clinical_bucket": "superhigh-potency steroid", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 5, "source_readiness": 5, "therapy_friction": 4, "requires_exact_product": true },
-    { "id": "fluorouracil-topical", "display_name": "Fluorouracil topical 5%", "clinical_bucket": "actinic keratosis therapy", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 3, "requires_exact_product": true },
-    { "id": "tacrolimus-ointment", "display_name": "Tacrolimus ointment", "clinical_bucket": "calcineurin inhibitor", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 3, "requires_exact_product": true },
-    { "id": "pimecrolimus-cream", "display_name": "Pimecrolimus cream", "clinical_bucket": "calcineurin inhibitor", "specialty_relevance": 4, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 3, "requires_exact_product": true },
-    { "id": "calcipotriene-betamethasone", "display_name": "Calcipotriene/betamethasone dipropionate", "clinical_bucket": "psoriasis combination topical", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 4, "requires_exact_product": true },
-    { "id": "crisaborole", "display_name": "Crisaborole 2%", "clinical_bucket": "atopic dermatitis PDE4 topical", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "roflumilast-foam", "display_name": "Roflumilast 0.3% foam (Zoryve)", "clinical_bucket": "psoriasis PDE4 topical", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 4, "requires_exact_product": true },
-    { "id": "tapinarof-cream", "display_name": "Tapinarof 1% cream (Vtama)", "clinical_bucket": "AhR topical", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 4, "requires_exact_product": true },
-    { "id": "methotrexate-oral", "display_name": "Methotrexate oral", "clinical_bucket": "systemic DMARD anchor", "specialty_relevance": 4, "service_line_match": 3, "public_condition_match": 4, "source_readiness": 5, "therapy_friction": 2, "requires_exact_product": true },
-    { "id": "acitretin", "display_name": "Acitretin", "clinical_bucket": "systemic retinoid", "specialty_relevance": 4, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 3, "requires_exact_product": true },
-    { "id": "apremilast", "display_name": "Apremilast (Otezla)", "clinical_bucket": "oral PDE4 systemic", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "dupilumab", "display_name": "Dupixent (dupilumab)", "clinical_bucket": "atopic dermatitis biologic", "specialty_relevance": 5, "service_line_match": 5, "public_condition_match": 5, "source_readiness": 5, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "adalimumab-biosimilars", "display_name": "Adalimumab biosimilars vs brand Humira", "clinical_bucket": "TNF biologic with biosimilar churn", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "etanercept", "display_name": "Enbrel/Erelzi (etanercept)", "clinical_bucket": "TNF biologic", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "secukinumab", "display_name": "Cosentyx (secukinumab)", "clinical_bucket": "IL-17 biologic", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "ixekizumab", "display_name": "Taltz (ixekizumab)", "clinical_bucket": "IL-17 biologic", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "ustekinumab", "display_name": "Stelara and biosimilars (ustekinumab)", "clinical_bucket": "IL-12/23 biologic with preferred-product churn", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "deucravacitinib", "display_name": "Sotyktu (deucravacitinib)", "clinical_bucket": "TYK2 oral systemic", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 3, "therapy_friction": 5, "requires_exact_product": true },
-    { "id": "infliximab-iv", "display_name": "Infliximab IV (Remicade/Inflectra)", "clinical_bucket": "medical-benefit buy-and-bill contrast row", "specialty_relevance": 3, "service_line_match": 2, "public_condition_match": 3, "source_readiness": 2, "therapy_friction": 5, "requires_exact_product": true }
+    {
+      "id": "tretinoin-topical",
+      "display_name": "Tretinoin topical",
+      "clinical_bucket": "retinoid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clobetasol-0.05",
+      "display_name": "Clobetasol propionate 0.05%",
+      "clinical_bucket": "superhigh-potency steroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fluorouracil-topical",
+      "display_name": "Fluorouracil topical 5%",
+      "clinical_bucket": "actinic keratosis therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tacrolimus-ointment",
+      "display_name": "Tacrolimus ointment",
+      "clinical_bucket": "calcineurin inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pimecrolimus-cream",
+      "display_name": "Pimecrolimus cream",
+      "clinical_bucket": "calcineurin inhibitor",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "calcipotriene-betamethasone",
+      "display_name": "Calcipotriene/betamethasone dipropionate",
+      "clinical_bucket": "psoriasis combination topical",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "crisaborole",
+      "display_name": "Crisaborole 2%",
+      "clinical_bucket": "atopic dermatitis PDE4 topical",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "roflumilast-foam",
+      "display_name": "Roflumilast 0.3% foam (Zoryve)",
+      "clinical_bucket": "psoriasis and atopic dermatitis PDE4 topical",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tapinarof-cream",
+      "display_name": "Tapinarof 1% cream (Vtama)",
+      "clinical_bucket": "AhR topical",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methotrexate-oral",
+      "display_name": "Methotrexate",
+      "clinical_bucket": "systemic DMARD anchor",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "acitretin",
+      "display_name": "Acitretin",
+      "clinical_bucket": "systemic retinoid",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apremilast",
+      "display_name": "Apremilast (Otezla)",
+      "clinical_bucket": "oral PDE4 systemic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dupilumab",
+      "display_name": "Dupixent (dupilumab)",
+      "clinical_bucket": "atopic dermatitis biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "adalimumab-biosimilars",
+      "display_name": "Adalimumab biosimilars vs brand Humira",
+      "clinical_bucket": "TNF biologic with biosimilar churn",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "etanercept",
+      "display_name": "Enbrel/Etanercept (plan-dependent biosimilars)",
+      "clinical_bucket": "TNF biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "secukinumab",
+      "display_name": "Cosentyx (secukinumab)",
+      "clinical_bucket": "IL-17 biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ixekizumab",
+      "display_name": "Taltz (ixekizumab)",
+      "clinical_bucket": "IL-17 biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ustekinumab",
+      "display_name": "Stelara and biosimilars (ustekinumab)",
+      "clinical_bucket": "IL-12/23 biologic with preferred-product churn",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "deucravacitinib",
+      "display_name": "Sotyktu (deucravacitinib)",
+      "clinical_bucket": "TYK2 oral systemic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "infliximab-iv",
+      "display_name": "Infliximab IV (Remicade/Inflectra)",
+      "clinical_bucket": "medical-benefit buy-and-bill contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 3,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
   ]
 }

@@ -61,7 +61,7 @@ Vaccines and in-office injectables require a separate medical-benefit layer. A p
 ## Current gaps
 
 - The app has a 20-medication Family Medicine starter catalog, but it is explicitly labeled `starter`, not source-confirmed coverage.
-- The current formulary audit is pulmonary-focused: 85 medications across 17 NJ plan-family baselines, with 1,035 confirmed and 410 unconfirmed cells.
+- The current formulary audit is pulmonary-focused: 85 medications across 17 NJ plan-family baselines, with 1,144 confirmed and 301 unconfirmed cells.
 - NJ Medicaid has five participating managed-care plans: Aetna Better Health, Fidelis Care, Horizon NJ Health, UnitedHealthcare Community Plan, and Wellpoint. [NJ DMAHS](https://www.nj.gov/humanservices/dmahs/providers-stakeholders/provider-resources/medicaid/)
 - Public NJ payer categories are manageable for a first release: Medicaid MCOs, Marketplace/QHP, commercial employer PDLs, Medicare Advantage, and standalone Part D.
 - Hard gaps remain in medical-benefit products, vaccine schedules, authenticated portals, employer-specific formulary variants, controlled-substance policy, pediatric liquid normalization, contraceptive brand/pack rules, and insulin/GLP-1 device and indication matching.
