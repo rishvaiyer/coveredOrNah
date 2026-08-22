@@ -1,0 +1,41 @@
+{
+  "clinic_display_name": "Example Pulmonary Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Pulmonology",
+  "region": { "state": "NJ" },
+  "public_context_note": "Synthetic example. Replace only with cited public clinic context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": { "role": "medication-access workflow owner" },
+  "plan_families": [
+    {
+      "id": "example-marketplace",
+      "display_name": "Example Marketplace Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://example.invalid/formulary"
+    },
+    {
+      "id": "example-medicare",
+      "display_name": "Example Medicare Family",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://example.invalid/medicare-formulary"
+    }
+  ],
+  "medications": [
+    { "id": "albuterol-hfa", "display_name": "Albuterol HFA inhaler", "clinical_bucket": "rescue inhaler", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 5, "therapy_friction": 2, "requires_exact_product": true },
+    { "id": "budesonide-formoterol", "display_name": "Budesonide-formoterol inhaler", "clinical_bucket": "maintenance controller", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 4, "source_readiness": 5, "therapy_friction": 4, "requires_exact_product": true },
+    { "id": "tiotropium", "display_name": "Tiotropium inhaler", "clinical_bucket": "long-acting bronchodilator", "specialty_relevance": 5, "service_line_match": 4, "public_condition_match": 3, "source_readiness": 5, "therapy_friction": 3, "requires_exact_product": true },
+    { "id": "mepolizumab", "display_name": "Mepolizumab injection", "clinical_bucket": "asthma biologic", "specialty_relevance": 5, "service_line_match": 3, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
+    { "id": "dupilumab", "display_name": "Dupilumab injection", "clinical_bucket": "type-2 inflammation biologic", "specialty_relevance": 5, "service_line_match": 3, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
+    { "id": "omalizumab", "display_name": "Omalizumab injection", "clinical_bucket": "allergic asthma biologic", "specialty_relevance": 5, "service_line_match": 3, "public_condition_match": 3, "source_readiness": 4, "therapy_friction": 5, "requires_exact_product": true },
+    { "id": "roflumilast", "display_name": "Roflumilast tablet", "clinical_bucket": "copd anti-inflammatory", "specialty_relevance": 4, "service_line_match": 3, "public_condition_match": 2, "source_readiness": 4, "therapy_friction": 4, "requires_exact_product": true },
+    { "id": "pirfenidone", "display_name": "Pirfenidone tablet", "clinical_bucket": "pulmonary fibrosis therapy", "specialty_relevance": 4, "service_line_match": 2, "public_condition_match": 2, "source_readiness": 3, "therapy_friction": 5, "requires_exact_product": true },
+    { "id": "tobramycin-inhaled", "display_name": "Tobramycin inhalation", "clinical_bucket": "inhaled antibiotic", "specialty_relevance": 4, "service_line_match": 2, "public_condition_match": 2, "source_readiness": 3, "therapy_friction": 5, "requires_exact_product": true },
+    { "id": "benralizumab", "display_name": "Benralizumab injection", "clinical_bucket": "eosinophilic asthma biologic", "specialty_relevance": 5, "service_line_match": 2, "public_condition_match": 2, "source_readiness": 3, "therapy_friction": 5, "requires_exact_product": true }
+  ]
+}

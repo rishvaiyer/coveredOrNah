@@ -1,0 +1,18 @@
+{
+  "case_id": "syn_pa_001",
+  "synthetic": true,
+  "mode": "synthetic_local_only",
+  "human_approved": true,
+  "settings": {
+    "provider": "mock",
+    "external_network": false,
+    "real_calls": false,
+    "inbound_calls": false,
+    "transfers": false,
+    "recording": false,
+    "audio_storage": false,
+    "follow_up_execution": "internal_task_only",
+    "require_disclosure": true,
+    "require_human_review": true
+  }
+}

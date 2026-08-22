@@ -7,9 +7,9 @@
     "medicationCount": 85,
     "planCount": 17,
     "totalCells": 1445,
-    "confirmedCells": 1128,
-    "unconfirmedCells": 317,
-    "unconfirmedPercent": 21.94
+    "confirmedCells": 1144,
+    "unconfirmedCells": 301,
+    "unconfirmedPercent": 20.83
   },
   "plans": [
     {
@@ -26,8 +26,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": null,
       "totalCells": 85,
-      "confirmedCells": 69,
-      "unconfirmedCells": 16
+      "confirmedCells": 70,
+      "unconfirmedCells": 15
     },
     {
       "planKey": "horizonClassic",
@@ -77,8 +77,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.optum.com/content/dam/optum3/professional-optumrx/resources/pdfs/UHCEnI/General_UHC.pdf",
       "totalCells": 85,
-      "confirmedCells": 64,
-      "unconfirmedCells": 21
+      "confirmedCells": 68,
+      "unconfirmedCells": 17
     },
     {
       "planKey": "oxfordFreedom",
@@ -94,8 +94,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.uhcprovider.com/en/prior-auth-advance-notification/prior-auth-specialty-drugs/prior-auth-pharmacy-medical-necessity.html",
       "totalCells": 85,
-      "confirmedCells": 64,
-      "unconfirmedCells": 21
+      "confirmedCells": 68,
+      "unconfirmedCells": 17
     },
     {
       "planKey": "aetnaMedicareHmo",
@@ -111,8 +111,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.aetna.com/content/dam/aetna/pdfs/wwwaetnamedicarecomSSL/individual/2026/appeals/Coverage_Determination_Request_Form.pdf",
       "totalCells": 85,
-      "confirmedCells": 70,
-      "unconfirmedCells": 15
+      "confirmedCells": 71,
+      "unconfirmedCells": 14
     },
     {
       "planKey": "amerihealthNj",
@@ -179,8 +179,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://v.static.cigna.com/assets/chcp/resourceLibrary/forms/prescription/commercialDrugPriorAuthorizationForms.html",
       "totalCells": 85,
-      "confirmedCells": 47,
-      "unconfirmedCells": 38
+      "confirmedCells": 49,
+      "unconfirmedCells": 36
     },
     {
       "planKey": "oscarNjIndividual",
@@ -213,8 +213,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.wellcare.com/-/media/pdfs/na/member/request-forms/der/na_drug_coverage_determination_request_2025_r.ashx",
       "totalCells": 85,
-      "confirmedCells": 65,
-      "unconfirmedCells": 20
+      "confirmedCells": 68,
+      "unconfirmedCells": 17
     },
     {
       "planKey": "humanaNj26408",
@@ -264,8 +264,8 @@
       "manifestAsOf": "2026-08-21",
       "priorAuthorizationUrl": "https://www.healthspring.com/providers/pharmacy",
       "totalCells": 85,
-      "confirmedCells": 70,
-      "unconfirmedCells": 15
+      "confirmedCells": 71,
+      "unconfirmedCells": 14
     },
     {
       "planKey": "cloverNj2026",

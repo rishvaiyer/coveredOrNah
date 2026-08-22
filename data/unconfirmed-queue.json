@@ -4,9 +4,9 @@
   "generatedAt": "2026-08-22",
   "freshnessAsOf": "2026-08-21",
   "summary": {
-    "totalUnconfirmed": 317,
-    "ambiguousProduct": 60,
-    "noExactProduct": 257
+    "totalUnconfirmed": 301,
+    "ambiguousProduct": 57,
+    "noExactProduct": 244
   },
   "cells": [
     {
@@ -68,15 +68,6 @@
       "planName": "Aetna Medicare HMO formulary baseline",
       "medication": "Guaifenesin ER",
       "therapeuticArea": "Cough and mucus",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "aetnaMedicareHmo",
-      "planName": "Aetna Medicare HMO formulary baseline",
-      "medication": "Mometasone",
-      "therapeuticArea": "Inhaled corticosteroids",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
@@ -1128,15 +1119,6 @@
     {
       "planKey": "cignaNationalPreferred",
       "planName": "Cigna National Preferred 3-Tier employer formulary",
-      "medication": "Bupropion SR 150 mg",
-      "therapeuticArea": "Smoking cessation",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "cignaNationalPreferred",
-      "planName": "Cigna National Preferred 3-Tier employer formulary",
       "medication": "Cetirizine",
       "therapeuticArea": "Upper airway / allergy",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -1175,15 +1157,6 @@
       "planName": "Cigna National Preferred 3-Tier employer formulary",
       "medication": "Ensifentrine",
       "therapeuticArea": "COPD nebulized therapy",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "cignaNationalPreferred",
-      "planName": "Cigna National Preferred 3-Tier employer formulary",
-      "medication": "Epinephrine auto-injector",
-      "therapeuticArea": "Allergy and anaphylaxis",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
@@ -1247,9 +1220,9 @@
       "planName": "Cigna National Preferred 3-Tier employer formulary",
       "medication": "Ipratropium",
       "therapeuticArea": "Anticholinergics",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "Only ipratropium combination product (COMBIVENT RESPIMAT) is listed; no mono ipratropium row in the abridged PDL.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "cignaNationalPreferred",
@@ -1373,9 +1346,9 @@
       "planName": "Cigna National Preferred 3-Tier employer formulary",
       "medication": "Tiotropium (generic capsule-inhaler)",
       "therapeuticArea": "Anticholinergics",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "Abridged PDL lists SPIRIVA RESPIMAT only; no HandiHaler capsule-DPI or generic tiotropium row.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "cignaNationalPreferred",
@@ -1614,15 +1587,6 @@
     {
       "planKey": "healthspringNj26096",
       "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
-      "medication": "Mometasone",
-      "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "healthspringNj26096",
-      "planName": "HealthSpring NJ Medicare H3949-054 / H7849-149 formulary",
       "medication": "Mometasone / formoterol",
       "therapeuticArea": "ICS / LABA combinations",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -1788,7 +1752,7 @@
       "medication": "Guaifenesin ER",
       "therapeuticArea": "Cough and mucus",
       "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "No exact Guaifenesin ER product row was found in the July 2026 Horizon Classic Formulary.",
+      "productNote": "No guaifenesin entries of any kind appear in the July 2026 Horizon Classic Formulary.",
       "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
@@ -1815,7 +1779,7 @@
       "medication": "Sotatercept-csrk",
       "therapeuticArea": "Pulmonary hypertension",
       "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "No exact Sotatercept-csrk product row was found in the July 2026 Horizon Classic Formulary.",
+      "productNote": "No Winrevair/sotatercept row was found in the July 2026 Horizon Classic Formulary.",
       "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
@@ -1824,7 +1788,7 @@
       "medication": "Treprostinil inhaled",
       "therapeuticArea": "Pulmonary hypertension",
       "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "The Classic list includes oral treprostinil, but no exact inhaled product row was found.",
+      "productNote": "Only oral Orenitram treprostinil rows exist; no inhaled Tyvaso row in the July 2026 Classic formulary.",
       "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
@@ -1868,9 +1832,9 @@
       "planName": "Horizon BCBSNJ Marketplace",
       "medication": "Cetirizine",
       "therapeuticArea": "Upper airway / allergy",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "Only ophthalmic ZERVIATE is listed; no oral cetirizine row in the August 2026 Marketplace guide.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "horizonMarketplace",
@@ -1931,18 +1895,9 @@
       "planName": "Horizon BCBSNJ Marketplace",
       "medication": "Guaifenesin ER",
       "therapeuticArea": "Cough and mucus",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "horizonMarketplace",
-      "planName": "Horizon BCBSNJ Marketplace",
-      "medication": "Olodaterol",
-      "therapeuticArea": "Long-acting bronchodilators",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
+      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
+      "productNote": "No guaifenesin entries of any kind appear in the August 2026 Marketplace guide.",
+      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "horizonMarketplace",
@@ -2388,15 +2343,6 @@
     {
       "planKey": "oxfordFreedom",
       "planName": "Oxford Freedom Network commercial PDL baseline",
-      "medication": "Famotidine",
-      "therapeuticArea": "Reflux and upper airway",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "The May 2026 PDL lists an oral suspension row only; confirm the exact dosage form.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
-    },
-    {
-      "planKey": "oxfordFreedom",
-      "planName": "Oxford Freedom Network commercial PDL baseline",
       "medication": "Fluticasone propionate HFA 44 mcg",
       "therapeuticArea": "Inhaled corticosteroids",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2424,28 +2370,10 @@
     {
       "planKey": "oxfordFreedom",
       "planName": "Oxford Freedom Network commercial PDL baseline",
-      "medication": "Mometasone",
-      "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oxfordFreedom",
-      "planName": "Oxford Freedom Network commercial PDL baseline",
       "medication": "Mometasone / formoterol",
       "therapeuticArea": "ICS / LABA combinations",
       "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
       "productNote": "No exact Dulera/mometasone-formoterol row was found in the May 2026 UHC commercial PDL.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
-    },
-    {
-      "planKey": "oxfordFreedom",
-      "planName": "Oxford Freedom Network commercial PDL baseline",
-      "medication": "Prednisolone",
-      "therapeuticArea": "Systemic corticosteroids",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "The May 2026 PDL lists oral solution products only; confirm the exact strength and dosage form.",
       "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
@@ -2474,15 +2402,6 @@
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "oxfordFreedom",
-      "planName": "Oxford Freedom Network commercial PDL baseline",
-      "medication": "Tiotropium (generic capsule-inhaler)",
-      "therapeuticArea": "Anticholinergics",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "No exact generic tiotropium capsule row was found in the May 2026 UHC commercial PDL.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "oxfordFreedom",
@@ -2577,15 +2496,6 @@
     {
       "planKey": "uhcCommercial",
       "planName": "UnitedHealthcare Commercial PDL baseline",
-      "medication": "Famotidine",
-      "therapeuticArea": "Reflux and upper airway",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "The May 2026 PDL lists an oral suspension row only; confirm the exact dosage form.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
-    },
-    {
-      "planKey": "uhcCommercial",
-      "planName": "UnitedHealthcare Commercial PDL baseline",
       "medication": "Fluticasone propionate HFA 44 mcg",
       "therapeuticArea": "Inhaled corticosteroids",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2613,28 +2523,10 @@
     {
       "planKey": "uhcCommercial",
       "planName": "UnitedHealthcare Commercial PDL baseline",
-      "medication": "Mometasone",
-      "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "uhcCommercial",
-      "planName": "UnitedHealthcare Commercial PDL baseline",
       "medication": "Mometasone / formoterol",
       "therapeuticArea": "ICS / LABA combinations",
       "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
       "productNote": "No exact Dulera/mometasone-formoterol row was found in the May 2026 UHC commercial PDL.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
-    },
-    {
-      "planKey": "uhcCommercial",
-      "planName": "UnitedHealthcare Commercial PDL baseline",
-      "medication": "Prednisolone",
-      "therapeuticArea": "Systemic corticosteroids",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "The May 2026 PDL lists oral solution products only; confirm the exact strength and dosage form.",
       "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
@@ -2663,15 +2555,6 @@
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "uhcCommercial",
-      "planName": "UnitedHealthcare Commercial PDL baseline",
-      "medication": "Tiotropium (generic capsule-inhaler)",
-      "therapeuticArea": "Anticholinergics",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "No exact generic tiotropium capsule row was found in the May 2026 UHC commercial PDL.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
     },
     {
       "planKey": "uhcCommercial",
@@ -2730,15 +2613,6 @@
     {
       "planKey": "wellcareNjH0913",
       "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
-      "medication": "Guaifenesin ER",
-      "therapeuticArea": "Cough and mucus",
-      "reasonCode": "UNCONFIRMED_AMBIGUOUS_PRODUCT",
-      "productNote": "No exact extended-release guaifenesin row was found; only guaifenesin-codeine and OTC entries are listed.",
-      "requiredEvidence": "Exact product/strength/device row from the current official plan-family source"
-    },
-    {
-      "planKey": "wellcareNjH0913",
-      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
       "medication": "Mepolizumab",
       "therapeuticArea": "Asthma biologics",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
@@ -2748,26 +2622,8 @@
     {
       "planKey": "wellcareNjH0913",
       "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
-      "medication": "Mometasone",
-      "therapeuticArea": "Inhaled corticosteroids",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "wellcareNjH0913",
-      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
       "medication": "Mometasone / formoterol",
       "therapeuticArea": "ICS / LABA combinations",
-      "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
-      "productNote": null,
-      "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
-    },
-    {
-      "planKey": "wellcareNjH0913",
-      "planName": "Wellcare NJ Medicare H0913-002/021 formulary",
-      "medication": "Nicotine replacement",
-      "therapeuticArea": "Smoking cessation",
       "reasonCode": "UNCONFIRMED_NO_EXACT_PRODUCT",
       "productNote": null,
       "requiredEvidence": "Exact product row from the current official source; absence is not a denial"
