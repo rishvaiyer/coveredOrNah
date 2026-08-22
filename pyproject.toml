@@ -1,0 +1,8 @@
+[project]
+name = "formulary-pipeline"
+version = "0.1.0"
+description = "Local-first evidence-aware formulary ingestion and matching pipeline"
+requires-python = ">=3.11"
+
+[project.scripts]
+formulary-pipeline = "formulary_pipeline.cli:main"

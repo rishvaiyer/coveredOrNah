@@ -4,10 +4,10 @@ import test from "node:test";
 import {
   coverageFor,
   medications,
-  primaryNjPlans,
   type Coverage,
   type CoverageState,
 } from "../src/components/generated/PulmonaryFormularyDashboard.js";
+import { primaryNjPlans } from "../src/components/generated/formularyPlanRegistry.js";
 import { auditCoverageGaps } from "./audit-formulary-gaps.js";
 
 test("reports the current static formulary gap inventory deterministically", () => {
@@ -17,9 +17,9 @@ test("reports the current static formulary gap inventory deterministically", () 
     medicationCount: 85,
     planCount: 17,
     totalCells: 1445,
-    confirmedCells: 1011,
-    unconfirmedCells: 434,
-    unconfirmedPercent: 30.03,
+      confirmedCells: 1035,
+      unconfirmedCells: 410,
+      unconfirmedPercent: 28.37,
   });
 
   assert.deepEqual(
@@ -36,12 +36,12 @@ test("reports the current static formulary gap inventory deterministically", () 
       amerihealthSelect: 4,
       cignaNationalPreferred: 38,
       oscarNjIndividual: 54,
-      wellcareNjH0913: 25,
+      wellcareNjH0913: 20,
       humanaNj26408: 26,
       bravenNjH0885: 76,
-      healthspringNj26096: 17,
-      cloverNj2026: 20,
-      wellpointNjFamilyCare: 63,
+      healthspringNj26096: 15,
+      cloverNj2026: 17,
+      wellpointNjFamilyCare: 49,
     },
   );
 
@@ -51,7 +51,7 @@ test("reports the current static formulary gap inventory deterministically", () 
   );
   assert.equal(
     audit.byTherapeuticArea.find((row) => row.therapeuticArea === "Rescue inhalers")?.unconfirmedCells,
-    10,
+    9,
   );
 });
 
@@ -114,7 +114,7 @@ test("static source-backed UI uses source-listed language instead of covered lan
   assert.match(readmeSource, /\| \*\*Source-listed\*\* \| The selected medication product appears in the selected source\./);
   assert.match(readmeSource, /Reserve `Covered` for exact connector output tied to a selected plan or NDC\./);
   assert.doesNotMatch(readmeSource, /\| \*\*Covered\*\* \| The selected medication product appears in the selected source\./);
-  assert.match(launchPlanGeneratorSource, /1,011 of 1,445 medication-plan cells as source-confirmed; 434 remain explicitly unconfirmed/);
+  assert.match(launchPlanGeneratorSource, /1,035 of 1,445 medication-plan cells as source-confirmed; 410 remain explicitly unconfirmed/);
   assert.doesNotMatch(launchPlanGeneratorSource, /1,009 of 1,445 medication-plan cells as source-confirmed; 436 remain explicitly unconfirmed/);
 });
 

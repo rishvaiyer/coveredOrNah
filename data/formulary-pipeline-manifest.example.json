@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "source_id": "cms-nj-medicare-2026",
+      "insurer": "CMS",
+      "state": "NJ",
+      "benefit_type": "medicare",
+      "plan_name": "Exact CMS contract-plan-segment",
+      "url": "https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers",
+      "source_type": "cms-monthly-files",
+      "source_version": "YYYY-MM-DD",
+      "scope": "exact contract, plan, segment, formulary, and product",
+      "refresh_days": 31,
+      "access": "public"
+    }
+  ]
+}

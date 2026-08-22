@@ -1,0 +1,30 @@
+import type { ClinicCatalog } from "./catalogTypes";
+
+export const familyMedicineCatalog: ClinicCatalog = {
+  slug: "family-medicine",
+  name: "Family Medicine Starter Catalog",
+  specialty: "Family medicine",
+  status: "starter",
+  medications: [
+    ["Amoxicillin / clavulanate", "Augmentin", "Respiratory infections", "Common bacterial respiratory infections", "Oral tablets and suspension; exact strength matters."],
+    ["Amoxicillin", "Amoxil", "Respiratory infections", "Common outpatient infections", "Oral capsules, tablets, and suspension."],
+    ["Azithromycin", "Zithromax", "Respiratory infections", "Respiratory and selected bacterial infections", "Oral tablets, suspension, and packet products differ."],
+    ["Doxycycline", "Vibramycin", "Respiratory infections", "Respiratory, skin, and tick-borne infections", "Hyclate and monohydrate products differ."],
+    ["Cephalexin", "Keflex", "Anti-infectives", "Skin and urinary infections", "Oral capsules and suspension."],
+    ["Lisinopril", "Prinivil, Zestril", "Cardiovascular", "Hypertension and heart failure", "Strength and dosage form must be matched."],
+    ["Losartan", "Cozaar", "Cardiovascular", "Hypertension and kidney protection", "Strength and dosage form must be matched."],
+    ["Amlodipine", "Norvasc", "Cardiovascular", "Hypertension and angina", "Oral tablet strengths differ."],
+    ["Atorvastatin", "Lipitor", "Cardiovascular", "Lipid lowering", "Oral tablet strengths differ."],
+    ["Apixaban", "Eliquis", "Anticoagulation", "Stroke prevention and venous thromboembolism", "2.5 mg and 5 mg products are distinct."],
+    ["Metformin", "Glucophage", "Diabetes", "Type 2 diabetes", "Immediate-release and extended-release products differ."],
+    ["Semaglutide", "Ozempic, Wegovy, Rybelsus", "Diabetes and weight management", "Type 2 diabetes or weight management", "Indication, device, and strength must be matched."],
+    ["Levothyroxine", "Synthroid, Levoxyl", "Endocrine", "Hypothyroidism", "Strength and manufacturer can matter clinically."],
+    ["Sertraline", "Zoloft", "Behavioral health", "Depression and anxiety disorders", "Concentrate and tablet products differ."],
+    ["Escitalopram", "Lexapro", "Behavioral health", "Depression and anxiety disorders", "Tablet and solution products differ."],
+    ["Prednisone", "Rayos", "Inflammation", "Inflammatory and autoimmune conditions", "Immediate-release, delayed-release, and dose packs differ."],
+    ["Famotidine", "Pepcid", "Gastrointestinal", "Reflux and ulcer disease", "Tablet, chewable, and suspension products differ."],
+    ["Omeprazole", "Prilosec", "Gastrointestinal", "Reflux and ulcer disease", "Delayed-release capsule and suspension products differ."],
+    ["Albuterol HFA", "ProAir, Ventolin", "Respiratory", "Asthma and COPD rescue", "Inhaler device and actuation strength must be matched."],
+    ["Epinephrine auto-injector", "EpiPen", "Allergy", "Anaphylaxis", "Device strength and package count must be matched."],
+  ].map(([generic, brands, category, commonUses, productDetails]) => ({ generic, brands, category, commonUses, productDetails })),
+};

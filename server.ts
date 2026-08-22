@@ -4,13 +4,11 @@ import { fileURLToPath } from "node:url";
 import { ensureFormularySchema, pool } from "./db.js";
 import {
   medications,
-  plans,
-  primaryNjPlans,
   coverageFor,
   summitNjInsurers,
   summitNjFormularySources,
-  type PlanKey,
 } from "./src/components/generated/PulmonaryFormularyDashboard.tsx";
+import { plans, primaryNjPlans, type PlanKey } from "./src/components/generated/formularyPlanRegistry.ts";
 import { PDP_REGION_BY_STATE } from "./scripts/cms-medicare-utils.js";
 import { UhcNjQhpAdapter, serializeUhcNjQhpError } from "./uhc-nj-qhp.js";
 import {
@@ -44,6 +42,7 @@ import {
   lookupWellpointFeedProduct,
   type WellpointNjFamilyCareFeed,
 } from "./src/server-data/wellpoint-nj-familycare-feed.js";
+import { clinicCatalogs, getClinicCatalog } from "./src/catalogs/index.js";
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
@@ -114,6 +113,16 @@ app.get("/api/health", (_request, response) => {
 
 app.get("/api/plans", (_request, response) => {
   response.json({ plans: primaryNjPlans });
+});
+
+app.get("/api/catalogs", (_request, response) => {
+  response.json({ catalogs: clinicCatalogs.map(({ medications: _medications, ...catalog }) => ({ ...catalog, medicationCount: _medications.length })) });
+});
+
+app.get("/api/catalogs/:slug/medications", (request, response) => {
+  const catalog = getClinicCatalog(String(request.params.slug));
+  if (!catalog) return response.status(404).json({ error: "Clinic catalog not found." });
+  response.json(catalog);
 });
 
 app.get("/api/uhc-nj-qhp/plans", async (request, response) => {

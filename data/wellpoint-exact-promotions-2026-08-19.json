@@ -1,0 +1,27 @@
+{
+  "source_id": "wellpoint-nj-medicaid",
+  "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json",
+  "public_name": "New Jersey Medicaid",
+  "formulary_name": "New Jersey Medicaid Formulary",
+  "formulary_id": "16194",
+  "formulary_version": "79",
+  "effective_date": "2026-08-01",
+  "fetched_at": "2026-08-19T16:54:41.349Z",
+  "evidence_state": "confirmed",
+  "promotions": [
+    {"medication": "Arformoterol", "feed_product": "Arformoterol Tartrate Nebulization Solution 15 MCG/2ML Inhalation", "tier": "Non-Preferred", "flags": ["QL"]},
+    {"medication": "Formoterol", "feed_product": "Formoterol Fumarate Nebulization Solution 20 MCG/2ML Inhalation", "tier": "Non-Preferred", "flags": ["QL"]},
+    {"medication": "Tiotropium (generic capsule-inhaler)", "feed_product": "Tiotropium Bromide Capsule 18 MCG Inhalation", "representative_ndcs": ["68180096412", "68180096411"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Incruse Ellipta (brand)", "feed_product": "Incruse Ellipta Aerosol Powder Breath Activated 62.5 MCG/ACT Inhalation", "representative_ndcs": ["00173087306", "00173087310"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Glycopyrrolate / formoterol", "feed_product": "Bevespi Aerosphere Aerosol 9-4.8 MCG/ACT Inhalation", "representative_ndcs": ["00310460012"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Revefenacin", "feed_product": "Yupelri Nebulization Solution 175 MCG/3ML Inhalation", "representative_ndcs": ["49502080632", "49502080693", "49502080687"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Olodaterol", "feed_product": "Striverdi Respimat Aerosol Solution 2.5 MCG/ACT Inhalation", "representative_ndcs": ["00597019261"], "tier": "Non-Preferred", "flags": ["QL"]},
+    {"medication": "Aclidinium", "feed_product": "Tudorza Pressair Aerosol Powder Breath Activated 400 MCG/ACT Inhalation", "representative_ndcs": ["00310080039", "00310080060"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Ensifentrine", "feed_product": "Ohtuvayre Suspension 3 MG/2.5ML Inhalation", "representative_ndcs": ["83034000360", "83034000301"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Albuterol / budesonide", "feed_product": "Airsupra Aerosol 90-80 MCG/ACT Inhalation", "representative_ndcs": ["00310908012", "00310908028"], "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Zileuton ER", "feed_product": "Zileuton ER Tablet Extended Release 12 Hour 600 MG Oral", "tier": "Non-Preferred", "flags": ["PA", "QL"]},
+    {"medication": "Reslizumab", "feed_product": "Cinqair SOLUTION 100 MG/10ML Intravenous", "representative_ndcs": ["59310061031", "59310061033"], "tier": "Non-Preferred", "flags": []},
+    {"medication": "Aztreonam inhalation", "feed_product": "Cayston Solution Reconstituted 75 MG Inhalation", "representative_ndcs": ["61958090101"], "tier": "Non-Preferred", "flags": ["QL"]},
+    {"medication": "Dornase alfa", "feed_product": "Pulmozyme Solution 2.5 MG/2.5ML Inhalation", "representative_ndcs": ["50242010039", "50242010040"], "tier": "Preferred", "flags": ["PA", "QL"]}
+  ]
+}

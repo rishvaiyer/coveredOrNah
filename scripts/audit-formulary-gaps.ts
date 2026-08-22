@@ -3,12 +3,11 @@ import { fileURLToPath } from "node:url";
 import {
   coverageFor,
   medications,
-  primaryNjPlans,
   type Coverage,
   type CoverageState,
   type Medication,
-  type PlanKey,
 } from "../src/components/generated/PulmonaryFormularyDashboard.js";
+import { plans, primaryNjPlans, type PlanKey } from "../src/components/generated/formularyPlanRegistry.js";
 
 export const VALID_COVERAGE_STATES = [
   "Preferred",
