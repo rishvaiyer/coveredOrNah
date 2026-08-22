@@ -27,7 +27,7 @@ The same lifecycle, radar engine, and case model as Phase A, operating on real c
 
 - Automatic submission of prior authorizations to payers.
 - EHR integration or chart access.
-- Voice/phone automation against real payers (the synthetic sandbox pattern extends only under separately approved telephony compliance review).
+- Voice/phone automation against real payers. Status calls stay on the mock provider indefinitely (the `run-pa-voice-sandbox.py` pattern); any real-telephony path requires a separate telephony compliance review and is not part of this spec.
 - Any claim language beyond stage status: the tracker reports where a case stands; it never adjudicates.
 
 ## 5. Acceptance tests for Phase B (when unlocked)
