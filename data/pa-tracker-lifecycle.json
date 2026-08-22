@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "name": "PA tracker canonical lifecycle",
+  "description": "Canonical prior authorization case lifecycle for the Formulary Finder PA tracker research preview. Fully synthetic operating model; clock values cite public rules where a rule exists.",
+  "stages": [
+    {
+      "id": "intake",
+      "label": "Intake",
+      "description": "A new PA request is captured: medication family, plan family, and benefit type are recorded before any evidence work begins."
+    },
+    {
+      "id": "evidence_assembly",
+      "label": "Evidence assembly",
+      "description": "Chart-supported clinical justification is collected and organized against what the plan family is known to request."
+    },
+    {
+      "id": "submitted",
+      "label": "Submitted",
+      "description": "The PA packet has been sent to the payer. The standard decision clock is running."
+    },
+    {
+      "id": "acknowledged",
+      "label": "Acknowledged",
+      "description": "The payer has confirmed receipt and issued a reference number. Silence after acknowledgment is still tracked against the clock."
+    },
+    {
+      "id": "pended_more_info",
+      "label": "Pending more info",
+      "description": "The payer requested additional information. The response deadline is tracked as a hard follow-up date; unconfirmed is not a denial."
+    },
+    {
+      "id": "approved",
+      "label": "Approved",
+      "description": "Synthetic outcome stage: the payer authorized the request for a bounded period. Expiry tracking starts here."
+    },
+    {
+      "id": "denied",
+      "label": "Denied",
+      "description": "Synthetic outcome stage: the payer declined the request as submitted. Appeal windows and reasons are recorded for the loop-closure step."
+    },
+    {
+      "id": "appeal_p2p",
+      "label": "Appeal or peer-to-peer",
+      "description": "A denial is being contested through appeal or peer-to-peer review while the case stays visible on the board."
+    },
+    {
+      "id": "filled",
+      "label": "Filled",
+      "description": "The medication was dispensed under the authorization. The case remains open for renewal monitoring."
+    },
+    {
+      "id": "renewal_due",
+      "label": "Renewal due",
+      "description": "The authorization is approaching expiry and a renewal packet must enter the cycle before coverage lapses between visits."
+    }
+  ],
+  "clocks": {
+    "standard_tat_days": 7,
+    "expedited_tat_hours": 72,
+    "default_pend_response_days": 14,
+    "renewal_runway_days": 45,
+    "sourceNotes": [
+      "Standard 7 calendar day and expedited 72 hour prior authorization decision timeframes are requirements of the CMS Interoperability and Prior Authorization Support final rule (CMS-0057-F), applicable to covered payers starting January 1, 2026.",
+      "default_pend_response_days and renewal_runway_days are internal synthetic-clinic operating defaults for the research preview, not regulatory figures."
+    ]
+  }
+}

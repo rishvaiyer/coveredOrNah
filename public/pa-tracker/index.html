@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PA tracker research preview | Formulary Finder</title>
+<meta name="description" content="A synthetic, PHI-free prior authorization tracker storyboard: canonical lifecycle, follow-up radar, and renewal loop." />
+<style>
+:root { color-scheme: light; }
+body { font-family: Georgia, 'Times New Roman', serif; margin: 0; background: #f6f1e7; color: #14213d; }
+main { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+h1 { font-size: 2rem; margin: 0 0 .35rem; }
+h2 { font-size: 1.2rem; margin-top: 2.25rem; }
+h3 { font-size: 1rem; margin: 0 0 .5rem; }
+.badge { display: inline-block; font-family: ui-monospace, monospace; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; background: #14213d; color: #f6f1e7; padding: .25rem .55rem; border-radius: 3px; }
+.note { background: #fffaf0; border: 1px solid #d8c4a0; padding: .9rem 1rem; border-radius: 6px; font-size: .95rem; }
+.beat { border-left: 4px solid #d8c4a0; padding-left: 1rem; }
+table { border-collapse: collapse; width: 100%; margin-top: 1rem; background: #fffdf8; }
+th, td { border: 1px solid #e0d5bd; padding: .45rem .55rem; text-align: left; vertical-align: top; font-size: .88rem; }
+th { background: #efe6d2; font-family: ui-monospace, monospace; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+td.num, th.num { text-align: center; font-family: ui-monospace, monospace; }
+.radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+.radar-card { background: #fffdf8; border: 1px solid #d8c4a0; border-radius: 6px; padding: 1rem; }
+.radar-card ul { list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+.radar-card li { padding: .45rem 0; border-bottom: 1px dashed #e0d5bd; }
+.radar-card li:last-child { border-bottom: none; }
+.radar-empty { color: #5a5347; font-style: italic; }
+.unassigned { font-family: ui-monospace, monospace; font-weight: bold; color: #8c2f00; }
+.late { font-family: ui-monospace, monospace; font-weight: bold; color: #8c2f00; }
+.soon { font-family: ui-monospace, monospace; color: #7a5b00; }
+footer { margin-top: 3rem; font-size: .85rem; color: #5a5347; border-top: 1px solid #d8c4a0; padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>PA tracker research preview</h1>
+<p><span class="badge">synthetic data</span> <span class="badge">research preview</span></p>
+<p>A storyboard for a prior authorization case-and-follow-up layer at Example NJ Specialty Clinic, a fictional three-provider New Jersey clinic mixing pulmonology and dermatology. Every case on this page is invented. Nothing here is a coverage determination, a benefit check, or medical advice.</p>
+<div class="note">
+<strong>Truth language.</strong> All rows are synthetic. Unconfirmed is not a denial. Words like approved or denied below appear only as lifecycle stage labels of invented cases; this preview never states anything about any real person's benefits.
+</div>
+
+<h2 id="beat-wall">Beat 1: The wall today</h2>
+<div class="beat">
+<p>The whole board at a glance: every open synthetic PA case, its lifecycle stage, and who owns the next move.</p>
+<table>
+<tr><th>Case</th><th>Medication family</th><th>Plan family</th><th>Stage</th><th>Benefit</th><th>Payer ref</th><th class="num">Decision due</th><th class="num">Pend response due</th><th class="num">Auth expires</th><th>Owner</th></tr>
+<tr><td>SYN-001</td><td>Dupilumab</td><td>Horizon BCBSNJ Marketplace</td><td>Submitted</td><td>pharmacy</td><td>PA-2026-10417</td><td class="num">2026-08-06</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>ma-01</td></tr>
+<tr><td>SYN-002</td><td>Secukinumab</td><td>UHC Commercial PDL baseline</td><td>Acknowledged</td><td>medical</td><td>PA-2026-10388</td><td class="num">2026-08-02</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>rn-02</td></tr>
+<tr><td>SYN-003</td><td>Omalizumab</td><td>Aetna Medicare HMO 26010</td><td>Submitted</td><td>medical</td><td>PA-2026-10501</td><td class="num">2026-08-08</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td><span class="unassigned">UNASSIGNED</span></td></tr>
+<tr><td>SYN-004</td><td>Mepolizumab</td><td>Wellpoint NJ FamilyCare</td><td>Pending more info</td><td>pharmacy</td><td>PA-2026-10544</td><td class="num">2026-09-02</td><td class="num">2026-08-26</td><td class="num"><span class="radar-empty">none</span></td><td><span class="unassigned">UNASSIGNED</span></td></tr>
+<tr><td>SYN-005</td><td>Adalimumab biosimilar</td><td>AmeriHealth NJ Individual &amp; Family</td><td>Pending more info</td><td>pharmacy</td><td>PA-2026-10552</td><td class="num">2026-09-04</td><td class="num">2026-08-27</td><td class="num"><span class="radar-empty">none</span></td><td><span class="unassigned">UNASSIGNED</span></td></tr>
+<tr><td>SYN-006</td><td>Dupilumab</td><td>Horizon BCBSNJ Marketplace</td><td>Approved</td><td>pharmacy</td><td>PA-2026-09871</td><td class="num">2026-07-20</td><td class="num"><span class="radar-empty">none</span></td><td class="num">2026-10-28</td><td>rn-01</td></tr>
+<tr><td>SYN-007</td><td>Crisaborole</td><td>Wellpoint NJ FamilyCare</td><td>Approved</td><td>pharmacy</td><td>PA-2026-09904</td><td class="num">2026-07-23</td><td class="num"><span class="radar-empty">none</span></td><td class="num">2026-11-04</td><td>ma-02</td></tr>
+<tr><td>SYN-008</td><td>Roflumilast foam</td><td>AmeriHealth NJ Individual &amp; Family</td><td>Denied</td><td>pharmacy</td><td>PA-2026-10561</td><td class="num">2026-08-14</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>rn-02</td></tr>
+<tr><td>SYN-009</td><td>Tretinoin</td><td>UHC Commercial PDL baseline</td><td>Intake</td><td>pharmacy</td><td><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>ma-01</td></tr>
+<tr><td>SYN-010</td><td>Clobetasol</td><td>Horizon BCBSNJ Marketplace</td><td>Evidence assembly</td><td>pharmacy</td><td><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>ma-02</td></tr>
+<tr><td>SYN-011</td><td>Calcipotriene/betamethasone</td><td>Aetna Medicare HMO 26010</td><td>Filled</td><td>medical</td><td>PA-2026-10122</td><td class="num">2026-08-10</td><td class="num"><span class="radar-empty">none</span></td><td class="num">2026-11-20</td><td>rn-01</td></tr>
+<tr><td>SYN-012</td><td>Apremilast</td><td>UHC Commercial PDL baseline</td><td>Acknowledged</td><td>pharmacy</td><td>PA-2026-10618</td><td class="num">2026-09-28</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>rn-02</td></tr>
+<tr><td>SYN-013</td><td>Methotrexate</td><td>Wellpoint NJ FamilyCare</td><td>Appeal or peer-to-peer</td><td>pharmacy</td><td>PA-2026-10490</td><td class="num">2026-08-12</td><td class="num"><span class="radar-empty">none</span></td><td class="num"><span class="radar-empty">none</span></td><td>rn-01</td></tr>
+<tr><td>SYN-014</td><td>Secukinumab</td><td>AmeriHealth NJ Individual &amp; Family</td><td>Renewal due</td><td>pharmacy</td><td>PA-2026-10033</td><td class="num">2026-07-06</td><td class="num"><span class="radar-empty">none</span></td><td class="num">2026-09-30</td><td>ma-01</td></tr>
+</table>
+</div>
+
+<h2 id="beat-intake">Beat 2: New case intake</h2>
+<div class="beat">
+<p>In the product, starting a case means capturing three facts first: medication family, plan family, and pharmacy versus medical benefit. The tracker then shows which evidence the plan family is known to request, before anyone touches a chart. Intake stays structured and flat by design, so nothing patient-identifying ever needs to enter the tool.</p>
+</div>
+
+<h2 id="beat-evidence">Beat 3: Evidence assembly</h2>
+<div class="beat">
+<p>The product organizes chart-supported clinical justification against the payer's documented requests, and marks each item confirmed only when an official source is attached. Items without exact evidence stay marked unconfirmed, and unconfirmed is not a denial. Staff see what is missing instead of guessing.</p>
+</div>
+
+<h2 id="beat-submit">Beat 4: Submit and acknowledge</h2>
+<div class="beat">
+<p>On submission the tracker starts the payer clock: seven calendar days standard, seventy-two hours expedited, per CMS-0057-F timeframes effective starting 2026. When an acknowledgment and reference number arrive they are attached to the case. If the payer stays silent past the clock, the case surfaces on the radar below instead of quietly aging in an inbox.</p>
+</div>
+
+<h2 id="beat-radar">Beat 5: Radar</h2>
+<div class="beat">
+<p>Three card groups, computed directly from the synthetic case dates as of 2026-08-22. This is the persuasive moment: nothing here requires anyone to remember a deadline.</p>
+<div class="radar-grid">
+<div class="radar-card"><h3>Pend deadlines</h3><ul>
+<li data-radar-kind="pend">SYN-004 Mepolizumab: response due 2026-08-26 (<span class="soon">4 days left</span>), owner <span class="unassigned">UNASSIGNED</span></li>
+<li data-radar-kind="pend">SYN-005 Adalimumab biosimilar: response due 2026-08-27 (<span class="soon">5 days left</span>), owner <span class="unassigned">UNASSIGNED</span></li>
+</ul></div>
+<div class="radar-card"><h3>Silent past turnaround</h3><ul>
+<li data-radar-kind="silent">SYN-002 Secukinumab (UHC Commercial PDL baseline): no decision, due 2026-08-02, <span class="late">20 days overdue</span>. Silence is tracked, but unconfirmed is not a denial.</li>
+<li data-radar-kind="silent">SYN-001 Dupilumab (Horizon BCBSNJ Marketplace): no decision, due 2026-08-06, <span class="late">16 days overdue</span>. Silence is tracked, but unconfirmed is not a denial.</li>
+<li data-radar-kind="silent">SYN-003 Omalizumab (Aetna Medicare HMO 26010): no decision, due 2026-08-08, <span class="late">14 days overdue</span>. Silence is tracked, but unconfirmed is not a denial.</li>
+</ul></div>
+<div class="radar-card"><h3>Renewal wall</h3><ul>
+<li data-radar-kind="renewal">SYN-006 Dupilumab: authorization ends 2026-10-28 (<span class="soon">67 days left</span>). Renewal work should start before this date.</li>
+<li data-radar-kind="renewal">SYN-007 Crisaborole: authorization ends 2026-11-04 (<span class="soon">74 days left</span>). Renewal work should start before this date.</li>
+</ul></div>
+</div>
+</div>
+
+<h2 id="beat-renewal">Beat 6: Outcome and renewal loop</h2>
+<div class="beat">
+<p>An outcome is not the end. Authorizations expire, renewals need runway, and a denied case opens a bounded appeal window. The product keeps those dates visible so the clinic acts before a gap between visits, and records why each denial happened so the next packet is stronger. Renewal runway default in this synthetic model: 45 days before expiry.</p>
+<table><tr><th>Case</th><th>Medication family</th><th class="num">Authorization ends</th><th>Recorded denial reason, where one exists</th></tr><tr><td>SYN-006</td><td>Dupilumab</td><td class="num">2026-10-28</td><td><span class="radar-empty">none</span></td></tr><tr><td>SYN-007</td><td>Crisaborole</td><td class="num">2026-11-04</td><td><span class="radar-empty">none</span></td></tr><tr><td>SYN-011</td><td>Calcipotriene/betamethasone</td><td class="num">2026-11-20</td><td><span class="radar-empty">none</span></td></tr><tr><td>SYN-014</td><td>Secukinumab</td><td class="num">2026-09-30</td><td><span class="radar-empty">none</span></td></tr></table>
+</div>
+
+<footer>
+Formulary Finder is an evidence layer for medication access: AI should not make coverage decisions; it should make the evidence inspectable. This page is a static, deterministic research preview built entirely from synthetic seed data under privacy mode phi_free_only. It is not a coverage determination and it describes no real benefits. <a href="/specialty/">All specialty previews</a>.
+</footer>
+</main>
+</body>
+</html>
