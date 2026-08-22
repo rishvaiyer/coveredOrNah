@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Wound Care Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Wound care",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AHRQ pressure-injury prevention public resources, WOCN and CMS wound-care coverage reporting, and published enzymatic versus sharp debridement distinctions used only as public formulary-complexity signals, not clinical advice. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "mupirocin-ointment",
+      "display_name": "Mupirocin 2% ointment",
+      "clinical_bucket": "topical anti-infective ointment versus cream route split row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mupirocin-nasal",
+      "display_name": "Mupirocin nasal",
+      "clinical_bucket": "MRSA decolonization nasal formulation split row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "retapamulin",
+      "display_name": "Retapamulin (Altabax)",
+      "clinical_bucket": "pleuromutilin topical ointment brand-only history row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "bacitracin-polymyxin",
+      "display_name": "Bacitracin zinc / polymyxin B",
+      "clinical_bucket": "over-the-counter routing neutral framing row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "silver-sulfadiazine",
+      "display_name": "Silver sulfadiazine cream",
+      "clinical_bucket": "burn and chronic wound topical anti-infective row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "povidone-iodine",
+      "display_name": "Povidone-iodine (Betadine)",
+      "clinical_bucket": "antiseptic over-the-counter routing neutral framing row",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "collagenase-santyl",
+      "display_name": "Collagenase clostridial histolyticum (Santyl)",
+      "clinical_bucket": "enzymatic debridement agent distinction row with prior-auth friction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "medical-grade-honey",
+      "display_name": "Medical-grade honey dressings",
+      "clinical_bucket": "debridement and moisture balance neutral framing row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": false
+    },
+    {
+      "id": "triamcinolone-topical",
+      "display_name": "Triamcinolone topical",
+      "clinical_bucket": "periwound dermatitis strength and vehicle match row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pentoxifylline",
+      "display_name": "Pentoxifylline",
+      "clinical_bucket": "venous-leg-ulcer adjunct to compression row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cephalexin",
+      "display_name": "Cephalexin",
+      "clinical_bucket": "first-line oral systemic antibiotic for non-purulent wound infections",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tmp-smx-ds",
+      "display_name": "Sulfamethoxazole / trimethoprim DS (Bactrim DS)",
+      "clinical_bucket": "MRSA-risk purulent infection strength-distinct row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clindamycin",
+      "display_name": "Clindamycin",
+      "clinical_bucket": "anaerobic-covering oral systemic antibiotic row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "linezolid",
+      "display_name": "Linezolid",
+      "clinical_bucket": "oral versus intravenous MRSA benefit-routing split row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ceftriaxone-iv",
+      "display_name": "Ceftriaxone IV (Rocephin)",
+      "clinical_bucket": "medical-benefit versus pharmacy-benefit injectable contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "vancomycin-daptomycin-iv",
+      "display_name": "Vancomycin / daptomycin IV",
+      "clinical_bucket": "serious MRSA infusion-site medical-benefit contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    }
+  ]
+}

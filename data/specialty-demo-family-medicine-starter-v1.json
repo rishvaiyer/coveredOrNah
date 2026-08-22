@@ -1,0 +1,279 @@
+{
+  "clinic_display_name": "Example New Jersey Family Medicine Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Family medicine",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed aligned to the committed Family Medicine starter catalog; replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "amoxicillin-clavulanate",
+      "display_name": "Amoxicillin / clavulanate (Augmentin)",
+      "clinical_bucket": "Respiratory infections",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "amoxicillin",
+      "display_name": "Amoxicillin (Amoxil)",
+      "clinical_bucket": "Respiratory infections",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azithromycin",
+      "display_name": "Azithromycin (Zithromax)",
+      "clinical_bucket": "Respiratory infections",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "doxycycline",
+      "display_name": "Doxycycline (Vibramycin)",
+      "clinical_bucket": "Respiratory infections",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cephalexin",
+      "display_name": "Cephalexin (Keflex)",
+      "clinical_bucket": "Anti-infectives",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lisinopril",
+      "display_name": "Lisinopril (Prinivil)",
+      "clinical_bucket": "Cardiovascular",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "losartan",
+      "display_name": "Losartan (Cozaar)",
+      "clinical_bucket": "Cardiovascular",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "amlodipine",
+      "display_name": "Amlodipine (Norvasc)",
+      "clinical_bucket": "Cardiovascular",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "atorvastatin",
+      "display_name": "Atorvastatin (Lipitor)",
+      "clinical_bucket": "Cardiovascular",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apixaban",
+      "display_name": "Apixaban (Eliquis)",
+      "clinical_bucket": "Anticoagulation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metformin",
+      "display_name": "Metformin (Glucophage)",
+      "clinical_bucket": "Diabetes",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "semaglutide",
+      "display_name": "Semaglutide (Ozempic)",
+      "clinical_bucket": "Type 2 diabetes",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levothyroxine",
+      "display_name": "Levothyroxine (Synthroid)",
+      "clinical_bucket": "Endocrine",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sertraline",
+      "display_name": "Sertraline (Zoloft)",
+      "clinical_bucket": "Behavioral health",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "escitalopram",
+      "display_name": "Escitalopram (Lexapro)",
+      "clinical_bucket": "Behavioral health",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prednisone",
+      "display_name": "Prednisone (Rayos)",
+      "clinical_bucket": "Inflammation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "famotidine",
+      "display_name": "Famotidine (Pepcid)",
+      "clinical_bucket": "Gastrointestinal",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "omeprazole",
+      "display_name": "Omeprazole (Prilosec)",
+      "clinical_bucket": "Gastrointestinal",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "albuterol-hfa",
+      "display_name": "Albuterol HFA (ProAir)",
+      "clinical_bucket": "Respiratory",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "epinephrine-auto-injector",
+      "display_name": "Epinephrine auto-injector (EpiPen)",
+      "clinical_bucket": "Allergy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example Cystic Fibrosis Care Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Cystic fibrosis care",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: Cystic Fibrosis Foundation access resources cited generically, including the CF Foundation's prescription assistance and drug coverage guidance, its case-management and payer-coordination materials, and accredited CF care center pharmacy support documentation. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "elexacaftor-tezacaftor-ivacaftor",
+      "display_name": "Elexacaftor/tezacaftor/ivacaftor (Trikafta)",
+      "clinical_bucket": "CFTR modulator",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ivacaftor",
+      "display_name": "Ivacaftor (Kalydeco)",
+      "clinical_bucket": "CFTR potentiator",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tezacaftor-ivacaftor",
+      "display_name": "Tezacaftor/ivacaftor (Symdeko)",
+      "clinical_bucket": "CFTR corrector-potentiator",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dornase-alfa",
+      "display_name": "Dornase alfa (Pulmozyme)",
+      "clinical_bucket": "inhaled mucolytic enzyme",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tobramycin-inhaled",
+      "display_name": "Tobramycin inhaled (TOBI, Bethkis, Podhaler)",
+      "clinical_bucket": "inhaled antibiotic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "aztreonam-lysine-inhalation",
+      "display_name": "Aztreonam lysine inhalation (Cayston)",
+      "clinical_bucket": "inhaled antibiotic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "hypertonic-saline-inhalation",
+      "display_name": "Hypertonic saline inhalation (Hyper-Sal, Nebusal)",
+      "clinical_bucket": "inhaled osmotic agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pancreatic-enzyme-replacement",
+      "display_name": "Pancreatic enzyme replacement (Creon)",
+      "clinical_bucket": "enzyme replacement",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ursodiol",
+      "display_name": "Ursodiol (Actigall)",
+      "clinical_bucket": "bile acid therapy",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fat-soluble-vitamin-support",
+      "display_name": "Fat-soluble vitamin support (CF multivitamins)",
+      "clinical_bucket": "vitamin supplementation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "albuterol-nebulized",
+      "display_name": "Albuterol nebulized (Accuneb-type solution)",
+      "clinical_bucket": "short-acting bronchodilator",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azithromycin",
+      "display_name": "Azithromycin (Zithromax)",
+      "clinical_bucket": "macrolide chronic maintenance",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "omeprazole",
+      "display_name": "Omeprazole (Prilosec)",
+      "clinical_bucket": "proton pump inhibitor",
+      "specialty_relevance": 2,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "budesonide-nebulized",
+      "display_name": "Budesonide nebulized (Pulmicort respules)",
+      "clinical_bucket": "inhaled corticosteroid",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "insulin",
+      "display_name": "Insulin (CFRD cross-specialty row)",
+      "clinical_bucket": "diabetes management",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ibuprofen-prescription",
+      "display_name": "Prescription ibuprofen",
+      "clinical_bucket": "NSAID protocol use",
+      "specialty_relevance": 2,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

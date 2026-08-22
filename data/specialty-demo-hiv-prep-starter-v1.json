@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey HIV and PrEP Care Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "HIV and PrEP care",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: CDC PrEP clinical guideline updates, DHHS antiretroviral guidelines, and NJ state formulary public listings. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "ftc-tdf-prep",
+      "display_name": "Emtricitabine/tenofovir disoproxil fumarate (Truvada and generics)",
+      "clinical_bucket": "PrEP backbone with brand-generic distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ftc-taf-descovy",
+      "display_name": "Emtricitabine/tenofovir alafenamide (Descovy)",
+      "clinical_bucket": "PrEP backbone with narrowed indication",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "biktarvy-str",
+      "display_name": "Bictegravir/emtricitabine/TAF (Biktarvy)",
+      "clinical_bucket": "single-tablet regimen anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dolutegravir-tivicay",
+      "display_name": "Dolutegravir (Tivicay)",
+      "clinical_bucket": "standalone integrase inhibitor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dolutegravir-lamivudine-dovato",
+      "display_name": "Dolutegravir/lamivudine (Dovato) vs standalone dolutegravir",
+      "clinical_bucket": "two-drug STR distinction row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "raltegravir-isentress",
+      "display_name": "Raltegravir (Isentress / Isentress HD)",
+      "clinical_bucket": "integrase inhibitor with strength split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "darunavir-cobicistat-rezolsta",
+      "display_name": "Darunavir/cobicistat boost pair (Rezolsta)",
+      "clinical_bucket": "boosted protease inhibitor note row",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "doravirine-pifeltro",
+      "display_name": "Doravirine (Pifeltro)",
+      "clinical_bucket": "NNRTI legacy-regimen replacement",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rilpivirine-edurant",
+      "display_name": "Rilpivirine (Edurant) oral tablet",
+      "clinical_bucket": "NNRTI with food and acid-timing rules",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cabenuva-la-injection",
+      "display_name": "Cabotegravir/rilpivirine LA injection (Cabenuva)",
+      "clinical_bucket": "medical-benefit long-acting injectable contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sunlenca-la-injection",
+      "display_name": "Lenacapavir LA injection (Sunlenca)",
+      "clinical_bucket": "medical-benefit twice-yearly injectable contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "valacyclovir-hsv-support",
+      "display_name": "Valacyclovir and acyclovir collapsed HSV-support row",
+      "clinical_bucket": "HSV support therapy in HIV care",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "fluconazole-thrush",
+      "display_name": "Fluconazole thrush row",
+      "clinical_bucket": "oropharyngeal candidiasis therapy",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ondansetron-supportive",
+      "display_name": "Ondansetron supportive-care row",
+      "clinical_bucket": "nausea supportive care",
+      "specialty_relevance": 2,
+      "service_line_match": 2,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "loperamide-supportive",
+      "display_name": "Loperamide supportive-care row",
+      "clinical_bucket": "diarrhea supportive care",
+      "specialty_relevance": 2,
+      "service_line_match": 2,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "cholestyramine-diarrhea-support",
+      "display_name": "Cholestyramine diarrhea-support row",
+      "clinical_bucket": "bile-acid binding diarrhea support",
+      "specialty_relevance": 2,
+      "service_line_match": 2,
+      "public_condition_match": 2,
+      "source_readiness": 3,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

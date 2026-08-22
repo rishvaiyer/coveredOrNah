@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Geriatrics Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Geriatrics",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AGS Beers Criteria (2023 update) used only as a public formulary-complexity signal, not clinical advice; ASHP geriatric polypharmacy coverage reporting; CMS Part D protected-class and anticoagulant utilization public data. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "donepezil",
+      "display_name": "Donepezil",
+      "clinical_bucket": "cholinesterase inhibitor cognitive support",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "memantine-er",
+      "display_name": "Memantine extended-release",
+      "clinical_bucket": "NMDA antagonist once-daily formulation row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rivastigmine-patch",
+      "display_name": "Rivastigmine transdermal patch",
+      "clinical_bucket": "transdermal cholinesterase inhibitor device row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "quetiapine-low-dose",
+      "display_name": "Quetiapine (low-dose dementia-framing, neutral)",
+      "clinical_bucket": "Beers-awareness antipsychotic row, neutral framing",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mirtazapine",
+      "display_name": "Mirtazapine",
+      "clinical_bucket": "older-adult behavioral health anchor",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "polyethylene-glycol-3350",
+      "display_name": "Polyethylene glycol 3350",
+      "clinical_bucket": "osmotic laxative over-the-counter routing row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "senna",
+      "display_name": "Senna",
+      "clinical_bucket": "stimulant laxative combination-product row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "lactulose",
+      "display_name": "Lactulose solution",
+      "clinical_bucket": "high-volume chronic laxative row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rifaximin-he",
+      "display_name": "Rifaximin 550 mg",
+      "clinical_bucket": "hepatic encephalopathy recurring specialty row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "alendronate-weekly",
+      "display_name": "Alendronate weekly regimen",
+      "clinical_bucket": "bisphosphonate frequency-distinct row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "vitamin-d2-d3-distinction",
+      "display_name": "Ergocalciferol (D2) vs cholecalciferol (D3)",
+      "clinical_bucket": "prescription vs over-the-counter distinction row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "calcitonin-salmon-nasal",
+      "display_name": "Calcitonin salmon nasal spray",
+      "clinical_bucket": "device-based bone health row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "teriparatide-medical-benefit",
+      "display_name": "Teriparatide daily pen injector",
+      "clinical_bucket": "medical-benefit versus pharmacy-benefit routing note row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "insulin-glargine-simplified-regimens",
+      "display_name": "Insulin glargine (U-100 vs U-300, biosimilar designations)",
+      "clinical_bucket": "simplified basal regimen note row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "warfarin-inr-monitoring",
+      "display_name": "Warfarin multi-strength",
+      "clinical_bucket": "INR-monitoring program alignment row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apixaban-dose-reduction-criteria",
+      "display_name": "Apixaban 5 mg vs 2.5 mg dose-reduction criteria row",
+      "clinical_bucket": "anticoagulant strength-criteria row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    }
+  ]
+}

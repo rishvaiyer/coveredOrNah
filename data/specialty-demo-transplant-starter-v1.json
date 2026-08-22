@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Transplant Medicine Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Transplant medicine",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: KDIGO kidney-transplant recipient care guideline, AST and OPTN immunosuppression guidance, CMS transplant coverage and Medicare Part B versus Part D immunosuppressant billing rules, AJMC 2026 reporting on transplant drug access. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 16,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "tacrolimus-immediate-release",
+      "display_name": "Tacrolimus immediate-release (Prograf)",
+      "clinical_bucket": "calcineurin inhibitor anchor, trough-level monitored",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tacrolimus-extended-release",
+      "display_name": "Tacrolimus extended-release (Envarsus XR/Astagraf XL)",
+      "clinical_bucket": "IR-versus-ER formulation split with distinct conversion dosing",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyclosporine-modified",
+      "display_name": "Cyclosporine modified (Gengraf/Neoral)",
+      "clinical_bucket": "modified-versus-non-modified absorption distinction",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mycophenolate-mofetil",
+      "display_name": "Mycophenolate mofetil (CellCept)",
+      "clinical_bucket": "antiproliferative anchor, salt-form distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mycophenolic-acid-er",
+      "display_name": "Mycophenolic acid extended-release (Myfortic)",
+      "clinical_bucket": "MPA-versus-MMF non-interchangeable formulation split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azathioprine",
+      "display_name": "Azathioprine (Imuran/Azasan)",
+      "clinical_bucket": "legacy antiproliferative with TPMT-guided dosing",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "prednisone",
+      "display_name": "Prednisone (Deltasone/Rayos)",
+      "clinical_bucket": "corticosteroid maintenance and rejection rescue",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "belatacept-iv",
+      "display_name": "Belatacept IV (Nulojix)",
+      "clinical_bucket": "infusion-center medical-benefit contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "everolimus-oral",
+      "display_name": "Everolimus oral (Zortress/Afinitor)",
+      "clinical_bucket": "mTOR inhibitor with transplant-versus-oncology label split",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sirolimus",
+      "display_name": "Sirolimus (Rapamune)",
+      "clinical_bucket": "mTOR inhibitor, solution-versus-tablet non-equivalence",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "valganciclovir",
+      "display_name": "Valganciclovir (Valcyte)",
+      "clinical_bucket": "CMV prophylaxis anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sulfamethoxazole-trimethoprim",
+      "display_name": "Sulfamethoxazole / trimethoprim (Bactrim DS)",
+      "clinical_bucket": "PJP prophylaxis strength-and-schedule row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "clotrimazole-troche",
+      "display_name": "Clotrimazole troche (Mycelex troche)",
+      "clinical_bucket": "fungal prophylaxis dosage-form-specific row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pantoprazole",
+      "display_name": "Pantoprazole (Protonix)",
+      "clinical_bucket": "GI protection on combination immunosuppression",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "magnesium-oxide",
+      "display_name": "Magnesium oxide (generic)",
+      "clinical_bucket": "calcineurin-inhibitor hypomagnesemia replacement",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "potassium-chloride-er",
+      "display_name": "Potassium chloride extended-release (Klor-Con/K-Dur)",
+      "clinical_bucket": "replacement row with hyperkalemia caution and ER form split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

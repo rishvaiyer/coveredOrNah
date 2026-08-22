@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Benign Hematology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Benign hematology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: published medical-benefit infusion coverage rules for IV iron, erythropoiesis-stimulating agents, and complement inhibitors in New Jersey commercial and Medicaid formularies. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "ferrous-sulfate-oral",
+      "display_name": "Ferrous sulfate oral",
+      "clinical_bucket": "oral iron replacement",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "iron-sucrose-iv",
+      "display_name": "Iron sucrose (Venofer)",
+      "clinical_bucket": "medical-benefit IV iron contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ferric-carboxymaltose-iv",
+      "display_name": "Ferric carboxymaltose (Injectafer)",
+      "clinical_bucket": "medical-benefit IV iron contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "folic-acid",
+      "display_name": "Folic acid",
+      "clinical_bucket": "folate supplementation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyanocobalamin-oral",
+      "display_name": "Cyanocobalamin oral high-dose tablets",
+      "clinical_bucket": "oral B12 replacement",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyanocobalamin-injection",
+      "display_name": "Cyanocobalamin injection",
+      "clinical_bucket": "injectable B12 benefit-pathway contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "epoetin-darbepoetin-contrast",
+      "display_name": "Epoetin alfa vs darbepoetin alfa (Epogen/Procrit vs Aranesp)",
+      "clinical_bucket": "medical-benefit ESA contrast row collapsed to one entry",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "eltrombopag-promacta",
+      "display_name": "Eltrombopag (Promacta)",
+      "clinical_bucket": "chronic ITP TPO agonist oral",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "romiplostim-nplate",
+      "display_name": "Romiplostim (Nplate)",
+      "clinical_bucket": "medical-benefit chronic ITP injection contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fostamatinib-tavalisse",
+      "display_name": "Fostamatinib (Tavalisse)",
+      "clinical_bucket": "chronic ITP second-line oral",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "eculizumab-ravulizumab-contrast",
+      "display_name": "Eculizumab vs ravulizumab (Soliris vs Ultomiris)",
+      "clinical_bucket": "medical-benefit PNH/TMA complement inhibitor contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "deferasirox-chelation",
+      "display_name": "Deferasirox (Exjade, Jadenu)",
+      "clinical_bucket": "transfusion-related iron chelation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "filgrastim-gcsf-contrast",
+      "display_name": "Filgrastim family incl. biosimilars and pegfilgrastim",
+      "clinical_bucket": "medical-benefit G-CSF contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "avatrombopag-doptelet",
+      "display_name": "Avatrombopag (Doptelet)",
+      "clinical_bucket": "CLD thrombocytopenia procedure-support TPO agonist",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "luspatercept-reblozyl",
+      "display_name": "Luspatercept (Reblozyl)",
+      "clinical_bucket": "medical-benefit MDS/beta-thal anemia contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tranexamic-acid",
+      "display_name": "Tranexamic acid (Lysteda, Cyklokapron)",
+      "clinical_bucket": "antifibrinolytic bleeding support",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

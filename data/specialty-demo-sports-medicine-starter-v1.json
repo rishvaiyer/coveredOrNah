@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Sports Medicine Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Sports medicine",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: public FDA labeling for each agent, American College of Sports Medicine and AAOS patient-facing guidance, and public NJ commercial, Medicaid, and Medicare formularies. Non-performance-enhancing agents only; no anabolic steroids or other controlled performance enhancers are included. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "diclofenac-gel-1-topical",
+      "display_name": "Diclofenac sodium topical gel 1% (Voltaren)",
+      "clinical_bucket": "topical NSAID gel, distinct vehicle and route from oral diclofenac",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "diclofenac-patch-flector",
+      "display_name": "Diclofenac epolamine patch (Flector)",
+      "clinical_bucket": "transdermal NSAID patch vehicle contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "naproxen",
+      "display_name": "Naproxen (IR, enteric-coated, delayed-release, ER tablets)",
+      "clinical_bucket": "oral NSAID anchor with IR versus coated versus ER tablet churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "celecoxib",
+      "display_name": "Celecoxib (Celebrex)",
+      "clinical_bucket": "COX-2 selective oral NSAID capsule",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "meloxicam",
+      "display_name": "Meloxicam (Mobic, Vivlodex)",
+      "clinical_bucket": "once-daily oral NSAID, tablet versus suspension split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ketorolac-short-course",
+      "display_name": "Ketorolac (Toradol), short-course oral only",
+      "clinical_bucket": "potent oral NSAID with strict five-day short-course labeling",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "acetaminophen",
+      "display_name": "Acetaminophen",
+      "clinical_bucket": "non-opioid oral analgesic anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "menthol-methylsalicylate-topical",
+      "display_name": "Topical menthol / methyl salicylate combination (generic OTC counterirritants)",
+      "clinical_bucket": "OTC counterirritant in cream, lotion, gel, and patch vehicles",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "lidocaine-patch-4-5",
+      "display_name": "Lidocaine 4% to 5% patch (Lidoderm, generic, OTC variants)",
+      "clinical_bucket": "topical local anesthetic patch with Rx versus OTC split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "triamcinolone-acetonide-injection",
+      "display_name": "Triamcinolone acetonide injection (Kenalog-10, Kenalog-40)",
+      "clinical_bucket": "in-office joint injection, medical-benefit rather than pharmacy-benefit coverage contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prednisone-taper-packs",
+      "display_name": "Prednisone burst and taper packs (Deltasone, Rayos)",
+      "clinical_bucket": "systemic corticosteroid burst-and-taper dose packs",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "colchicine-gout-flare",
+      "display_name": "Colchicine (Colcrys, Mitigare)",
+      "clinical_bucket": "gout flare treatment common in sports medicine populations",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "allopurinol-maintenance",
+      "display_name": "Allopurinol (Zyloprim)",
+      "clinical_bucket": "urate-lowering maintenance therapy, not a flare agent",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "febuxostat-uloric-cv-label",
+      "display_name": "Febuxostat (Uloric)",
+      "clinical_bucket": "alternate urate-lowering maintenance agent with boxed cardiovascular mortality warning",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "baclofen",
+      "display_name": "Baclofen (Gablofen, Lioresal)",
+      "clinical_bucket": "antispasticity muscle relaxant with titration-dependent strengths",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cyclobenzaprine-er-amrix",
+      "display_name": "Cyclobenzaprine extended-release capsules (Amrix) versus IR tablets",
+      "clinical_bucket": "skeletal muscle relaxant with ER versus IR product distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

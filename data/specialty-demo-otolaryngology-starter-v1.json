@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Otolaryngology Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Otolaryngology (ENT)",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AAO-HNS nasal-spray and otitis-media guidance summaries, FDA phenylephrine oral effectiveness review (2023 to 2024), oxymetazoline rebound-congestion labeling, AAP acute otitis media guideline. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "fluticasone-propionate-nasal",
+      "display_name": "Fluticasone propionate nasal spray",
+      "clinical_bucket": "intranasal corticosteroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mometasone-nasal",
+      "display_name": "Mometasone furoate nasal spray",
+      "clinical_bucket": "intranasal corticosteroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "budesonide-respiratory-sinus-suspension",
+      "display_name": "Budesonide respiratory sinus inhalation suspension",
+      "clinical_bucket": "nebulized sinus corticosteroid contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azelastine-nasal",
+      "display_name": "Azelastine nasal spray",
+      "clinical_bucket": "intranasal antihistamine",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "olopatadine-nasal",
+      "display_name": "Olopatadine nasal spray",
+      "clinical_bucket": "intranasal antihistamine",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ipratropium-nasal-0.03-0.06",
+      "display_name": "Ipratropium nasal 0.03% vs 0.06%",
+      "clinical_bucket": "anticholinergic rhinorrhea spray strength split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pseudoephedrine-behind-counter",
+      "display_name": "Pseudoephedrine behind-counter oral decongestant",
+      "clinical_bucket": "oral decongestant with access friction",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "phenylephrine-oral-effectiveness-label",
+      "display_name": "Phenylephrine oral effectiveness-label row",
+      "clinical_bucket": "oral decongestant under FDA effectiveness review",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": false
+    },
+    {
+      "id": "oxymetazoline-nasal-rebound-limitation",
+      "display_name": "Oxymetazoline nasal spray rebound-limitation row",
+      "clinical_bucket": "topical decongestant with duration limit",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "ciclesonide-nasal-omnaris-zetonna",
+      "display_name": "Ciclesonide nasal (Omnaris vs Zetonna)",
+      "clinical_bucket": "intranasal corticosteroid vehicle split",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "beclomethasone-nasal-qnasl",
+      "display_name": "Beclomethasone nasal aerosol (Qnasl)",
+      "clinical_bucket": "intranasal corticosteroid aerosol",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ofloxacin-otic",
+      "display_name": "Ofloxacin otic solution",
+      "clinical_bucket": "otic fluoroquinolone monotherapy",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ciprofloxacin-dexamethasone-otic",
+      "display_name": "Ciprofloxacin-dexamethasone otic suspension",
+      "clinical_bucket": "otic fluoroquinolone plus steroid combination",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "acetic-acid-otic",
+      "display_name": "Acetic acid 2% otic solution",
+      "clinical_bucket": "otic acidifier for externa",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "amoxicillin-aom-note",
+      "display_name": "Amoxicillin high-dose AOM note row",
+      "clinical_bucket": "first-line acute otitis media antibiotic",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clindamycin-oral",
+      "display_name": "Clindamycin oral",
+      "clinical_bucket": "penicillin-allergy alternate antibiotic",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

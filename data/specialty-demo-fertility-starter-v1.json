@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Fertility Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Fertility and reproductive endocrinology",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: public NJ marketplace and Medicaid formularies listed in plan_families plus published IVF medication-benefit split (pharmacy vs medical benefit) reporting. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "letrozole",
+      "display_name": "Letrozole (Femara)",
+      "clinical_bucket": "oral ovulation induction anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clomiphene-citrate",
+      "display_name": "Clomiphene citrate (Clomid, Serophene)",
+      "clinical_bucket": "oral ovulation induction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "metformin-pcos-support",
+      "display_name": "Metformin PCOS support",
+      "clinical_bucket": "PCOS metabolic support",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "leuprolide-kits",
+      "display_name": "Leuprolide acetate injection kits (Lupron)",
+      "clinical_bucket": "GnRH agonist suppression kit",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ganirelix",
+      "display_name": "Ganirelix acetate injection",
+      "clinical_bucket": "GnRH antagonist injection",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cetrorelix",
+      "display_name": "Cetrorelix (Cetrotide)",
+      "clinical_bucket": "GnRH antagonist kit",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "follitropin-alfa-beta",
+      "display_name": "Follitropin alfa (Gonal-f) vs beta (Follistim AQ)",
+      "clinical_bucket": "gonadotropin stimulation pen devices",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "menotropins",
+      "display_name": "Menotropins (Menopur)",
+      "clinical_bucket": "hMG stimulation kit",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "hcg-trigger-ovidrel-vs-novarel",
+      "display_name": "hCG trigger: Ovidrel (recombinant) vs Novarel/Pregnyl (urinary)",
+      "clinical_bucket": "trigger shot product split",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "progesterone-in-oil-im",
+      "display_name": "Progesterone in oil injection (IM)",
+      "clinical_bucket": "luteal support intramuscular",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "progesterone-vaginal-gel-suppository",
+      "display_name": "Progesterone vaginal gel (Crinone) and suppositories/inserts",
+      "clinical_bucket": "luteal support vaginal formats",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "estradiol-valerate-im",
+      "display_name": "Estradiol valerate injection (Delestrogen)",
+      "clinical_bucket": "endometrial preparation IM estrogen",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "prenatal-vitamin-rx-grade",
+      "display_name": "Prescription-grade prenatal vitamins",
+      "clinical_bucket": "preconception support neutral row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "low-dose-aspirin-protocol",
+      "display_name": "Low-dose aspirin protocol adjunct",
+      "clinical_bucket": "protocol adjunct neutral row",
+      "specialty_relevance": 2,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "enoxaparin-protocol",
+      "display_name": "Enoxaparin thromboprophylaxis adjunct (Lovenox)",
+      "clinical_bucket": "protocol adjunct anticoagulant",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "doxycycline-retrieval-prophylaxis",
+      "display_name": "Doxycycline peri-retrieval prophylaxis note row",
+      "clinical_bucket": "prophylaxis retrieval note row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Anticoagulation Management Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Anticoagulation management",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: public FDA labeling for anticoagulant and reversal agents, AHRQ and CMS anticoagulation safety resources, and published DOAC monitoring and reversal distinctions used only as public formulary-complexity signals, not clinical advice. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "warfarin",
+      "display_name": "Warfarin (Coumadin, Jantoven)",
+      "clinical_bucket": "vitamin K antagonist multi-strength tablet split with INR monitoring row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "apixaban",
+      "display_name": "Apixaban (Eliquis)",
+      "clinical_bucket": "DOAC single row with 2.5 mg versus 5 mg dose-reduction criteria note",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "rivaroxaban",
+      "display_name": "Rivaroxaban (Xarelto)",
+      "clinical_bucket": "DOAC single row with AF once-daily versus VTE twice-daily dosing distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "edoxaban",
+      "display_name": "Edoxaban (Savaysa)",
+      "clinical_bucket": "DOAC creatinine-based dose selection row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dabigatran",
+      "display_name": "Dabigatran (Pradaxa)",
+      "clinical_bucket": "DOAC capsule-only renal-adjusted row with packaging splits",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "enoxaparin-self-administered",
+      "display_name": "Enoxaparin (Lovenox and generics)",
+      "clinical_bucket": "self-administered prefilled syringe versus vial benefit-routing row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fondaparinux",
+      "display_name": "Fondaparinux (Arixatra)",
+      "clinical_bucket": "injectable factor Xa inhibitor non-formulary sourcing-friction row",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "heparin-iv",
+      "display_name": "Heparin (unfractionated) IV",
+      "clinical_bucket": "hospital medical-benefit infusion contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": false
+    },
+    {
+      "id": "phytonadione-oral",
+      "display_name": "Phytonadione oral vitamin K (Mephyton)",
+      "clinical_bucket": "outpatient warfarin reversal oral row distinct from IV routing",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "protamine-iv",
+      "display_name": "Protamine sulfate IV",
+      "clinical_bucket": "heparin reversal medical-benefit contrast row administered in monitored settings",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": false
+    },
+    {
+      "id": "idarucizumab",
+      "display_name": "Idarucizumab (Praxbind)",
+      "clinical_bucket": "dabigatran-specific reversal medical-benefit emergency-setting contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "andexanet-alfa",
+      "display_name": "Andexanet alfa (Andexxa)",
+      "clinical_bucket": "factor Xa inhibitor reversal high-cost inpatient medical-benefit contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clopidogrel",
+      "display_name": "Clopidogrel (Plavix and generics)",
+      "clinical_bucket": "adjacent antiplatelet combination-use bleeding-review row",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cilostazol",
+      "display_name": "Cilostazol (Pletal)",
+      "clinical_bucket": "claudication antiplatelet contraindication-note row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dipyridamole-aspirin",
+      "display_name": "Dipyridamole / aspirin ER (Aggrenox)",
+      "clinical_bucket": "antiplatelet combination capsule versus separate-component distinction row",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tranexamic-acid-oral",
+      "display_name": "Tranexamic acid oral (Lysteda and generics)",
+      "clinical_bucket": "bleeding-management indication-based coverage adjacent row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Multiple Sclerosis Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Multiple sclerosis",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: published multiple sclerosis DMT access and prior-authorization burden reporting, payer formulary documents listed below. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "glatiramer-acetate",
+      "display_name": "Glatiramer acetate (Copaxone 40 mg 3x/week vs 20 mg daily; Glatopa generic)",
+      "clinical_bucket": "injectable immunomodulator with schedule-strength churn",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "interferon-beta-1a",
+      "display_name": "Interferon beta-1a (Avonex IM vs Rebif SC)",
+      "clinical_bucket": "route-distinct injectable immunomodulator",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "peginterferon-beta-1a",
+      "display_name": "Peginterferon beta-1a (Plegridy)",
+      "clinical_bucket": "every-two-week subcutaneous immunomodulator",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fumarate-orals",
+      "display_name": "Dimethyl fumarate (Tecfidera) vs diroximel fumarate (Vumerity)",
+      "clinical_bucket": "distinct-product oral fumarates",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "teriflunomide",
+      "display_name": "Teriflunomide (Aubagio)",
+      "clinical_bucket": "once-daily oral immunomodulator",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "fingolimod",
+      "display_name": "Fingolimod (Gilenya)",
+      "clinical_bucket": "S1P modulator with first-dose monitoring",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "siponimod",
+      "display_name": "Siponimod (Mayzent)",
+      "clinical_bucket": "S1P modulator with CYP2C19 titration",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ozanimod-ms",
+      "display_name": "Ozanimod (Zeposia, MS indication)",
+      "clinical_bucket": "S1P modulator with 7-day escalation, MS indication only",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cladribine",
+      "display_name": "Cladribine (Mavenclad)",
+      "clinical_bucket": "annual-course oral cytotoxic agent",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "natalizumab",
+      "display_name": "Natalizumab IV/SC (Tysabri, Tyruko)",
+      "clinical_bucket": "integrin blocker, medical-benefit vs pharmacy-benefit contrast",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ocrelizumab",
+      "display_name": "Ocrelizumab (Ocrevus) IV infusion",
+      "clinical_bucket": "anti-CD20 medical-benefit contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ofatumumab-sc",
+      "display_name": "Ofatumumab SC (Kesimpta)",
+      "clinical_bucket": "anti-CD20 pharmacy-benefit self-injection",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ublituximab",
+      "display_name": "Ublituximab IV (Briumvi)",
+      "clinical_bucket": "anti-CD20 medical-benefit contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dalfampridine",
+      "display_name": "Dalfampridine (Ampyra)",
+      "clinical_bucket": "walking-support symptom therapy",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "baclofen-spasticity",
+      "display_name": "Baclofen (spasticity support)",
+      "clinical_bucket": "spasticity symptom management",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "oxybutynin-bladder-support",
+      "display_name": "Oxybutynin (bladder support, urology cross-reference)",
+      "clinical_bucket": "neurogenic bladder symptom therapy",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

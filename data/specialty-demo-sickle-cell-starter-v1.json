@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Sickle Cell Disease Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Sickle cell disease",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: NHLBI sickle cell disease expert-panel management guidelines, ASH sickle cell disease guidelines, FDA alert on the voluntary market withdrawal of Oxbryta (voxelotor) dated September 26 2024, and NJ FamilyCare hematology coverage reporting. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "hydroxyurea",
+      "display_name": "Hydroxyurea",
+      "clinical_bucket": "disease-modifying anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "crizanlizumab",
+      "display_name": "Adakveo (crizanlizumab)",
+      "clinical_bucket": "medical-benefit infusion contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 2,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "voxelotor-oxbryta-withdrawn",
+      "display_name": "Oxbryta (voxelotor), worldwide withdrawal September 2024",
+      "clinical_bucket": "market-withdrawal caution row",
+      "specialty_relevance": 5,
+      "service_line_match": 2,
+      "public_condition_match": 5,
+      "source_readiness": 1,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "l-glutamine-endari",
+      "display_name": "Endari (L-glutamine)",
+      "clinical_bucket": "oral powder adjunct",
+      "specialty_relevance": 5,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "deferasirox",
+      "display_name": "Exjade / Jadenu (deferasirox)",
+      "clinical_bucket": "iron chelation with distinct oral forms",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "deferoxamine",
+      "display_name": "Desferal (deferoxamine)",
+      "clinical_bucket": "medical-benefit home-infusion contrast row",
+      "specialty_relevance": 4,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "folic-acid",
+      "display_name": "Folic acid supplementation",
+      "clinical_bucket": "hemolysis supportive supplementation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "penicillin-v-prophylaxis",
+      "display_name": "Penicillin V potassium pediatric prophylaxis",
+      "clinical_bucket": "pneumococcal sepsis prophylaxis",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cefuroxime-axetil",
+      "display_name": "Ceftin (cefuroxime axetil)",
+      "clinical_bucket": "infection treatment oral",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levofloxacin",
+      "display_name": "Levaquin (levofloxacin)",
+      "clinical_bucket": "infection treatment oral",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "morphine-sulfate-inpatient",
+      "display_name": "Morphine sulfate inpatient crisis analgesia",
+      "clinical_bucket": "hospital medical-benefit contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 1,
+      "public_condition_match": 5,
+      "source_readiness": 2,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ketorolac",
+      "display_name": "Toradol (ketorolac)",
+      "clinical_bucket": "crisis pain adjunct short-course",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ondansetron",
+      "display_name": "Zofran (ondansetron)",
+      "clinical_bucket": "supportive antiemetic",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "senna-docusate-oic-program",
+      "display_name": "Senna / docusate combination bowel regimen",
+      "clinical_bucket": "opioid-induced constipation program 2-in-1",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ceftriaxone",
+      "display_name": "Rocephin (ceftriaxone)",
+      "clinical_bucket": "medical-benefit injection contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 2,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "celecoxib-voc-outpatient",
+      "display_name": "Celebrex (celecoxib) outpatient crisis pain",
+      "clinical_bucket": "outpatient crisis analgesia",
+      "specialty_relevance": 3,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

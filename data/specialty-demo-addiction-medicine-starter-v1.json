@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Addiction Medicine Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Addiction medicine",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: ASAM National Practice Guideline for the treatment of opioid use disorder (2020 focused update), SAMHSA buprenorphine and OTP guidance, FDA REMS documentation for buprenorphine extended-release injection. Treatment and supportive-care framing only. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "buprenorphine-naloxone-film",
+      "display_name": "Buprenorphine/naloxone sublingual film (Suboxone)",
+      "clinical_bucket": "OUD first-line maintenance, film form",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "buprenorphine-naloxone-tablet",
+      "display_name": "Buprenorphine/naloxone sublingual tablet (Zubsolv, generics)",
+      "clinical_bucket": "OUD first-line maintenance, tablet form distinct from film",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "buprenorphine-monthly-injection",
+      "display_name": "Buprenorphine extended-release monthly injection (Sublocade)",
+      "clinical_bucket": "monthly injectable OUD maintenance under REMS",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methadone-oud-otp",
+      "display_name": "Methadone for OUD (OTP clinic-dispensed)",
+      "clinical_bucket": "opioid agonist therapy, certified program dispensing",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "naltrexone-oral",
+      "display_name": "Naltrexone oral (Revia, generics)",
+      "clinical_bucket": "OUD/AUD relapse prevention, daily oral",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "naltrexone-im-vivitrol",
+      "display_name": "Naltrexone extended-release IM (Vivitrol)",
+      "clinical_bucket": "monthly injectable relapse prevention, distinct from oral",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lofexidine-lucemyra",
+      "display_name": "Lofexidine (Lucemyra)",
+      "clinical_bucket": "opioid withdrawal symptom support course",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clonidine-withdrawal-adjunct",
+      "display_name": "Clonidine (withdrawal-support adjunct)",
+      "clinical_bucket": "adjunctive withdrawal symptom support, off-label framing",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "acamprosate-campral",
+      "display_name": "Acamprosate (Campral)",
+      "clinical_bucket": "AUD abstinence support",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "disulfiram",
+      "display_name": "Disulfiram (Antabuse, generics)",
+      "clinical_bucket": "AUD aversion therapy with supervision needs",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "varenicline-chantix",
+      "display_name": "Varenicline (Chantix, generics)",
+      "clinical_bucket": "tobacco cessation pharmacotherapy",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "nicotine-patch",
+      "display_name": "Nicotine replacement transdermal patch",
+      "clinical_bucket": "step-down nicotine replacement, patch form",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "nicotine-gum",
+      "display_name": "Nicotine replacement gum",
+      "clinical_bucket": "on-demand nicotine replacement, gum form",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "nicotine-lozenge",
+      "display_name": "Nicotine replacement lozenge",
+      "clinical_bucket": "on-demand nicotine replacement, lozenge form distinct from gum",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ondansetron-supportive",
+      "display_name": "Ondansetron (Zofran, generics)",
+      "clinical_bucket": "supportive-care antiemetic during treatment visits",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "chlordiazepoxide-ciwa-inpatient",
+      "display_name": "Chlordiazepoxide (CIWA inpatient alcohol withdrawal protocol)",
+      "clinical_bucket": "inpatient protocol agent, setting-restricted handling",
+      "specialty_relevance": 4,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    }
+  ]
+}

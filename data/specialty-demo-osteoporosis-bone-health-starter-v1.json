@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Bone Health Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Osteoporosis and bone health",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: NOF/BHOF clinician guides on osteoporosis treatment, Endocrine Society osteoporosis therapy guidance, AJMC reporting on anabolic-agent prior-authorization burden. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "alendronate-weekly",
+      "display_name": "Alendronate weekly (Fosamax)",
+      "clinical_bucket": "oral bisphosphonate anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "risedronate-weekly",
+      "display_name": "Risedronate weekly (Actonel/Atelvia)",
+      "clinical_bucket": "oral bisphosphonate",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "risedronate-monthly",
+      "display_name": "Risedronate monthly 150 mg (Actonel)",
+      "clinical_bucket": "oral bisphosphonate distinct strength",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ibandronate-monthly",
+      "display_name": "Ibandronate monthly (Boniva)",
+      "clinical_bucket": "oral bisphosphonate",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "zoledronic-acid-iv",
+      "display_name": "Zoledronic acid IV annual (Reclast)",
+      "clinical_bucket": "medical-benefit IV bisphosphonate contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 5,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "denosumab-prolia",
+      "display_name": "Denosumab SC (Prolia)",
+      "clinical_bucket": "RANKL inhibitor pharmacy-benefit biologic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "teriparatide-daily",
+      "display_name": "Teriparatide daily pen (Forteo)",
+      "clinical_bucket": "anabolic agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "abaloparatide-daily",
+      "display_name": "Abaloparatide daily pen (Tymlos)",
+      "clinical_bucket": "anabolic agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "romosozumab-iv",
+      "display_name": "Romosozumab monthly course (Evenity)",
+      "clinical_bucket": "medical-benefit sclerostin inhibitor contrast row",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "raloxifene",
+      "display_name": "Raloxifene (Evista)",
+      "clinical_bucket": "estrogen agonist-antagonist",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "calcium-carbonate-citrate",
+      "display_name": "Calcium carbonate or citrate (Caltrate/Citracal)",
+      "clinical_bucket": "mineral supplement with salt distinction collapsed to one row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "vitamin-d2-d3",
+      "display_name": "Vitamin D2 Rx or D3 OTC (Drisdol/cholecalciferol)",
+      "clinical_bucket": "vitamin supplement Rx vs OTC distinction single neutral row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 1,
+      "requires_exact_product": false
+    },
+    {
+      "id": "calcitonin-salmon-nasal",
+      "display_name": "Calcitonin salmon nasal spray (Miacalcin/Fortical)",
+      "clinical_bucket": "calcitonin nasal device",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "conjugated-estrogens-bazedoxifene",
+      "display_name": "Conjugated estrogens/bazedoxifene (Duavee)",
+      "clinical_bucket": "estrogen agonist-antagonist combination",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pamidronate-iv",
+      "display_name": "Pamidronate IV (Aredia)",
+      "clinical_bucket": "medical-benefit IV bisphosphonate contrast row",
+      "specialty_relevance": 2,
+      "service_line_match": 2,
+      "public_condition_match": 3,
+      "source_readiness": 2,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ergocalciferol-50000iu",
+      "display_name": "Ergocalciferol 50,000 IU weekly Rx (Drisdol)",
+      "clinical_bucket": "prescription vitamin D deficiency therapy",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

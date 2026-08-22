@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Pediatrics Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Pediatrics",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AAP pediatric medication-safety and prior-authorization reporting, AJMC 2026 pediatric PA-burden coverage, NJ Medicaid family formulary references. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "amoxicillin-suspension",
+      "display_name": "Amoxicillin high-dose suspension",
+      "clinical_bucket": "first-line pediatric antibiotic",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cefdinir-suspension",
+      "display_name": "Cefdinir oral suspension",
+      "clinical_bucket": "second-line otitis antibiotic",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "azithromycin-suspension",
+      "display_name": "Azithromycin oral suspension and packets",
+      "clinical_bucket": "macrolide pediatric antibiotic",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "oseltamivir-suspension",
+      "display_name": "Oseltamivir oral suspension",
+      "clinical_bucket": "seasonal influenza antiviral",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "albuterol-neb-unit-dose",
+      "display_name": "Albuterol nebulized pediatric unit-dose vials",
+      "clinical_bucket": "rescue bronchodilator",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "budesonide-respules",
+      "display_name": "Budesonide nebulized suspension (Pulmicort Respules)",
+      "clinical_bucket": "inhaled corticosteroid for young children",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "montelukast-granules-chewables",
+      "display_name": "Montelukast granules vs chewables",
+      "clinical_bucket": "leukotriene modifier age-band products",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "cetirizine-pediatric-forms",
+      "display_name": "Cetirizine solution, syrup, and chewables",
+      "clinical_bucket": "antihistamine multi-form family",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "loratadine-syrup-chewables",
+      "display_name": "Loratadine syrup and chewables",
+      "clinical_bucket": "antihistamine pediatric forms",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lisdexamfetamine-vyvanse",
+      "display_name": "Lisdexamfetamine capsules and chewables (Vyvanse)",
+      "clinical_bucket": "stimulant with controlled-substance rules",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methylphenidate-er-concerta",
+      "display_name": "Methylphenidate ER osmotic tablets (Concerta)",
+      "clinical_bucket": "ADHD stimulant osmotic-release product",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methylphenidate-er-ritalin-la",
+      "display_name": "Methylphenidate ER biphasic capsules (Ritalin LA)",
+      "clinical_bucket": "ADHD stimulant capsule product",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "guanfacine-er-intuniv",
+      "display_name": "Guanfacine extended-release (Intuniv)",
+      "clinical_bucket": "non-stimulant ADHD therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "atomoxetine-strattera",
+      "display_name": "Atomoxetine (Strattera)",
+      "clinical_bucket": "non-stimulant ADHD therapy",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "peg-3350-miralax",
+      "display_name": "Polyethylene glycol 3350 (Miralax)",
+      "clinical_bucket": "functional constipation osmotic laxative",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": false
+    },
+    {
+      "id": "cholecalciferol-infant-drops",
+      "display_name": "Cholecalciferol infant drops",
+      "clinical_bucket": "infant vitamin D supplementation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

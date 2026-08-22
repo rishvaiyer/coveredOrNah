@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Sleep Medicine Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Sleep medicine",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: AASM clinical practice guideline for chronic insomnia treatment, AASM position statements on hypersomnolence therapies, and published prior-authorization burden reporting for orexin antagonists and REMS-restricted sodium oxybate products. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "modafinil",
+      "display_name": "Modafinil (Provigil)",
+      "clinical_bucket": "wake-promoting agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "armodafinil",
+      "display_name": "Armodafinil (Nuvigil)",
+      "clinical_bucket": "R-enantiomer wake-promoting agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "solriamfetol",
+      "display_name": "Solriamfetol (Sunosi)",
+      "clinical_bucket": "DNRI wake-promoting agent",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "pitolisant",
+      "display_name": "Pitolisant (Wakix)",
+      "clinical_bucket": "histamine H3 inverse agonist",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "sodium-oxybate-xywav",
+      "display_name": "Sodium oxybate lower-sodium formulation (Xywav)",
+      "clinical_bucket": "REMS-restricted central nervous system depressant",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "zolpidem-ir",
+      "display_name": "Zolpidem immediate-release (Ambien)",
+      "clinical_bucket": "Z-drug hypnotic IR",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "zolpidem-er",
+      "display_name": "Zolpidem extended-release (Ambien CR)",
+      "clinical_bucket": "Z-drug hypnotic ER",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "zolpidem-odt",
+      "display_name": "Zolpidem orally disintegrating (Edluar, Zolpimist)",
+      "clinical_bucket": "Z-drug hypnotic ODT or sublingual spray",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "eszopiclone",
+      "display_name": "Eszopiclone (Lunesta)",
+      "clinical_bucket": "Z-drug hypnotic sleep onset and maintenance",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "zaleplon",
+      "display_name": "Zaleplon (Sonata)",
+      "clinical_bucket": "ultra-short-acting Z-drug hypnotic",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "ramelteon",
+      "display_name": "Ramelteon (Rozerem)",
+      "clinical_bucket": "melatonin receptor agonist",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "suvorexant",
+      "display_name": "Suvorexant (Belsomra)",
+      "clinical_bucket": "dual orexin receptor antagonist",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lemborexant",
+      "display_name": "Lemborexant (Dayvigo)",
+      "clinical_bucket": "dual orexin receptor antagonist",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "doxepin-low-dose",
+      "display_name": "Doxepin low-dose sleep indication (Silenor)",
+      "clinical_bucket": "low-dose H1 antagonist hypnotic",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "trazodone-off-label",
+      "display_name": "Trazodone (off-label sleep use)",
+      "clinical_bucket": "off-label sedating antidepressant contrast row",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "clonidine-er-pediatric",
+      "display_name": "Clonidine extended-release pediatric adjunct (Kapvay)",
+      "clinical_bucket": "pediatric off-label insomnia adjunct",
+      "specialty_relevance": 3,
+      "service_line_match": 3,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

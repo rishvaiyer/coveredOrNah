@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Palliative and Supportive Care Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Palliative and supportive care",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: published palliative-care formulary and symptom-management guidance, hospice comfort-medication coverage reporting, and NJ payer public formularies. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "ondansetron",
+      "display_name": "Ondansetron (tablet, ODT, soluble film, IV)",
+      "clinical_bucket": "antiemetic anchor",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "scopolamine-transdermal",
+      "display_name": "Scopolamine transdermal patch (Transderm Scop)",
+      "clinical_bucket": "secretions management",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "haloperidol-low-dose",
+      "display_name": "Haloperidol low-dose (oral vs decanoate)",
+      "clinical_bucket": "delirium symptom management",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "olanzapine",
+      "display_name": "Olanzapine (tablet vs ODT vs IM)",
+      "clinical_bucket": "nausea and appetite support",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dexamethasone",
+      "display_name": "Dexamethasone (tablet, solution, injectable)",
+      "clinical_bucket": "supportive steroid",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methylphenidate",
+      "display_name": "Methylphenidate (IR vs ER)",
+      "clinical_bucket": "fatigue symptom management",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "mirtazapine",
+      "display_name": "Mirtazapine (tablet vs ODT)",
+      "clinical_bucket": "appetite support with sedation benefit",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "dronabinol",
+      "display_name": "Dronabinol capsules (Marinol)",
+      "clinical_bucket": "appetite stimulation",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "megestrol-acetate",
+      "display_name": "Megestrol acetate (suspension vs tablet)",
+      "clinical_bucket": "appetite and weight support",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 3,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lactulose",
+      "display_name": "Lactulose oral solution",
+      "clinical_bucket": "osmotic laxative",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "methylnaltrexone",
+      "display_name": "Methylnaltrexone subcutaneous kit (Relistor)",
+      "clinical_bucket": "opioid-induced constipation injectable",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "naloxegol",
+      "display_name": "Naloxegol tablets (Movantik)",
+      "clinical_bucket": "opioid-induced constipation oral",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "senna-s",
+      "display_name": "Senna-S combination tablets",
+      "clinical_bucket": "stimulant plus stool softener",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "polyethylene-glycol-3350",
+      "display_name": "Polyethylene glycol 3350 powder (Miralax)",
+      "clinical_bucket": "osmotic laxative",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 5,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "hydroxyzine",
+      "display_name": "Hydroxyzine (tablet/capsule vs syrup)",
+      "clinical_bucket": "anxiety-support adjunct",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "gabapentin",
+      "display_name": "Gabapentin (capsule vs tablet vs solution)",
+      "clinical_bucket": "neuropathic discomfort",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}

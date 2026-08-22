@@ -1,0 +1,235 @@
+{
+  "clinic_display_name": "Example New Jersey Post-Acute and Long-Term Care Clinic",
+  "clinic_website_url": "https://example.invalid",
+  "specialty": "Post-acute and long-term care",
+  "region": {
+    "state": "NJ"
+  },
+  "public_context_note": "Synthetic starter seed. Research basis: published New Jersey plan formulary rules for regimen simplification and deprescribing-awareness documentation in post-acute settings, including administration-route and nursing-pass product distinctions. Replace clinic fields only with cited public context.",
+  "privacy_mode": "phi_free_only",
+  "outbound_mode": "draft_only",
+  "max_medication_families": 10,
+  "prospect": {
+    "role": "prior-authorization workflow owner"
+  },
+  "plan_families": [
+    {
+      "id": "horizon-marketplace",
+      "display_name": "Horizon BCBSNJ Marketplace",
+      "coverage_type": "marketplace",
+      "local_relevance": 5,
+      "source_status": "public_current",
+      "source_url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf"
+    },
+    {
+      "id": "amerihealth-ifp",
+      "display_name": "AmeriHealth NJ Individual & Family",
+      "coverage_type": "marketplace",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf"
+    },
+    {
+      "id": "wellpoint-medicaid",
+      "display_name": "Wellpoint NJ FamilyCare (Medicaid)",
+      "coverage_type": "medicaid",
+      "local_relevance": 4,
+      "source_status": "public_current",
+      "source_url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json"
+    },
+    {
+      "id": "aetna-medicare",
+      "display_name": "Aetna Medicare HMO 26010",
+      "coverage_type": "medicare",
+      "local_relevance": 3,
+      "source_status": "public_current",
+      "source_url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf"
+    },
+    {
+      "id": "uhc-commercial-pdl",
+      "display_name": "UnitedHealthcare Commercial PDL baseline",
+      "coverage_type": "commercial",
+      "local_relevance": 3,
+      "source_status": "public_needs_review",
+      "source_url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf"
+    }
+  ],
+  "medications": [
+    {
+      "id": "donepezil",
+      "display_name": "Donepezil (Aricept)",
+      "clinical_bucket": "dementia cognitive-support form-consistency row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "memantine-er",
+      "display_name": "Memantine ER (Namenda XR)",
+      "clinical_bucket": "IR-to-ER consolidation checkpoint row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "quetiapine-ir-vs-xr",
+      "display_name": "Quetiapine IR vs XR (Seroquel)",
+      "clinical_bucket": "deprescribing-awareness behavioral row with nursing-pass timing distinctions",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "risperidone-forms",
+      "display_name": "Risperidone tablet, ODT, and solution",
+      "clinical_bucket": "deprescribing-awareness behavioral row with route distinctions",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "haloperidol-oral-vs-decanoate",
+      "display_name": "Haloperidol oral vs decanoate injection",
+      "clinical_bucket": "coverage-pathway contrast row by administration route",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 3,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "trazodone-sleep-row",
+      "display_name": "Trazodone sleep-support regimens",
+      "clinical_bucket": "deprescribing-awareness sleep-support row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "polyethylene-glycol",
+      "display_name": "Polyethylene glycol 3350 (Miralax)",
+      "clinical_bucket": "standing-order bowel-regimen capful-dosing row",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "senna-docusate-combo",
+      "display_name": "Senna-docusate combination vs senna alone",
+      "clinical_bucket": "MAR tablet-count matching bowel-regimen row",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "lactulose-forms",
+      "display_name": "Lactulose solution and packets",
+      "clinical_bucket": "titration-to-effect bowel-regimen row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "bisacodyl-suppository",
+      "display_name": "Bisacodyl suppository rescue orders",
+      "clinical_bucket": "route-explicit rescue bowel-regimen row",
+      "specialty_relevance": 4,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "oxybutynin-ir-vs-xl",
+      "display_name": "Oxybutynin IR vs XL",
+      "clinical_bucket": "anticholinergic-burden review row with dosing-frequency distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 3,
+      "requires_exact_product": true
+    },
+    {
+      "id": "tamsulosin-capsule",
+      "display_name": "Tamsulosin (Flomax)",
+      "clinical_bucket": "urinary-symptom nursing-pass timing row",
+      "specialty_relevance": 4,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 1,
+      "requires_exact_product": true
+    },
+    {
+      "id": "warfarin-monitoring-framing",
+      "display_name": "Warfarin simplified-monitoring framing row",
+      "clinical_bucket": "INR-testing coordination-load framing without clinical advice",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 5,
+      "requires_exact_product": true
+    },
+    {
+      "id": "insulin-glargine-once-daily",
+      "display_name": "Insulin glargine U-100 vs U-300 once-daily row",
+      "clinical_bucket": "once-daily basal insulin concentration and device distinction",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 4,
+      "therapy_friction": 4,
+      "requires_exact_product": true
+    },
+    {
+      "id": "furosemide-timing",
+      "display_name": "Furosemide morning-timing row",
+      "clinical_bucket": "nursing-pass timing distinction row",
+      "specialty_relevance": 5,
+      "service_line_match": 5,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    },
+    {
+      "id": "levothyroxine-morning-rule",
+      "display_name": "Levothyroxine empty-stomach morning-rule row",
+      "clinical_bucket": "administration-timing distinction row versus breakfast passes",
+      "specialty_relevance": 5,
+      "service_line_match": 4,
+      "public_condition_match": 4,
+      "source_readiness": 5,
+      "therapy_friction": 2,
+      "requires_exact_product": true
+    }
+  ]
+}
