@@ -1,0 +1,30 @@
+import type { ClinicCatalog } from "./catalogTypes";
+
+export const dermatologyCatalog: ClinicCatalog = {
+  slug: "dermatology",
+  name: "Dermatology Starter Catalog",
+  specialty: "Dermatology",
+  status: "starter",
+  medications: [
+    ["Tretinoin topical", "Retin-A, Altreno", "Retinoids", "Acne and photoaging", "Cream, gel, and microsphere products differ by strength."],
+    ["Clobetasol propionate 0.05%", "Temovate, Clobex", "Superhigh-potency topical steroids", "Severe inflammatory dermatoses", "Cream, ointment, foam, lotion, and spray vehicles differ."],
+    ["Fluorouracil topical 5%", "Efudex, Carac", "Actinic keratosis therapy", "Actinic keratoses", "Cream solution vehicle and packaging differ."],
+    ["Tacrolimus ointment", "Protopic", "Calcineurin inhibitors", "Atopic dermatitis", "0.03% and 0.1% strengths are distinct products."],
+    ["Pimecrolimus cream", "Elidel", "Calcineurin inhibitors", "Atopic dermatitis", "One percent cream; age-indication labeling differs."],
+    ["Calcipotriene / betamethasone dipropionate", "Taclonex, Enstilar", "Psoriasis combination topicals", "Plaque psoriasis", "Ointment, foam, and suspension products differ."],
+    ["Crisaborole 2%", "Eucrisa", "Topical PDE4 inhibitors", "Atopic dermatitis", "Ointment vehicle only."],
+    ["Roflumilast 0.3% foam", "Zoryve", "Topical PDE4 inhibitors", "Plaque psoriasis and atopic dermatitis", "Foam and cream products are distinct."],
+    ["Tapinarof 1% cream", "Vtama", "Aryl hydrocarbon receptor modulators", "Plaque psoriasis and atopic dermatitis", "Cream vehicle only."],
+    ["Methotrexate oral", "Trexall, Rasuvo", "Systemic antimetabolites", "Severe psoriasis", "Tablet and auto-injector products differ; weekly dosing errors are dangerous."],
+    ["Acitretin", "Soriatane", "Systemic retinoids", "Severe psoriasis", "Capsule strengths differ."],
+    ["Apremilast", "Otezla", "Oral PDE4 inhibitors", "Plaque psoriasis and psoriatic arthritis", "Starter pack versus continuing pack is a distinct product."],
+    ["Dupilumab", "Dupixent", "IL-4/IL-13 biologics", "Atopic dermatitis", "Prefilled syringe and pen devices differ."],
+    ["Adalimumab biosimilars", "Hadlima, Hulio, and others", "TNF biologics", "Plaque psoriasis, hidradenitis suppurativa", "Biosimilar product, device, and citrate content must be matched."],
+    ["Etanercept", "Enbrel, Erelzi", "TNF biologics", "Plaque psoriasis", "Prefilled syringe, pen, and powder products differ."],
+    ["Secukinumab", "Cosentyx", "IL-17 biologics", "Plaque psoriasis", "Pen and prefilled syringe devices differ."],
+    ["Ixekizumab", "Taltz", "IL-17 biologics", "Plaque psoriasis", "Autoinjector and syringe devices differ."],
+    ["Ustekinumab", "Stelara, Wezlana, Selarsdi", "IL-12/23 biologics", "Plaque psoriasis", "Brand-versus-biosimilar product selection is plan-dependent."],
+    ["Deucravacitinib", "Sotyktu", "TYK2 inhibitors", "Moderate-to-severe plaque psoriasis", "Six-milligram tablet only."],
+    ["Infliximab IV", "Remicade, Inflectra", "Medical-benefit biologics", "Severe psoriasis (buy-and-bill contrast row)", "Infused under the medical benefit; separate evidence path from pharmacy formularies."],
+  ].map(([generic, brands, category, commonUses, productDetails]) => ({ generic, brands, category, commonUses, productDetails })),
+};
