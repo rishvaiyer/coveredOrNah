@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "ox-alpha evidence-gated loop",
+  "generatedAt": "2026-08-22",
+  "specialty": "Dermatology",
+  "note": "Exact-row extraction from five official public plan-family sources. Cells are ingredient-level source-listing evidence, not member benefit determinations. Absent means no exact row in that source; it is never a denial.",
+  "sources": {
+    "HM": { "name": "Horizon BCBSNJ Marketplace", "url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf", "edition": "August 2026" },
+    "AHIF": { "name": "AmeriHealth NJ Individual & Family", "url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf", "edition": "July 1, 2026" },
+    "WP": { "name": "Wellpoint NJ FamilyCare machine-readable feed", "url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json", "edition": "effective 2026-08-01" },
+    "AET": { "name": "Aetna Medicare HMO 26010 v16", "url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf", "edition": "updated 08/01/2026" },
+    "UHC": { "name": "UnitedHealthcare Commercial PDL", "url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf", "edition": "effective May 1, 2026" }
+  },
+  "families": [
+    { "id": "dupilumab", "display": "Dupixent (dupilumab)", "cells": {
+      "HM": { "s": "listed", "d": "Tier 2, PA, QL, specialty, limited distribution (p65)" },
+      "AHIF": { "s": "listed", "d": "Dupixent, preferred brand, PA (p43)" },
+      "WP": { "s": "listed", "d": "Preferred, PA, QL; 12 NDCs" },
+      "AET": { "s": "listed", "d": "Tier 5, PA, QL per 28 days (p111)" },
+      "UHC": { "s": "listed", "d": "Tier 2, PA, QL, specialty (p22)" } } },
+    { "id": "secukinumab", "display": "Cosentyx (secukinumab)", "cells": {
+      "HM": { "s": "listed", "d": "Tier 2, PA, QL, specialty, limited distribution (p64)" },
+      "AHIF": { "s": "listed", "d": "Non-preferred drug, PA (p42)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; brand only" },
+      "AET": { "s": "absent", "d": "No row in formulary 26010 v16" },
+      "UHC": { "s": "listed", "d": "Tier 2, PA, QL, specialty (p34)" } } },
+    { "id": "adalimumab", "display": "Humira and adalimumab biosimilars", "cells": {
+      "HM": { "s": "listed", "d": "Hadlima products Tier 2, PA, QL, specialty, LD; Humira brand absent (pp51-52)" },
+      "AHIF": { "s": "listed", "d": "37 product rows; biosimilars mostly non-formulary QL, some preferred with PA; Humira non-preferred drug PA QL (pp55-59)" },
+      "WP": { "s": "listed", "d": "Mostly non-preferred PA QL; bwwd and pediatric Amjevita preferred; 83 NDCs" },
+      "AET": { "s": "listed", "d": "Tier 5, PA, QL per 365 days; only pediatric-strength Humira plus Hadlima/bwwd (p111)" },
+      "UHC": { "s": "listed", "d": "Adalimumab-adaz and Amjevita Tier 2 PA QL SP; Humira exclusion-coded with continuation footnote for current users (p34)" } } },
+    { "id": "roflumilast-foam", "display": "Zoryve (roflumilast 0.3% foam)", "cells": {
+      "HM": { "s": "absent", "d": "Oral Daliresp tablets exist; no topical foam row" },
+      "AHIF": { "s": "listed", "d": "Foam preferred brand PA; cream non-preferred drug PA (p46)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; single NDC" },
+      "AET": { "s": "absent", "d": "No topical roflumilast row" },
+      "UHC": { "s": "listed", "d": "External foam Tier 4, PA, QL (p23)" } } },
+    { "id": "crisaborole", "display": "Eucrisa (crisaborole 2%)", "cells": {
+      "HM": { "s": "absent", "d": "No row" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, PA (p43)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL" },
+      "AET": { "s": "listed", "d": "Tier 4, PA, QL 120 GM per 30 days (p138)" },
+      "UHC": { "s": "listed", "d": "Tier 3, step therapy, QL (p22)" } } },
+    { "id": "tretinoin-topical", "display": "Tretinoin topical", "cells": {
+      "HM": { "s": "listed", "d": "Cream 0.025/0.05/0.1 percent and gel Tier 1, PA (p66); no lotion or microsponge rows" },
+      "AHIF": { "s": "listed", "d": "Generics alternate-language; Retin-A and Micro non-preferred alternate-language; Altreno non-preferred (pp41-45)" },
+      "WP": { "s": "listed", "d": "Mostly preferred, PA, QL; 112 NDCs; brands Retin-A/Micro, Atralin, Altreno" },
+      "AET": { "s": "listed", "d": "Creams and gels Tier 4, PA, QL 45 GM per 30 days (p134)" },
+      "UHC": { "s": "listed", "d": "External cream Tier 3, QL; single topical row (p23)" } } },
+    { "id": "clobetasol", "display": "Clobetasol propionate 0.05%", "cells": {
+      "HM": { "s": "listed", "d": "Cream, ointment, gel, emollient, solution all Tier 1, no flags (p64); no foam/lotion/shampoo rows" },
+      "AHIF": { "s": "listed", "d": "Generic forms listed; Clobex, Temovate non-preferred; emulsion foam non-preferred drug (pp42-45)" },
+      "WP": { "s": "listed", "d": "Cream/emollient/ointment/gel/solution preferred; foam/lotion/shampoo non-preferred with PA; QL throughout; 308 NDCs" },
+      "AET": { "s": "listed", "d": "All vehicles Tier 4, QL by vehicle, mail-order notation (p136)" },
+      "UHC": { "s": "ambiguous", "d": "Vehicle rows Tier 1-2 with QL; one truncated row not resolvable from text layer (pp21-22)" } } },
+    { "id": "calcipotriene-betamethasone", "display": "Calcipotriene/betamethasone dipropionate", "cells": {
+      "HM": { "s": "listed", "d": "Enstilar foam Tier 3, PA (p65); Taclonex absent" },
+      "AHIF": { "s": "listed", "d": "Generic ointment and suspension; Enstilar and Taclonex non-preferred drug (pp41-45)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; 27 NDCs including Taclonex suspension and Enstilar foam" },
+      "AET": { "s": "absent", "d": "No combination row; single-agent calcipotriene exists (different ingredients)" },
+      "UHC": { "s": "listed", "d": "Enstilar Tier 4 QL; Taclonex suspension Tier 3 QL (pp22-23)" } } },
+    { "id": "omalizumab", "display": "Xolair (omalizumab)", "cells": {
+      "HM": { "s": "listed", "d": "Tier 2, PA, specialty, limited distribution; no QL printed (p39)" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p67)" },
+      "WP": { "s": "listed", "d": "Preferred, PA, QL; brand only" },
+      "AET": { "s": "listed", "d": "Tier 5, PA, limited distribution (p132)" },
+      "UHC": { "s": "listed", "d": "Tier 2, PA, QL, specialty (p40)" } } },
+    { "id": "mepolizumab", "display": "Nucala (mepolizumab)", "cells": {
+      "HM": { "s": "listed", "d": "Tier 2, PA, QL, specialty, limited distribution (p38)" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p66)" },
+      "WP": { "s": "listed", "d": "Auto-injector/pens non-preferred PA QL; reconstituted vials unflagged" },
+      "AET": { "s": "absent", "d": "No row in formulary 26010 v16" },
+      "UHC": { "s": "listed", "d": "Tier 4, PA, QL, specialty (p40)" } } },
+    { "id": "apremilast", "display": "Otezla (apremilast)", "cells": {
+      "HM": { "s": "listed", "d": "Tier 2, PA, QL, specialty, LD including starter packs and XR (p52)" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p58)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; initiation packs present" },
+      "AET": { "s": "absent", "d": "No row in formulary 26010 v16" },
+      "UHC": { "s": "listed", "d": "Otezla and XR Tier 2, PA, QL, specialty (p35)" } } },
+    { "id": "methotrexate-oral", "display": "Methotrexate (oral)", "cells": {
+      "HM": { "s": "listed", "d": "Tablet 2.5 mg Tier 1 (p21)" },
+      "AHIF": { "s": "listed", "d": "Generic tablet; Trexall non-preferred (pp22-24)" },
+      "WP": { "s": "listed", "d": "Generic 2.5 mg preferred; Trexall non-preferred with PA" },
+      "AET": { "s": "listed", "d": "Tablet 2.5 mg Tier 2; Xatmep solution Tier 4 (p113)" },
+      "UHC": { "s": "listed", "d": "Sodium oral Tier 1; Trexall Tier 2 (p35)" } } },
+    { "id": "tacrolimus-ointment", "display": "Tacrolimus ointment", "cells": {
+      "HM": { "s": "listed", "d": "Ointment 0.03 and 0.1 percent Tier 1, PA (p66)" },
+      "AHIF": { "s": "ambiguous", "d": "Protopic non-preferred; generic row does not print route; treat as needs confirmation (p23)" },
+      "WP": { "s": "listed", "d": "Both strengths preferred, PA, QL; 35 NDCs" },
+      "AET": { "s": "listed", "d": "Tier 4, QL 60 GM per 30 days (p138)" },
+      "UHC": { "s": "listed", "d": "External Tier 2, QL (p23)" } } },
+    { "id": "pimecrolimus", "display": "Elidel (pimecrolimus 1%)", "cells": {
+      "HM": { "s": "absent", "d": "No row" },
+      "AHIF": { "s": "listed", "d": "Elidel non-preferred; generic cream with PA (pp43-44)" },
+      "WP": { "s": "listed", "d": "Preferred, PA, QL; generic only" },
+      "AET": { "s": "listed", "d": "Tier 4, QL 100 GM per 30 days (p138)" },
+      "UHC": { "s": "listed", "d": "Tier 3, QL (p23)" } } },
+    { "id": "fluorouracil-topical-5", "display": "Fluorouracil topical 5%", "cells": {
+      "HM": { "s": "listed", "d": "Cream 5 percent Tier 1 PA and QL; solution 5 percent Tier 1 no flags (p65)" },
+      "AHIF": { "s": "ambiguous", "d": "Efudex cream 5 percent non-preferred specialty; no generic 5 percent cream row; other strengths differ (pp42-43)" },
+      "WP": { "s": "listed", "d": "Cream 5 percent and solutions preferred with QL; 0.5 percent cream non-preferred PA" },
+      "AET": { "s": "listed", "d": "Cream 5 percent Tier 4, QL 40 GM per 30 days (p138)" },
+      "UHC": { "s": "listed", "d": "Generic cream 5 percent Tier 1; Efudex brand Tier 4 (p22)" } } },
+    { "id": "tapinarof", "display": "Vtama (tapinarof 1%)", "cells": {
+      "HM": { "s": "absent", "d": "No row" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, PA (p46)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; single NDC" },
+      "AET": { "s": "absent", "d": "No row" },
+      "UHC": { "s": "listed", "d": "Tier 4, PA, QL (p23)" } } },
+    { "id": "ustekinumab", "display": "Stelara and ustekinumab biosimilars", "cells": {
+      "HM": { "s": "listed", "d": "Biosimilars Steqeyma, ustekinumab-aauz, Yesintek Tier 2 PA QL; Stelara brand absent (p66)" },
+      "AHIF": { "s": "listed", "d": "Class mostly non-formulary; Yesintek preferred brand PA; Pyzchiva non-preferred drug PA; Stelara non-formulary (p58)" },
+      "WP": { "s": "listed", "d": "Selarsdi preferred; Stelara and other biosimilars non-preferred PA QL; 48 NDCs" },
+      "AET": { "s": "listed", "d": "Stelara and ustekinumab Tier 5 PA QL; Pyzchiva and Yesintek Tier 3/5 mix (pp111-113)" },
+      "UHC": { "s": "listed", "d": "Wezlana and Yesintek Tier 2 PA QL SP; Stelara brand absent from PDL (p35)" } } },
+    { "id": "ixekizumab", "display": "Taltz (ixekizumab)", "cells": {
+      "HM": { "s": "absent", "d": "No row" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p45)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; brand only" },
+      "AET": { "s": "absent", "d": "No row" },
+      "UHC": { "s": "absent", "d": "No row in PDL" } } },
+    { "id": "deucravacitinib", "display": "Sotyktu (deucravacitinib)", "cells": {
+      "HM": { "s": "absent", "d": "No row" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p58)" },
+      "WP": { "s": "listed", "d": "Non-preferred, PA, QL; single NDC" },
+      "AET": { "s": "listed", "d": "Tier 5, PA, QL 30 EA per 30 days, limited distribution (p112)" },
+      "UHC": { "s": "listed", "d": "Tier 2, PA, QL, specialty (p35)" } } },
+    { "id": "etanercept", "display": "Enbrel and etanercept products", "cells": {
+      "HM": { "s": "listed", "d": "Enbrel family Tier 2, PA, QL, specialty, LD across four devices (pp51-52); Erelzi absent" },
+      "AHIF": { "s": "listed", "d": "Preferred brand, specialty, PA (p56); no Mini row" },
+      "WP": { "s": "listed", "d": "Enbrel, SureClick, Mini non-preferred PA QL; biosimilars absent from feed" },
+      "AET": { "s": "listed", "d": "Three devices Tier 5, PA, QL 8 ML per 28 days; no biosimilar labels (p111)" },
+      "UHC": { "s": "listed", "d": "Enbrel, Mini, SureClick Tier 2, PA, QL, specialty (p34)" } } }
+  ]
+}

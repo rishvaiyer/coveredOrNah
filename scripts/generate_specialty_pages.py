@@ -23,8 +23,9 @@ SEEDS = [
     {
         "slug": "dermatology",
         "seed": ROOT / "data" / "specialty-demo-dermatology-starter-v1.json",
+        "evidence": ROOT / "data" / "dermatology-evidence-v1.json",
         "tagline": "A scoped dermatology medication-access research preview for New Jersey clinics.",
-        "status": "starter catalog: 20 medication families, evidence pass in progress",
+        "status": "starter catalog: 20 medication families, exact-row evidence pass complete",
     },
 ]
 
@@ -46,6 +47,9 @@ body {{ font-family: Georgia, 'Times New Roman', serif; margin: 0; background: #
 main {{ max-width: 60rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }}
 h1 {{ font-size: 2rem; margin: 0 0 .35rem; }}
 h2 {{ font-size: 1.15rem; margin-top: 2rem; }}
+.matrix th, .matrix td {{ font-size: .8rem; padding: .35rem .45rem; }}
+.matrix td {{ font-family: ui-monospace, monospace; }}
+.absent {{ color: #8a7f6a; }}
 .badge {{ display: inline-block; font-family: ui-monospace, monospace; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; background: #14213d; color: #f6f1e7; padding: .25rem .55rem; border-radius: 3px; }}
 .note {{ background: #fffaf0; border: 1px solid #d8c4a0; padding: .9rem 1rem; border-radius: 6px; font-size: .95rem; }}
 table {{ border-collapse: collapse; width: 100%; margin-top: 1rem; background: #fffdf8; }}
@@ -74,12 +78,23 @@ a {{ color: #0e366e; }}
 <tr><th>#</th><th>Medication family</th><th>Clinical bucket</th><th>Evidence posture</th></tr>
 {med_rows}
 </table>
+{evidence_matrix}
 <footer>
 Formulary Finder is an evidence layer for medication access: AI should not make coverage decisions; it should make the evidence inspectable. In the full product, every confirmed mapping carries its official source URL, source date, and refresh owner; this static preview shows the scoped candidate set only. <a href="/specialty/">All specialty previews</a>.
 </footer>
 </main>
 </body>
 </html>
+"""
+
+MATRIX_TMPL = """
+<h2>Exact-row evidence matrix</h2>
+<p>Each cell is ingredient-level source-listing evidence from the official source named in the plan-families table. <strong>Listed</strong> shows published tier and restriction signals as printed. Not listed means no exact row exists in that source and is never a denial. Ambiguous means the source has candidates that cannot be resolved to one product without confirmation.</p>
+<table class="matrix">
+<tr><th>Medication family</th>{headers}</tr>
+{rows}
+</table>
+<p>Plan-family sources are family-level baselines, not exact member benefits. Exact-plan results require the clinic&#8217;s real plan list.</p>
 """
 
 INDEX_TMPL = """<!doctype html>
@@ -120,8 +135,30 @@ def esc(value: str) -> str:
     )
 
 
+def render_evidence_matrix(evidence_path) -> str:
+    if not evidence_path:
+        return ""
+    data = json.loads(evidence_path.read_text())
+    keys = list(data["sources"].keys())
+    headers = "".join(f"<th>{esc(data['sources'][k]['name'])}</th>" for k in keys)
+    rows = []
+    for fam in data["families"]:
+        cells = []
+        for k in keys:
+            cell = fam["cells"].get(k)
+            if cell is None or cell["s"] == "absent":
+                cells.append('<td class="absent">Not listed</td>')
+            elif cell["s"] == "ambiguous":
+                cells.append(f"<td>Ambiguous: {esc(cell['d'])}</td>")
+            else:
+                cells.append(f"<td>Listed: {esc(cell['d'])}</td>")
+        rows.append(f"<tr><td>{esc(fam['display'])}</td>{''.join(cells)}</tr>")
+    return MATRIX_TMPL.format(headers=headers, rows="\n".join(rows))
+
+
 def render_specialty_page(entry: dict) -> str:
     seed = json.loads(entry["seed"].read_text())
+    evidence_block = render_evidence_matrix(entry.get("evidence"))
     plan_rows = "\n".join(
         "<tr><td>{name}</td><td>{ctype}</td><td>{state}</td><td><a href=\"{url}\">official source</a></td></tr>".format(
             name=esc(plan["display_name"]),
@@ -148,6 +185,7 @@ def render_specialty_page(entry: dict) -> str:
         plan_rows=plan_rows,
         med_count=len(seed["medications"]),
         med_rows=med_rows,
+        evidence_matrix=evidence_block,
     )
     forbidden = FORBIDDEN_CLAIMS.search(
         html.replace("coverage determination", "")
