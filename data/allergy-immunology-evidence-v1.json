@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "derived from committed pulmonary dashboard coverage via scripts-side derivation",
+  "generatedAt": "2026-08-22",
+  "specialty": "Allergy and immunology",
+  "note": "Cells derived from exact-row promotions already evidenced in the committed pulmonary dashboard. Families without a committed mapping are marked needs-extraction rather than guessed.",
+  "sources": {
+    "HM": {
+      "name": "Horizon BCBSNJ Marketplace",
+      "url": "https://www.myprime.com/content/dam/prime/memberportal/WebDocs/2026/Formularies/HIM/2026_NJ_3T_HealthInsuranceMarketplace.pdf",
+      "edition": "August 2026"
+    },
+    "AHIF": {
+      "name": "AmeriHealth NJ Individual & Family",
+      "url": "https://www.amerihealth.com/pdfs/providers/pharmacy_information/value/ah-individual-family-formulary.pdf",
+      "edition": "July 1, 2026"
+    },
+    "WP": {
+      "name": "Wellpoint NJ FamilyCare machine-readable feed",
+      "url": "https://fm.formularynavigator.com/FBO/4/New%20Jersey%20Medicaid.json",
+      "edition": "effective 2026-08-01"
+    },
+    "AET": {
+      "name": "Aetna Medicare HMO 26010 v16",
+      "url": "https://www.aetna.com/medicare/documents/individual/2026/formularies/FORM_2026_26010B29zHMO_EN.pdf",
+      "edition": "updated 08/01/2026"
+    },
+    "UHC": {
+      "name": "UnitedHealthcare Commercial PDL baseline",
+      "url": "https://www.uhcprovider.com/content/dam/provider/docs/public/resources/pharmacy/commercial-pdl-may-2026.pdf",
+      "edition": "effective May 1, 2026"
+    }
+  },
+  "families": [
+    {
+      "id": "omalizumab",
+      "display": "Xolair (omalizumab)",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2 + PA, PA, SP, LD"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Preferred brand, SP, PA"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, SP, QL - Xolair entry."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 5, PA, LD"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 2, PA, QL, SP"
+        }
+      }
+    },
+    {
+      "id": "mepolizumab",
+      "display": "Nucala (mepolizumab)",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2 + PA, PA, QL, SP, LD"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Preferred brand, SP, PA"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, SP, QL - Nucala auto-injector/prefilled syringe 100 mg/mL, Non-Preferred, PA and QL; reconstituted kit unflagged. Wellpoint NJ Medicaid Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 5, PA, QL - Nucala injection entries."
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 4, PA, QL, SP"
+        }
+      }
+    },
+    {
+      "id": "benralizumab",
+      "display": "Fasenra (benralizumab)",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2 + PA, PA, QL, SP"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Preferred brand, PA, SP"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, SP, QL - Fasenra syringe/auto-injector 30 mg/mL, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 5, PA, QL, LD"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 4, PA, QL, SP"
+        }
+      }
+    },
+    {
+      "id": "tezepelumab",
+      "display": "Tezspire (tezepelumab)",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2 + PA, PA, QL, SP, LD"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Preferred brand, SP, PA"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, QL - Tezspire 210 mg/1.91 mL auto-injector and prefilled syringe, Non-Preferred, PA and QL. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "needs-extraction",
+          "d": "No committed exact-row mapping yet"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 4, PA, QL, SP"
+        }
+      }
+    },
+    {
+      "id": "dupilumab",
+      "display": "Dupixent (dupilumab)",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2 + PA, PA, QL, SP, LD"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Preferred brand, PA, SP"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, SP, QL - Dupixent entry."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 5, PA, QL"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 2, PA, QL, SP - Dupixent entry."
+        }
+      }
+    },
+    {
+      "id": "fluticasone-nasal",
+      "display": "Fluticasone propionate nasal spray",
+      "cells": {
+        "HM": {
+          "s": "needs-extraction",
+          "d": "No committed exact-row mapping yet"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Generic"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, QL - Fluticasone propionate nasal spray 50 mcg only, Preferred, QL, OTC. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 2, QL - Fluticasone propionate nasal spray entry."
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 2"
+        }
+      }
+    },
+    {
+      "id": "mometasone-nasal",
+      "display": "Mometasone nasal spray",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 2, QL"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Non-formulary"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, QL - Mometasone 50 mcg nasal spray, generic-only, Non-Preferred, PA, QL, OTC. Nasonex brand label absent. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 2, QL - Mometasone furoate suspension 50 mcg/actuation nasal spray entry, QL 34 GM per 30 days, mail-order notation, in Aetna Medicare Aetna Medicare formulary 26010 version 16, updated 08/01/2026."
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 3, QL - Mometasone furoate nasal spray entry, QL."
+        }
+      }
+    },
+    {
+      "id": "azelastine-nasal",
+      "display": "Azelastine nasal spray",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 1, QL"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Generic"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, QL - Azelastine nasal spray, Preferred, QL. Azelastine-fluticasone combo is a separate non-preferred entry. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 2, QL - Azelastine hydrochloride nasal spray entry."
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 2"
+        }
+      }
+    },
+    {
+      "id": "montelukast",
+      "display": "Montelukast",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 1, QL"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Generic"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, QL - Montelukast / Singulair entries."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 1, QL"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier varies - Packet is Tier 2; tablet and chewable entries are Tier 1."
+        }
+      }
+    },
+    {
+      "id": "epinephrine-autoinjector",
+      "display": "Epinephrine auto-injector",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier varies, QL - Auvi-Q is Tier 2; EpiPen products are Tier 1; listed products carry quantity limits."
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Generic, QL"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, PA, QL - Generic epinephrine auto-injectors including 0.3 mg, Preferred, PA and QL per feed encoding. Wellpoint NJ Medicaid feed, effective Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 3, QL - Auto-injector entry; quantity limit 2 per 30 days."
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 1, QL"
+        }
+      }
+    },
+    {
+      "id": "cetirizine",
+      "display": "Cetirizine oral",
+      "cells": {
+        "HM": {
+          "s": "needs-extraction",
+          "d": "No committed exact-row mapping yet"
+        },
+        "AHIF": {
+          "s": "needs-extraction",
+          "d": "No committed exact-row mapping yet"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL - Cetirizine oral products, Preferred, OTC. Levocetirizine excluded as a different drug. Wellpoint NJ Medicaid feed, effective 2026-08-01."
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 2, QL - Cetirizine oral solution entry."
+        },
+        "UHC": {
+          "s": "needs-extraction",
+          "d": "No committed exact-row mapping yet"
+        }
+      }
+    },
+    {
+      "id": "zafirlukast",
+      "display": "Zafirlukast",
+      "cells": {
+        "HM": {
+          "s": "listed",
+          "d": "Tier 1, QL"
+        },
+        "AHIF": {
+          "s": "listed",
+          "d": "Generic"
+        },
+        "WP": {
+          "s": "listed",
+          "d": "Listed in PDL, QL"
+        },
+        "AET": {
+          "s": "listed",
+          "d": "Tier 4, QL"
+        },
+        "UHC": {
+          "s": "listed",
+          "d": "Tier 1"
+        }
+      }
+    }
+  ]
+}

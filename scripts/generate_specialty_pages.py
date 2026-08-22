@@ -30,8 +30,9 @@ SEEDS = [
     {
         "slug": "allergy-immunology",
         "seed": ROOT / "data" / "specialty-demo-allergy-immunology-starter-v1.json",
+        "evidence": ROOT / "data" / "allergy-immunology-evidence-v1.json",
         "tagline": "A scoped allergy and immunology medication-access research preview for New Jersey clinics.",
-        "status": "starter catalog: evidence pass not started; rows shown as candidates only",
+        "status": "starter catalog: committed-mapping evidence matrix complete; remaining families queued",
     },
     {
         "slug": "cardiology",
@@ -359,6 +360,8 @@ def render_evidence_matrix(evidence_path) -> str:
                 cells.append('<td class="absent">Not listed</td>')
             elif cell["s"] == "ambiguous":
                 cells.append(f"<td>Ambiguous: {esc(cell['d'])}</td>")
+            elif cell["s"] == "needs-extraction":
+                cells.append('<td class="absent">Unconfirmed: evidence pass not yet run for this source; not a denial.</td>')
             else:
                 cells.append(f"<td>Listed: {esc(cell['d'])}</td>")
         rows.append(f"<tr><td>{esc(fam['display'])}</td>{''.join(cells)}</tr>")
